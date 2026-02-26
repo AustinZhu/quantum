@@ -1,0 +1,99 @@
+syntax = "proto3";
+
+package quant.datafeed.v1;
+option go_package = "github.com/austin/quantum/datafeed/internal/gen/datafeed/v1;datafeedv1";
+
+service DatafeedService {
+  rpc IngestTicks(IngestTicksRequest) returns (IngestTicksResponse);
+  rpc ReplayTicks(ReplayTicksRequest) returns (ReplayTicksResponse);
+  rpc QueryBars(QueryBarsRequest) returns (QueryBarsResponse);
+  rpc ListNews(ListNewsRequest) returns (ListNewsResponse);
+  rpc ListSocial(ListSocialRequest) returns (ListSocialResponse);
+}
+
+message Tick {
+  string symbol = 1;
+  int64 ts_ms = 2;
+  double price = 3;
+  double size = 4;
+  string source = 5;
+}
+
+message IngestTicksRequest {
+  repeated Tick ticks = 1;
+}
+
+message IngestTicksResponse {
+  uint32 inserted = 1;
+}
+
+message ReplayTicksRequest {
+  string symbol = 1;
+  int64 start_ts_ms = 2;
+  int64 end_ts_ms = 3;
+  uint32 limit = 4;
+}
+
+message ReplayTicksResponse {
+  repeated Tick ticks = 1;
+}
+
+message Bar {
+  string symbol = 1;
+  string interval = 2;
+  int64 ts_ms = 3;
+  double open = 4;
+  double high = 5;
+  double low = 6;
+  double close = 7;
+  double volume = 8;
+}
+
+message QueryBarsRequest {
+  string symbol = 1;
+  string interval = 2;
+  int64 start_ts_ms = 3;
+  int64 end_ts_ms = 4;
+  uint32 limit = 5;
+}
+
+message QueryBarsResponse {
+  repeated Bar bars = 1;
+}
+
+message ListNewsRequest {
+  string symbol = 1;
+  uint32 limit = 2;
+}
+
+message NewsEvent {
+  string id = 1;
+  string symbol = 2;
+  string title = 3;
+  string url = 4;
+  int64 ts_ms = 5;
+  string source = 6;
+}
+
+message ListNewsResponse {
+  repeated NewsEvent items = 1;
+}
+
+message ListSocialRequest {
+  string symbol = 1;
+  uint32 limit = 2;
+}
+
+message SocialEvent {
+  string id = 1;
+  string symbol = 2;
+  string platform = 3;
+  string author = 4;
+  string text = 5;
+  int64 ts_ms = 6;
+  double sentiment = 7;
+}
+
+message ListSocialResponse {
+  repeated SocialEvent items = 1;
+}

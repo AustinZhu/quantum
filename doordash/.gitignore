@@ -1,0 +1,13 @@
+# Gradle/Kotlin build caches and outputs
+.gradle/
+.kotlin/
+build/
+out/
+
+# Local env/config overrides
+.env
+.env.local
+
+# IDE/OS
+*.iml
+.DS_Store

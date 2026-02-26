@@ -1,0 +1,1 @@
+-- Aerich scaffold marker; run `aerich init-db` to generate formal migration files.

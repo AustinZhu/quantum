@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package quant.algorand.v1;
+option go_package = "github.com/austin/quantum/datafeed/internal/gen/algorand/v1;algorandv1";
+
+import "common/v1/common.proto";
+
+service AlertService {
+  rpc TestAlert(TestAlertRequest) returns (TestAlertResponse);
+  rpc ListAlertEvents(ListAlertEventsRequest) returns (ListAlertEventsResponse);
+}
+
+message TestAlertRequest {
+  string channel = 1;
+  string target = 2;
+  string message = 3;
+}
+
+message TestAlertResponse {
+  string status = 1;
+  string event_id = 2;
+}
+
+message ListAlertEventsRequest {
+  RunId run_id = 1;
+  Paging paging = 2;
+}
+
+message AlertEvent {
+  string event_id = 1;
+  RunId run_id = 2;
+  string channel = 3;
+  string target = 4;
+  string status = 5;
+  int64 created_ts_ms = 6;
+}
+
+message ListAlertEventsResponse {
+  repeated AlertEvent events = 1;
+  PageInfo page = 2;
+}

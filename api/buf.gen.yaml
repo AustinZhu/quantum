@@ -1,0 +1,31 @@
+version: v2
+plugins:
+  - remote: buf.build/protocolbuffers/python
+    out: ../algorand/src/algorand/interfaces/connectrpc/generated
+  - remote: buf.build/protocolbuffers/pyi
+    out: ../algorand/src/algorand/interfaces/connectrpc/generated
+  - remote: buf.build/protocolbuffers/go
+    out: ../datafeed
+    opt:
+      - paths=import
+      - module=github.com/austin/quantum/datafeed
+  - remote: buf.build/connectrpc/go
+    out: ../datafeed
+    opt:
+      - paths=import
+      - module=github.com/austin/quantum/datafeed
+  - remote: buf.build/protocolbuffers/kotlin
+    out: ../doordash/build/generated/source/proto/main/kotlin
+  - remote: buf.build/protocolbuffers/js
+    out: ../terminal/src/lib/gen
+    opt:
+      - import_style=commonjs
+      - binary
+  - remote: buf.build/bufbuild/es
+    out: ../terminal/src/lib/gen
+    opt:
+      - target=ts
+  - remote: buf.build/connectrpc/es
+    out: ../terminal/src/lib/gen
+    opt:
+      - target=ts

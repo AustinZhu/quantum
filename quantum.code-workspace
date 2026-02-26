@@ -1,0 +1,61 @@
+{
+  "folders": [
+    {
+      "name": "quantum",
+      "path": "."
+    },
+    {
+      "name": "algorand",
+      "path": "algorand"
+    },
+    {
+      "name": "api",
+      "path": "api"
+    },
+    {
+      "name": "datafeed",
+      "path": "datafeed"
+    },
+    {
+      "name": "doordash",
+      "path": "doordash"
+    },
+    {
+      "name": "terminal",
+      "path": "terminal"
+    },
+    {
+      "name": "ops",
+      "path": "ops"
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "**/.pnpm-store": true,
+      "**/node_modules": true,
+      "**/.next": true,
+      "**/build": true,
+      "**/.gradle": true
+    },
+    "search.exclude": {
+      "**/.pnpm-store": true,
+      "**/node_modules": true,
+      "**/.next": true,
+      "**/build": true,
+      "**/.gradle": true,
+      "**/terminal/public/charting_library": true
+    }
+  },
+  "extensions": {
+    "recommendations": [
+      "golang.go",
+      "ms-python.python",
+      "ms-python.vscode-pylance",
+      "redhat.vscode-yaml",
+      "bufbuild.vscode-buf",
+      "ms-kotlin.kotlin",
+      "bradlc.vscode-tailwindcss",
+      "oxc.oxc-vscode"
+    ]
+  }
+}

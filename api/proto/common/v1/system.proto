@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package quant.system.v1;
+option go_package = "github.com/austin/quantum/datafeed/internal/gen/system/v1;systemv1";
+
+service SystemService {
+  rpc GetHealth(HealthRequest) returns (HealthResponse);
+  rpc GetReadiness(ReadinessRequest) returns (ReadinessResponse);
+}
+
+message HealthRequest {}
+
+message HealthResponse {
+  string service = 1;
+  string status = 2;
+  int64 ts_ms = 3;
+}
+
+message ReadinessRequest {}
+
+message DependencyStatus {
+  string name = 1;
+  string status = 2;
+  string detail = 3;
+}
+
+message ReadinessResponse {
+  string service = 1;
+  string status = 2;
+  repeated DependencyStatus dependencies = 3;
+}

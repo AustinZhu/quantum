@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package quant.algorand.v1;
+option go_package = "github.com/austin/quantum/datafeed/internal/gen/algorand/v1;algorandv1";
+
+import "common/v1/common.proto";
+
+service BacktestService {
+  rpc RunBacktest(RunBacktestRequest) returns (RunBacktestResponse);
+  rpc GetRun(GetRunRequest) returns (GetRunResponse);
+  rpc ListRuns(ListRunsRequest) returns (ListRunsResponse);
+}
+
+message RunBacktestRequest {
+  string symbol = 1;
+  string interval = 2;
+  TimeRange time_range = 3;
+  StrategyId strategy_id = 4;
+  map<string, string> strategy_params = 5;
+}
+
+message RunBacktestResponse {
+  RunId run_id = 1;
+  string status = 2;
+}
+
+message GetRunRequest {
+  RunId run_id = 1;
+}
+
+message GetRunResponse {
+  RunId run_id = 1;
+  string status = 2;
+  string symbol = 3;
+  string interval = 4;
+  StrategyId strategy_id = 5;
+  map<string, string> metadata = 6;
+}
+
+message ListRunsRequest {
+  Paging paging = 1;
+}
+
+message ListRunsResponse {
+  repeated GetRunResponse runs = 1;
+  PageInfo page = 2;
+}

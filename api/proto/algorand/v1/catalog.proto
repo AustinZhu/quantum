@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+package quant.algorand.v1;
+option go_package = "github.com/austin/quantum/datafeed/internal/gen/algorand/v1;algorandv1";
+
+service CatalogService {
+  rpc ListStrategies(ListStrategiesRequest) returns (ListStrategiesResponse);
+  rpc ListIndicators(ListIndicatorsRequest) returns (ListIndicatorsResponse);
+  rpc ListSignals(ListSignalsRequest) returns (ListSignalsResponse);
+}
+
+message ListStrategiesRequest {}
+
+message StrategyDefinition {
+  string strategy_id = 1;
+  string version = 2;
+  string display_name = 3;
+  string description = 4;
+}
+
+message ListStrategiesResponse {
+  repeated StrategyDefinition strategies = 1;
+}
+
+message ListIndicatorsRequest {}
+
+message IndicatorDefinition {
+  string indicator_id = 1;
+  string version = 2;
+  string display_name = 3;
+  string description = 4;
+}
+
+message ListIndicatorsResponse {
+  repeated IndicatorDefinition indicators = 1;
+}
+
+message ListSignalsRequest {}
+
+message SignalDefinition {
+  string signal_id = 1;
+  string version = 2;
+  string display_name = 3;
+  string description = 4;
+}
+
+message ListSignalsResponse {
+  repeated SignalDefinition signals = 1;
+}

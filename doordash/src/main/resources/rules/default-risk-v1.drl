@@ -1,0 +1,21 @@
+package com.quantum.doordash.rules
+
+import com.quantum.doordash.domain.RiskFact;
+
+global java.util.List reasons;
+
+dialect "java"
+
+rule "Reject huge notional"
+when
+  $f : RiskFact(notional > 1000000)
+then
+  reasons.add("NOTIONAL_LIMIT_EXCEEDED");
+end
+
+rule "Reject oversized quantity"
+when
+  $f : RiskFact(quantity > 10000)
+then
+  reasons.add("QUANTITY_LIMIT_EXCEEDED");
+end

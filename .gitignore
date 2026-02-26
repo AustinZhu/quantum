@@ -1,0 +1,35 @@
+.DS_Store
+.env
+.env.local
+*.log
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+
+# Go
+bin/
+*.test
+
+# Kotlin/Gradle
+.gradle/
+build/
+out/
+
+# Node
+node_modules/
+.next/
+coverage/
+/.pnpm-store/
+/terminal/public/charting_library/
+
+# Data
+volumes/
+
+# IDE
+.vscode/
+.idea/

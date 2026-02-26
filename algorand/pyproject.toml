@@ -1,0 +1,78 @@
+[project]
+name = "algorand"
+version = "0.1.0"
+description = "Modular monolith quant backend for backtesting, analytics, ML scoring, and alerts"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "arch>=8.0.0",
+    "asyncpg>=0.30.0",
+    "backtrader>=1.9.78.123",
+    "connect-python>=0.8.1",
+    "duckdb>=1.4.1",
+    "fastapi>=0.115.5",
+    "hmmlearn>=0.3.3",
+    "httpx>=0.28.1",
+    "lightgbm>=4.6.0",
+    "lppls>=0.6.23",
+    "mfdfa>=0.4.3",
+    "numpy>=2.3.3",
+    "openai>=2.24.0",
+    "opentelemetry-api>=1.28.2",
+    "opentelemetry-sdk>=1.28.2",
+    "opentelemetry-exporter-otlp>=1.28.2",
+    "orjson>=3.11.4",
+    "pandas>=3.0.1",
+    "pandas-ta-classic>=0.3.59",
+    "plotly>=6.5.2",
+    "pmdarima>=2.1.1",
+    "pyarrow>=21.0.0",
+    "pydantic>=2.12.0",
+    "pydantic-settings>=2.11.0",
+    "pywavelets>=1.9.0",
+    "quantstats>=0.0.81",
+    "redis>=7.2.1",
+    "scikit-learn>=1.7.2",
+    "temporalio>=1.9.0",
+    "tortoise-orm>=1.1.5",
+    "typer>=0.19.2",
+    "uvicorn>=0.32.0",
+    "yfinance>=0.2.66",
+]
+
+[project.optional-dependencies]
+dev = [
+    "mypy>=1.18.2",
+    "pytest>=8.4.2",
+    "pytest-asyncio>=1.2.0",
+    "ruff>=0.13.0",
+]
+
+[project.scripts]
+algorand = "algorand.cli:main"
+
+[build-system]
+requires = ["hatchling>=1.27.0"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/algorand"]
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+addopts = "-ra"
+testpaths = ["src/algorand/tests"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py314"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.mypy]
+python_version = "3.14"
+strict = false
+warn_unused_configs = true
+packages = ["algorand"]
+ignore_missing_imports = true
