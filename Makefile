@@ -2,7 +2,7 @@ SHELL := /bin/bash
 
 .DEFAULT_GOAL := help
 
-.PHONY: help check-env bootstrap generate up down down-v logs lint fmt test
+.PHONY: help check-env bootstrap generate up down down-v logs lint fmt test tf-init tf-plan tf-apply tf-destroy
 
 help: ## Show available targets
 	@awk 'BEGIN {FS = ":.*##"; printf "Usage: make <target>\n\nTargets:\n"} /^[a-zA-Z0-9_.-]+:.*##/ { printf "  %-12s %s\n", $$1, $$2 }' $(MAKEFILE_LIST)
@@ -55,3 +55,15 @@ test: ## Run all test suites
 	cd datafeed && go test ./...
 	cd doordash && (./gradlew --no-daemon test || gradle --no-daemon test)
 	cd terminal && pnpm test
+
+tf-init: ## Initialize Terraform backend/providers for infra bootstrap
+	cd infra/terraform && terraform init -backend-config=environments/dev/backend.hcl.example
+
+tf-plan: check-env ## Plan Terraform bootstrap changes
+	cd infra/terraform && terraform plan
+
+tf-apply: check-env ## Apply Terraform bootstrap changes
+	cd infra/terraform && terraform apply
+
+tf-destroy: ## Destroy Terraform-managed bootstrap resources
+	cd infra/terraform && terraform destroy

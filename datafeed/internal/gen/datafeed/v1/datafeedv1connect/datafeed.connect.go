@@ -77,9 +77,6 @@ const (
 	// DatafeedServiceStreamBarsProcedure is the fully-qualified name of the DatafeedService's
 	// StreamBars RPC.
 	DatafeedServiceStreamBarsProcedure = "/quant.datafeed.v1.DatafeedService/StreamBars"
-	// DatafeedServiceScanSymbolsProcedure is the fully-qualified name of the DatafeedService's
-	// ScanSymbols RPC.
-	DatafeedServiceScanSymbolsProcedure = "/quant.datafeed.v1.DatafeedService/ScanSymbols"
 	// DatafeedServiceListSymbolsProcedure is the fully-qualified name of the DatafeedService's
 	// ListSymbols RPC.
 	DatafeedServiceListSymbolsProcedure = "/quant.datafeed.v1.DatafeedService/ListSymbols"
@@ -102,7 +99,6 @@ type DatafeedServiceClient interface {
 	GetSymbolGroupInfo(context.Context, *connect.Request[v1.GetSymbolGroupInfoRequest]) (*connect.Response[v1.GetSymbolGroupInfoResponse], error)
 	SearchSymbols(context.Context, *connect.Request[v1.SearchSymbolsRequest]) (*connect.Response[v1.SearchSymbolsResponse], error)
 	StreamBars(context.Context, *connect.Request[v1.StreamBarsRequest]) (*connect.ServerStreamForClient[v1.StreamBarsResponse], error)
-	ScanSymbols(context.Context, *connect.Request[v1.ScanSymbolsRequest]) (*connect.Response[v1.ScanSymbolsResponse], error)
 	ListSymbols(context.Context, *connect.Request[v1.ListSymbolsRequest]) (*connect.Response[v1.ListSymbolsResponse], error)
 }
 
@@ -207,12 +203,6 @@ func NewDatafeedServiceClient(httpClient connect.HTTPClient, baseURL string, opt
 			connect.WithSchema(datafeedServiceMethods.ByName("StreamBars")),
 			connect.WithClientOptions(opts...),
 		),
-		scanSymbols: connect.NewClient[v1.ScanSymbolsRequest, v1.ScanSymbolsResponse](
-			httpClient,
-			baseURL+DatafeedServiceScanSymbolsProcedure,
-			connect.WithSchema(datafeedServiceMethods.ByName("ScanSymbols")),
-			connect.WithClientOptions(opts...),
-		),
 		listSymbols: connect.NewClient[v1.ListSymbolsRequest, v1.ListSymbolsResponse](
 			httpClient,
 			baseURL+DatafeedServiceListSymbolsProcedure,
@@ -239,7 +229,6 @@ type datafeedServiceClient struct {
 	getSymbolGroupInfo *connect.Client[v1.GetSymbolGroupInfoRequest, v1.GetSymbolGroupInfoResponse]
 	searchSymbols      *connect.Client[v1.SearchSymbolsRequest, v1.SearchSymbolsResponse]
 	streamBars         *connect.Client[v1.StreamBarsRequest, v1.StreamBarsResponse]
-	scanSymbols        *connect.Client[v1.ScanSymbolsRequest, v1.ScanSymbolsResponse]
 	listSymbols        *connect.Client[v1.ListSymbolsRequest, v1.ListSymbolsResponse]
 }
 
@@ -318,11 +307,6 @@ func (c *datafeedServiceClient) StreamBars(ctx context.Context, req *connect.Req
 	return c.streamBars.CallServerStream(ctx, req)
 }
 
-// ScanSymbols calls quant.datafeed.v1.DatafeedService.ScanSymbols.
-func (c *datafeedServiceClient) ScanSymbols(ctx context.Context, req *connect.Request[v1.ScanSymbolsRequest]) (*connect.Response[v1.ScanSymbolsResponse], error) {
-	return c.scanSymbols.CallUnary(ctx, req)
-}
-
 // ListSymbols calls quant.datafeed.v1.DatafeedService.ListSymbols.
 func (c *datafeedServiceClient) ListSymbols(ctx context.Context, req *connect.Request[v1.ListSymbolsRequest]) (*connect.Response[v1.ListSymbolsResponse], error) {
 	return c.listSymbols.CallUnary(ctx, req)
@@ -345,7 +329,6 @@ type DatafeedServiceHandler interface {
 	GetSymbolGroupInfo(context.Context, *connect.Request[v1.GetSymbolGroupInfoRequest]) (*connect.Response[v1.GetSymbolGroupInfoResponse], error)
 	SearchSymbols(context.Context, *connect.Request[v1.SearchSymbolsRequest]) (*connect.Response[v1.SearchSymbolsResponse], error)
 	StreamBars(context.Context, *connect.Request[v1.StreamBarsRequest], *connect.ServerStream[v1.StreamBarsResponse]) error
-	ScanSymbols(context.Context, *connect.Request[v1.ScanSymbolsRequest]) (*connect.Response[v1.ScanSymbolsResponse], error)
 	ListSymbols(context.Context, *connect.Request[v1.ListSymbolsRequest]) (*connect.Response[v1.ListSymbolsResponse], error)
 }
 
@@ -446,12 +429,6 @@ func NewDatafeedServiceHandler(svc DatafeedServiceHandler, opts ...connect.Handl
 		connect.WithSchema(datafeedServiceMethods.ByName("StreamBars")),
 		connect.WithHandlerOptions(opts...),
 	)
-	datafeedServiceScanSymbolsHandler := connect.NewUnaryHandler(
-		DatafeedServiceScanSymbolsProcedure,
-		svc.ScanSymbols,
-		connect.WithSchema(datafeedServiceMethods.ByName("ScanSymbols")),
-		connect.WithHandlerOptions(opts...),
-	)
 	datafeedServiceListSymbolsHandler := connect.NewUnaryHandler(
 		DatafeedServiceListSymbolsProcedure,
 		svc.ListSymbols,
@@ -490,8 +467,6 @@ func NewDatafeedServiceHandler(svc DatafeedServiceHandler, opts ...connect.Handl
 			datafeedServiceSearchSymbolsHandler.ServeHTTP(w, r)
 		case DatafeedServiceStreamBarsProcedure:
 			datafeedServiceStreamBarsHandler.ServeHTTP(w, r)
-		case DatafeedServiceScanSymbolsProcedure:
-			datafeedServiceScanSymbolsHandler.ServeHTTP(w, r)
 		case DatafeedServiceListSymbolsProcedure:
 			datafeedServiceListSymbolsHandler.ServeHTTP(w, r)
 		default:
@@ -561,10 +536,6 @@ func (UnimplementedDatafeedServiceHandler) SearchSymbols(context.Context, *conne
 
 func (UnimplementedDatafeedServiceHandler) StreamBars(context.Context, *connect.Request[v1.StreamBarsRequest], *connect.ServerStream[v1.StreamBarsResponse]) error {
 	return connect.NewError(connect.CodeUnimplemented, errors.New("quant.datafeed.v1.DatafeedService.StreamBars is not implemented"))
-}
-
-func (UnimplementedDatafeedServiceHandler) ScanSymbols(context.Context, *connect.Request[v1.ScanSymbolsRequest]) (*connect.Response[v1.ScanSymbolsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("quant.datafeed.v1.DatafeedService.ScanSymbols is not implemented"))
 }
 
 func (UnimplementedDatafeedServiceHandler) ListSymbols(context.Context, *connect.Request[v1.ListSymbolsRequest]) (*connect.Response[v1.ListSymbolsResponse], error) {

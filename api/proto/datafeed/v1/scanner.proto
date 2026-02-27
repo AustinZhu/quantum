@@ -1,0 +1,108 @@
+syntax = "proto3";
+
+package quant.datafeed.v1;
+option go_package = "github.com/austin/quantum/datafeed/internal/gen/datafeed/v1;datafeedv1";
+
+import "datafeed/v1/datafeed.proto";
+import "gnostic/openapi/v3/annotations.proto";
+import "google/protobuf/struct.proto";
+
+service ScannerService {
+  rpc ScanSymbols(ScanSymbolsRequest) returns (ScanSymbolsResponse) {
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "ScannerService_ScanSymbols"
+      summary: "Scan Symbols"
+      description: "Scans symbols using scanner filter/sort schema."
+      tags: "Scanner"
+      tags: "Datafeed"
+    };
+  }
+}
+
+enum ScannerLogicalOperator {
+  SCANNER_LOGICAL_OPERATOR_UNSPECIFIED = 0;
+  SCANNER_LOGICAL_OPERATOR_AND = 1;
+  SCANNER_LOGICAL_OPERATOR_OR = 2;
+}
+
+enum ScannerFilterOperation {
+  SCANNER_FILTER_OPERATION_UNSPECIFIED = 0;
+  SCANNER_FILTER_OPERATION_EQUAL = 1;
+  SCANNER_FILTER_OPERATION_NOT_EQUAL = 2;
+  SCANNER_FILTER_OPERATION_GREATER = 3;
+  SCANNER_FILTER_OPERATION_GREATER_OR_EQUAL = 4;
+  SCANNER_FILTER_OPERATION_LESS = 5;
+  SCANNER_FILTER_OPERATION_LESS_OR_EQUAL = 6;
+  SCANNER_FILTER_OPERATION_IN_RANGE = 7;
+  SCANNER_FILTER_OPERATION_NOT_IN_RANGE = 8;
+  SCANNER_FILTER_OPERATION_HAS = 9;
+  SCANNER_FILTER_OPERATION_HAS_NONE_OF = 10;
+  SCANNER_FILTER_OPERATION_MATCH = 11;
+  SCANNER_FILTER_OPERATION_NOT_MATCH = 12;
+}
+
+message ScannerFilterValue {
+  oneof value {
+    string string_value = 1;
+    double number_value = 2;
+    bool bool_value = 3;
+    StringList string_list = 4;
+    DoubleList number_list = 5;
+  }
+}
+
+message ScannerFilterExpression {
+  string left = 1;
+  ScannerFilterOperation operation = 2;
+  ScannerFilterValue right = 3;
+}
+
+message ScannerFilterNode {
+  optional ScannerFilterExpression expression = 1;
+  optional ScannerFilterGroup operation = 2;
+}
+
+message ScannerFilterGroup {
+  ScannerLogicalOperator operator = 1;
+  repeated ScannerFilterNode operands = 2;
+}
+
+message ScannerFilter {
+  ScannerLogicalOperator operator = 1;
+  repeated ScannerFilterNode operands = 2;
+}
+
+message ScannerSort {
+  string sort_by = 1;
+  SortOrder sort_order = 2;
+}
+
+message ScannerRange {
+  uint32 start = 1;
+  uint32 end = 2;
+}
+
+message ScannerOptions {
+  optional string lang = 1;
+}
+
+message ScanSymbolsRequest {
+  repeated string columns = 1;
+  optional ScannerFilter filter = 2;
+  optional ScannerSort sort = 3;
+  optional ScannerRange range = 4;
+  optional ScannerOptions options = 5;
+  optional bool ignore_unknown_fields = 6;
+  repeated string markets = 7;
+  map<string, google.protobuf.Value> symbols = 8;
+}
+
+message ScanSymbolRow {
+  string s = 1;
+  repeated google.protobuf.Value d = 2;
+}
+
+message ScanSymbolsResponse {
+  uint32 total_count = 1;
+  repeated ScanSymbolRow data = 2;
+}

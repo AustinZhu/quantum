@@ -285,134 +285,6 @@ func (TimescaleMarkShape) EnumDescriptor() ([]byte, []int) {
 	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{4}
 }
 
-type ScannerLogicalOperator int32
-
-const (
-	ScannerLogicalOperator_SCANNER_LOGICAL_OPERATOR_UNSPECIFIED ScannerLogicalOperator = 0
-	ScannerLogicalOperator_SCANNER_LOGICAL_OPERATOR_AND         ScannerLogicalOperator = 1
-	ScannerLogicalOperator_SCANNER_LOGICAL_OPERATOR_OR          ScannerLogicalOperator = 2
-)
-
-// Enum value maps for ScannerLogicalOperator.
-var (
-	ScannerLogicalOperator_name = map[int32]string{
-		0: "SCANNER_LOGICAL_OPERATOR_UNSPECIFIED",
-		1: "SCANNER_LOGICAL_OPERATOR_AND",
-		2: "SCANNER_LOGICAL_OPERATOR_OR",
-	}
-	ScannerLogicalOperator_value = map[string]int32{
-		"SCANNER_LOGICAL_OPERATOR_UNSPECIFIED": 0,
-		"SCANNER_LOGICAL_OPERATOR_AND":         1,
-		"SCANNER_LOGICAL_OPERATOR_OR":          2,
-	}
-)
-
-func (x ScannerLogicalOperator) Enum() *ScannerLogicalOperator {
-	p := new(ScannerLogicalOperator)
-	*p = x
-	return p
-}
-
-func (x ScannerLogicalOperator) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (ScannerLogicalOperator) Descriptor() protoreflect.EnumDescriptor {
-	return file_datafeed_v1_datafeed_proto_enumTypes[5].Descriptor()
-}
-
-func (ScannerLogicalOperator) Type() protoreflect.EnumType {
-	return &file_datafeed_v1_datafeed_proto_enumTypes[5]
-}
-
-func (x ScannerLogicalOperator) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use ScannerLogicalOperator.Descriptor instead.
-func (ScannerLogicalOperator) EnumDescriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{5}
-}
-
-type ScannerFilterOperation int32
-
-const (
-	ScannerFilterOperation_SCANNER_FILTER_OPERATION_UNSPECIFIED      ScannerFilterOperation = 0
-	ScannerFilterOperation_SCANNER_FILTER_OPERATION_EQUAL            ScannerFilterOperation = 1
-	ScannerFilterOperation_SCANNER_FILTER_OPERATION_NOT_EQUAL        ScannerFilterOperation = 2
-	ScannerFilterOperation_SCANNER_FILTER_OPERATION_GREATER          ScannerFilterOperation = 3
-	ScannerFilterOperation_SCANNER_FILTER_OPERATION_GREATER_OR_EQUAL ScannerFilterOperation = 4
-	ScannerFilterOperation_SCANNER_FILTER_OPERATION_LESS             ScannerFilterOperation = 5
-	ScannerFilterOperation_SCANNER_FILTER_OPERATION_LESS_OR_EQUAL    ScannerFilterOperation = 6
-	ScannerFilterOperation_SCANNER_FILTER_OPERATION_IN_RANGE         ScannerFilterOperation = 7
-	ScannerFilterOperation_SCANNER_FILTER_OPERATION_NOT_IN_RANGE     ScannerFilterOperation = 8
-	ScannerFilterOperation_SCANNER_FILTER_OPERATION_HAS              ScannerFilterOperation = 9
-	ScannerFilterOperation_SCANNER_FILTER_OPERATION_HAS_NONE_OF      ScannerFilterOperation = 10
-	ScannerFilterOperation_SCANNER_FILTER_OPERATION_MATCH            ScannerFilterOperation = 11
-	ScannerFilterOperation_SCANNER_FILTER_OPERATION_NOT_MATCH        ScannerFilterOperation = 12
-)
-
-// Enum value maps for ScannerFilterOperation.
-var (
-	ScannerFilterOperation_name = map[int32]string{
-		0:  "SCANNER_FILTER_OPERATION_UNSPECIFIED",
-		1:  "SCANNER_FILTER_OPERATION_EQUAL",
-		2:  "SCANNER_FILTER_OPERATION_NOT_EQUAL",
-		3:  "SCANNER_FILTER_OPERATION_GREATER",
-		4:  "SCANNER_FILTER_OPERATION_GREATER_OR_EQUAL",
-		5:  "SCANNER_FILTER_OPERATION_LESS",
-		6:  "SCANNER_FILTER_OPERATION_LESS_OR_EQUAL",
-		7:  "SCANNER_FILTER_OPERATION_IN_RANGE",
-		8:  "SCANNER_FILTER_OPERATION_NOT_IN_RANGE",
-		9:  "SCANNER_FILTER_OPERATION_HAS",
-		10: "SCANNER_FILTER_OPERATION_HAS_NONE_OF",
-		11: "SCANNER_FILTER_OPERATION_MATCH",
-		12: "SCANNER_FILTER_OPERATION_NOT_MATCH",
-	}
-	ScannerFilterOperation_value = map[string]int32{
-		"SCANNER_FILTER_OPERATION_UNSPECIFIED":      0,
-		"SCANNER_FILTER_OPERATION_EQUAL":            1,
-		"SCANNER_FILTER_OPERATION_NOT_EQUAL":        2,
-		"SCANNER_FILTER_OPERATION_GREATER":          3,
-		"SCANNER_FILTER_OPERATION_GREATER_OR_EQUAL": 4,
-		"SCANNER_FILTER_OPERATION_LESS":             5,
-		"SCANNER_FILTER_OPERATION_LESS_OR_EQUAL":    6,
-		"SCANNER_FILTER_OPERATION_IN_RANGE":         7,
-		"SCANNER_FILTER_OPERATION_NOT_IN_RANGE":     8,
-		"SCANNER_FILTER_OPERATION_HAS":              9,
-		"SCANNER_FILTER_OPERATION_HAS_NONE_OF":      10,
-		"SCANNER_FILTER_OPERATION_MATCH":            11,
-		"SCANNER_FILTER_OPERATION_NOT_MATCH":        12,
-	}
-)
-
-func (x ScannerFilterOperation) Enum() *ScannerFilterOperation {
-	p := new(ScannerFilterOperation)
-	*p = x
-	return p
-}
-
-func (x ScannerFilterOperation) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (ScannerFilterOperation) Descriptor() protoreflect.EnumDescriptor {
-	return file_datafeed_v1_datafeed_proto_enumTypes[6].Descriptor()
-}
-
-func (ScannerFilterOperation) Type() protoreflect.EnumType {
-	return &file_datafeed_v1_datafeed_proto_enumTypes[6]
-}
-
-func (x ScannerFilterOperation) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use ScannerFilterOperation.Descriptor instead.
-func (ScannerFilterOperation) EnumDescriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{6}
-}
-
 type StringList struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Values        []string               `protobuf:"bytes,1,rep,name=values,proto3" json:"values,omitempty"`
@@ -4895,704 +4767,6 @@ func (x *StreamBarsResponse) GetV() []float64 {
 	return nil
 }
 
-type ScannerFilterValue struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Types that are valid to be assigned to Value:
-	//
-	//	*ScannerFilterValue_StringValue
-	//	*ScannerFilterValue_NumberValue
-	//	*ScannerFilterValue_BoolValue
-	//	*ScannerFilterValue_StringList
-	//	*ScannerFilterValue_NumberList
-	Value         isScannerFilterValue_Value `protobuf_oneof:"value"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ScannerFilterValue) Reset() {
-	*x = ScannerFilterValue{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[59]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ScannerFilterValue) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ScannerFilterValue) ProtoMessage() {}
-
-func (x *ScannerFilterValue) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[59]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ScannerFilterValue.ProtoReflect.Descriptor instead.
-func (*ScannerFilterValue) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{59}
-}
-
-func (x *ScannerFilterValue) GetValue() isScannerFilterValue_Value {
-	if x != nil {
-		return x.Value
-	}
-	return nil
-}
-
-func (x *ScannerFilterValue) GetStringValue() string {
-	if x != nil {
-		if x, ok := x.Value.(*ScannerFilterValue_StringValue); ok {
-			return x.StringValue
-		}
-	}
-	return ""
-}
-
-func (x *ScannerFilterValue) GetNumberValue() float64 {
-	if x != nil {
-		if x, ok := x.Value.(*ScannerFilterValue_NumberValue); ok {
-			return x.NumberValue
-		}
-	}
-	return 0
-}
-
-func (x *ScannerFilterValue) GetBoolValue() bool {
-	if x != nil {
-		if x, ok := x.Value.(*ScannerFilterValue_BoolValue); ok {
-			return x.BoolValue
-		}
-	}
-	return false
-}
-
-func (x *ScannerFilterValue) GetStringList() *StringList {
-	if x != nil {
-		if x, ok := x.Value.(*ScannerFilterValue_StringList); ok {
-			return x.StringList
-		}
-	}
-	return nil
-}
-
-func (x *ScannerFilterValue) GetNumberList() *DoubleList {
-	if x != nil {
-		if x, ok := x.Value.(*ScannerFilterValue_NumberList); ok {
-			return x.NumberList
-		}
-	}
-	return nil
-}
-
-type isScannerFilterValue_Value interface {
-	isScannerFilterValue_Value()
-}
-
-type ScannerFilterValue_StringValue struct {
-	StringValue string `protobuf:"bytes,1,opt,name=string_value,json=stringValue,proto3,oneof"`
-}
-
-type ScannerFilterValue_NumberValue struct {
-	NumberValue float64 `protobuf:"fixed64,2,opt,name=number_value,json=numberValue,proto3,oneof"`
-}
-
-type ScannerFilterValue_BoolValue struct {
-	BoolValue bool `protobuf:"varint,3,opt,name=bool_value,json=boolValue,proto3,oneof"`
-}
-
-type ScannerFilterValue_StringList struct {
-	StringList *StringList `protobuf:"bytes,4,opt,name=string_list,json=stringList,proto3,oneof"`
-}
-
-type ScannerFilterValue_NumberList struct {
-	NumberList *DoubleList `protobuf:"bytes,5,opt,name=number_list,json=numberList,proto3,oneof"`
-}
-
-func (*ScannerFilterValue_StringValue) isScannerFilterValue_Value() {}
-
-func (*ScannerFilterValue_NumberValue) isScannerFilterValue_Value() {}
-
-func (*ScannerFilterValue_BoolValue) isScannerFilterValue_Value() {}
-
-func (*ScannerFilterValue_StringList) isScannerFilterValue_Value() {}
-
-func (*ScannerFilterValue_NumberList) isScannerFilterValue_Value() {}
-
-type ScannerFilterExpression struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Left          string                 `protobuf:"bytes,1,opt,name=left,proto3" json:"left,omitempty"`
-	Operation     ScannerFilterOperation `protobuf:"varint,2,opt,name=operation,proto3,enum=quant.datafeed.v1.ScannerFilterOperation" json:"operation,omitempty"`
-	Right         *ScannerFilterValue    `protobuf:"bytes,3,opt,name=right,proto3" json:"right,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ScannerFilterExpression) Reset() {
-	*x = ScannerFilterExpression{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[60]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ScannerFilterExpression) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ScannerFilterExpression) ProtoMessage() {}
-
-func (x *ScannerFilterExpression) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[60]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ScannerFilterExpression.ProtoReflect.Descriptor instead.
-func (*ScannerFilterExpression) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{60}
-}
-
-func (x *ScannerFilterExpression) GetLeft() string {
-	if x != nil {
-		return x.Left
-	}
-	return ""
-}
-
-func (x *ScannerFilterExpression) GetOperation() ScannerFilterOperation {
-	if x != nil {
-		return x.Operation
-	}
-	return ScannerFilterOperation_SCANNER_FILTER_OPERATION_UNSPECIFIED
-}
-
-func (x *ScannerFilterExpression) GetRight() *ScannerFilterValue {
-	if x != nil {
-		return x.Right
-	}
-	return nil
-}
-
-type ScannerFilterNode struct {
-	state         protoimpl.MessageState   `protogen:"open.v1"`
-	Expression    *ScannerFilterExpression `protobuf:"bytes,1,opt,name=expression,proto3,oneof" json:"expression,omitempty"`
-	Operation     *ScannerFilterGroup      `protobuf:"bytes,2,opt,name=operation,proto3,oneof" json:"operation,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ScannerFilterNode) Reset() {
-	*x = ScannerFilterNode{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[61]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ScannerFilterNode) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ScannerFilterNode) ProtoMessage() {}
-
-func (x *ScannerFilterNode) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[61]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ScannerFilterNode.ProtoReflect.Descriptor instead.
-func (*ScannerFilterNode) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{61}
-}
-
-func (x *ScannerFilterNode) GetExpression() *ScannerFilterExpression {
-	if x != nil {
-		return x.Expression
-	}
-	return nil
-}
-
-func (x *ScannerFilterNode) GetOperation() *ScannerFilterGroup {
-	if x != nil {
-		return x.Operation
-	}
-	return nil
-}
-
-type ScannerFilterGroup struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Operator      ScannerLogicalOperator `protobuf:"varint,1,opt,name=operator,proto3,enum=quant.datafeed.v1.ScannerLogicalOperator" json:"operator,omitempty"`
-	Operands      []*ScannerFilterNode   `protobuf:"bytes,2,rep,name=operands,proto3" json:"operands,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ScannerFilterGroup) Reset() {
-	*x = ScannerFilterGroup{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[62]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ScannerFilterGroup) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ScannerFilterGroup) ProtoMessage() {}
-
-func (x *ScannerFilterGroup) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[62]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ScannerFilterGroup.ProtoReflect.Descriptor instead.
-func (*ScannerFilterGroup) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{62}
-}
-
-func (x *ScannerFilterGroup) GetOperator() ScannerLogicalOperator {
-	if x != nil {
-		return x.Operator
-	}
-	return ScannerLogicalOperator_SCANNER_LOGICAL_OPERATOR_UNSPECIFIED
-}
-
-func (x *ScannerFilterGroup) GetOperands() []*ScannerFilterNode {
-	if x != nil {
-		return x.Operands
-	}
-	return nil
-}
-
-type ScannerFilter struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Operator      ScannerLogicalOperator `protobuf:"varint,1,opt,name=operator,proto3,enum=quant.datafeed.v1.ScannerLogicalOperator" json:"operator,omitempty"`
-	Operands      []*ScannerFilterNode   `protobuf:"bytes,2,rep,name=operands,proto3" json:"operands,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ScannerFilter) Reset() {
-	*x = ScannerFilter{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[63]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ScannerFilter) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ScannerFilter) ProtoMessage() {}
-
-func (x *ScannerFilter) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[63]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ScannerFilter.ProtoReflect.Descriptor instead.
-func (*ScannerFilter) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{63}
-}
-
-func (x *ScannerFilter) GetOperator() ScannerLogicalOperator {
-	if x != nil {
-		return x.Operator
-	}
-	return ScannerLogicalOperator_SCANNER_LOGICAL_OPERATOR_UNSPECIFIED
-}
-
-func (x *ScannerFilter) GetOperands() []*ScannerFilterNode {
-	if x != nil {
-		return x.Operands
-	}
-	return nil
-}
-
-type ScannerSort struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	SortBy        string                 `protobuf:"bytes,1,opt,name=sort_by,json=sortBy,proto3" json:"sort_by,omitempty"`
-	SortOrder     SortOrder              `protobuf:"varint,2,opt,name=sort_order,json=sortOrder,proto3,enum=quant.datafeed.v1.SortOrder" json:"sort_order,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ScannerSort) Reset() {
-	*x = ScannerSort{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[64]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ScannerSort) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ScannerSort) ProtoMessage() {}
-
-func (x *ScannerSort) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[64]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ScannerSort.ProtoReflect.Descriptor instead.
-func (*ScannerSort) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{64}
-}
-
-func (x *ScannerSort) GetSortBy() string {
-	if x != nil {
-		return x.SortBy
-	}
-	return ""
-}
-
-func (x *ScannerSort) GetSortOrder() SortOrder {
-	if x != nil {
-		return x.SortOrder
-	}
-	return SortOrder_SORT_ORDER_UNSPECIFIED
-}
-
-type ScannerRange struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Start         uint32                 `protobuf:"varint,1,opt,name=start,proto3" json:"start,omitempty"`
-	End           uint32                 `protobuf:"varint,2,opt,name=end,proto3" json:"end,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ScannerRange) Reset() {
-	*x = ScannerRange{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[65]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ScannerRange) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ScannerRange) ProtoMessage() {}
-
-func (x *ScannerRange) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[65]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ScannerRange.ProtoReflect.Descriptor instead.
-func (*ScannerRange) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{65}
-}
-
-func (x *ScannerRange) GetStart() uint32 {
-	if x != nil {
-		return x.Start
-	}
-	return 0
-}
-
-func (x *ScannerRange) GetEnd() uint32 {
-	if x != nil {
-		return x.End
-	}
-	return 0
-}
-
-type ScannerOptions struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Lang          *string                `protobuf:"bytes,1,opt,name=lang,proto3,oneof" json:"lang,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ScannerOptions) Reset() {
-	*x = ScannerOptions{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[66]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ScannerOptions) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ScannerOptions) ProtoMessage() {}
-
-func (x *ScannerOptions) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[66]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ScannerOptions.ProtoReflect.Descriptor instead.
-func (*ScannerOptions) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{66}
-}
-
-func (x *ScannerOptions) GetLang() string {
-	if x != nil && x.Lang != nil {
-		return *x.Lang
-	}
-	return ""
-}
-
-type ScanSymbolsRequest struct {
-	state               protoimpl.MessageState     `protogen:"open.v1"`
-	Columns             []string                   `protobuf:"bytes,1,rep,name=columns,proto3" json:"columns,omitempty"`
-	Filter              *ScannerFilter             `protobuf:"bytes,2,opt,name=filter,proto3,oneof" json:"filter,omitempty"`
-	Sort                *ScannerSort               `protobuf:"bytes,3,opt,name=sort,proto3,oneof" json:"sort,omitempty"`
-	Range               *ScannerRange              `protobuf:"bytes,4,opt,name=range,proto3,oneof" json:"range,omitempty"`
-	Options             *ScannerOptions            `protobuf:"bytes,5,opt,name=options,proto3,oneof" json:"options,omitempty"`
-	IgnoreUnknownFields *bool                      `protobuf:"varint,6,opt,name=ignore_unknown_fields,json=ignoreUnknownFields,proto3,oneof" json:"ignore_unknown_fields,omitempty"`
-	Markets             []string                   `protobuf:"bytes,7,rep,name=markets,proto3" json:"markets,omitempty"`
-	Symbols             map[string]*structpb.Value `protobuf:"bytes,8,rep,name=symbols,proto3" json:"symbols,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	unknownFields       protoimpl.UnknownFields
-	sizeCache           protoimpl.SizeCache
-}
-
-func (x *ScanSymbolsRequest) Reset() {
-	*x = ScanSymbolsRequest{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[67]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ScanSymbolsRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ScanSymbolsRequest) ProtoMessage() {}
-
-func (x *ScanSymbolsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[67]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ScanSymbolsRequest.ProtoReflect.Descriptor instead.
-func (*ScanSymbolsRequest) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{67}
-}
-
-func (x *ScanSymbolsRequest) GetColumns() []string {
-	if x != nil {
-		return x.Columns
-	}
-	return nil
-}
-
-func (x *ScanSymbolsRequest) GetFilter() *ScannerFilter {
-	if x != nil {
-		return x.Filter
-	}
-	return nil
-}
-
-func (x *ScanSymbolsRequest) GetSort() *ScannerSort {
-	if x != nil {
-		return x.Sort
-	}
-	return nil
-}
-
-func (x *ScanSymbolsRequest) GetRange() *ScannerRange {
-	if x != nil {
-		return x.Range
-	}
-	return nil
-}
-
-func (x *ScanSymbolsRequest) GetOptions() *ScannerOptions {
-	if x != nil {
-		return x.Options
-	}
-	return nil
-}
-
-func (x *ScanSymbolsRequest) GetIgnoreUnknownFields() bool {
-	if x != nil && x.IgnoreUnknownFields != nil {
-		return *x.IgnoreUnknownFields
-	}
-	return false
-}
-
-func (x *ScanSymbolsRequest) GetMarkets() []string {
-	if x != nil {
-		return x.Markets
-	}
-	return nil
-}
-
-func (x *ScanSymbolsRequest) GetSymbols() map[string]*structpb.Value {
-	if x != nil {
-		return x.Symbols
-	}
-	return nil
-}
-
-type ScanSymbolRow struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	S             string                 `protobuf:"bytes,1,opt,name=s,proto3" json:"s,omitempty"`
-	D             []*structpb.Value      `protobuf:"bytes,2,rep,name=d,proto3" json:"d,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ScanSymbolRow) Reset() {
-	*x = ScanSymbolRow{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[68]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ScanSymbolRow) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ScanSymbolRow) ProtoMessage() {}
-
-func (x *ScanSymbolRow) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[68]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ScanSymbolRow.ProtoReflect.Descriptor instead.
-func (*ScanSymbolRow) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{68}
-}
-
-func (x *ScanSymbolRow) GetS() string {
-	if x != nil {
-		return x.S
-	}
-	return ""
-}
-
-func (x *ScanSymbolRow) GetD() []*structpb.Value {
-	if x != nil {
-		return x.D
-	}
-	return nil
-}
-
-type ScanSymbolsResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	TotalCount    uint32                 `protobuf:"varint,1,opt,name=total_count,json=totalCount,proto3" json:"total_count,omitempty"`
-	Data          []*ScanSymbolRow       `protobuf:"bytes,2,rep,name=data,proto3" json:"data,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ScanSymbolsResponse) Reset() {
-	*x = ScanSymbolsResponse{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[69]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ScanSymbolsResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ScanSymbolsResponse) ProtoMessage() {}
-
-func (x *ScanSymbolsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[69]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ScanSymbolsResponse.ProtoReflect.Descriptor instead.
-func (*ScanSymbolsResponse) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{69}
-}
-
-func (x *ScanSymbolsResponse) GetTotalCount() uint32 {
-	if x != nil {
-		return x.TotalCount
-	}
-	return 0
-}
-
-func (x *ScanSymbolsResponse) GetData() []*ScanSymbolRow {
-	if x != nil {
-		return x.Data
-	}
-	return nil
-}
-
 type Tick struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Symbol        string                 `protobuf:"bytes,1,opt,name=symbol,proto3" json:"symbol,omitempty"`
@@ -5606,7 +4780,7 @@ type Tick struct {
 
 func (x *Tick) Reset() {
 	*x = Tick{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[70]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[59]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5618,7 +4792,7 @@ func (x *Tick) String() string {
 func (*Tick) ProtoMessage() {}
 
 func (x *Tick) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[70]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[59]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5631,7 +4805,7 @@ func (x *Tick) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Tick.ProtoReflect.Descriptor instead.
 func (*Tick) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{70}
+	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{59}
 }
 
 func (x *Tick) GetSymbol() string {
@@ -5678,7 +4852,7 @@ type IngestTicksRequest struct {
 
 func (x *IngestTicksRequest) Reset() {
 	*x = IngestTicksRequest{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[71]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[60]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5690,7 +4864,7 @@ func (x *IngestTicksRequest) String() string {
 func (*IngestTicksRequest) ProtoMessage() {}
 
 func (x *IngestTicksRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[71]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[60]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5703,7 +4877,7 @@ func (x *IngestTicksRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IngestTicksRequest.ProtoReflect.Descriptor instead.
 func (*IngestTicksRequest) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{71}
+	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{60}
 }
 
 func (x *IngestTicksRequest) GetTicks() []*Tick {
@@ -5722,7 +4896,7 @@ type IngestTicksResponse struct {
 
 func (x *IngestTicksResponse) Reset() {
 	*x = IngestTicksResponse{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[72]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[61]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5734,7 +4908,7 @@ func (x *IngestTicksResponse) String() string {
 func (*IngestTicksResponse) ProtoMessage() {}
 
 func (x *IngestTicksResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[72]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[61]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5747,7 +4921,7 @@ func (x *IngestTicksResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IngestTicksResponse.ProtoReflect.Descriptor instead.
 func (*IngestTicksResponse) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{72}
+	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{61}
 }
 
 func (x *IngestTicksResponse) GetInserted() uint32 {
@@ -5769,7 +4943,7 @@ type ReplayTicksRequest struct {
 
 func (x *ReplayTicksRequest) Reset() {
 	*x = ReplayTicksRequest{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[73]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[62]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5781,7 +4955,7 @@ func (x *ReplayTicksRequest) String() string {
 func (*ReplayTicksRequest) ProtoMessage() {}
 
 func (x *ReplayTicksRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[73]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[62]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5794,7 +4968,7 @@ func (x *ReplayTicksRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReplayTicksRequest.ProtoReflect.Descriptor instead.
 func (*ReplayTicksRequest) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{73}
+	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{62}
 }
 
 func (x *ReplayTicksRequest) GetSymbol() string {
@@ -5834,7 +5008,7 @@ type ReplayTicksResponse struct {
 
 func (x *ReplayTicksResponse) Reset() {
 	*x = ReplayTicksResponse{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[74]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[63]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5846,7 +5020,7 @@ func (x *ReplayTicksResponse) String() string {
 func (*ReplayTicksResponse) ProtoMessage() {}
 
 func (x *ReplayTicksResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[74]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[63]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5859,7 +5033,7 @@ func (x *ReplayTicksResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReplayTicksResponse.ProtoReflect.Descriptor instead.
 func (*ReplayTicksResponse) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{74}
+	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{63}
 }
 
 func (x *ReplayTicksResponse) GetTicks() []*Tick {
@@ -5885,7 +5059,7 @@ type Bar struct {
 
 func (x *Bar) Reset() {
 	*x = Bar{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[75]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[64]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5897,7 +5071,7 @@ func (x *Bar) String() string {
 func (*Bar) ProtoMessage() {}
 
 func (x *Bar) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[75]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[64]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5910,7 +5084,7 @@ func (x *Bar) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Bar.ProtoReflect.Descriptor instead.
 func (*Bar) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{75}
+	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{64}
 }
 
 func (x *Bar) GetSymbol() string {
@@ -5982,7 +5156,7 @@ type QueryBarsRequest struct {
 
 func (x *QueryBarsRequest) Reset() {
 	*x = QueryBarsRequest{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[76]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[65]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5994,7 +5168,7 @@ func (x *QueryBarsRequest) String() string {
 func (*QueryBarsRequest) ProtoMessage() {}
 
 func (x *QueryBarsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[76]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[65]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6007,7 +5181,7 @@ func (x *QueryBarsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryBarsRequest.ProtoReflect.Descriptor instead.
 func (*QueryBarsRequest) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{76}
+	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{65}
 }
 
 func (x *QueryBarsRequest) GetSymbol() string {
@@ -6054,7 +5228,7 @@ type QueryBarsResponse struct {
 
 func (x *QueryBarsResponse) Reset() {
 	*x = QueryBarsResponse{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[77]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[66]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6066,7 +5240,7 @@ func (x *QueryBarsResponse) String() string {
 func (*QueryBarsResponse) ProtoMessage() {}
 
 func (x *QueryBarsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[77]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[66]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6079,7 +5253,7 @@ func (x *QueryBarsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryBarsResponse.ProtoReflect.Descriptor instead.
 func (*QueryBarsResponse) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{77}
+	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{66}
 }
 
 func (x *QueryBarsResponse) GetBars() []*Bar {
@@ -6099,7 +5273,7 @@ type ListNewsRequest struct {
 
 func (x *ListNewsRequest) Reset() {
 	*x = ListNewsRequest{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[78]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[67]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6111,7 +5285,7 @@ func (x *ListNewsRequest) String() string {
 func (*ListNewsRequest) ProtoMessage() {}
 
 func (x *ListNewsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[78]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[67]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6124,7 +5298,7 @@ func (x *ListNewsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListNewsRequest.ProtoReflect.Descriptor instead.
 func (*ListNewsRequest) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{78}
+	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{67}
 }
 
 func (x *ListNewsRequest) GetSymbol() string {
@@ -6155,7 +5329,7 @@ type NewsEvent struct {
 
 func (x *NewsEvent) Reset() {
 	*x = NewsEvent{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[79]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[68]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6167,7 +5341,7 @@ func (x *NewsEvent) String() string {
 func (*NewsEvent) ProtoMessage() {}
 
 func (x *NewsEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[79]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[68]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6180,7 +5354,7 @@ func (x *NewsEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NewsEvent.ProtoReflect.Descriptor instead.
 func (*NewsEvent) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{79}
+	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{68}
 }
 
 func (x *NewsEvent) GetId() string {
@@ -6234,7 +5408,7 @@ type ListNewsResponse struct {
 
 func (x *ListNewsResponse) Reset() {
 	*x = ListNewsResponse{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[80]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[69]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6246,7 +5420,7 @@ func (x *ListNewsResponse) String() string {
 func (*ListNewsResponse) ProtoMessage() {}
 
 func (x *ListNewsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[80]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[69]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6259,7 +5433,7 @@ func (x *ListNewsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListNewsResponse.ProtoReflect.Descriptor instead.
 func (*ListNewsResponse) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{80}
+	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{69}
 }
 
 func (x *ListNewsResponse) GetItems() []*NewsEvent {
@@ -6279,7 +5453,7 @@ type ListSocialRequest struct {
 
 func (x *ListSocialRequest) Reset() {
 	*x = ListSocialRequest{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[81]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[70]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6291,7 +5465,7 @@ func (x *ListSocialRequest) String() string {
 func (*ListSocialRequest) ProtoMessage() {}
 
 func (x *ListSocialRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[81]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[70]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6304,7 +5478,7 @@ func (x *ListSocialRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListSocialRequest.ProtoReflect.Descriptor instead.
 func (*ListSocialRequest) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{81}
+	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{70}
 }
 
 func (x *ListSocialRequest) GetSymbol() string {
@@ -6336,7 +5510,7 @@ type SocialEvent struct {
 
 func (x *SocialEvent) Reset() {
 	*x = SocialEvent{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[82]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[71]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6348,7 +5522,7 @@ func (x *SocialEvent) String() string {
 func (*SocialEvent) ProtoMessage() {}
 
 func (x *SocialEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[82]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[71]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6361,7 +5535,7 @@ func (x *SocialEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SocialEvent.ProtoReflect.Descriptor instead.
 func (*SocialEvent) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{82}
+	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{71}
 }
 
 func (x *SocialEvent) GetId() string {
@@ -6422,7 +5596,7 @@ type ListSocialResponse struct {
 
 func (x *ListSocialResponse) Reset() {
 	*x = ListSocialResponse{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[83]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[72]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -6434,7 +5608,7 @@ func (x *ListSocialResponse) String() string {
 func (*ListSocialResponse) ProtoMessage() {}
 
 func (x *ListSocialResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[83]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[72]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -6447,7 +5621,7 @@ func (x *ListSocialResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListSocialResponse.ProtoReflect.Descriptor instead.
 func (*ListSocialResponse) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{83}
+	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{72}
 }
 
 func (x *ListSocialResponse) GetItems() []*SocialEvent {
@@ -6936,70 +6110,7 @@ const file_datafeed_v1_datafeed_proto_rawDesc = "" +
 	"\x01o\x18\x03 \x03(\x01R\x01o\x12\f\n" +
 	"\x01h\x18\x04 \x03(\x01R\x01h\x12\f\n" +
 	"\x01l\x18\x05 \x03(\x01R\x01l\x12\f\n" +
-	"\x01v\x18\x06 \x03(\x01R\x01v\"\x8c\x02\n" +
-	"\x12ScannerFilterValue\x12#\n" +
-	"\fstring_value\x18\x01 \x01(\tH\x00R\vstringValue\x12#\n" +
-	"\fnumber_value\x18\x02 \x01(\x01H\x00R\vnumberValue\x12\x1f\n" +
-	"\n" +
-	"bool_value\x18\x03 \x01(\bH\x00R\tboolValue\x12@\n" +
-	"\vstring_list\x18\x04 \x01(\v2\x1d.quant.datafeed.v1.StringListH\x00R\n" +
-	"stringList\x12@\n" +
-	"\vnumber_list\x18\x05 \x01(\v2\x1d.quant.datafeed.v1.DoubleListH\x00R\n" +
-	"numberListB\a\n" +
-	"\x05value\"\xb3\x01\n" +
-	"\x17ScannerFilterExpression\x12\x12\n" +
-	"\x04left\x18\x01 \x01(\tR\x04left\x12G\n" +
-	"\toperation\x18\x02 \x01(\x0e2).quant.datafeed.v1.ScannerFilterOperationR\toperation\x12;\n" +
-	"\x05right\x18\x03 \x01(\v2%.quant.datafeed.v1.ScannerFilterValueR\x05right\"\xcb\x01\n" +
-	"\x11ScannerFilterNode\x12O\n" +
-	"\n" +
-	"expression\x18\x01 \x01(\v2*.quant.datafeed.v1.ScannerFilterExpressionH\x00R\n" +
-	"expression\x88\x01\x01\x12H\n" +
-	"\toperation\x18\x02 \x01(\v2%.quant.datafeed.v1.ScannerFilterGroupH\x01R\toperation\x88\x01\x01B\r\n" +
-	"\v_expressionB\f\n" +
-	"\n" +
-	"_operation\"\x9d\x01\n" +
-	"\x12ScannerFilterGroup\x12E\n" +
-	"\boperator\x18\x01 \x01(\x0e2).quant.datafeed.v1.ScannerLogicalOperatorR\boperator\x12@\n" +
-	"\boperands\x18\x02 \x03(\v2$.quant.datafeed.v1.ScannerFilterNodeR\boperands\"\x98\x01\n" +
-	"\rScannerFilter\x12E\n" +
-	"\boperator\x18\x01 \x01(\x0e2).quant.datafeed.v1.ScannerLogicalOperatorR\boperator\x12@\n" +
-	"\boperands\x18\x02 \x03(\v2$.quant.datafeed.v1.ScannerFilterNodeR\boperands\"c\n" +
-	"\vScannerSort\x12\x17\n" +
-	"\asort_by\x18\x01 \x01(\tR\x06sortBy\x12;\n" +
-	"\n" +
-	"sort_order\x18\x02 \x01(\x0e2\x1c.quant.datafeed.v1.SortOrderR\tsortOrder\"6\n" +
-	"\fScannerRange\x12\x14\n" +
-	"\x05start\x18\x01 \x01(\rR\x05start\x12\x10\n" +
-	"\x03end\x18\x02 \x01(\rR\x03end\"2\n" +
-	"\x0eScannerOptions\x12\x17\n" +
-	"\x04lang\x18\x01 \x01(\tH\x00R\x04lang\x88\x01\x01B\a\n" +
-	"\x05_lang\"\xdd\x04\n" +
-	"\x12ScanSymbolsRequest\x12\x18\n" +
-	"\acolumns\x18\x01 \x03(\tR\acolumns\x12=\n" +
-	"\x06filter\x18\x02 \x01(\v2 .quant.datafeed.v1.ScannerFilterH\x00R\x06filter\x88\x01\x01\x127\n" +
-	"\x04sort\x18\x03 \x01(\v2\x1e.quant.datafeed.v1.ScannerSortH\x01R\x04sort\x88\x01\x01\x12:\n" +
-	"\x05range\x18\x04 \x01(\v2\x1f.quant.datafeed.v1.ScannerRangeH\x02R\x05range\x88\x01\x01\x12@\n" +
-	"\aoptions\x18\x05 \x01(\v2!.quant.datafeed.v1.ScannerOptionsH\x03R\aoptions\x88\x01\x01\x127\n" +
-	"\x15ignore_unknown_fields\x18\x06 \x01(\bH\x04R\x13ignoreUnknownFields\x88\x01\x01\x12\x18\n" +
-	"\amarkets\x18\a \x03(\tR\amarkets\x12L\n" +
-	"\asymbols\x18\b \x03(\v22.quant.datafeed.v1.ScanSymbolsRequest.SymbolsEntryR\asymbols\x1aR\n" +
-	"\fSymbolsEntry\x12\x10\n" +
-	"\x03key\x18\x01 \x01(\tR\x03key\x12,\n" +
-	"\x05value\x18\x02 \x01(\v2\x16.google.protobuf.ValueR\x05value:\x028\x01B\t\n" +
-	"\a_filterB\a\n" +
-	"\x05_sortB\b\n" +
-	"\x06_rangeB\n" +
-	"\n" +
-	"\b_optionsB\x18\n" +
-	"\x16_ignore_unknown_fields\"C\n" +
-	"\rScanSymbolRow\x12\f\n" +
-	"\x01s\x18\x01 \x01(\tR\x01s\x12$\n" +
-	"\x01d\x18\x02 \x03(\v2\x16.google.protobuf.ValueR\x01d\"l\n" +
-	"\x13ScanSymbolsResponse\x12\x1f\n" +
-	"\vtotal_count\x18\x01 \x01(\rR\n" +
-	"totalCount\x124\n" +
-	"\x04data\x18\x02 \x03(\v2 .quant.datafeed.v1.ScanSymbolRowR\x04data\"u\n" +
+	"\x01v\x18\x06 \x03(\x01R\x01v\"u\n" +
 	"\x04Tick\x12\x16\n" +
 	"\x06symbol\x18\x01 \x01(\tR\x06symbol\x12\x13\n" +
 	"\x05ts_ms\x18\x02 \x01(\x03R\x04tsMs\x12\x14\n" +
@@ -7084,26 +6195,7 @@ const file_datafeed_v1_datafeed_proto_rawDesc = "" +
 	"\x1bTIMESCALE_MARK_SHAPE_CIRCLE\x10\x01\x12#\n" +
 	"\x1fTIMESCALE_MARK_SHAPE_EARNING_UP\x10\x02\x12%\n" +
 	"!TIMESCALE_MARK_SHAPE_EARNING_DOWN\x10\x03\x12 \n" +
-	"\x1cTIMESCALE_MARK_SHAPE_EARNING\x10\x04*\x85\x01\n" +
-	"\x16ScannerLogicalOperator\x12(\n" +
-	"$SCANNER_LOGICAL_OPERATOR_UNSPECIFIED\x10\x00\x12 \n" +
-	"\x1cSCANNER_LOGICAL_OPERATOR_AND\x10\x01\x12\x1f\n" +
-	"\x1bSCANNER_LOGICAL_OPERATOR_OR\x10\x02*\x9c\x04\n" +
-	"\x16ScannerFilterOperation\x12(\n" +
-	"$SCANNER_FILTER_OPERATION_UNSPECIFIED\x10\x00\x12\"\n" +
-	"\x1eSCANNER_FILTER_OPERATION_EQUAL\x10\x01\x12&\n" +
-	"\"SCANNER_FILTER_OPERATION_NOT_EQUAL\x10\x02\x12$\n" +
-	" SCANNER_FILTER_OPERATION_GREATER\x10\x03\x12-\n" +
-	")SCANNER_FILTER_OPERATION_GREATER_OR_EQUAL\x10\x04\x12!\n" +
-	"\x1dSCANNER_FILTER_OPERATION_LESS\x10\x05\x12*\n" +
-	"&SCANNER_FILTER_OPERATION_LESS_OR_EQUAL\x10\x06\x12%\n" +
-	"!SCANNER_FILTER_OPERATION_IN_RANGE\x10\a\x12)\n" +
-	"%SCANNER_FILTER_OPERATION_NOT_IN_RANGE\x10\b\x12 \n" +
-	"\x1cSCANNER_FILTER_OPERATION_HAS\x10\t\x12(\n" +
-	"$SCANNER_FILTER_OPERATION_HAS_NONE_OF\x10\n" +
-	"\x12\"\n" +
-	"\x1eSCANNER_FILTER_OPERATION_MATCH\x10\v\x12&\n" +
-	"\"SCANNER_FILTER_OPERATION_NOT_MATCH\x10\f2\xf9\x17\n" +
+	"\x1cTIMESCALE_MARK_SHAPE_EARNING\x10\x042\xa6\x16\n" +
 	"\x0fDatafeedService\x12\\\n" +
 	"\vIngestTicks\x12%.quant.datafeed.v1.IngestTicksRequest\x1a&.quant.datafeed.v1.IngestTicksResponse\x12\\\n" +
 	"\vReplayTicks\x12%.quant.datafeed.v1.ReplayTicksRequest\x1a&.quant.datafeed.v1.ReplayTicksResponse\x12V\n" +
@@ -7143,10 +6235,7 @@ const file_datafeed_v1_datafeed_proto_rawDesc = "" +
 	"\n" +
 	"StreamBars\x12$.quant.datafeed.v1.StreamBarsRequest\x1a%.quant.datafeed.v1.StreamBarsResponse\"r\xbaGo\n" +
 	"\x03UDF\n" +
-	"\bDatafeed\x12\vStream Bars\x1a5Streams incremental bar updates in UDF stream format.*\x1aDatafeedService_StreamBars0\x01\x12\xd0\x01\n" +
-	"\vScanSymbols\x12%.quant.datafeed.v1.ScanSymbolsRequest\x1a&.quant.datafeed.v1.ScanSymbolsResponse\"r\xbaGo\n" +
-	"\aScanner\n" +
-	"\bDatafeed\x12\fScan Symbols\x1a/Scans symbols using scanner filter/sort schema.*\x1bDatafeedService_ScanSymbols\x12\xf3\x01\n" +
+	"\bDatafeed\x12\vStream Bars\x1a5Streams incremental bar updates in UDF stream format.*\x1aDatafeedService_StreamBars0\x01\x12\xf3\x01\n" +
 	"\vListSymbols\x12%.quant.datafeed.v1.ListSymbolsRequest\x1a&.quant.datafeed.v1.ListSymbolsResponse\"\x94\x01\xbaG\x90\x01\n" +
 	"\x03UDF\n" +
 	"\aScanner\n" +
@@ -7164,252 +6253,217 @@ func file_datafeed_v1_datafeed_proto_rawDescGZIP() []byte {
 	return file_datafeed_v1_datafeed_proto_rawDescData
 }
 
-var file_datafeed_v1_datafeed_proto_enumTypes = make([]protoimpl.EnumInfo, 7)
-var file_datafeed_v1_datafeed_proto_msgTypes = make([]protoimpl.MessageInfo, 88)
+var file_datafeed_v1_datafeed_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
+var file_datafeed_v1_datafeed_proto_msgTypes = make([]protoimpl.MessageInfo, 76)
 var file_datafeed_v1_datafeed_proto_goTypes = []any{
 	(SeriesFormat)(0),                  // 0: quant.datafeed.v1.SeriesFormat
 	(VisiblePlotsSet)(0),               // 1: quant.datafeed.v1.VisiblePlotsSet
 	(DataStatus)(0),                    // 2: quant.datafeed.v1.DataStatus
 	(SortOrder)(0),                     // 3: quant.datafeed.v1.SortOrder
 	(TimescaleMarkShape)(0),            // 4: quant.datafeed.v1.TimescaleMarkShape
-	(ScannerLogicalOperator)(0),        // 5: quant.datafeed.v1.ScannerLogicalOperator
-	(ScannerFilterOperation)(0),        // 6: quant.datafeed.v1.ScannerFilterOperation
-	(*StringList)(nil),                 // 7: quant.datafeed.v1.StringList
-	(*StringListList)(nil),             // 8: quant.datafeed.v1.StringListList
-	(*DoubleList)(nil),                 // 9: quant.datafeed.v1.DoubleList
-	(*Int64List)(nil),                  // 10: quant.datafeed.v1.Int64List
-	(*BoolList)(nil),                   // 11: quant.datafeed.v1.BoolList
-	(*NullableStringList)(nil),         // 12: quant.datafeed.v1.NullableStringList
-	(*NullableDoubleList)(nil),         // 13: quant.datafeed.v1.NullableDoubleList
-	(*NullableBoolList)(nil),           // 14: quant.datafeed.v1.NullableBoolList
-	(*StringOrStringList)(nil),         // 15: quant.datafeed.v1.StringOrStringList
-	(*StringListOrStringListList)(nil), // 16: quant.datafeed.v1.StringListOrStringListList
-	(*DoubleOrDoubleList)(nil),         // 17: quant.datafeed.v1.DoubleOrDoubleList
-	(*Int64OrInt64List)(nil),           // 18: quant.datafeed.v1.Int64OrInt64List
-	(*BoolOrBoolList)(nil),             // 19: quant.datafeed.v1.BoolOrBoolList
-	(*StringOrNullableStringList)(nil), // 20: quant.datafeed.v1.StringOrNullableStringList
-	(*DoubleOrNullableDoubleList)(nil), // 21: quant.datafeed.v1.DoubleOrNullableDoubleList
-	(*BoolOrNullableBoolList)(nil),     // 22: quant.datafeed.v1.BoolOrNullableBoolList
-	(*VisiblePlotsSetList)(nil),        // 23: quant.datafeed.v1.VisiblePlotsSetList
-	(*VisiblePlotsSetOrList)(nil),      // 24: quant.datafeed.v1.VisiblePlotsSetOrList
-	(*SymbolPriceSource)(nil),          // 25: quant.datafeed.v1.SymbolPriceSource
-	(*SubsessionInfo)(nil),             // 26: quant.datafeed.v1.SubsessionInfo
-	(*LibrarySymbolInfo)(nil),          // 27: quant.datafeed.v1.LibrarySymbolInfo
-	(*ListSymbolsRequest)(nil),         // 28: quant.datafeed.v1.ListSymbolsRequest
-	(*ListSymbolsResponse)(nil),        // 29: quant.datafeed.v1.ListSymbolsResponse
-	(*ExchangeDescriptor)(nil),         // 30: quant.datafeed.v1.ExchangeDescriptor
-	(*SymbolTypeDescriptor)(nil),       // 31: quant.datafeed.v1.SymbolTypeDescriptor
-	(*CurrencyItem)(nil),               // 32: quant.datafeed.v1.CurrencyItem
-	(*CurrencyCodeEntry)(nil),          // 33: quant.datafeed.v1.CurrencyCodeEntry
-	(*UnitItem)(nil),                   // 34: quant.datafeed.v1.UnitItem
-	(*UnitList)(nil),                   // 35: quant.datafeed.v1.UnitList
-	(*GetConfigRequest)(nil),           // 36: quant.datafeed.v1.GetConfigRequest
-	(*GetConfigResponse)(nil),          // 37: quant.datafeed.v1.GetConfigResponse
-	(*GetTimeRequest)(nil),             // 38: quant.datafeed.v1.GetTimeRequest
-	(*GetTimeResponse)(nil),            // 39: quant.datafeed.v1.GetTimeResponse
-	(*GetHistoryRequest)(nil),          // 40: quant.datafeed.v1.GetHistoryRequest
-	(*GetHistoryOk)(nil),               // 41: quant.datafeed.v1.GetHistoryOk
-	(*GetHistoryNoData)(nil),           // 42: quant.datafeed.v1.GetHistoryNoData
-	(*GetHistoryError)(nil),            // 43: quant.datafeed.v1.GetHistoryError
-	(*GetHistoryResponse)(nil),         // 44: quant.datafeed.v1.GetHistoryResponse
-	(*QuoteValues)(nil),                // 45: quant.datafeed.v1.QuoteValues
-	(*QuoteData)(nil),                  // 46: quant.datafeed.v1.QuoteData
-	(*GetQuotesRequest)(nil),           // 47: quant.datafeed.v1.GetQuotesRequest
-	(*GetQuotesOk)(nil),                // 48: quant.datafeed.v1.GetQuotesOk
-	(*GetQuotesError)(nil),             // 49: quant.datafeed.v1.GetQuotesError
-	(*GetQuotesResponse)(nil),          // 50: quant.datafeed.v1.GetQuotesResponse
-	(*MarkId)(nil),                     // 51: quant.datafeed.v1.MarkId
-	(*GetMarksRequest)(nil),            // 52: quant.datafeed.v1.GetMarksRequest
-	(*GetMarksResponse)(nil),           // 53: quant.datafeed.v1.GetMarksResponse
-	(*TimescaleMark)(nil),              // 54: quant.datafeed.v1.TimescaleMark
-	(*GetTimescaleMarksRequest)(nil),   // 55: quant.datafeed.v1.GetTimescaleMarksRequest
-	(*GetTimescaleMarksResponse)(nil),  // 56: quant.datafeed.v1.GetTimescaleMarksResponse
-	(*ResolveSymbolRequest)(nil),       // 57: quant.datafeed.v1.ResolveSymbolRequest
-	(*ResolveSymbolResponse)(nil),      // 58: quant.datafeed.v1.ResolveSymbolResponse
-	(*GetSymbolGroupInfoRequest)(nil),  // 59: quant.datafeed.v1.GetSymbolGroupInfoRequest
-	(*GetSymbolGroupInfoResponse)(nil), // 60: quant.datafeed.v1.GetSymbolGroupInfoResponse
-	(*SearchResultItem)(nil),           // 61: quant.datafeed.v1.SearchResultItem
-	(*SearchSymbolsRequest)(nil),       // 62: quant.datafeed.v1.SearchSymbolsRequest
-	(*SearchSymbolsResponse)(nil),      // 63: quant.datafeed.v1.SearchSymbolsResponse
-	(*StreamBarsRequest)(nil),          // 64: quant.datafeed.v1.StreamBarsRequest
-	(*StreamBarsResponse)(nil),         // 65: quant.datafeed.v1.StreamBarsResponse
-	(*ScannerFilterValue)(nil),         // 66: quant.datafeed.v1.ScannerFilterValue
-	(*ScannerFilterExpression)(nil),    // 67: quant.datafeed.v1.ScannerFilterExpression
-	(*ScannerFilterNode)(nil),          // 68: quant.datafeed.v1.ScannerFilterNode
-	(*ScannerFilterGroup)(nil),         // 69: quant.datafeed.v1.ScannerFilterGroup
-	(*ScannerFilter)(nil),              // 70: quant.datafeed.v1.ScannerFilter
-	(*ScannerSort)(nil),                // 71: quant.datafeed.v1.ScannerSort
-	(*ScannerRange)(nil),               // 72: quant.datafeed.v1.ScannerRange
-	(*ScannerOptions)(nil),             // 73: quant.datafeed.v1.ScannerOptions
-	(*ScanSymbolsRequest)(nil),         // 74: quant.datafeed.v1.ScanSymbolsRequest
-	(*ScanSymbolRow)(nil),              // 75: quant.datafeed.v1.ScanSymbolRow
-	(*ScanSymbolsResponse)(nil),        // 76: quant.datafeed.v1.ScanSymbolsResponse
-	(*Tick)(nil),                       // 77: quant.datafeed.v1.Tick
-	(*IngestTicksRequest)(nil),         // 78: quant.datafeed.v1.IngestTicksRequest
-	(*IngestTicksResponse)(nil),        // 79: quant.datafeed.v1.IngestTicksResponse
-	(*ReplayTicksRequest)(nil),         // 80: quant.datafeed.v1.ReplayTicksRequest
-	(*ReplayTicksResponse)(nil),        // 81: quant.datafeed.v1.ReplayTicksResponse
-	(*Bar)(nil),                        // 82: quant.datafeed.v1.Bar
-	(*QueryBarsRequest)(nil),           // 83: quant.datafeed.v1.QueryBarsRequest
-	(*QueryBarsResponse)(nil),          // 84: quant.datafeed.v1.QueryBarsResponse
-	(*ListNewsRequest)(nil),            // 85: quant.datafeed.v1.ListNewsRequest
-	(*NewsEvent)(nil),                  // 86: quant.datafeed.v1.NewsEvent
-	(*ListNewsResponse)(nil),           // 87: quant.datafeed.v1.ListNewsResponse
-	(*ListSocialRequest)(nil),          // 88: quant.datafeed.v1.ListSocialRequest
-	(*SocialEvent)(nil),                // 89: quant.datafeed.v1.SocialEvent
-	(*ListSocialResponse)(nil),         // 90: quant.datafeed.v1.ListSocialResponse
-	nil,                                // 91: quant.datafeed.v1.LibrarySymbolInfo.LibraryCustomFieldsEntry
-	nil,                                // 92: quant.datafeed.v1.GetConfigResponse.UnitsEntry
-	nil,                                // 93: quant.datafeed.v1.GetConfigResponse.SymbolsGroupingEntry
-	nil,                                // 94: quant.datafeed.v1.ScanSymbolsRequest.SymbolsEntry
-	(*wrapperspb.StringValue)(nil),     // 95: google.protobuf.StringValue
-	(*wrapperspb.DoubleValue)(nil),     // 96: google.protobuf.DoubleValue
-	(*wrapperspb.BoolValue)(nil),       // 97: google.protobuf.BoolValue
-	(*structpb.Value)(nil),             // 98: google.protobuf.Value
+	(*StringList)(nil),                 // 5: quant.datafeed.v1.StringList
+	(*StringListList)(nil),             // 6: quant.datafeed.v1.StringListList
+	(*DoubleList)(nil),                 // 7: quant.datafeed.v1.DoubleList
+	(*Int64List)(nil),                  // 8: quant.datafeed.v1.Int64List
+	(*BoolList)(nil),                   // 9: quant.datafeed.v1.BoolList
+	(*NullableStringList)(nil),         // 10: quant.datafeed.v1.NullableStringList
+	(*NullableDoubleList)(nil),         // 11: quant.datafeed.v1.NullableDoubleList
+	(*NullableBoolList)(nil),           // 12: quant.datafeed.v1.NullableBoolList
+	(*StringOrStringList)(nil),         // 13: quant.datafeed.v1.StringOrStringList
+	(*StringListOrStringListList)(nil), // 14: quant.datafeed.v1.StringListOrStringListList
+	(*DoubleOrDoubleList)(nil),         // 15: quant.datafeed.v1.DoubleOrDoubleList
+	(*Int64OrInt64List)(nil),           // 16: quant.datafeed.v1.Int64OrInt64List
+	(*BoolOrBoolList)(nil),             // 17: quant.datafeed.v1.BoolOrBoolList
+	(*StringOrNullableStringList)(nil), // 18: quant.datafeed.v1.StringOrNullableStringList
+	(*DoubleOrNullableDoubleList)(nil), // 19: quant.datafeed.v1.DoubleOrNullableDoubleList
+	(*BoolOrNullableBoolList)(nil),     // 20: quant.datafeed.v1.BoolOrNullableBoolList
+	(*VisiblePlotsSetList)(nil),        // 21: quant.datafeed.v1.VisiblePlotsSetList
+	(*VisiblePlotsSetOrList)(nil),      // 22: quant.datafeed.v1.VisiblePlotsSetOrList
+	(*SymbolPriceSource)(nil),          // 23: quant.datafeed.v1.SymbolPriceSource
+	(*SubsessionInfo)(nil),             // 24: quant.datafeed.v1.SubsessionInfo
+	(*LibrarySymbolInfo)(nil),          // 25: quant.datafeed.v1.LibrarySymbolInfo
+	(*ListSymbolsRequest)(nil),         // 26: quant.datafeed.v1.ListSymbolsRequest
+	(*ListSymbolsResponse)(nil),        // 27: quant.datafeed.v1.ListSymbolsResponse
+	(*ExchangeDescriptor)(nil),         // 28: quant.datafeed.v1.ExchangeDescriptor
+	(*SymbolTypeDescriptor)(nil),       // 29: quant.datafeed.v1.SymbolTypeDescriptor
+	(*CurrencyItem)(nil),               // 30: quant.datafeed.v1.CurrencyItem
+	(*CurrencyCodeEntry)(nil),          // 31: quant.datafeed.v1.CurrencyCodeEntry
+	(*UnitItem)(nil),                   // 32: quant.datafeed.v1.UnitItem
+	(*UnitList)(nil),                   // 33: quant.datafeed.v1.UnitList
+	(*GetConfigRequest)(nil),           // 34: quant.datafeed.v1.GetConfigRequest
+	(*GetConfigResponse)(nil),          // 35: quant.datafeed.v1.GetConfigResponse
+	(*GetTimeRequest)(nil),             // 36: quant.datafeed.v1.GetTimeRequest
+	(*GetTimeResponse)(nil),            // 37: quant.datafeed.v1.GetTimeResponse
+	(*GetHistoryRequest)(nil),          // 38: quant.datafeed.v1.GetHistoryRequest
+	(*GetHistoryOk)(nil),               // 39: quant.datafeed.v1.GetHistoryOk
+	(*GetHistoryNoData)(nil),           // 40: quant.datafeed.v1.GetHistoryNoData
+	(*GetHistoryError)(nil),            // 41: quant.datafeed.v1.GetHistoryError
+	(*GetHistoryResponse)(nil),         // 42: quant.datafeed.v1.GetHistoryResponse
+	(*QuoteValues)(nil),                // 43: quant.datafeed.v1.QuoteValues
+	(*QuoteData)(nil),                  // 44: quant.datafeed.v1.QuoteData
+	(*GetQuotesRequest)(nil),           // 45: quant.datafeed.v1.GetQuotesRequest
+	(*GetQuotesOk)(nil),                // 46: quant.datafeed.v1.GetQuotesOk
+	(*GetQuotesError)(nil),             // 47: quant.datafeed.v1.GetQuotesError
+	(*GetQuotesResponse)(nil),          // 48: quant.datafeed.v1.GetQuotesResponse
+	(*MarkId)(nil),                     // 49: quant.datafeed.v1.MarkId
+	(*GetMarksRequest)(nil),            // 50: quant.datafeed.v1.GetMarksRequest
+	(*GetMarksResponse)(nil),           // 51: quant.datafeed.v1.GetMarksResponse
+	(*TimescaleMark)(nil),              // 52: quant.datafeed.v1.TimescaleMark
+	(*GetTimescaleMarksRequest)(nil),   // 53: quant.datafeed.v1.GetTimescaleMarksRequest
+	(*GetTimescaleMarksResponse)(nil),  // 54: quant.datafeed.v1.GetTimescaleMarksResponse
+	(*ResolveSymbolRequest)(nil),       // 55: quant.datafeed.v1.ResolveSymbolRequest
+	(*ResolveSymbolResponse)(nil),      // 56: quant.datafeed.v1.ResolveSymbolResponse
+	(*GetSymbolGroupInfoRequest)(nil),  // 57: quant.datafeed.v1.GetSymbolGroupInfoRequest
+	(*GetSymbolGroupInfoResponse)(nil), // 58: quant.datafeed.v1.GetSymbolGroupInfoResponse
+	(*SearchResultItem)(nil),           // 59: quant.datafeed.v1.SearchResultItem
+	(*SearchSymbolsRequest)(nil),       // 60: quant.datafeed.v1.SearchSymbolsRequest
+	(*SearchSymbolsResponse)(nil),      // 61: quant.datafeed.v1.SearchSymbolsResponse
+	(*StreamBarsRequest)(nil),          // 62: quant.datafeed.v1.StreamBarsRequest
+	(*StreamBarsResponse)(nil),         // 63: quant.datafeed.v1.StreamBarsResponse
+	(*Tick)(nil),                       // 64: quant.datafeed.v1.Tick
+	(*IngestTicksRequest)(nil),         // 65: quant.datafeed.v1.IngestTicksRequest
+	(*IngestTicksResponse)(nil),        // 66: quant.datafeed.v1.IngestTicksResponse
+	(*ReplayTicksRequest)(nil),         // 67: quant.datafeed.v1.ReplayTicksRequest
+	(*ReplayTicksResponse)(nil),        // 68: quant.datafeed.v1.ReplayTicksResponse
+	(*Bar)(nil),                        // 69: quant.datafeed.v1.Bar
+	(*QueryBarsRequest)(nil),           // 70: quant.datafeed.v1.QueryBarsRequest
+	(*QueryBarsResponse)(nil),          // 71: quant.datafeed.v1.QueryBarsResponse
+	(*ListNewsRequest)(nil),            // 72: quant.datafeed.v1.ListNewsRequest
+	(*NewsEvent)(nil),                  // 73: quant.datafeed.v1.NewsEvent
+	(*ListNewsResponse)(nil),           // 74: quant.datafeed.v1.ListNewsResponse
+	(*ListSocialRequest)(nil),          // 75: quant.datafeed.v1.ListSocialRequest
+	(*SocialEvent)(nil),                // 76: quant.datafeed.v1.SocialEvent
+	(*ListSocialResponse)(nil),         // 77: quant.datafeed.v1.ListSocialResponse
+	nil,                                // 78: quant.datafeed.v1.LibrarySymbolInfo.LibraryCustomFieldsEntry
+	nil,                                // 79: quant.datafeed.v1.GetConfigResponse.UnitsEntry
+	nil,                                // 80: quant.datafeed.v1.GetConfigResponse.SymbolsGroupingEntry
+	(*wrapperspb.StringValue)(nil),     // 81: google.protobuf.StringValue
+	(*wrapperspb.DoubleValue)(nil),     // 82: google.protobuf.DoubleValue
+	(*wrapperspb.BoolValue)(nil),       // 83: google.protobuf.BoolValue
+	(*structpb.Value)(nil),             // 84: google.protobuf.Value
 }
 var file_datafeed_v1_datafeed_proto_depIdxs = []int32{
-	7,   // 0: quant.datafeed.v1.StringListList.values:type_name -> quant.datafeed.v1.StringList
-	95,  // 1: quant.datafeed.v1.NullableStringList.values:type_name -> google.protobuf.StringValue
-	96,  // 2: quant.datafeed.v1.NullableDoubleList.values:type_name -> google.protobuf.DoubleValue
-	97,  // 3: quant.datafeed.v1.NullableBoolList.values:type_name -> google.protobuf.BoolValue
-	7,   // 4: quant.datafeed.v1.StringOrStringList.many:type_name -> quant.datafeed.v1.StringList
-	7,   // 5: quant.datafeed.v1.StringListOrStringListList.single:type_name -> quant.datafeed.v1.StringList
-	8,   // 6: quant.datafeed.v1.StringListOrStringListList.many:type_name -> quant.datafeed.v1.StringListList
-	9,   // 7: quant.datafeed.v1.DoubleOrDoubleList.many:type_name -> quant.datafeed.v1.DoubleList
-	10,  // 8: quant.datafeed.v1.Int64OrInt64List.many:type_name -> quant.datafeed.v1.Int64List
-	11,  // 9: quant.datafeed.v1.BoolOrBoolList.many:type_name -> quant.datafeed.v1.BoolList
-	12,  // 10: quant.datafeed.v1.StringOrNullableStringList.many:type_name -> quant.datafeed.v1.NullableStringList
-	13,  // 11: quant.datafeed.v1.DoubleOrNullableDoubleList.many:type_name -> quant.datafeed.v1.NullableDoubleList
-	14,  // 12: quant.datafeed.v1.BoolOrNullableBoolList.many:type_name -> quant.datafeed.v1.NullableBoolList
+	5,   // 0: quant.datafeed.v1.StringListList.values:type_name -> quant.datafeed.v1.StringList
+	81,  // 1: quant.datafeed.v1.NullableStringList.values:type_name -> google.protobuf.StringValue
+	82,  // 2: quant.datafeed.v1.NullableDoubleList.values:type_name -> google.protobuf.DoubleValue
+	83,  // 3: quant.datafeed.v1.NullableBoolList.values:type_name -> google.protobuf.BoolValue
+	5,   // 4: quant.datafeed.v1.StringOrStringList.many:type_name -> quant.datafeed.v1.StringList
+	5,   // 5: quant.datafeed.v1.StringListOrStringListList.single:type_name -> quant.datafeed.v1.StringList
+	6,   // 6: quant.datafeed.v1.StringListOrStringListList.many:type_name -> quant.datafeed.v1.StringListList
+	7,   // 7: quant.datafeed.v1.DoubleOrDoubleList.many:type_name -> quant.datafeed.v1.DoubleList
+	8,   // 8: quant.datafeed.v1.Int64OrInt64List.many:type_name -> quant.datafeed.v1.Int64List
+	9,   // 9: quant.datafeed.v1.BoolOrBoolList.many:type_name -> quant.datafeed.v1.BoolList
+	10,  // 10: quant.datafeed.v1.StringOrNullableStringList.many:type_name -> quant.datafeed.v1.NullableStringList
+	11,  // 11: quant.datafeed.v1.DoubleOrNullableDoubleList.many:type_name -> quant.datafeed.v1.NullableDoubleList
+	12,  // 12: quant.datafeed.v1.BoolOrNullableBoolList.many:type_name -> quant.datafeed.v1.NullableBoolList
 	1,   // 13: quant.datafeed.v1.VisiblePlotsSetList.values:type_name -> quant.datafeed.v1.VisiblePlotsSet
 	1,   // 14: quant.datafeed.v1.VisiblePlotsSetOrList.single:type_name -> quant.datafeed.v1.VisiblePlotsSet
-	23,  // 15: quant.datafeed.v1.VisiblePlotsSetOrList.many:type_name -> quant.datafeed.v1.VisiblePlotsSetList
+	21,  // 15: quant.datafeed.v1.VisiblePlotsSetOrList.many:type_name -> quant.datafeed.v1.VisiblePlotsSetList
 	0,   // 16: quant.datafeed.v1.LibrarySymbolInfo.format:type_name -> quant.datafeed.v1.SeriesFormat
 	2,   // 17: quant.datafeed.v1.LibrarySymbolInfo.data_status:type_name -> quant.datafeed.v1.DataStatus
 	1,   // 18: quant.datafeed.v1.LibrarySymbolInfo.visible_plots_set:type_name -> quant.datafeed.v1.VisiblePlotsSet
-	25,  // 19: quant.datafeed.v1.LibrarySymbolInfo.price_sources:type_name -> quant.datafeed.v1.SymbolPriceSource
-	26,  // 20: quant.datafeed.v1.LibrarySymbolInfo.subsessions:type_name -> quant.datafeed.v1.SubsessionInfo
-	91,  // 21: quant.datafeed.v1.LibrarySymbolInfo.library_custom_fields:type_name -> quant.datafeed.v1.LibrarySymbolInfo.LibraryCustomFieldsEntry
+	23,  // 19: quant.datafeed.v1.LibrarySymbolInfo.price_sources:type_name -> quant.datafeed.v1.SymbolPriceSource
+	24,  // 20: quant.datafeed.v1.LibrarySymbolInfo.subsessions:type_name -> quant.datafeed.v1.SubsessionInfo
+	78,  // 21: quant.datafeed.v1.LibrarySymbolInfo.library_custom_fields:type_name -> quant.datafeed.v1.LibrarySymbolInfo.LibraryCustomFieldsEntry
 	3,   // 22: quant.datafeed.v1.ListSymbolsRequest.sort_order:type_name -> quant.datafeed.v1.SortOrder
-	27,  // 23: quant.datafeed.v1.ListSymbolsResponse.symbols:type_name -> quant.datafeed.v1.LibrarySymbolInfo
-	32,  // 24: quant.datafeed.v1.CurrencyCodeEntry.item:type_name -> quant.datafeed.v1.CurrencyItem
-	34,  // 25: quant.datafeed.v1.UnitList.items:type_name -> quant.datafeed.v1.UnitItem
-	30,  // 26: quant.datafeed.v1.GetConfigResponse.exchanges:type_name -> quant.datafeed.v1.ExchangeDescriptor
-	31,  // 27: quant.datafeed.v1.GetConfigResponse.symbols_types:type_name -> quant.datafeed.v1.SymbolTypeDescriptor
-	33,  // 28: quant.datafeed.v1.GetConfigResponse.currency_codes:type_name -> quant.datafeed.v1.CurrencyCodeEntry
-	92,  // 29: quant.datafeed.v1.GetConfigResponse.units:type_name -> quant.datafeed.v1.GetConfigResponse.UnitsEntry
-	93,  // 30: quant.datafeed.v1.GetConfigResponse.symbols_grouping:type_name -> quant.datafeed.v1.GetConfigResponse.SymbolsGroupingEntry
-	41,  // 31: quant.datafeed.v1.GetHistoryResponse.ok:type_name -> quant.datafeed.v1.GetHistoryOk
-	42,  // 32: quant.datafeed.v1.GetHistoryResponse.no_data:type_name -> quant.datafeed.v1.GetHistoryNoData
-	43,  // 33: quant.datafeed.v1.GetHistoryResponse.error:type_name -> quant.datafeed.v1.GetHistoryError
-	45,  // 34: quant.datafeed.v1.QuoteData.v:type_name -> quant.datafeed.v1.QuoteValues
-	46,  // 35: quant.datafeed.v1.GetQuotesOk.d:type_name -> quant.datafeed.v1.QuoteData
-	48,  // 36: quant.datafeed.v1.GetQuotesResponse.ok:type_name -> quant.datafeed.v1.GetQuotesOk
-	49,  // 37: quant.datafeed.v1.GetQuotesResponse.error:type_name -> quant.datafeed.v1.GetQuotesError
-	51,  // 38: quant.datafeed.v1.GetMarksResponse.id:type_name -> quant.datafeed.v1.MarkId
-	18,  // 39: quant.datafeed.v1.GetMarksResponse.time:type_name -> quant.datafeed.v1.Int64OrInt64List
-	15,  // 40: quant.datafeed.v1.GetMarksResponse.color:type_name -> quant.datafeed.v1.StringOrStringList
-	15,  // 41: quant.datafeed.v1.GetMarksResponse.text:type_name -> quant.datafeed.v1.StringOrStringList
-	15,  // 42: quant.datafeed.v1.GetMarksResponse.label:type_name -> quant.datafeed.v1.StringOrStringList
-	15,  // 43: quant.datafeed.v1.GetMarksResponse.label_font_color:type_name -> quant.datafeed.v1.StringOrStringList
-	17,  // 44: quant.datafeed.v1.GetMarksResponse.min_size:type_name -> quant.datafeed.v1.DoubleOrDoubleList
-	21,  // 45: quant.datafeed.v1.GetMarksResponse.border_width:type_name -> quant.datafeed.v1.DoubleOrNullableDoubleList
-	21,  // 46: quant.datafeed.v1.GetMarksResponse.hovered_border_width:type_name -> quant.datafeed.v1.DoubleOrNullableDoubleList
-	20,  // 47: quant.datafeed.v1.GetMarksResponse.image_url:type_name -> quant.datafeed.v1.StringOrNullableStringList
-	22,  // 48: quant.datafeed.v1.GetMarksResponse.show_label_when_image_loaded:type_name -> quant.datafeed.v1.BoolOrNullableBoolList
-	51,  // 49: quant.datafeed.v1.TimescaleMark.id:type_name -> quant.datafeed.v1.MarkId
+	25,  // 23: quant.datafeed.v1.ListSymbolsResponse.symbols:type_name -> quant.datafeed.v1.LibrarySymbolInfo
+	30,  // 24: quant.datafeed.v1.CurrencyCodeEntry.item:type_name -> quant.datafeed.v1.CurrencyItem
+	32,  // 25: quant.datafeed.v1.UnitList.items:type_name -> quant.datafeed.v1.UnitItem
+	28,  // 26: quant.datafeed.v1.GetConfigResponse.exchanges:type_name -> quant.datafeed.v1.ExchangeDescriptor
+	29,  // 27: quant.datafeed.v1.GetConfigResponse.symbols_types:type_name -> quant.datafeed.v1.SymbolTypeDescriptor
+	31,  // 28: quant.datafeed.v1.GetConfigResponse.currency_codes:type_name -> quant.datafeed.v1.CurrencyCodeEntry
+	79,  // 29: quant.datafeed.v1.GetConfigResponse.units:type_name -> quant.datafeed.v1.GetConfigResponse.UnitsEntry
+	80,  // 30: quant.datafeed.v1.GetConfigResponse.symbols_grouping:type_name -> quant.datafeed.v1.GetConfigResponse.SymbolsGroupingEntry
+	39,  // 31: quant.datafeed.v1.GetHistoryResponse.ok:type_name -> quant.datafeed.v1.GetHistoryOk
+	40,  // 32: quant.datafeed.v1.GetHistoryResponse.no_data:type_name -> quant.datafeed.v1.GetHistoryNoData
+	41,  // 33: quant.datafeed.v1.GetHistoryResponse.error:type_name -> quant.datafeed.v1.GetHistoryError
+	43,  // 34: quant.datafeed.v1.QuoteData.v:type_name -> quant.datafeed.v1.QuoteValues
+	44,  // 35: quant.datafeed.v1.GetQuotesOk.d:type_name -> quant.datafeed.v1.QuoteData
+	46,  // 36: quant.datafeed.v1.GetQuotesResponse.ok:type_name -> quant.datafeed.v1.GetQuotesOk
+	47,  // 37: quant.datafeed.v1.GetQuotesResponse.error:type_name -> quant.datafeed.v1.GetQuotesError
+	49,  // 38: quant.datafeed.v1.GetMarksResponse.id:type_name -> quant.datafeed.v1.MarkId
+	16,  // 39: quant.datafeed.v1.GetMarksResponse.time:type_name -> quant.datafeed.v1.Int64OrInt64List
+	13,  // 40: quant.datafeed.v1.GetMarksResponse.color:type_name -> quant.datafeed.v1.StringOrStringList
+	13,  // 41: quant.datafeed.v1.GetMarksResponse.text:type_name -> quant.datafeed.v1.StringOrStringList
+	13,  // 42: quant.datafeed.v1.GetMarksResponse.label:type_name -> quant.datafeed.v1.StringOrStringList
+	13,  // 43: quant.datafeed.v1.GetMarksResponse.label_font_color:type_name -> quant.datafeed.v1.StringOrStringList
+	15,  // 44: quant.datafeed.v1.GetMarksResponse.min_size:type_name -> quant.datafeed.v1.DoubleOrDoubleList
+	19,  // 45: quant.datafeed.v1.GetMarksResponse.border_width:type_name -> quant.datafeed.v1.DoubleOrNullableDoubleList
+	19,  // 46: quant.datafeed.v1.GetMarksResponse.hovered_border_width:type_name -> quant.datafeed.v1.DoubleOrNullableDoubleList
+	18,  // 47: quant.datafeed.v1.GetMarksResponse.image_url:type_name -> quant.datafeed.v1.StringOrNullableStringList
+	20,  // 48: quant.datafeed.v1.GetMarksResponse.show_label_when_image_loaded:type_name -> quant.datafeed.v1.BoolOrNullableBoolList
+	49,  // 49: quant.datafeed.v1.TimescaleMark.id:type_name -> quant.datafeed.v1.MarkId
 	4,   // 50: quant.datafeed.v1.TimescaleMark.shape:type_name -> quant.datafeed.v1.TimescaleMarkShape
-	54,  // 51: quant.datafeed.v1.GetTimescaleMarksResponse.marks:type_name -> quant.datafeed.v1.TimescaleMark
-	27,  // 52: quant.datafeed.v1.ResolveSymbolResponse.symbol:type_name -> quant.datafeed.v1.LibrarySymbolInfo
-	15,  // 53: quant.datafeed.v1.GetSymbolGroupInfoResponse.description:type_name -> quant.datafeed.v1.StringOrStringList
-	17,  // 54: quant.datafeed.v1.GetSymbolGroupInfoResponse.minmov:type_name -> quant.datafeed.v1.DoubleOrDoubleList
-	17,  // 55: quant.datafeed.v1.GetSymbolGroupInfoResponse.pricescale:type_name -> quant.datafeed.v1.DoubleOrDoubleList
-	15,  // 56: quant.datafeed.v1.GetSymbolGroupInfoResponse.type:type_name -> quant.datafeed.v1.StringOrStringList
-	15,  // 57: quant.datafeed.v1.GetSymbolGroupInfoResponse.timezone:type_name -> quant.datafeed.v1.StringOrStringList
-	15,  // 58: quant.datafeed.v1.GetSymbolGroupInfoResponse.exchange_listed:type_name -> quant.datafeed.v1.StringOrStringList
-	15,  // 59: quant.datafeed.v1.GetSymbolGroupInfoResponse.exchange_traded:type_name -> quant.datafeed.v1.StringOrStringList
-	17,  // 60: quant.datafeed.v1.GetSymbolGroupInfoResponse.minmov2:type_name -> quant.datafeed.v1.DoubleOrDoubleList
-	19,  // 61: quant.datafeed.v1.GetSymbolGroupInfoResponse.fractional:type_name -> quant.datafeed.v1.BoolOrBoolList
-	19,  // 62: quant.datafeed.v1.GetSymbolGroupInfoResponse.has_intraday:type_name -> quant.datafeed.v1.BoolOrBoolList
-	19,  // 63: quant.datafeed.v1.GetSymbolGroupInfoResponse.has_daily:type_name -> quant.datafeed.v1.BoolOrBoolList
-	19,  // 64: quant.datafeed.v1.GetSymbolGroupInfoResponse.has_weekly_and_monthly:type_name -> quant.datafeed.v1.BoolOrBoolList
-	19,  // 65: quant.datafeed.v1.GetSymbolGroupInfoResponse.has_empty_bars:type_name -> quant.datafeed.v1.BoolOrBoolList
-	24,  // 66: quant.datafeed.v1.GetSymbolGroupInfoResponse.visible_plots_set:type_name -> quant.datafeed.v1.VisiblePlotsSetOrList
-	15,  // 67: quant.datafeed.v1.GetSymbolGroupInfoResponse.ticker:type_name -> quant.datafeed.v1.StringOrStringList
-	15,  // 68: quant.datafeed.v1.GetSymbolGroupInfoResponse.session_regular:type_name -> quant.datafeed.v1.StringOrStringList
-	15,  // 69: quant.datafeed.v1.GetSymbolGroupInfoResponse.session_holidays:type_name -> quant.datafeed.v1.StringOrStringList
-	15,  // 70: quant.datafeed.v1.GetSymbolGroupInfoResponse.corrections:type_name -> quant.datafeed.v1.StringOrStringList
-	16,  // 71: quant.datafeed.v1.GetSymbolGroupInfoResponse.supported_resolutions:type_name -> quant.datafeed.v1.StringListOrStringListList
-	19,  // 72: quant.datafeed.v1.GetSymbolGroupInfoResponse.force_session_rebuild:type_name -> quant.datafeed.v1.BoolOrBoolList
-	16,  // 73: quant.datafeed.v1.GetSymbolGroupInfoResponse.intraday_multipliers:type_name -> quant.datafeed.v1.StringListOrStringListList
-	17,  // 74: quant.datafeed.v1.GetSymbolGroupInfoResponse.volume_precision:type_name -> quant.datafeed.v1.DoubleOrDoubleList
-	61,  // 75: quant.datafeed.v1.SearchSymbolsResponse.items:type_name -> quant.datafeed.v1.SearchResultItem
-	27,  // 76: quant.datafeed.v1.StreamBarsRequest.symbol_info:type_name -> quant.datafeed.v1.LibrarySymbolInfo
-	7,   // 77: quant.datafeed.v1.ScannerFilterValue.string_list:type_name -> quant.datafeed.v1.StringList
-	9,   // 78: quant.datafeed.v1.ScannerFilterValue.number_list:type_name -> quant.datafeed.v1.DoubleList
-	6,   // 79: quant.datafeed.v1.ScannerFilterExpression.operation:type_name -> quant.datafeed.v1.ScannerFilterOperation
-	66,  // 80: quant.datafeed.v1.ScannerFilterExpression.right:type_name -> quant.datafeed.v1.ScannerFilterValue
-	67,  // 81: quant.datafeed.v1.ScannerFilterNode.expression:type_name -> quant.datafeed.v1.ScannerFilterExpression
-	69,  // 82: quant.datafeed.v1.ScannerFilterNode.operation:type_name -> quant.datafeed.v1.ScannerFilterGroup
-	5,   // 83: quant.datafeed.v1.ScannerFilterGroup.operator:type_name -> quant.datafeed.v1.ScannerLogicalOperator
-	68,  // 84: quant.datafeed.v1.ScannerFilterGroup.operands:type_name -> quant.datafeed.v1.ScannerFilterNode
-	5,   // 85: quant.datafeed.v1.ScannerFilter.operator:type_name -> quant.datafeed.v1.ScannerLogicalOperator
-	68,  // 86: quant.datafeed.v1.ScannerFilter.operands:type_name -> quant.datafeed.v1.ScannerFilterNode
-	3,   // 87: quant.datafeed.v1.ScannerSort.sort_order:type_name -> quant.datafeed.v1.SortOrder
-	70,  // 88: quant.datafeed.v1.ScanSymbolsRequest.filter:type_name -> quant.datafeed.v1.ScannerFilter
-	71,  // 89: quant.datafeed.v1.ScanSymbolsRequest.sort:type_name -> quant.datafeed.v1.ScannerSort
-	72,  // 90: quant.datafeed.v1.ScanSymbolsRequest.range:type_name -> quant.datafeed.v1.ScannerRange
-	73,  // 91: quant.datafeed.v1.ScanSymbolsRequest.options:type_name -> quant.datafeed.v1.ScannerOptions
-	94,  // 92: quant.datafeed.v1.ScanSymbolsRequest.symbols:type_name -> quant.datafeed.v1.ScanSymbolsRequest.SymbolsEntry
-	98,  // 93: quant.datafeed.v1.ScanSymbolRow.d:type_name -> google.protobuf.Value
-	75,  // 94: quant.datafeed.v1.ScanSymbolsResponse.data:type_name -> quant.datafeed.v1.ScanSymbolRow
-	77,  // 95: quant.datafeed.v1.IngestTicksRequest.ticks:type_name -> quant.datafeed.v1.Tick
-	77,  // 96: quant.datafeed.v1.ReplayTicksResponse.ticks:type_name -> quant.datafeed.v1.Tick
-	82,  // 97: quant.datafeed.v1.QueryBarsResponse.bars:type_name -> quant.datafeed.v1.Bar
-	86,  // 98: quant.datafeed.v1.ListNewsResponse.items:type_name -> quant.datafeed.v1.NewsEvent
-	89,  // 99: quant.datafeed.v1.ListSocialResponse.items:type_name -> quant.datafeed.v1.SocialEvent
-	98,  // 100: quant.datafeed.v1.LibrarySymbolInfo.LibraryCustomFieldsEntry.value:type_name -> google.protobuf.Value
-	35,  // 101: quant.datafeed.v1.GetConfigResponse.UnitsEntry.value:type_name -> quant.datafeed.v1.UnitList
-	98,  // 102: quant.datafeed.v1.ScanSymbolsRequest.SymbolsEntry.value:type_name -> google.protobuf.Value
-	78,  // 103: quant.datafeed.v1.DatafeedService.IngestTicks:input_type -> quant.datafeed.v1.IngestTicksRequest
-	80,  // 104: quant.datafeed.v1.DatafeedService.ReplayTicks:input_type -> quant.datafeed.v1.ReplayTicksRequest
-	83,  // 105: quant.datafeed.v1.DatafeedService.QueryBars:input_type -> quant.datafeed.v1.QueryBarsRequest
-	85,  // 106: quant.datafeed.v1.DatafeedService.ListNews:input_type -> quant.datafeed.v1.ListNewsRequest
-	88,  // 107: quant.datafeed.v1.DatafeedService.ListSocial:input_type -> quant.datafeed.v1.ListSocialRequest
-	36,  // 108: quant.datafeed.v1.DatafeedService.GetConfig:input_type -> quant.datafeed.v1.GetConfigRequest
-	38,  // 109: quant.datafeed.v1.DatafeedService.GetTime:input_type -> quant.datafeed.v1.GetTimeRequest
-	40,  // 110: quant.datafeed.v1.DatafeedService.GetHistory:input_type -> quant.datafeed.v1.GetHistoryRequest
-	47,  // 111: quant.datafeed.v1.DatafeedService.GetQuotes:input_type -> quant.datafeed.v1.GetQuotesRequest
-	52,  // 112: quant.datafeed.v1.DatafeedService.GetMarks:input_type -> quant.datafeed.v1.GetMarksRequest
-	55,  // 113: quant.datafeed.v1.DatafeedService.GetTimescaleMarks:input_type -> quant.datafeed.v1.GetTimescaleMarksRequest
-	57,  // 114: quant.datafeed.v1.DatafeedService.ResolveSymbol:input_type -> quant.datafeed.v1.ResolveSymbolRequest
-	59,  // 115: quant.datafeed.v1.DatafeedService.GetSymbolGroupInfo:input_type -> quant.datafeed.v1.GetSymbolGroupInfoRequest
-	62,  // 116: quant.datafeed.v1.DatafeedService.SearchSymbols:input_type -> quant.datafeed.v1.SearchSymbolsRequest
-	64,  // 117: quant.datafeed.v1.DatafeedService.StreamBars:input_type -> quant.datafeed.v1.StreamBarsRequest
-	74,  // 118: quant.datafeed.v1.DatafeedService.ScanSymbols:input_type -> quant.datafeed.v1.ScanSymbolsRequest
-	28,  // 119: quant.datafeed.v1.DatafeedService.ListSymbols:input_type -> quant.datafeed.v1.ListSymbolsRequest
-	79,  // 120: quant.datafeed.v1.DatafeedService.IngestTicks:output_type -> quant.datafeed.v1.IngestTicksResponse
-	81,  // 121: quant.datafeed.v1.DatafeedService.ReplayTicks:output_type -> quant.datafeed.v1.ReplayTicksResponse
-	84,  // 122: quant.datafeed.v1.DatafeedService.QueryBars:output_type -> quant.datafeed.v1.QueryBarsResponse
-	87,  // 123: quant.datafeed.v1.DatafeedService.ListNews:output_type -> quant.datafeed.v1.ListNewsResponse
-	90,  // 124: quant.datafeed.v1.DatafeedService.ListSocial:output_type -> quant.datafeed.v1.ListSocialResponse
-	37,  // 125: quant.datafeed.v1.DatafeedService.GetConfig:output_type -> quant.datafeed.v1.GetConfigResponse
-	39,  // 126: quant.datafeed.v1.DatafeedService.GetTime:output_type -> quant.datafeed.v1.GetTimeResponse
-	44,  // 127: quant.datafeed.v1.DatafeedService.GetHistory:output_type -> quant.datafeed.v1.GetHistoryResponse
-	50,  // 128: quant.datafeed.v1.DatafeedService.GetQuotes:output_type -> quant.datafeed.v1.GetQuotesResponse
-	53,  // 129: quant.datafeed.v1.DatafeedService.GetMarks:output_type -> quant.datafeed.v1.GetMarksResponse
-	56,  // 130: quant.datafeed.v1.DatafeedService.GetTimescaleMarks:output_type -> quant.datafeed.v1.GetTimescaleMarksResponse
-	58,  // 131: quant.datafeed.v1.DatafeedService.ResolveSymbol:output_type -> quant.datafeed.v1.ResolveSymbolResponse
-	60,  // 132: quant.datafeed.v1.DatafeedService.GetSymbolGroupInfo:output_type -> quant.datafeed.v1.GetSymbolGroupInfoResponse
-	63,  // 133: quant.datafeed.v1.DatafeedService.SearchSymbols:output_type -> quant.datafeed.v1.SearchSymbolsResponse
-	65,  // 134: quant.datafeed.v1.DatafeedService.StreamBars:output_type -> quant.datafeed.v1.StreamBarsResponse
-	76,  // 135: quant.datafeed.v1.DatafeedService.ScanSymbols:output_type -> quant.datafeed.v1.ScanSymbolsResponse
-	29,  // 136: quant.datafeed.v1.DatafeedService.ListSymbols:output_type -> quant.datafeed.v1.ListSymbolsResponse
-	120, // [120:137] is the sub-list for method output_type
-	103, // [103:120] is the sub-list for method input_type
-	103, // [103:103] is the sub-list for extension type_name
-	103, // [103:103] is the sub-list for extension extendee
-	0,   // [0:103] is the sub-list for field type_name
+	52,  // 51: quant.datafeed.v1.GetTimescaleMarksResponse.marks:type_name -> quant.datafeed.v1.TimescaleMark
+	25,  // 52: quant.datafeed.v1.ResolveSymbolResponse.symbol:type_name -> quant.datafeed.v1.LibrarySymbolInfo
+	13,  // 53: quant.datafeed.v1.GetSymbolGroupInfoResponse.description:type_name -> quant.datafeed.v1.StringOrStringList
+	15,  // 54: quant.datafeed.v1.GetSymbolGroupInfoResponse.minmov:type_name -> quant.datafeed.v1.DoubleOrDoubleList
+	15,  // 55: quant.datafeed.v1.GetSymbolGroupInfoResponse.pricescale:type_name -> quant.datafeed.v1.DoubleOrDoubleList
+	13,  // 56: quant.datafeed.v1.GetSymbolGroupInfoResponse.type:type_name -> quant.datafeed.v1.StringOrStringList
+	13,  // 57: quant.datafeed.v1.GetSymbolGroupInfoResponse.timezone:type_name -> quant.datafeed.v1.StringOrStringList
+	13,  // 58: quant.datafeed.v1.GetSymbolGroupInfoResponse.exchange_listed:type_name -> quant.datafeed.v1.StringOrStringList
+	13,  // 59: quant.datafeed.v1.GetSymbolGroupInfoResponse.exchange_traded:type_name -> quant.datafeed.v1.StringOrStringList
+	15,  // 60: quant.datafeed.v1.GetSymbolGroupInfoResponse.minmov2:type_name -> quant.datafeed.v1.DoubleOrDoubleList
+	17,  // 61: quant.datafeed.v1.GetSymbolGroupInfoResponse.fractional:type_name -> quant.datafeed.v1.BoolOrBoolList
+	17,  // 62: quant.datafeed.v1.GetSymbolGroupInfoResponse.has_intraday:type_name -> quant.datafeed.v1.BoolOrBoolList
+	17,  // 63: quant.datafeed.v1.GetSymbolGroupInfoResponse.has_daily:type_name -> quant.datafeed.v1.BoolOrBoolList
+	17,  // 64: quant.datafeed.v1.GetSymbolGroupInfoResponse.has_weekly_and_monthly:type_name -> quant.datafeed.v1.BoolOrBoolList
+	17,  // 65: quant.datafeed.v1.GetSymbolGroupInfoResponse.has_empty_bars:type_name -> quant.datafeed.v1.BoolOrBoolList
+	22,  // 66: quant.datafeed.v1.GetSymbolGroupInfoResponse.visible_plots_set:type_name -> quant.datafeed.v1.VisiblePlotsSetOrList
+	13,  // 67: quant.datafeed.v1.GetSymbolGroupInfoResponse.ticker:type_name -> quant.datafeed.v1.StringOrStringList
+	13,  // 68: quant.datafeed.v1.GetSymbolGroupInfoResponse.session_regular:type_name -> quant.datafeed.v1.StringOrStringList
+	13,  // 69: quant.datafeed.v1.GetSymbolGroupInfoResponse.session_holidays:type_name -> quant.datafeed.v1.StringOrStringList
+	13,  // 70: quant.datafeed.v1.GetSymbolGroupInfoResponse.corrections:type_name -> quant.datafeed.v1.StringOrStringList
+	14,  // 71: quant.datafeed.v1.GetSymbolGroupInfoResponse.supported_resolutions:type_name -> quant.datafeed.v1.StringListOrStringListList
+	17,  // 72: quant.datafeed.v1.GetSymbolGroupInfoResponse.force_session_rebuild:type_name -> quant.datafeed.v1.BoolOrBoolList
+	14,  // 73: quant.datafeed.v1.GetSymbolGroupInfoResponse.intraday_multipliers:type_name -> quant.datafeed.v1.StringListOrStringListList
+	15,  // 74: quant.datafeed.v1.GetSymbolGroupInfoResponse.volume_precision:type_name -> quant.datafeed.v1.DoubleOrDoubleList
+	59,  // 75: quant.datafeed.v1.SearchSymbolsResponse.items:type_name -> quant.datafeed.v1.SearchResultItem
+	25,  // 76: quant.datafeed.v1.StreamBarsRequest.symbol_info:type_name -> quant.datafeed.v1.LibrarySymbolInfo
+	64,  // 77: quant.datafeed.v1.IngestTicksRequest.ticks:type_name -> quant.datafeed.v1.Tick
+	64,  // 78: quant.datafeed.v1.ReplayTicksResponse.ticks:type_name -> quant.datafeed.v1.Tick
+	69,  // 79: quant.datafeed.v1.QueryBarsResponse.bars:type_name -> quant.datafeed.v1.Bar
+	73,  // 80: quant.datafeed.v1.ListNewsResponse.items:type_name -> quant.datafeed.v1.NewsEvent
+	76,  // 81: quant.datafeed.v1.ListSocialResponse.items:type_name -> quant.datafeed.v1.SocialEvent
+	84,  // 82: quant.datafeed.v1.LibrarySymbolInfo.LibraryCustomFieldsEntry.value:type_name -> google.protobuf.Value
+	33,  // 83: quant.datafeed.v1.GetConfigResponse.UnitsEntry.value:type_name -> quant.datafeed.v1.UnitList
+	65,  // 84: quant.datafeed.v1.DatafeedService.IngestTicks:input_type -> quant.datafeed.v1.IngestTicksRequest
+	67,  // 85: quant.datafeed.v1.DatafeedService.ReplayTicks:input_type -> quant.datafeed.v1.ReplayTicksRequest
+	70,  // 86: quant.datafeed.v1.DatafeedService.QueryBars:input_type -> quant.datafeed.v1.QueryBarsRequest
+	72,  // 87: quant.datafeed.v1.DatafeedService.ListNews:input_type -> quant.datafeed.v1.ListNewsRequest
+	75,  // 88: quant.datafeed.v1.DatafeedService.ListSocial:input_type -> quant.datafeed.v1.ListSocialRequest
+	34,  // 89: quant.datafeed.v1.DatafeedService.GetConfig:input_type -> quant.datafeed.v1.GetConfigRequest
+	36,  // 90: quant.datafeed.v1.DatafeedService.GetTime:input_type -> quant.datafeed.v1.GetTimeRequest
+	38,  // 91: quant.datafeed.v1.DatafeedService.GetHistory:input_type -> quant.datafeed.v1.GetHistoryRequest
+	45,  // 92: quant.datafeed.v1.DatafeedService.GetQuotes:input_type -> quant.datafeed.v1.GetQuotesRequest
+	50,  // 93: quant.datafeed.v1.DatafeedService.GetMarks:input_type -> quant.datafeed.v1.GetMarksRequest
+	53,  // 94: quant.datafeed.v1.DatafeedService.GetTimescaleMarks:input_type -> quant.datafeed.v1.GetTimescaleMarksRequest
+	55,  // 95: quant.datafeed.v1.DatafeedService.ResolveSymbol:input_type -> quant.datafeed.v1.ResolveSymbolRequest
+	57,  // 96: quant.datafeed.v1.DatafeedService.GetSymbolGroupInfo:input_type -> quant.datafeed.v1.GetSymbolGroupInfoRequest
+	60,  // 97: quant.datafeed.v1.DatafeedService.SearchSymbols:input_type -> quant.datafeed.v1.SearchSymbolsRequest
+	62,  // 98: quant.datafeed.v1.DatafeedService.StreamBars:input_type -> quant.datafeed.v1.StreamBarsRequest
+	26,  // 99: quant.datafeed.v1.DatafeedService.ListSymbols:input_type -> quant.datafeed.v1.ListSymbolsRequest
+	66,  // 100: quant.datafeed.v1.DatafeedService.IngestTicks:output_type -> quant.datafeed.v1.IngestTicksResponse
+	68,  // 101: quant.datafeed.v1.DatafeedService.ReplayTicks:output_type -> quant.datafeed.v1.ReplayTicksResponse
+	71,  // 102: quant.datafeed.v1.DatafeedService.QueryBars:output_type -> quant.datafeed.v1.QueryBarsResponse
+	74,  // 103: quant.datafeed.v1.DatafeedService.ListNews:output_type -> quant.datafeed.v1.ListNewsResponse
+	77,  // 104: quant.datafeed.v1.DatafeedService.ListSocial:output_type -> quant.datafeed.v1.ListSocialResponse
+	35,  // 105: quant.datafeed.v1.DatafeedService.GetConfig:output_type -> quant.datafeed.v1.GetConfigResponse
+	37,  // 106: quant.datafeed.v1.DatafeedService.GetTime:output_type -> quant.datafeed.v1.GetTimeResponse
+	42,  // 107: quant.datafeed.v1.DatafeedService.GetHistory:output_type -> quant.datafeed.v1.GetHistoryResponse
+	48,  // 108: quant.datafeed.v1.DatafeedService.GetQuotes:output_type -> quant.datafeed.v1.GetQuotesResponse
+	51,  // 109: quant.datafeed.v1.DatafeedService.GetMarks:output_type -> quant.datafeed.v1.GetMarksResponse
+	54,  // 110: quant.datafeed.v1.DatafeedService.GetTimescaleMarks:output_type -> quant.datafeed.v1.GetTimescaleMarksResponse
+	56,  // 111: quant.datafeed.v1.DatafeedService.ResolveSymbol:output_type -> quant.datafeed.v1.ResolveSymbolResponse
+	58,  // 112: quant.datafeed.v1.DatafeedService.GetSymbolGroupInfo:output_type -> quant.datafeed.v1.GetSymbolGroupInfoResponse
+	61,  // 113: quant.datafeed.v1.DatafeedService.SearchSymbols:output_type -> quant.datafeed.v1.SearchSymbolsResponse
+	63,  // 114: quant.datafeed.v1.DatafeedService.StreamBars:output_type -> quant.datafeed.v1.StreamBarsResponse
+	27,  // 115: quant.datafeed.v1.DatafeedService.ListSymbols:output_type -> quant.datafeed.v1.ListSymbolsResponse
+	100, // [100:116] is the sub-list for method output_type
+	84,  // [84:100] is the sub-list for method input_type
+	84,  // [84:84] is the sub-list for extension type_name
+	84,  // [84:84] is the sub-list for extension extendee
+	0,   // [0:84] is the sub-list for field type_name
 }
 
 func init() { file_datafeed_v1_datafeed_proto_init() }
@@ -7484,23 +6538,13 @@ func file_datafeed_v1_datafeed_proto_init() {
 	file_datafeed_v1_datafeed_proto_msgTypes[53].OneofWrappers = []any{}
 	file_datafeed_v1_datafeed_proto_msgTypes[54].OneofWrappers = []any{}
 	file_datafeed_v1_datafeed_proto_msgTypes[55].OneofWrappers = []any{}
-	file_datafeed_v1_datafeed_proto_msgTypes[59].OneofWrappers = []any{
-		(*ScannerFilterValue_StringValue)(nil),
-		(*ScannerFilterValue_NumberValue)(nil),
-		(*ScannerFilterValue_BoolValue)(nil),
-		(*ScannerFilterValue_StringList)(nil),
-		(*ScannerFilterValue_NumberList)(nil),
-	}
-	file_datafeed_v1_datafeed_proto_msgTypes[61].OneofWrappers = []any{}
-	file_datafeed_v1_datafeed_proto_msgTypes[66].OneofWrappers = []any{}
-	file_datafeed_v1_datafeed_proto_msgTypes[67].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_datafeed_v1_datafeed_proto_rawDesc), len(file_datafeed_v1_datafeed_proto_rawDesc)),
-			NumEnums:      7,
-			NumMessages:   88,
+			NumEnums:      5,
+			NumMessages:   76,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
 import {
   CandlestickChart,
   LayoutDashboard,
@@ -33,86 +34,218 @@ import {
   Hexagon,
   ChevronLeft,
   PanelLeft,
+  LogOut,
   type LucideIcon,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { LocaleToggle } from "@/components/locale-toggle";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import type { SessionUser } from "@/lib/session";
 
 /* ── Navigation structure ── */
 
-type NavItem = { href: string; label: string; icon: LucideIcon; badge?: string };
-type NavGroup = { label: string; tag?: string; items: NavItem[] };
+type NavItem = { href: string; labelKey: string; icon: LucideIcon; badge?: string };
+type NavGroup = { labelKey: string; items: NavItem[] };
 
 const navigation: NavGroup[] = [
   {
-    label: "Overview",
+    labelKey: "Overview",
     items: [
-      { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
-      { href: "/chart", label: "Chart", icon: CandlestickChart },
+      { href: "/dashboard", labelKey: "Dashboard", icon: LayoutDashboard },
+      { href: "/chart", labelKey: "Chart", icon: CandlestickChart },
     ],
   },
   {
-    label: "Research",
+    labelKey: "Research",
     items: [
-      { href: "/screening", label: "Screening", icon: ScanSearch },
-      { href: "/strategies", label: "Strategies", icon: Brain },
-      { href: "/backtesting", label: "Backtesting", icon: FlaskConical },
-      { href: "/models", label: "Model Registry", icon: Box },
-      { href: "/features", label: "Feature Store", icon: Layers },
-      { href: "/research", label: "AI Research", icon: Sparkles },
+      { href: "/screening", labelKey: "Screening", icon: ScanSearch },
+      { href: "/strategies", labelKey: "Strategies", icon: Brain },
+      { href: "/backtesting", labelKey: "Backtesting", icon: FlaskConical },
+      { href: "/models", labelKey: "Model Registry", icon: Box },
+      { href: "/features", labelKey: "Feature Store", icon: Layers },
+      { href: "/research", labelKey: "AI Research", icon: Sparkles },
     ],
   },
   {
-    label: "Market Data",
+    labelKey: "Market Data",
     items: [
-      { href: "/feed", label: "Live Feed", icon: Radio, badge: "Live" },
-      { href: "/news", label: "News", icon: Newspaper },
-      { href: "/fundamentals", label: "Fundamentals", icon: BarChart3 },
-      { href: "/social", label: "Social Sentiment", icon: Users },
-      { href: "/alerts", label: "Alerts", icon: Bell },
+      { href: "/feed", labelKey: "Live Feed", icon: Radio, badge: "Live" },
+      { href: "/news", labelKey: "News", icon: Newspaper },
+      { href: "/fundamentals", labelKey: "Fundamentals", icon: BarChart3 },
+      { href: "/social", labelKey: "Social Sentiment", icon: Users },
+      { href: "/alerts", labelKey: "Alerts", icon: Bell },
     ],
   },
   {
-    label: "Execution",
+    labelKey: "Execution",
     items: [
-      { href: "/orders", label: "Orders", icon: ArrowUpDown },
-      { href: "/portfolio", label: "Portfolio", icon: Briefcase },
-      { href: "/rules", label: "Risk Rules", icon: Shield },
-      { href: "/exposure", label: "Exposure", icon: Gauge },
-      { href: "/cost-analysis", label: "Cost Analysis", icon: Calculator },
+      { href: "/orders", labelKey: "Orders", icon: ArrowUpDown },
+      { href: "/portfolio", labelKey: "Portfolio", icon: Briefcase },
+      { href: "/rules", labelKey: "Risk Rules", icon: Shield },
+      { href: "/exposure", labelKey: "Exposure", icon: Gauge },
+      { href: "/cost-analysis", labelKey: "Cost Analysis", icon: Calculator },
     ],
   },
   {
-    label: "System",
+    labelKey: "System",
     items: [
-      { href: "/health", label: "Health", icon: HeartPulse },
-      { href: "/settings", label: "Settings", icon: Settings },
-      { href: "/analytics", label: "Analytics", icon: TrendingUp },
-      { href: "/reports", label: "Reports", icon: FileText },
-      { href: "/feedback", label: "Feedback", icon: MessageCircle },
-      { href: "/similarity", label: "Similarity", icon: GitCompareArrows },
+      { href: "/health", labelKey: "Health", icon: HeartPulse },
+      { href: "/settings", labelKey: "Settings", icon: Settings },
+      { href: "/analytics", labelKey: "Analytics", icon: TrendingUp },
+      { href: "/reports", labelKey: "Reports", icon: FileText },
+      { href: "/feedback", labelKey: "Feedback", icon: MessageCircle },
+      { href: "/similarity", labelKey: "Similarity", icon: GitCompareArrows },
     ],
   },
 ];
 
+/* ── User avatar with initials fallback ── */
+
+function UserAvatar({ user, size = "sm" }: { user: SessionUser; size?: "sm" | "xs" }) {
+  const initials = (user.displayName ?? user.name ?? "?")
+    .split(" ")
+    .map((w) => w[0])
+    .join("")
+    .toUpperCase()
+    .slice(0, 2);
+
+  const dim = size === "xs" ? "h-7 w-7 text-[10px]" : "h-8 w-8 text-xs";
+
+  if (user.avatar) {
+    return (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
+        src={user.avatar}
+        alt={user.displayName ?? user.name}
+        className={cn("rounded-full object-cover", dim)}
+      />
+    );
+  }
+
+  return (
+    <span
+      className={cn(
+        "flex shrink-0 items-center justify-center rounded-full bg-primary/15 font-semibold text-primary",
+        dim
+      )}
+    >
+      {initials}
+    </span>
+  );
+}
+
+/* ── User profile footer ── */
+
+function UserProfile({ user, isCollapsed }: { user: SessionUser; isCollapsed: boolean }) {
+  const t = useTranslations("common");
+  const displayName = user.displayName ?? user.name ?? "User";
+
+  const avatarWithDot = (
+    <div className="relative shrink-0">
+      <UserAvatar user={user} size={isCollapsed ? "xs" : "sm"} />
+      <span className="absolute -right-0.5 -bottom-0.5 flex h-2.5 w-2.5 items-center justify-center rounded-full bg-sidebar ring-1 ring-sidebar">
+        <span className="h-1.5 w-1.5 rounded-full bg-green-500" />
+      </span>
+    </div>
+  );
+
+  const trigger = isCollapsed ? (
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <button
+          className="flex w-full cursor-pointer items-center justify-center rounded-md p-1 hover:bg-accent"
+          aria-label={displayName}
+        >
+          {avatarWithDot}
+        </button>
+      </TooltipTrigger>
+      <TooltipContent side="right" sideOffset={10}>
+        <p className="font-medium">{displayName}</p>
+        {user.email && <p className="text-xs text-muted-foreground">{user.email}</p>}
+      </TooltipContent>
+    </Tooltip>
+  ) : (
+    <button
+      className="flex w-full min-w-0 cursor-pointer items-center gap-2.5 rounded-md px-1 py-1 text-left hover:bg-accent"
+      aria-label={displayName}
+    >
+      {avatarWithDot}
+      <div className="min-w-0 flex-1">
+        <p className="truncate text-sm font-medium leading-tight">{displayName}</p>
+        {user.email && (
+          <p className="truncate font-mono text-[10px] text-muted-foreground">{user.email}</p>
+        )}
+      </div>
+    </button>
+  );
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>{trigger}</DropdownMenuTrigger>
+      <DropdownMenuContent
+        side="top"
+        align={isCollapsed ? "center" : "start"}
+        sideOffset={8}
+        className="w-56"
+      >
+        <DropdownMenuLabel className="font-normal">
+          <div className="flex flex-col space-y-0.5">
+            <p className="text-sm font-medium">{displayName}</p>
+            {user.email && (
+              <p className="font-mono text-xs text-muted-foreground">{user.email}</p>
+            )}
+          </div>
+        </DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem asChild>
+          <Link href={"/settings" as never}>
+            <Settings className="mr-2 h-4 w-4" />
+            {t("settings")}
+          </Link>
+        </DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem asChild>
+          <a href="/api/auth/logout" className="text-destructive focus:text-destructive">
+            <LogOut className="mr-2 h-4 w-4" />
+            {t("signOut")}
+          </a>
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
+
 /* ── Sidebar content (shared between desktop & mobile) ── */
 
 function SidebarContent({
+  user,
   onNavigate,
   isCollapsed = false,
   onToggle,
 }: {
+  user?: SessionUser | null;
   onNavigate?: () => void;
   isCollapsed?: boolean;
   onToggle?: () => void;
 }) {
   const pathname = usePathname();
+  const tBrand = useTranslations("brand");
+  const tNav = useTranslations("nav");
+  const tCommon = useTranslations("common");
 
   return (
     <div className="flex flex-1 flex-col overflow-hidden">
@@ -126,9 +259,9 @@ function SidebarContent({
         <Hexagon className="h-6 w-6 shrink-0 text-primary" strokeWidth={2.2} />
         {!isCollapsed && (
           <div className="flex flex-1 flex-col">
-            <span className="text-sm font-bold tracking-tight">Quantum</span>
+            <span className="text-sm font-bold tracking-tight">{tBrand("name")}</span>
             <span className="font-mono text-[10px] tracking-wider text-muted-foreground uppercase">
-              
+              {tBrand("subtitle")}
             </span>
           </div>
         )}
@@ -150,11 +283,11 @@ function SidebarContent({
       <ScrollArea className="flex-1 min-h-0 py-3">
         <nav className={cn("space-y-5 px-3", isCollapsed && "px-2")}>
           {navigation.map((group) => (
-            <div key={group.label}>
+            <div key={group.labelKey}>
               {!isCollapsed && (
                 <div className="mb-1 flex items-center gap-2 px-2">
                   <span className="font-mono text-[10px] font-medium tracking-widest text-muted-foreground uppercase">
-                    {group.label}
+                    {tNav(`groups.${group.labelKey}`)}
                   </span>
                 </div>
               )}
@@ -185,7 +318,7 @@ function SidebarContent({
                       />
                       {!isCollapsed && (
                         <>
-                          <span className="truncate">{item.label}</span>
+                          <span className="truncate">{tNav(`items.${item.labelKey}`)}</span>
                           {item.badge && (
                             <Badge
                               variant="default"
@@ -204,7 +337,7 @@ function SidebarContent({
                       <Tooltip key={item.href}>
                         <TooltipTrigger asChild>{link}</TooltipTrigger>
                         <TooltipContent side="right" sideOffset={10}>
-                          {item.label}
+                          {tNav(`items.${item.labelKey}`)}
                         </TooltipContent>
                       </Tooltip>
                     );
@@ -223,20 +356,29 @@ function SidebarContent({
       {/* Footer */}
       <div
         className={cn(
-          "flex shrink-0 items-center justify-between px-4 py-3",
-          isCollapsed && "flex-col gap-4 px-0"
+          "flex shrink-0 items-center gap-1 px-3 py-3",
+          isCollapsed ? "flex-col justify-center px-0" : "justify-between"
         )}
       >
-        {!isCollapsed && (
-          <div className="flex items-center gap-2 text-nowrap">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
-            </span>
-            <span className="font-mono text-xs text-muted-foreground">Online</span>
+        {user ? (
+          <div className={cn("min-w-0", isCollapsed ? "w-full flex justify-center" : "flex-1")}>
+            <UserProfile user={user} isCollapsed={isCollapsed} />
           </div>
+        ) : (
+          !isCollapsed && (
+            <div className="flex items-center gap-2 text-nowrap">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
+              </span>
+              <span className="font-mono text-xs text-muted-foreground">{tCommon("online")}</span>
+            </div>
+          )
         )}
-        <ThemeToggle />
+        <div className="flex items-center gap-1">
+          <LocaleToggle />
+          <ThemeToggle />
+        </div>
       </div>
     </div>
   );
@@ -244,9 +386,10 @@ function SidebarContent({
 
 /* ── Main export ── */
 
-export function AppSidebar() {
+export function AppSidebar({ user }: { user?: SessionUser | null }) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const tCommon = useTranslations("common");
 
   return (
     <>
@@ -270,10 +413,10 @@ export function AppSidebar() {
               </Button>
             </div>
             <Separator />
-            <SidebarContent isCollapsed={true} />
+            <SidebarContent user={user} isCollapsed={true} />
           </div>
         ) : (
-          <SidebarContent onToggle={() => setIsCollapsed(true)} />
+          <SidebarContent user={user} onToggle={() => setIsCollapsed(true)} />
         )}
       </aside>
 
@@ -286,16 +429,18 @@ export function AppSidebar() {
             </Button>
           </SheetTrigger>
           <SheetContent side="left" className="w-[260px] p-0">
-            <SheetTitle className="sr-only">Navigation</SheetTitle>
-            <SidebarContent onNavigate={() => setMobileOpen(false)} />
+            <SheetTitle className="sr-only">{tCommon("navigation")}</SheetTitle>
+            <SidebarContent user={user} onNavigate={() => setMobileOpen(false)} />
           </SheetContent>
         </Sheet>
         <div className="flex items-center gap-2">
           <Hexagon className="h-5 w-5 text-primary" strokeWidth={2.2} />
           <span className="text-sm font-bold tracking-tight">Quantum</span>
         </div>
-        <div className="ml-auto">
+        <div className="ml-auto flex items-center gap-2">
+          <LocaleToggle />
           <ThemeToggle />
+          {user && <UserProfile user={user} isCollapsed={false} />}
         </div>
       </header>
     </>

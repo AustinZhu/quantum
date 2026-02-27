@@ -1,9 +1,12 @@
 import { AppSidebar } from "@/components/app-sidebar";
+import { getSessionUser } from "@/lib/session";
 
-export default function DashboardLayout({ children }: { children: React.ReactNode }) {
+export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
+  const user = await getSessionUser();
+
   return (
     <div className="app-shell">
-      <AppSidebar />
+      <AppSidebar user={user} />
       <main className="app-main">
         <div className="app-main-inner">{children}</div>
       </main>

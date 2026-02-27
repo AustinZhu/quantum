@@ -2,10 +2,10 @@
 
 import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import { useTranslations, useLocale } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { AnimatedPriceChart } from "@/components/animated-price-chart";
-import { AlertCircle, Hexagon, ShieldCheck } from "lucide-react";
-import Link from "next/link";
+import { AlertCircle, Hexagon, ShieldCheck, Lock } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 /* ── Rotating quotes ── */
@@ -129,10 +129,73 @@ const QUOTES = [
   },
 ] as const;
 
+/* ── Chinese quotes — faithful to source texts and standard translations ── */
+
+const ZH_QUOTES = [
+  // Jesse Livermore《股票大作手回忆录》Edwin Lefèvre 著
+  { text: "大钱不在买买卖卖，而在等待。", author: "杰西·利弗莫尔" },
+  // Warren Buffett
+  { text: "别人贪婪时我恐惧，别人恐惧时我贪婪。", author: "沃伦·巴菲特" },
+  // John Maynard Keynes
+  { text: "市场保持非理性的时间，可以远比你保持不破产的时间更长。", author: "约翰·梅纳德·凯恩斯" },
+  // Laozi《道德经》第三十三章
+  { text: "胜人者有力，自胜者强。", author: "老子《道德经》" },
+  // Sun Tzu《孙子兵法·形篇》
+  { text: "胜兵先胜而后求战，败兵先战而后求胜。", author: "孙子《孙子兵法》" },
+  // Jesse Livermore
+  { text: "投机是世界上最令人着迷的游戏。但它不适合愚蠢之人、精神懈怠之人，或急于求富的冒险家。", author: "杰西·利弗莫尔" },
+  // Warren Buffett
+  { text: "风险来自于你不知道自己在做什么。", author: "沃伦·巴菲特" },
+  // Laozi《道德经》第三十三章
+  { text: "知人者智，自知者明。", author: "老子《道德经》" },
+  // Benjamin Graham《聪明的投资者》
+  { text: "个人投资者应始终以投资者而非投机者的身份行事。", author: "本杰明·格雷厄姆《聪明的投资者》" },
+  // George Soros
+  { text: "重要的不是你对还是错，而是你对的时候赚了多少，错的时候亏了多少。", author: "乔治·索罗斯" },
+  // Jesse Livermore
+  { text: "古往今来，人们在市场中的行为方式基本如出一辙，皆受贪婪、恐惧、无知与希望所驱使。", author: "杰西·利弗莫尔" },
+  // Sun Tzu《孙子兵法·谋攻篇》
+  { text: "知可以战与不可以战者，胜。", author: "孙子《孙子兵法》" },
+  // Robert Arnott
+  { text: "在投资中，令人舒适的选择，鲜少带来丰厚回报。", author: "罗伯特·阿诺特" },
+  // Sir John Templeton
+  { text: "投资中最危险的四个字是：这次不同了。", author: "约翰·邓普顿爵士" },
+  // Warren Buffett
+  { text: "告诉你在华尔街致富的秘诀——在别人恐惧时，你要贪婪。", author: "沃伦·巴菲特" },
+  // Laozi《道德经》第三十三章（同上）
+  { text: "知人者智，自知者明。", author: "老子《道德经》" },
+  // Warren Buffett
+  { text: "市场是将钱从急躁者手中转移到有耐心者手中的工具。", author: "沃伦·巴菲特" },
+  // Warren Buffett
+  { text: "机遇难得。天降黄金之时，当备水桶，而非顶针。", author: "沃伦·巴菲特" },
+  // David Hume《人类理解研究》
+  { text: "智者依证据的分量来衡量自己的信念。", author: "大卫·休谟《人类理解研究》" },
+  // 《金刚经》鸠摩罗什译（402年）
+  { text: "一切有为法，如梦幻泡影，如露亦如电，应作如是观。", author: "《金刚经》" },
+  // 《金刚经》
+  { text: "应无所住，而生其心。", author: "《金刚经》" },
+  // 《金刚经》
+  { text: "不取于相，如如不动。", author: "《金刚经》" },
+  // 《心经》玄奘译（660年）
+  { text: "色即是空，空即是色。", author: "《心经》" },
+  // 《心经》
+  { text: "不生不灭，不垢不净，不增不减。", author: "《心经》" },
+  // 《心经》般若波罗蜜多咒
+  { text: "揭谛揭谛，波罗揭谛，波罗僧揭谛，菩提萨婆诃。", author: "《心经》" },
+  // 惠能《六祖坛经》
+  { text: "本来无一物，何处惹尘埃。", author: "惠能《六祖坛经》" },
+  // 惠能《六祖坛经》
+  { text: "佛法在世间，不离世间觉；离世觅菩提，恰如求兔角。", author: "惠能《六祖坛经》" },
+  // 惠能《六祖坛经》无念法门
+  { text: "无念为宗，无相为体，无住为本。", author: "惠能《六祖坛经》" },
+] as const;
+
 const QUOTE_DURATION_MS = 5500;
 const FADE_MS = 650;
 
 function RollingQuote() {
+  const locale = useLocale();
+  const quotes = locale === "zh" ? ZH_QUOTES : QUOTES;
   const [index, setIndex] = useState(0);
   const [visible, setVisible] = useState(true);
 
@@ -140,14 +203,15 @@ function RollingQuote() {
     const id = setInterval(() => {
       setVisible(false);
       setTimeout(() => {
-        setIndex((i) => (i + 1) % QUOTES.length);
+        setIndex((i) => (i + 1) % quotes.length);
         setVisible(true);
       }, FADE_MS);
     }, QUOTE_DURATION_MS);
     return () => clearInterval(id);
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [locale]);
 
-  const q = QUOTES[index];
+  const q = quotes[index];
 
   return (
     <blockquote
@@ -162,20 +226,19 @@ function RollingQuote() {
   );
 }
 
-/* ── Error messages ── */
-
-const ERROR_MESSAGES: Record<string, string> = {
-  no_code: "Authentication was cancelled. Please try again.",
-  auth_failed: "Authentication failed. Please try again or contact support.",
-};
-
 /* ── Login form ── */
 
 function LoginForm() {
+  const t = useTranslations("login");
   const [isLoading, setIsLoading] = useState(false);
   const searchParams = useSearchParams();
   const errorKey = searchParams.get("error");
-  const errorMessage = errorKey ? (ERROR_MESSAGES[errorKey] ?? "An unexpected error occurred.") : null;
+  const knownErrors = ["no_code", "auth_failed"] as const;
+  const errorMessage = errorKey
+    ? knownErrors.includes(errorKey as (typeof knownErrors)[number])
+      ? t(`errors.${errorKey as (typeof knownErrors)[number]}`)
+      : t("errors.unexpected")
+    : null;
 
   function handleLogin() {
     setIsLoading(true);
@@ -188,10 +251,8 @@ function LoginForm() {
         <div className="mb-6 flex justify-center lg:hidden">
           <Hexagon className="h-10 w-10 text-primary" strokeWidth={2.5} />
         </div>
-        <h1 className="text-3xl font-bold tracking-tight">Welcome back</h1>
-        <p className="text-sm text-muted-foreground">
-          Sign in with your organization account to access the terminal
-        </p>
+        <h1 className="text-3xl font-bold tracking-tight">{t("title")}</h1>
+        <p className="text-sm text-muted-foreground">{t("subtitle")}</p>
       </div>
 
       {errorMessage && (
@@ -209,20 +270,13 @@ function LoginForm() {
         onClick={handleLogin}
       >
         <ShieldCheck className="h-4 w-4" />
-        {isLoading ? "Redirecting…" : "Continue with Casdoor SSO"}
+        {isLoading ? t("signingIn") : t("signIn")}
       </Button>
 
-      <p className="text-center text-xs text-muted-foreground">
-        By signing in, you agree to our{" "}
-        <Link href={"/terms" as never} className="underline underline-offset-4 hover:text-primary">
-          Terms of Service
-        </Link>{" "}
-        and{" "}
-        <Link href={"/privacy" as never} className="underline underline-offset-4 hover:text-primary">
-          Privacy Policy
-        </Link>
-        .
-      </p>
+      <div className="flex items-start gap-2 rounded-md border border-amber-500/20 bg-amber-500/5 px-3 py-2.5 text-[11px] leading-relaxed text-amber-700/80 dark:text-amber-400/70">
+        <Lock className="mt-0.5 h-3 w-3 shrink-0" />
+        <span>{t("restricted")}</span>
+      </div>
     </div>
   );
 }

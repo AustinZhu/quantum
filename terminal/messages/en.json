@@ -1,0 +1,315 @@
+{
+  "brand": { "name": "Quantum", "subtitle": "Terminal" },
+  "theme": {
+    "toggle": "Toggle theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "nav": {
+    "groups": {
+      "Overview": "Overview",
+      "Research": "Research",
+      "Market Data": "Market Data",
+      "Execution": "Execution",
+      "System": "System"
+    },
+    "items": {
+      "Dashboard": "Dashboard", "Chart": "Chart", "Screening": "Screening",
+      "Strategies": "Strategies", "Backtesting": "Backtesting",
+      "Model Registry": "Model Registry", "Feature Store": "Feature Store",
+      "AI Research": "AI Research", "Live Feed": "Live Feed", "News": "News",
+      "Fundamentals": "Fundamentals", "Social Sentiment": "Social Sentiment",
+      "Alerts": "Alerts", "Orders": "Orders", "Portfolio": "Portfolio",
+      "Risk Rules": "Risk Rules", "Exposure": "Exposure",
+      "Cost Analysis": "Cost Analysis", "Health": "Health",
+      "Settings": "Settings", "Analytics": "Analytics", "Reports": "Reports",
+      "Feedback": "Feedback", "Similarity": "Similarity"
+    }
+  },
+  "common": {
+    "online": "Online", "signOut": "Sign out",
+    "settings": "Settings", "navigation": "Navigation",
+    "viewAll": "View All", "export": "Export", "download": "Download",
+    "saveChanges": "Save Changes", "edit": "Edit", "delete": "Delete",
+    "short": "Short"
+  },
+  "login": {
+    "title": "Welcome back",
+    "subtitle": "Sign in with your organization account to access the terminal",
+    "signIn": "Continue with Casdoor SSO",
+    "signingIn": "Redirecting\u2026",
+    "restricted": "RESTRICTED \u2014 For authorized personnel only. This system is confidential and proprietary. Unauthorized access is prohibited. All activity is monitored and logged.",
+    "errors": {
+      "no_code": "Authentication was cancelled. Please try again.",
+      "auth_failed": "Authentication failed. Please try again or contact support.",
+      "unexpected": "An unexpected error occurred."
+    }
+  },
+  "pages": {
+    "dashboard": {
+      "title": "Dashboard",
+      "description": "Real-time overview of your quantitative trading system",
+      "portfolioPnl": "Portfolio PnL", "activeSignals": "Active Signals",
+      "fillRate": "Fill Rate", "riskScore": "Risk Score",
+      "tradingActivity": "Trading Activity",
+      "cumulativePnl": "Cumulative PnL and signal volume",
+      "chartPlaceholder": "TradingView chart mounts here",
+      "alertsSignals": "Alerts & Signals",
+      "latestAlerts": "Latest system and trading alerts",
+      "activeStrategies": "Active Strategies",
+      "performanceSummary": "Performance summary by strategy",
+      "colStrategy": "Strategy", "colStatus": "Status",
+      "colYtdPnl": "YTD PnL", "colSharpe": "Sharpe",
+      "exposureOverview": "Exposure Overview",
+      "currentAllocation": "Current portfolio allocation",
+      "equityLong": "Equity Long", "equityShort": "Equity Short",
+      "futures": "Futures", "cash": "Cash",
+      "grossExposure": "Gross Exposure", "netExposure": "Net Exposure",
+      "marginUsed": "Margin Used",
+      "recentOrders": "Recent Orders",
+      "latestExecutions": "Latest order executions across all strategies",
+      "colOrderId": "Order ID", "colSymbol": "Symbol", "colSide": "Side",
+      "colQty": "Qty", "colPrice": "Price",
+      "statusActive": "Active", "statusPaused": "Paused",
+      "statusFilled": "Filled", "statusPartial": "Partial",
+      "statusPending": "Pending", "statusRejected": "Rejected"
+    },
+    "chart": {
+      "title": "Chart",
+      "description": "Interactive price charts and technical analysis"
+    },
+    "screening": {
+      "title": "Symbol Screening",
+      "description": "Screen and analyse symbols using time series, orderbook, and factor data",
+      "searchPlaceholder": "Search symbols\u2026",
+      "filter": "Filter",
+      "results": "Screening Results",
+      "resultsDesc": "Symbols matching your criteria",
+      "colSymbol": "Symbol", "colMomentum": "30D Momentum",
+      "colVolume": "Avg Volume", "colSignal": "Signal",
+      "strongBuy": "Strong Buy", "buy": "Buy", "hold": "Hold", "sell": "Sell"
+    },
+    "strategies": {
+      "title": "Strategies",
+      "description": "Strategy algorithms, indicators, and configuration",
+      "tabOverview": "Overview", "tabTsmom": "TSMOM",
+      "tabCsmom": "CSMOM", "tabConfig": "Configuration",
+      "strategyOverview": "Strategy Overview",
+      "strategyOverviewDesc": "All registered strategies and their current performance",
+      "colStrategy": "Strategy", "colVersion": "Version",
+      "colStatus": "Status", "colReturn": "Return",
+      "colSharpe": "Sharpe", "colDrawdown": "Max DD",
+      "colWinRate": "Win Rate", "colPositions": "Positions",
+      "statusActive": "Active", "statusPaused": "Paused"
+    },
+    "backtesting": {
+      "title": "Backtesting",
+      "description": "Run and evaluate strategy backtests and paper trading",
+      "tabHistory": "History", "tabNew": "New Backtest", "tabPaper": "Paper Trading",
+      "newBacktest": "New Backtest",
+      "backtestHistory": "Backtest History",
+      "backtestHistoryDesc": "Previous backtest runs and results",
+      "colRunId": "Run ID", "colStrategy": "Strategy", "colPeriod": "Period",
+      "colSharpe": "Sharpe", "colReturns": "Returns",
+      "colDuration": "Duration", "colStatus": "Status",
+      "statusCompleted": "Completed", "statusRunning": "Running", "statusFailed": "Failed",
+      "paperPlaceholder": "Paper trading simulation engine",
+      "newBacktestPlaceholder": "Configure and launch a new backtest run"
+    },
+    "models": {
+      "title": "Model Registry",
+      "description": "Version-controlled model and strategy registry",
+      "modelCatalog": "Model Catalog",
+      "modelCatalogDesc": "Registered models across all environments",
+      "deploy": "Deploy", "archive": "Archive",
+      "colModel": "Model", "colVersion": "Version", "colType": "Type",
+      "colEnv": "Environment", "colMetric": "Key Metric", "colUpdated": "Updated",
+      "envProduction": "Production", "envStaging": "Staging"
+    },
+    "features": {
+      "title": "Feature Store",
+      "description": "Centralised feature repository for ML models and strategies",
+      "totalFeatures": "Total Features", "featureGroups": "Feature Groups",
+      "avgFreshness": "Avg Freshness",
+      "featureCatalog": "Feature Catalog",
+      "featureCatalogDesc": "All registered features and their metadata",
+      "colFeature": "Feature", "colGroup": "Group", "colType": "Type",
+      "colFreshness": "Freshness", "colSource": "Source", "colUsedBy": "Used By"
+    },
+    "research": {
+      "title": "AI Research",
+      "description": "Agentic research, summarisation, and market analysis",
+      "newResearch": "New Research", "templates": "Templates",
+      "activeResearch": "Active Research",
+      "activeResearchDesc": "Ongoing and completed research tasks",
+      "statusCompleted": "Completed", "statusRunning": "Running",
+      "confidence": "confidence"
+    },
+    "feed": {
+      "title": "Live Feed",
+      "description": "Real-time tick data, order recording, and market data stream",
+      "ticksPerSec": "Ticks/sec", "symbols": "Symbols",
+      "latency": "Latency", "status": "Status", "statusLive": "Live",
+      "tickStream": "Tick Stream",
+      "tickStreamDesc": "Live market data feed",
+      "colTime": "Time", "colSymbol": "Symbol", "colPrice": "Price",
+      "colSize": "Size", "colExchange": "Exchange", "colType": "Type"
+    },
+    "news": {
+      "title": "News Feed",
+      "description": "Market news, earnings, and macro event aggregation",
+      "latestNews": "Latest News",
+      "latestNewsDesc": "Real-time market news and analysis",
+      "sentimentPositive": "Positive", "sentimentNegative": "Negative",
+      "sentimentNeutral": "Neutral", "readMore": "Read More"
+    },
+    "fundamentals": {
+      "title": "Fundamentals",
+      "description": "Financial statements, valuation metrics, and company data",
+      "financialOverview": "Financial Overview",
+      "financialOverviewDesc": "Key valuation and financial metrics",
+      "searchPlaceholder": "Search symbols\u2026",
+      "colSymbol": "Symbol", "colPe": "P/E", "colPb": "P/B",
+      "colDivYield": "Div Yield", "colMarketCap": "Market Cap",
+      "colRevenue": "Revenue", "colEpsGrowth": "EPS Growth"
+    },
+    "social": {
+      "title": "Social Sentiment",
+      "description": "Social media sentiment analysis and trending topics",
+      "sentimentTracker": "Sentiment Tracker",
+      "sentimentTrackerDesc": "All tracked symbols",
+      "colSymbol": "Symbol", "colScore": "Score", "colTrend": "Trend",
+      "colMentions": "Mentions (24h)", "colVolChange": "Vol Change"
+    },
+    "alerts": {
+      "title": "Alerts",
+      "description": "Alert configuration and notification channels",
+      "newAlert": "New Alert",
+      "totalAlerts": "Total Alerts",
+      "alertHistory": "Alert History",
+      "alertHistoryDesc": "Recent system and trading alerts",
+      "colType": "Type", "colSeverity": "Severity", "colMessage": "Message",
+      "colChannel": "Channel", "colTime": "Time"
+    },
+    "orders": {
+      "title": "Orders",
+      "description": "Order entry, execution, and management",
+      "orderManagement": "Order Management",
+      "orderManagementDesc": "Active and recent orders",
+      "colId": "ID", "colSymbol": "Symbol", "colSide": "Side",
+      "colQty": "Qty", "colPrice": "Price", "colStrategy": "Strategy",
+      "colStatus": "Status",
+      "statusFilled": "Filled", "statusPartial": "Partial",
+      "statusPending": "Pending", "statusRejected": "Rejected"
+    },
+    "portfolio": {
+      "title": "Portfolio",
+      "description": "Portfolio positions, allocation, and capital management",
+      "nav": "NAV", "dayPnl": "Day PnL", "positions": "Positions", "cash": "Cash",
+      "holdings": "Holdings", "holdingsDesc": "Current portfolio positions",
+      "colSymbol": "Symbol", "colShares": "Shares", "colAvgCost": "Avg Cost",
+      "colCurrent": "Current", "colPnl": "PnL", "colPnlPct": "PnL %",
+      "colWeight": "Weight"
+    },
+    "rules": {
+      "title": "Risk Rules",
+      "description": "Pre-trade and post-trade risk management rules",
+      "addRule": "Add Rule",
+      "ruleConfiguration": "Rule Configuration",
+      "ruleConfigurationDesc": "Active trading risk rules",
+      "colRule": "Rule", "colVersion": "Version", "colThreshold": "Threshold",
+      "colStatus": "Status", "colActions": "Actions",
+      "statusEnabled": "Enabled", "statusDisabled": "Disabled"
+    },
+    "exposure": {
+      "title": "Exposure",
+      "description": "Exposure, margin, and funding management",
+      "grossExposure": "Gross Exposure", "netExposure": "Net Exposure",
+      "marginUsed": "Margin Used", "availableMargin": "Available Margin",
+      "sectorBreakdown": "Sector Breakdown",
+      "sectorBreakdownDesc": "Current exposure by sector",
+      "colSector": "Sector", "colLong": "Long", "colShort": "Short", "colNet": "Net"
+    },
+    "costAnalysis": {
+      "title": "Cost Analysis",
+      "description": "Trade cost analysis: slippage, commissions, and market impact",
+      "totalCostsMtd": "Total Costs MTD", "avgSlippage": "Avg Slippage",
+      "totalTrades": "Total Trades",
+      "costBreakdown": "Cost Breakdown",
+      "costBreakdownDesc": "Trade costs by strategy",
+      "colStrategy": "Strategy", "colAvgSlippage": "Avg Slippage",
+      "colCommission": "Commission", "colMarketImpact": "Market Impact",
+      "colTotalCost": "Total Cost", "colCostPct": "Cost %"
+    },
+    "health": {
+      "title": "System Health",
+      "description": "Infrastructure and service monitoring",
+      "totalServices": "Total Services", "healthy": "Healthy", "degraded": "Degraded",
+      "uptime": "Uptime", "latency": "Latency", "openUi": "Open UI",
+      "statusHealthy": "healthy", "statusDegraded": "degraded"
+    },
+    "settings": {
+      "title": "Settings",
+      "description": "System configuration and parameter tuning",
+      "tabGeneral": "General", "tabTrading": "Trading",
+      "tabNotifications": "Notifications", "tabApi": "API Keys",
+      "systemParams": "System Parameters", "systemParamsDesc": "Core system configuration",
+      "bffTimeout": "BFF Upstream Timeout (ms)",
+      "maxConcurrent": "Max Concurrent Requests",
+      "dataRetention": "Data Retention (days)",
+      "logLevel": "Log Level",
+      "debugMode": "Enable Debug Mode",
+      "debugModeDesc": "Show detailed logging and diagnostics",
+      "autoRefresh": "Auto-refresh Dashboard",
+      "autoRefreshDesc": "Automatically refresh data every 5 seconds",
+      "maintenanceMode": "Maintenance Mode",
+      "maintenanceModeDesc": "Halt all trading and show maintenance banner",
+      "tradingParams": "Trading Parameters",
+      "tradingParamsDesc": "Strategy and execution parameter tuning",
+      "defaultLookback": "Default Lookback (days)",
+      "volScaling": "Volatility Scaling Factor",
+      "maxPosition": "Max Position Size ($)",
+      "stopLoss": "Stop Loss (%)",
+      "notificationsPlaceholder": "Notification preferences and channel configuration",
+      "apiPlaceholder": "API key management for external services"
+    },
+    "analytics": {
+      "title": "Analytics",
+      "description": "Performance analytics, risk metrics, and attribution analysis",
+      "tabPerformance": "Performance", "tabRisk": "Risk Analytics",
+      "tabAttribution": "Attribution",
+      "equityCurve": "Equity Curve", "portfolioValueTime": "Portfolio value over time",
+      "equityCurveChart": "Equity curve chart",
+      "riskPlaceholder": "VaR, drawdown analysis, and risk decomposition",
+      "attributionPlaceholder": "Return attribution by factor, strategy, and sector",
+      "totalReturn": "Total Return", "annualizedReturn": "Annualized Return",
+      "sharpeRatio": "Sharpe Ratio", "sortinoRatio": "Sortino Ratio",
+      "maxDrawdown": "Max Drawdown", "calmarRatio": "Calmar Ratio",
+      "winRate": "Win Rate", "profitFactor": "Profit Factor"
+    },
+    "reports": {
+      "title": "Reports",
+      "description": "Historical trade reports, performance summaries, and exports",
+      "generateNew": "Generate New",
+      "reportLibrary": "Report Library",
+      "reportLibraryDesc": "Available reports and exports",
+      "colReport": "Report", "colDate": "Date", "colTrades": "Trades",
+      "colPnl": "PnL", "colActions": "Actions",
+      "view": "View"
+    },
+    "feedback": {
+      "title": "Feedback Loop",
+      "description": "Human-in-the-loop feedback on signals, trades, and model decisions",
+      "feedbackItems": "Feedback Items", "last7Days": "Last 7 days",
+      "positiveRate": "Positive Rate", "pendingReview": "Pending Review",
+      "feedbackHistory": "Feedback History",
+      "feedbackHistoryDesc": "Signal and trade outcome evaluations",
+      "newFeedback": "New Feedback"
+    },
+    "similarity": {
+      "title": "Similarity Analysis",
+      "description": "ML-driven stock similarity and clustering workbench"
+    }
+  }
+}

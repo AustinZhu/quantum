@@ -1,0 +1,59 @@
+{
+  "brand": {
+    "name": "量子",
+    "subtitle": "终端"
+  },
+  "nav": {
+    "groups": {
+      "Overview": "概览",
+      "Research": "研究",
+      "Market Data": "市场数据",
+      "Execution": "执行",
+      "System": "系统"
+    },
+    "items": {
+      "Dashboard": "仪表板",
+      "Chart": "图表",
+      "Screening": "股票筛选",
+      "Strategies": "策略",
+      "Backtesting": "回测",
+      "Model Registry": "模型注册",
+      "Feature Store": "特征库",
+      "AI Research": "AI 研究",
+      "Live Feed": "实时行情",
+      "News": "新闻",
+      "Fundamentals": "基本面",
+      "Social Sentiment": "社交情绪",
+      "Alerts": "预警",
+      "Orders": "订单",
+      "Portfolio": "投资组合",
+      "Risk Rules": "风控规则",
+      "Exposure": "敞口",
+      "Cost Analysis": "成本分析",
+      "Health": "系统健康",
+      "Settings": "设置",
+      "Analytics": "分析",
+      "Reports": "报告",
+      "Feedback": "反馈",
+      "Similarity": "相似度"
+    }
+  },
+  "common": {
+    "online": "在线",
+    "signOut": "退出登录",
+    "settings": "设置",
+    "navigation": "导航"
+  },
+  "login": {
+    "title": "欢迎回来",
+    "subtitle": "使用组织账户登录量子终端",
+    "signIn": "通过 Casdoor SSO 登录",
+    "signingIn": "跳转中\u2026",
+    "restricted": "仅限授权人员访问。本系统内容属机密专有信息，未经授权严禁访问。所有操作均受监控并留有记录。",
+    "errors": {
+      "no_code": "身份验证已取消，请重试。",
+      "auth_failed": "身份验证失败，请重试或联系支持团队。",
+      "unexpected": "发生了意外错误。"
+    }
+  }
+}

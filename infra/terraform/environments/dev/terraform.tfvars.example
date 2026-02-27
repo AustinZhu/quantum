@@ -1,0 +1,13 @@
+project_root = "/Users/austin/GitHub/quantum"
+
+postgres_superuser_password = "quantum"
+vault_token                 = "root"
+minio_root_password         = "minioadmin"
+grafana_admin_password      = "admin"
+
+vault_secret_overrides = {
+  "quantum/casdoor" = {
+    client_secret = "replace-me"
+    certificate   = ""
+  }
+}

@@ -3,6 +3,7 @@
 ## Prerequisites
 
 - Docker + Docker Compose
+- Terraform 1.7+
 - `buf` CLI
 - Optional for local non-container workflows: `uv`, Go 1.26.0+, Node 22+, Java 25+
 
@@ -19,16 +20,12 @@ cp .env.example .env
 ./api/scripts/generate.sh
 ```
 
-## 3) Start the full platform
+## 3) Start and bootstrap the full platform (Terraform)
 
 ```bash
-docker compose up --build --wait
-```
-
-## 3.1) Seed Consul and Vault (required for config/secret fetch mode)
-
-```bash
-./infra/bootstrap/seed-consul-vault.sh
+cp infra/terraform/terraform.tfvars.example infra/terraform/terraform.tfvars
+make tf-init
+make tf-apply
 ```
 
 ## 4) Open key endpoints
@@ -64,6 +61,9 @@ make help
 make bootstrap
 make generate
 make up
+make tf-init
+make tf-plan
+make tf-apply
 make logs
 make down
 ```
@@ -76,3 +76,4 @@ make down
 - Casdoor uses the TimescaleDB/PostgreSQL cluster for persistence and Casbin for RBAC policy enforcement.
 - Datafeed uses `rueidis` as the Redis client.
 - First startup may take longer because `feast` and `mlflow` install pinned Python packages in their containers.
+- Legacy manual fallback if Terraform is disabled: `docker compose up --build --wait` then `./infra/bootstrap/seed-consul-vault.sh` (Consul/Vault only; no ordered runtime bootstrap for namespaces/topics/buckets/OIDC).

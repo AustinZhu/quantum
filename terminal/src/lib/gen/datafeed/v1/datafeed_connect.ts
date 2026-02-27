@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { GetConfigRequest, GetConfigResponse, GetHistoryRequest, GetHistoryResponse, GetMarksRequest, GetMarksResponse, GetQuotesRequest, GetQuotesResponse, GetSymbolGroupInfoRequest, GetSymbolGroupInfoResponse, GetTimeRequest, GetTimeResponse, GetTimescaleMarksRequest, GetTimescaleMarksResponse, IngestTicksRequest, IngestTicksResponse, ListNewsRequest, ListNewsResponse, ListSocialRequest, ListSocialResponse, ListSymbolsRequest, ListSymbolsResponse, QueryBarsRequest, QueryBarsResponse, ReplayTicksRequest, ReplayTicksResponse, ResolveSymbolRequest, ResolveSymbolResponse, ScanSymbolsRequest, ScanSymbolsResponse, SearchSymbolsRequest, SearchSymbolsResponse, StreamBarsRequest, StreamBarsResponse } from "./datafeed_pb.js";
+import { GetConfigRequest, GetConfigResponse, GetHistoryRequest, GetHistoryResponse, GetMarksRequest, GetMarksResponse, GetQuotesRequest, GetQuotesResponse, GetSymbolGroupInfoRequest, GetSymbolGroupInfoResponse, GetTimeRequest, GetTimeResponse, GetTimescaleMarksRequest, GetTimescaleMarksResponse, IngestTicksRequest, IngestTicksResponse, ListNewsRequest, ListNewsResponse, ListSocialRequest, ListSocialResponse, ListSymbolsRequest, ListSymbolsResponse, QueryBarsRequest, QueryBarsResponse, ReplayTicksRequest, ReplayTicksResponse, ResolveSymbolRequest, ResolveSymbolResponse, SearchSymbolsRequest, SearchSymbolsResponse, StreamBarsRequest, StreamBarsResponse } from "./datafeed_pb.js";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -146,15 +146,6 @@ export const DatafeedService = {
       I: StreamBarsRequest,
       O: StreamBarsResponse,
       kind: MethodKind.ServerStreaming,
-    },
-    /**
-     * @generated from rpc quant.datafeed.v1.DatafeedService.ScanSymbols
-     */
-    scanSymbols: {
-      name: "ScanSymbols",
-      I: ScanSymbolsRequest,
-      O: ScanSymbolsResponse,
-      kind: MethodKind.Unary,
     },
     /**
      * @generated from rpc quant.datafeed.v1.DatafeedService.ListSymbols

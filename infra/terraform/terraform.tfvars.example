@@ -1,0 +1,24 @@
+project_root         = "/Users/austin/GitHub/quantum"
+compose_project_name = "quantum"
+
+postgres_host               = "127.0.0.1"
+postgres_port               = 5432
+postgres_superuser          = "quantum"
+postgres_superuser_password = "replace-me"
+
+consul_address = "http://127.0.0.1:8500"
+vault_address  = "http://127.0.0.1:8200"
+vault_token    = "replace-me"
+
+minio_root_user     = "minioadmin"
+minio_root_password = "replace-me"
+
+grafana_url            = "http://127.0.0.1:3001"
+grafana_admin_user     = "admin"
+grafana_admin_password = "replace-me"
+
+configure_casdoor_oidc     = true
+bootstrap_temporal         = true
+bootstrap_redpanda_topics  = true
+bootstrap_minio            = true
+grafana_manage_datasources = false

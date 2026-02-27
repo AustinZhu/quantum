@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useCallback } from "react";
 import { useTheme } from "next-themes";
+import { useLocale } from "next-intl";
 import type {
   ChartingLibraryWidgetOptions,
   IChartingLibraryWidget,
@@ -44,10 +45,16 @@ export function TradingViewWidget({
   const containerRef = useRef<HTMLDivElement>(null);
   const widgetRef = useRef<IChartingLibraryWidget | null>(null);
   const { resolvedTheme } = useTheme();
+  const locale = useLocale();
 
   const tvTheme: ThemeName = resolvedTheme === "dark" ? "dark" : "light";
   const tvThemeRef = useRef(tvTheme);
   tvThemeRef.current = tvTheme;
+
+  // Map app locale to TradingView LanguageCode
+  const tvLocale = (locale === "zh" ? "zh" : "en") as LanguageCode;
+  const tvLocaleRef = useRef(tvLocale);
+  tvLocaleRef.current = tvLocale;
 
   const createWidget = useCallback(() => {
     if (!containerRef.current) return;
@@ -70,7 +77,7 @@ export function TradingViewWidget({
       ),
       symbol,
       interval,
-      locale: "en" as LanguageCode,
+      locale: tvLocaleRef.current,
       theme: tvThemeRef.current,
       autosize: true,
       fullscreen: false,
@@ -95,7 +102,7 @@ export function TradingViewWidget({
       widgetRef.current = widget;
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [symbol, interval]);
+  }, [symbol, interval, tvLocale]);
 
   /* Load the runtime scripts once, then instantiate the widget. */
   useEffect(() => {

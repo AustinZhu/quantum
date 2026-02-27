@@ -91,6 +91,7 @@ Note: OpenAPI generation currently uses Buf remote plugin `buf.build/community/s
   - `datafeed`
   - `doordash`
 - Additional databases created at bootstrap:
+  - `airflow`
   - `temporal`
   - `temporal_visibility`
   - `casdoor`
@@ -126,16 +127,30 @@ Default retention/compression from migrations:
 - Casdoor + Casbin: user/authn and RBAC baseline
 - Consul service registration JSONs live under `infra/consul/services`
 
-Bootstrap script:
+Terraform bootstrap (recommended):
+
+```bash
+cd infra/terraform
+terraform init -backend-config=environments/dev/backend.hcl.example
+terraform apply
+```
+
+This automates:
+
+- Docker Compose deployment
+- Consul/Vault seeding
+- Postgres user/database/schema bootstrap
+- Temporal namespace + Redpanda topic + MinIO bucket bootstrap
+- Casdoor OIDC redirect URI initialization
+
+Legacy script-only seed (optional fallback):
 
 ```bash
 ./infra/bootstrap/seed-consul-vault.sh
 ```
 
-This seeds:
-
-- Consul keys for `algorand`, `datafeed`, `doordash`, `casdoor`
-- Vault secrets for service API keys and Casdoor secret placeholders
+Note: this script only seeds Consul/Vault. It does not perform ordered runtime
+bootstrap for Temporal namespaces, Redpanda topics, MinIO buckets, or Casdoor OIDC redirect URIs.
 
 ## Observability Stack
 
@@ -150,6 +165,7 @@ This seeds:
 ### Prerequisites
 
 - Docker + Docker Compose
+- Terraform 1.7+
 - `buf` CLI
 - Optional local workflows:
   - `uv` (Python)
@@ -161,13 +177,8 @@ This seeds:
 
 ```bash
 cp .env.example .env
-docker compose up --build --wait
-```
-
-Then seed config/secrets:
-
-```bash
-./infra/bootstrap/seed-consul-vault.sh
+make tf-init
+make tf-apply
 ```
 
 ### Common Make targets
@@ -177,6 +188,9 @@ make help
 make bootstrap
 make generate
 make up
+make tf-init
+make tf-plan
+make tf-apply
 make logs
 make lint
 make test

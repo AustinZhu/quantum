@@ -274,9 +274,10 @@ services:
     entrypoint:
       - /bin/bash
       - -lc
-      - rm -f /opt/airflow/airflow-webserver.pid && exec airflow standalone
+      - (python -c "import psycopg2" >/dev/null 2>&1 || pip install --no-cache-dir psycopg2-binary) && rm -f /opt/airflow/airflow-webserver.pid && exec airflow standalone
     environment:
       AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://${AIRFLOW_DB_USER:-airflow}:${AIRFLOW_DB_PASSWORD:-airflow}@${AIRFLOW_DB_HOST:-timescaledb}:${AIRFLOW_DB_PORT:-5432}/${AIRFLOW_DB_NAME:-airflow}?sslmode=${AIRFLOW_DB_SSLMODE:-disable}
       PYTHONPATH: /opt/airflow/vendor
       AIRFLOW_OIDC_CLIENT_ID: ${AIRFLOW_OIDC_CLIENT_ID:-}
       AIRFLOW_OIDC_CLIENT_SECRET: ${AIRFLOW_OIDC_CLIENT_SECRET:-}
@@ -416,28 +417,12 @@ services:
         temporal-sql-tool --plugin postgres12 --ep timescaledb -p 5432 --db temporal_visibility --user ${POSTGRES_USER:-quantum} --pw ${POSTGRES_PASSWORD:-quantum} setup-schema -v 0.0 || true
         temporal-sql-tool --plugin postgres12 --ep timescaledb -p 5432 --db temporal_visibility --user ${POSTGRES_USER:-quantum} --pw ${POSTGRES_PASSWORD:-quantum} update-schema -d /etc/temporal/schema/postgresql/v12/visibility/versioned
         touch /tmp/temporal-schema-ready
-        for i in $(seq 1 60); do
-          if temporal operator cluster health --address temporal:7233 >/dev/null 2>&1; then
-            break
-          fi
-          sleep 2
-        done
-        temporal operator cluster health --address temporal:7233 >/dev/null
-        for ns in default algorand datafeed doordash; do
-          if temporal operator namespace describe --address temporal:7233 --namespace "$$ns" >/dev/null 2>&1; then
-            echo "Temporal namespace exists: $$ns"
-          else
-            echo "Creating Temporal namespace: $$ns"
-            temporal operator namespace create --address temporal:7233 --namespace "$$ns" --description "$$ns namespace" --retention 72h
-          fi
-        done
-        touch /tmp/temporal-namespaces-ready
         tail -f /dev/null
     healthcheck:
       test:
         [
           "CMD-SHELL",
-          "if temporal operator cluster health --address temporal:7233 >/dev/null 2>&1; then [ -f /tmp/temporal-namespaces-ready ]; else [ -f /tmp/temporal-schema-ready ]; fi",
+          "[ -f /tmp/temporal-schema-ready ]",
         ]
       interval: 2s
       timeout: 2s

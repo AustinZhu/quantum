@@ -1712,67 +1712,6 @@
         }
       }
     },
-    "/quant.datafeed.v1.DatafeedService/ScanSymbols": {
-      "post": {
-        "tags": [
-          "Scanner",
-          "Datafeed",
-          "DatafeedService"
-        ],
-        "summary": "Scan Symbols",
-        "description": "Scans symbols using scanner filter/sort schema.",
-        "operationId": "DatafeedService_ScanSymbols",
-        "parameters": [
-          {
-            "name": "Connect-Protocol-Version",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "$ref": "#/components/schemas/connect-protocol-version"
-            }
-          },
-          {
-            "name": "Connect-Timeout-Ms",
-            "in": "header",
-            "schema": {
-              "$ref": "#/components/schemas/connect-timeout-header"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/quant.datafeed.v1.ScanSymbolsRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "default": {
-            "description": "Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/connect.error"
-                }
-              }
-            }
-          },
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/quant.datafeed.v1.ScanSymbolsResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/quant.datafeed.v1.DatafeedService/SearchSymbols": {
       "post": {
         "tags": [
@@ -1835,6 +1774,67 @@
       }
     },
     "/quant.datafeed.v1.DatafeedService/StreamBars": {},
+    "/quant.datafeed.v1.ScannerService/ScanSymbols": {
+      "post": {
+        "tags": [
+          "Scanner",
+          "Datafeed",
+          "ScannerService"
+        ],
+        "summary": "Scan Symbols",
+        "description": "Scans symbols using scanner filter/sort schema.",
+        "operationId": "ScannerService_ScanSymbols",
+        "parameters": [
+          {
+            "name": "Connect-Protocol-Version",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/connect-protocol-version"
+            }
+          },
+          {
+            "name": "Connect-Timeout-Ms",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/connect-timeout-header"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/quant.datafeed.v1.ScanSymbolsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/connect.error"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/quant.datafeed.v1.ScanSymbolsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/quant.doordash.v1.OrderService/GetOrder": {
       "post": {
         "tags": [
@@ -7022,6 +7022,9 @@
     },
     {
       "name": "DatafeedService"
+    },
+    {
+      "name": "ScannerService"
     },
     {
       "name": "OrderService"
