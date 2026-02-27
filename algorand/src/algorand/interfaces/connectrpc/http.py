@@ -3,9 +3,11 @@
 from __future__ import annotations
 
 import time
+from pathlib import Path
 
 from fastapi import Body, FastAPI, Request
-from fastapi.responses import JSONResponse, PlainTextResponse
+from fastapi.responses import FileResponse, JSONResponse, PlainTextResponse
+from scalar_fastapi import get_scalar_api_reference
 
 from algorand.app.container import AppContainer
 from algorand.interfaces.connectrpc.app import build_registry
@@ -15,6 +17,7 @@ def build_http_app(container: AppContainer) -> FastAPI:
     app = FastAPI(title="algorand")
     services = build_registry(container)
     expected_api_key = container.settings.api_key
+    openapi_spec_path = container.settings.openapi_spec_path
 
     @app.middleware("http")
     async def auth_middleware(request: Request, call_next):
@@ -36,6 +39,23 @@ def build_http_app(container: AppContainer) -> FastAPI:
     def metrics() -> PlainTextResponse:
         return PlainTextResponse("# metrics scaffold\n")
 
+    @app.get("/openapi/connect.json", response_model=None)
+    def connect_openapi():
+        spec_path = Path(openapi_spec_path)
+        if not spec_path.exists():
+            return JSONResponse(
+                {"error": "openapi spec not found", "path": str(spec_path)},
+                status_code=404,
+            )
+        return FileResponse(spec_path, media_type="application/json")
+
+    @app.get("/scalar", include_in_schema=False)
+    def scalar_reference():
+        return get_scalar_api_reference(
+            title="Algorand Connect API",
+            openapi_url="/openapi/connect.json",
+        )
+
     @app.get("/rpc/quant.system.v1.SystemService/GetHealth")
     def system_health() -> dict[str, str | int]:
         return {"service": "algorand", "status": "healthy", "ts_ms": int(time.time() * 1000)}
@@ -48,6 +68,10 @@ def build_http_app(container: AppContainer) -> FastAPI:
             "dependencies": [
                 {"name": "postgres", "status": "up", "detail": "tortoise initialized"},
                 {"name": "redis", "status": "up", "detail": "redis reachable"},
+                {"name": "redpanda", "status": "up", "detail": "kafka publisher configured"},
+                {"name": "feast", "status": "up", "detail": "ui deployment available"},
+                {"name": "airflow", "status": "up", "detail": "orchestration api client configured"},
+                {"name": "mlflow", "status": "up", "detail": "ui deployment available"},
                 {"name": "temporal", "status": "up", "detail": "worker queues configured"},
             ],
         }
@@ -106,4 +130,18 @@ def build_http_app(container: AppContainer) -> FastAPI:
     @app.post("/rpc/quant.algorand.v1.MLService/GetModelVersions")
     def get_model_versions(payload: dict = Body(default_factory=dict)) -> dict:
         return services["MLService"].get_model_versions(payload)
+
+    @app.post("/rpc/quant.algorand.v1.MLService/ClusterStocks")
+    def cluster_stocks(payload: dict = Body(default_factory=dict)) -> JSONResponse:
+        result = services["MLService"].cluster_stocks(payload)
+        if "error" in result:
+            return JSONResponse(result, status_code=400)
+        return JSONResponse(result)
+
+    @app.post("/rpc/quant.algorand.v1.MLService/FindSimilarStocks")
+    def find_similar_stocks(payload: dict = Body(default_factory=dict)) -> JSONResponse:
+        result = services["MLService"].find_similar_stocks(payload)
+        if "error" in result:
+            return JSONResponse(result, status_code=400)
+        return JSONResponse(result)
     return app

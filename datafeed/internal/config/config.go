@@ -11,10 +11,13 @@ type Config struct {
 	Schema            string
 	MigrationsPath    string
 	RedisURL          string
+	RedpandaBrokers   string
+	RedpandaTickTopic string
 	TemporalAddress   string
 	TemporalNamespace string
 	TaskQueue         string
 	APIKey            string
+	OpenAPISpecPath   string
 	ConfigFromConsul  bool
 	ConsulHTTPAddr    string
 	ConsulKVPath      string
@@ -33,10 +36,13 @@ func Load() Config {
 		Schema:            getOrDefault("DATAFEED_DB_SCHEMA", "datafeed"),
 		MigrationsPath:    getOrDefault("DATAFEED_MIGRATIONS_PATH", "./migrations"),
 		RedisURL:          getOrDefault("DATAFEED_REDIS_URL", "redis://localhost:6379/0"),
+		RedpandaBrokers:   getOrDefault("DATAFEED_REDPANDA_BROKERS", getOrDefault("REDPANDA_BROKERS", "")),
+		RedpandaTickTopic: getOrDefault("DATAFEED_REDPANDA_TICKS_TOPIC", "datafeed.ticks"),
 		TemporalAddress:   getOrDefault("DATAFEED_TEMPORAL_ADDRESS", "localhost:7233"),
 		TemporalNamespace: getOrDefault("DATAFEED_TEMPORAL_NAMESPACE", "default"),
 		TaskQueue:         getOrDefault("DATAFEED_TASK_QUEUE", "datafeed-ingest"),
 		APIKey:            getOrDefault("DATAFEED_API_KEY", ""),
+		OpenAPISpecPath:   getOrDefault("DATAFEED_OPENAPI_SPEC_PATH", "/app/openapi/quantum.openapi.json"),
 		ConfigFromConsul:  getBoolOrDefault("DATAFEED_CONFIG_FROM_CONSUL", false),
 		ConsulHTTPAddr:    getOrDefault("DATAFEED_CONSUL_HTTP_ADDR", "http://localhost:8500"),
 		ConsulKVPath:      getOrDefault("DATAFEED_CONSUL_KV_PATH", "quantum/datafeed/config"),

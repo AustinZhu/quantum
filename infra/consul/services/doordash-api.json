@@ -1,0 +1,18 @@
+{
+  "service": {
+    "id": "doordash-api",
+    "name": "doordash-api",
+    "address": "doordash-api",
+    "port": 8082,
+    "tags": ["app", "kotlin", "connectrpc", "api"],
+    "checks": [
+      {
+        "id": "doordash-api-http",
+        "name": "doordash-api http",
+        "http": "http://doordash-api:8082/healthz",
+        "interval": "10s",
+        "timeout": "5s"
+      }
+    ]
+  }
+}

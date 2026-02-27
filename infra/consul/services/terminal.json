@@ -1,0 +1,18 @@
+{
+  "service": {
+    "id": "terminal",
+    "name": "terminal",
+    "address": "terminal",
+    "port": 3000,
+    "tags": ["app", "nextjs", "dashboard", "ui"],
+    "checks": [
+      {
+        "id": "terminal-http",
+        "name": "terminal http",
+        "http": "http://terminal:3000/health",
+        "interval": "15s",
+        "timeout": "5s"
+      }
+    ]
+  }
+}

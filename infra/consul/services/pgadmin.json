@@ -1,0 +1,18 @@
+{
+  "service": {
+    "id": "pgadmin",
+    "name": "pgadmin",
+    "address": "pgadmin",
+    "port": 80,
+    "tags": ["infra", "db-admin"],
+    "checks": [
+      {
+        "id": "pgadmin-http",
+        "name": "pgadmin http",
+        "http": "http://pgadmin:80/misc/ping",
+        "interval": "15s",
+        "timeout": "5s"
+      }
+    ]
+  }
+}

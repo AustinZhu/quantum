@@ -5,6 +5,7 @@ const links: Array<{ href: Route; label: string }> = [
   { href: "/dashboard", label: "Dashboard" },
   { href: "/orders", label: "Orders" },
   { href: "/rules", label: "Risk Rules" },
+  { href: "/similarity", label: "Similarity" },
   { href: "/health", label: "Health" },
 ];
 

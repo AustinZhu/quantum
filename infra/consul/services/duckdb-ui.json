@@ -1,0 +1,18 @@
+{
+  "service": {
+    "id": "duckdb-ui",
+    "name": "duckdb-ui",
+    "address": "duckdb-ui",
+    "port": 4213,
+    "tags": ["app", "duckdb", "ui"],
+    "checks": [
+      {
+        "id": "duckdb-ui-http",
+        "name": "duckdb-ui http",
+        "http": "http://duckdb-ui:4213/",
+        "interval": "15s",
+        "timeout": "5s"
+      }
+    ]
+  }
+}

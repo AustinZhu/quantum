@@ -1,0 +1,18 @@
+{
+  "service": {
+    "id": "timescaledb",
+    "name": "timescaledb",
+    "address": "timescaledb",
+    "port": 5432,
+    "tags": ["infra", "database", "timescale"],
+    "checks": [
+      {
+        "id": "timescaledb-tcp",
+        "name": "timescaledb tcp",
+        "tcp": "timescaledb:5432",
+        "interval": "10s",
+        "timeout": "3s"
+      }
+    ]
+  }
+}

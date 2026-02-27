@@ -24,10 +24,14 @@ fun applyExternalConfig(config: AppConfig): AppConfig {
                     dbPassword = payload["db_password"]?.toString() ?: resolved.dbPassword,
                     dbSchema = payload["db_schema"]?.toString() ?: resolved.dbSchema,
                     redisUrl = payload["redis_url"]?.toString() ?: resolved.redisUrl,
+                    redpandaBrokers = payload["redpanda_brokers"]?.toString() ?: resolved.redpandaBrokers,
+                    redpandaOrderTopic = payload["redpanda_order_topic"]?.toString() ?: resolved.redpandaOrderTopic,
+                    redpandaRiskTopic = payload["redpanda_risk_topic"]?.toString() ?: resolved.redpandaRiskTopic,
                     temporalAddress = payload["temporal_address"]?.toString() ?: resolved.temporalAddress,
                     temporalNamespace = payload["temporal_namespace"]?.toString() ?: resolved.temporalNamespace,
                     taskQueue = payload["task_queue"]?.toString() ?: resolved.taskQueue,
                     apiKey = payload["api_key"]?.toString() ?: resolved.apiKey,
+                    openapiSpecPath = payload["openapi_spec_path"]?.toString() ?: resolved.openapiSpecPath,
                 )
             }
         } catch (exc: Exception) {

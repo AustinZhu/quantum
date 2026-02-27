@@ -1,0 +1,18 @@
+{
+  "service": {
+    "id": "prometheus",
+    "name": "prometheus",
+    "address": "prometheus",
+    "port": 9090,
+    "tags": ["infra", "observability", "metrics"],
+    "checks": [
+      {
+        "id": "prometheus-http",
+        "name": "prometheus http",
+        "http": "http://prometheus:9090/-/healthy",
+        "interval": "15s",
+        "timeout": "5s"
+      }
+    ]
+  }
+}

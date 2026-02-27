@@ -29,3 +29,17 @@ plugins:
     out: ../terminal/src/lib/gen
     opt:
       - target=ts
+  - remote: buf.build/community/sudorandom-connect-openapi:v0.25.4
+    out: gen/openapi
+    opt:
+      - format=yaml
+      - path=quantum.openapi.yml
+      - short-service-tags
+      - short-operation-ids
+  - remote: buf.build/community/sudorandom-connect-openapi:v0.25.4
+    out: gen/openapi
+    opt:
+      - format=json
+      - path=quantum.openapi.json
+      - short-service-tags
+      - short-operation-ids

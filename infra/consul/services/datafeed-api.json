@@ -1,0 +1,18 @@
+{
+  "service": {
+    "id": "datafeed-api",
+    "name": "datafeed-api",
+    "address": "datafeed-api",
+    "port": 8081,
+    "tags": ["app", "go", "connectrpc", "api"],
+    "checks": [
+      {
+        "id": "datafeed-api-http",
+        "name": "datafeed-api http",
+        "http": "http://datafeed-api:8081/healthz",
+        "interval": "10s",
+        "timeout": "5s"
+      }
+    ]
+  }
+}

@@ -24,7 +24,7 @@ func main() {
 	}
 	defer repo.Close()
 
-	publisher, err := events.NewPublisher(cfg.RedisURL)
+	publisher, err := events.NewPublisher(cfg.RedisURL, cfg.RedpandaBrokers, cfg.RedpandaTickTopic)
 	if err != nil {
 		log.Fatalf("failed to init redis publisher: %v", err)
 	}

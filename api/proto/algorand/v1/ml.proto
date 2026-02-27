@@ -8,6 +8,8 @@ import "common/v1/common.proto";
 service MLService {
   rpc RunTrainingJob(RunTrainingJobRequest) returns (RunTrainingJobResponse);
   rpc GetModelVersions(GetModelVersionsRequest) returns (GetModelVersionsResponse);
+  rpc ClusterStocks(ClusterStocksRequest) returns (ClusterStocksResponse);
+  rpc FindSimilarStocks(FindSimilarStocksRequest) returns (FindSimilarStocksResponse);
 }
 
 message RunTrainingJobRequest {
@@ -35,4 +37,81 @@ message ModelVersion {
 
 message GetModelVersionsResponse {
   repeated ModelVersion versions = 1;
+}
+
+message DateRange {
+  string start_date = 1;
+  string end_date = 2;
+}
+
+message TimeWindow {
+  oneof mode {
+    int32 window_bars = 1;
+    DateRange date_range = 2;
+  }
+}
+
+message SimilarityWeights {
+  double price_action_weight = 1;
+  double volatility_weight = 2;
+  double performance_weight = 3;
+  double sector_weight = 4;
+}
+
+message ClusterMember {
+  string symbol = 1;
+  string sector = 2;
+  int32 cluster_id = 3;
+  double period_return = 4;
+  double volatility = 5;
+}
+
+message SimilarStock {
+  string symbol = 1;
+  string sector = 2;
+  int32 cluster_id = 3;
+  double score = 4;
+  double price_action_similarity = 5;
+  double volatility_similarity = 6;
+  double performance_similarity = 7;
+  double sector_similarity = 8;
+  double period_return = 9;
+  double volatility = 10;
+}
+
+message ClusterStocksRequest {
+  repeated string symbols = 1;
+  string interval = 2;
+  TimeWindow time_window = 3;
+  int32 min_clusters = 4;
+  int32 max_clusters = 5;
+  SimilarityWeights weights = 6;
+}
+
+message ClusterStocksResponse {
+  repeated ClusterMember members = 1;
+  int32 cluster_count = 2;
+  repeated PlotlyFigureSpec figures = 3;
+  repeated string dropped_symbols = 4;
+}
+
+message FindSimilarStocksRequest {
+  string target_symbol = 1;
+  repeated string symbols = 2;
+  string interval = 3;
+  TimeWindow time_window = 4;
+  int32 top_k = 5;
+  int32 min_clusters = 6;
+  int32 max_clusters = 7;
+  SimilarityWeights weights = 8;
+}
+
+message FindSimilarStocksResponse {
+  string target_symbol = 1;
+  int32 target_cluster_id = 2;
+  repeated ClusterMember members = 3;
+  repeated SimilarStock similar = 4;
+  int32 cluster_count = 5;
+  repeated PlotlyFigureSpec figures = 6;
+  repeated string dropped_symbols = 7;
 }

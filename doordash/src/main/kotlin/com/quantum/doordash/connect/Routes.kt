@@ -1,5 +1,7 @@
 package com.quantum.doordash.connect
 
+import com.scalar.maven.core.ScalarHtmlRenderer
+import com.scalar.maven.core.ScalarProperties
 import com.quantum.doordash.adapters.MockBroker
 import com.quantum.doordash.domain.Order
 import com.quantum.doordash.domain.PlaceOrderRequest
@@ -13,10 +15,12 @@ import io.ktor.server.application.Application
 import io.ktor.server.application.call
 import io.ktor.server.request.receive
 import io.ktor.server.response.respond
+import io.ktor.server.response.respondFile
 import io.ktor.server.response.respondText
 import io.ktor.server.routing.get
 import io.ktor.server.routing.post
 import io.ktor.server.routing.routing
+import java.io.File
 import java.util.UUID
 
 fun Application.installRoutes(
@@ -25,6 +29,7 @@ fun Application.installRoutes(
     riskEngine: RuleEngine,
     publisher: RedisPublisher,
     apiKey: String,
+    openapiSpecPath: String,
 ) {
     fun isAuthorized(serviceApiKey: String?, providedApiKey: String?): Boolean {
         if (serviceApiKey.isNullOrBlank()) {
@@ -44,6 +49,22 @@ fun Application.installRoutes(
 
         get("/metrics") {
             call.respondText("# metrics scaffold\n")
+        }
+
+        get("/openapi/connect.json") {
+            val specFile = File(openapiSpecPath)
+            if (!specFile.exists()) {
+                call.respond(HttpStatusCode.NotFound, mapOf("error" to "openapi spec not found", "path" to openapiSpecPath))
+                return@get
+            }
+            call.respondFile(specFile)
+        }
+
+        get("/scalar") {
+            val properties = ScalarProperties()
+            properties.url = "/openapi/connect.json"
+            properties.pageTitle = "Doordash Connect API"
+            call.respondText(ScalarHtmlRenderer.render(properties), contentType = io.ktor.http.ContentType.Text.Html)
         }
 
         post("/rpc/quant.doordash.v1.OrderService/PlaceOrder") {

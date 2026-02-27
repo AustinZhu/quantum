@@ -25,8 +25,8 @@
       "path": "terminal"
     },
     {
-      "name": "ops",
-      "path": "ops"
+      "name": "infra",
+      "path": "infra"
     }
   ],
   "settings": {

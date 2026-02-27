@@ -10,7 +10,7 @@ services:
       - "5432:5432"
     volumes:
       - pg_data:/var/lib/postgresql/data
-      - ./ops/postgres/init.sql:/docker-entrypoint-initdb.d/001-init.sql:ro
+      - ./infra/postgres/init.sql:/docker-entrypoint-initdb.d/001-init.sql:ro
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-quantum} -d ${POSTGRES_DB:-quantum}"]
       interval: 5s
@@ -28,6 +28,78 @@ services:
       timeout: 3s
       retries: 20
 
+  redpanda:
+    image: redpandadata/redpanda:v25.3.9
+    container_name: redpanda
+    command:
+      - redpanda
+      - start
+      - --mode
+      - dev-container
+      - --smp
+      - "1"
+      - --memory
+      - "1G"
+      - --reserve-memory
+      - "0M"
+      - --node-id
+      - "0"
+      - --check=false
+      - --kafka-addr
+      - PLAINTEXT://0.0.0.0:9092,OUTSIDE://0.0.0.0:19092
+      - --advertise-kafka-addr
+      - PLAINTEXT://redpanda:9092,OUTSIDE://localhost:19092
+      - --pandaproxy-addr
+      - PLAINTEXT://0.0.0.0:8082
+      - --advertise-pandaproxy-addr
+      - PLAINTEXT://redpanda:8082
+      - --rpc-addr
+      - 0.0.0.0:33145
+      - --advertise-rpc-addr
+      - redpanda:33145
+    ports:
+      - "19092:19092"
+      - "9644:9644"
+    volumes:
+      - redpanda_data:/var/lib/redpanda/data
+    healthcheck:
+      test: ["CMD-SHELL", "rpk cluster health --exit-when-healthy >/dev/null 2>&1"]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+      start_period: 20s
+
+  redpanda-console:
+    image: redpandadata/console:latest
+    container_name: redpanda-console
+    environment:
+      KAFKA_BROKERS: redpanda:9092
+      REDPANDA_ADMINAPI_ENABLED: "true"
+      REDPANDA_ADMINAPI_URLS: http://redpanda:9644
+    depends_on:
+      redpanda:
+        condition: service_healthy
+    ports:
+      - "8089:8080"
+    healthcheck:
+      test: ["CMD-SHELL", "if command -v curl >/dev/null 2>&1; then curl -fsS http://127.0.0.1:8080/ >/dev/null; elif command -v wget >/dev/null 2>&1; then wget -q -O- http://127.0.0.1:8080/ >/dev/null; else exit 1; fi"]
+      interval: 15s
+      timeout: 5s
+      retries: 12
+      start_period: 20s
+
+  redpanda-connect:
+    image: redpandadata/connect:latest
+    container_name: redpanda-connect
+    command: ["run", "/etc/redpanda-connect/connect.yaml"]
+    volumes:
+      - ./infra/redpanda-connect/connect.yaml:/etc/redpanda-connect/connect.yaml:ro
+    depends_on:
+      redpanda:
+        condition: service_healthy
+    ports:
+      - "4195:4195"
+
   minio:
     image: minio/minio:latest
     container_name: minio
@@ -41,7 +113,7 @@ services:
     volumes:
       - minio_data:/data
     healthcheck:
-      test: ["CMD", "mc", "ready", "local"]
+      test: ["CMD-SHELL", "if command -v curl >/dev/null 2>&1; then curl -fsS http://127.0.0.1:9000/minio/health/live >/dev/null; elif command -v wget >/dev/null 2>&1; then wget -q -O- http://127.0.0.1:9000/minio/health/live >/dev/null; else exit 1; fi"]
       interval: 10s
       timeout: 5s
       retries: 10
@@ -50,12 +122,13 @@ services:
   consul:
     image: hashicorp/consul:1.22
     container_name: consul
-    command: ["agent", "-dev", "-client=0.0.0.0", "-ui"]
+    command: ["agent", "-dev", "-client=0.0.0.0", "-ui", "-config-dir=/consul/config"]
     ports:
       - "8500:8500"
       - "8600:8600/udp"
     volumes:
       - consul_data:/consul/data
+      - ./infra/consul/services:/consul/config
     healthcheck:
       test: ["CMD", "consul", "info"]
       interval: 10s
@@ -90,10 +163,23 @@ services:
     image: dpage/pgadmin4:9.12
     container_name: pgadmin
     environment:
-      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-admin@quantum.local}
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-admin@quantum.dev}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
       PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION: "True"
       PGADMIN_CONFIG_LOGIN_BANNER: '"Quantum - Development Environment"'
+      PGADMIN_CONFIG_AUTHENTICATION_SOURCES: "['oauth2', 'internal']"
+      PGADMIN_CONFIG_OAUTH2_AUTO_CREATE_USER: "True"
+      PGADMIN_CONFIG_OAUTH2_CONFIG: >-
+        [{
+          'OAUTH2_NAME': 'casdoor',
+          'OAUTH2_DISPLAY_NAME': '${PGADMIN_OIDC_DISPLAY_NAME:-Casdoor}',
+          'OAUTH2_CLIENT_ID': '${PGADMIN_OIDC_CLIENT_ID:-}',
+          'OAUTH2_CLIENT_SECRET': '${PGADMIN_OIDC_CLIENT_SECRET:-}',
+          'OAUTH2_SERVER_METADATA_URL': '${PGADMIN_OIDC_DISCOVERY_URL:-http://casdoor.quantum.orb.local/.well-known/openid-configuration}',
+          'OAUTH2_SCOPE': '${PGADMIN_OIDC_SCOPE:-openid profile email}',
+          'OAUTH2_USERNAME_CLAIM': '${PGADMIN_OIDC_USERNAME_CLAIM:-email}',
+          'OAUTH2_SSL_CERT_VERIFICATION': True
+        }]
     ports:
       - "5050:80"
     volumes:
@@ -109,7 +195,7 @@ services:
       start_period: 20s
 
   redisinsight:
-    image: redis/redisinsight:3.0
+    image: redis/redisinsight:latest
     container_name: redisinsight
     ports:
       - "5540:5540"
@@ -125,17 +211,186 @@ services:
       retries: 12
       start_period: 20s
 
+  feast:
+    image: python:3.12-slim
+    container_name: feast
+    working_dir: /feast
+    command: >
+      /bin/sh -c "
+      pip install --no-cache-dir feast==0.59.0 &&
+      feast ui --host 0.0.0.0 --port 6566
+      "
+    volumes:
+      - ./infra/feast:/feast
+      - feast_data:/feast-data
+    healthcheck:
+      test: ["CMD-SHELL", "if command -v curl >/dev/null 2>&1; then curl -fsS http://127.0.0.1:6566/ >/dev/null; elif command -v wget >/dev/null 2>&1; then wget -q -O- http://127.0.0.1:6566/ >/dev/null; else exit 1; fi"]
+      interval: 15s
+      timeout: 5s
+      retries: 20
+      start_period: 30s
+
+  feast-oauth2-proxy:
+    image: quay.io/oauth2-proxy/oauth2-proxy:latest
+    container_name: feast-oauth2-proxy
+    environment:
+      OAUTH2_PROXY_PROVIDER: oidc
+      OAUTH2_PROXY_OIDC_ISSUER_URL: ${FEAST_OIDC_ISSUER_URL:-http://casdoor.quantum.orb.local}
+      OAUTH2_PROXY_CLIENT_ID: ${FEAST_OIDC_CLIENT_ID:-}
+      OAUTH2_PROXY_CLIENT_SECRET: ${FEAST_OIDC_CLIENT_SECRET:-}
+      OAUTH2_PROXY_COOKIE_SECRET: ${FEAST_OIDC_COOKIE_SECRET:-MDEyMzQ1Njc4OWFiY2RlZg==}
+      OAUTH2_PROXY_SCOPE: ${FEAST_OIDC_SCOPE:-openid profile email}
+      OAUTH2_PROXY_EMAIL_DOMAINS: ${FEAST_OIDC_EMAIL_DOMAINS:-*}
+      OAUTH2_PROXY_UPSTREAMS: http://feast:6566/
+      OAUTH2_PROXY_HTTP_ADDRESS: 0.0.0.0:4180
+      OAUTH2_PROXY_REDIRECT_URL: ${FEAST_OIDC_REDIRECT_URL:-http://feast.quantum.orb.local/oauth2/callback}
+      OAUTH2_PROXY_COOKIE_SECURE: ${FEAST_OIDC_COOKIE_SECURE:-false}
+      OAUTH2_PROXY_COOKIE_SAMESITE: ${FEAST_OIDC_COOKIE_SAMESITE:-lax}
+      OAUTH2_PROXY_SKIP_PROVIDER_BUTTON: "true"
+      OAUTH2_PROXY_REVERSE_PROXY: "true"
+      OAUTH2_PROXY_SET_XAUTHREQUEST: "true"
+      OAUTH2_PROXY_PASS_ACCESS_TOKEN: "true"
+      OAUTH2_PROXY_SET_AUTHORIZATION_HEADER: "true"
+      OAUTH2_PROXY_PASS_AUTHORIZATION_HEADER: "true"
+      OAUTH2_PROXY_PASS_USER_HEADERS: "true"
+      OAUTH2_PROXY_WHITELIST_DOMAINS: ${FEAST_OIDC_WHITELIST_DOMAINS:-.quantum.orb.local,localhost:6567,localhost}
+    ports:
+      - "6567:4180"
+    depends_on:
+      feast:
+        condition: service_healthy
+      casdoor:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "if command -v curl >/dev/null 2>&1; then curl -fsS http://127.0.0.1:4180/ping >/dev/null; elif command -v wget >/dev/null 2>&1; then wget -q -O- http://127.0.0.1:4180/ping >/dev/null; else exit 1; fi"]
+      interval: 15s
+      timeout: 5s
+      retries: 20
+      start_period: 20s
+
+  airflow:
+    image: apache/airflow:slim-2.11.1
+    container_name: airflow
+    entrypoint:
+      - /bin/bash
+      - -lc
+      - rm -f /opt/airflow/airflow-webserver.pid && exec airflow standalone
+    environment:
+      AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+      PYTHONPATH: /opt/airflow/vendor
+      AIRFLOW_OIDC_CLIENT_ID: ${AIRFLOW_OIDC_CLIENT_ID:-}
+      AIRFLOW_OIDC_CLIENT_SECRET: ${AIRFLOW_OIDC_CLIENT_SECRET:-}
+      AIRFLOW_OIDC_DISCOVERY_URL: ${AIRFLOW_OIDC_DISCOVERY_URL:-http://casdoor.quantum.orb.local/.well-known/openid-configuration}
+      AIRFLOW_OIDC_AUTHORIZE_URL: ${AIRFLOW_OIDC_AUTHORIZE_URL:-http://casdoor.quantum.orb.local/login/oauth/authorize}
+      AIRFLOW_OIDC_TOKEN_URL: ${AIRFLOW_OIDC_TOKEN_URL:-http://casdoor.quantum.orb.local/api/login/oauth/access_token}
+      AIRFLOW_OIDC_API_BASE_URL: ${AIRFLOW_OIDC_API_BASE_URL:-http://casdoor.quantum.orb.local/}
+      AIRFLOW_OIDC_USERINFO_ENDPOINT: ${AIRFLOW_OIDC_USERINFO_ENDPOINT:-api/userinfo}
+      AIRFLOW_OIDC_SCOPE: ${AIRFLOW_OIDC_SCOPE:-openid profile email}
+      AIRFLOW_OIDC_DEFAULT_ROLE: ${AIRFLOW_OIDC_DEFAULT_ROLE:-Admin}
+      AIRFLOW_OIDC_ENABLE_PROXY_FIX: ${AIRFLOW_OIDC_ENABLE_PROXY_FIX:-true}
+      _AIRFLOW_WWW_USER_USERNAME: ${AIRFLOW_USERNAME:-airflow}
+      _AIRFLOW_WWW_USER_PASSWORD: ${AIRFLOW_PASSWORD:-airflow}
+    volumes:
+      - ./infra/airflow/dags:/opt/airflow/dags
+      - ./infra/airflow/webserver_config.py:/opt/airflow/webserver_config.py:ro
+      - ./infra/airflow/authlib:/opt/airflow/vendor/authlib:ro
+    ports:
+      - "8087:8080"
+    depends_on:
+      timescaledb:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "if command -v curl >/dev/null 2>&1; then curl -fsS http://127.0.0.1:8080/health >/dev/null; elif command -v wget >/dev/null 2>&1; then wget -q -O- http://127.0.0.1:8080/health >/dev/null; else exit 1; fi"]
+      interval: 15s
+      timeout: 5s
+      retries: 20
+      start_period: 60s
+
+  mlflow:
+    image: ghcr.io/mlflow/mlflow:latest
+    container_name: mlflow
+    command: >
+      /bin/sh -c "
+      pip install --no-cache-dir mlflow-oidc-auth==6.7.1 &&
+      mlflow server
+      --app-name oidc-auth
+      --host 0.0.0.0
+      --port 5000
+      --backend-store-uri sqlite:////mlflow/mlflow.db
+      --allowed-hosts '*'
+      "
+    environment:
+      PYTHONPATH: /opt/mlflow-plugins
+      SECRET_KEY: ${MLFLOW_OIDC_SECRET_KEY:-quantum-mlflow-oidc-dev-secret}
+      OIDC_USERS_DB_URI: sqlite:////mlflow/oidc_auth.db
+      OIDC_DISCOVERY_URL: ${MLFLOW_OIDC_DISCOVERY_URL:-http://casdoor.quantum.orb.local/.well-known/openid-configuration}
+      OIDC_CLIENT_ID: ${MLFLOW_OIDC_CLIENT_ID:-}
+      OIDC_CLIENT_SECRET: ${MLFLOW_OIDC_CLIENT_SECRET:-}
+      OIDC_SCOPE: ${MLFLOW_OIDC_SCOPE:-openid profile email}
+      OIDC_PROVIDER_DISPLAY_NAME: ${MLFLOW_OIDC_PROVIDER_DISPLAY_NAME:-Login with Casdoor}
+      OIDC_GROUPS_ATTRIBUTE: ${MLFLOW_OIDC_GROUPS_ATTRIBUTE:-groups}
+      OIDC_GROUP_DETECTION_PLUGIN: ${MLFLOW_OIDC_GROUP_DETECTION_PLUGIN:-}
+      OIDC_GROUP_NAME: ${MLFLOW_OIDC_GROUP_NAME:-}
+      OIDC_ADMIN_GROUP_NAME: ${MLFLOW_OIDC_ADMIN_GROUP_NAME:-}
+      AUTOMATIC_LOGIN_REDIRECT: ${MLFLOW_OIDC_AUTOMATIC_LOGIN_REDIRECT:-true}
+    volumes:
+      - mlflow_data:/mlflow
+      - ./infra/mlflow:/opt/mlflow-plugins:ro
+    ports:
+      - "5001:5000"
+    depends_on:
+      casdoor:
+        condition: service_healthy
+
+  casdoor:
+    image: casbin/casdoor:2.335.1
+    container_name: casdoor
+    env_file:
+      - .env
+    entrypoint: ["/bin/sh", "/bootstrap.sh"]
+    volumes:
+      - ./infra/casdoor/bootstrap.sh:/bootstrap.sh:ro
+      - casdoor_data:/var/lib/casdoor
+    ports:
+      - "8000:8000"
+    depends_on:
+      timescaledb:
+        condition: service_healthy
+      consul:
+        condition: service_healthy
+      vault:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "if command -v curl >/dev/null 2>&1; then curl -fsS http://127.0.0.1:8000/ >/dev/null; elif command -v wget >/dev/null 2>&1; then wget -q -O- http://127.0.0.1:8000/ >/dev/null; else exit 1; fi"]
+      interval: 15s
+      timeout: 5s
+      retries: 20
+      start_period: 30s
+
   temporal:
     image: temporalio/server:1.29
     container_name: temporal
-    command: ["temporal", "server", "start-dev", "--ip", "0.0.0.0"]
+    environment:
+      DB: postgres12
+      DB_PORT: 5432
+      BIND_ON_IP: 0.0.0.0
+      POSTGRES_SEEDS: timescaledb
+      POSTGRES_USER: ${POSTGRES_USER:-quantum}
+      POSTGRES_PWD: ${POSTGRES_PASSWORD:-quantum}
+      DBNAME: temporal
+      VISIBILITY_DBNAME: temporal_visibility
+      DYNAMIC_CONFIG_FILE_PATH: config/dynamicconfig/docker.yaml
     depends_on:
       timescaledb:
+        condition: service_healthy
+      temporal-admin-tools:
         condition: service_healthy
     ports:
       - "7233:7233"
     healthcheck:
-      test: ["CMD-SHELL", "temporal operator cluster health --address 127.0.0.1:7233 >/dev/null 2>&1"]
+      test: ["CMD", "temporal", "operator", "cluster", "health", "--address", "127.0.0.1:7233"]
       interval: 10s
       timeout: 5s
       retries: 20
@@ -146,16 +401,48 @@ services:
     container_name: temporal-admin-tools
     environment:
       TEMPORAL_ADDRESS: temporal:7233
-    command: ["sleep", "infinity"]
     depends_on:
-      temporal:
+      timescaledb:
         condition: service_healthy
+    entrypoint:
+      - /bin/bash
+      - -c
+      - |
+        set -euo pipefail
+        temporal-sql-tool --plugin postgres12 --ep timescaledb -p 5432 --db temporal --user ${POSTGRES_USER:-quantum} --pw ${POSTGRES_PASSWORD:-quantum} create-database || true
+        temporal-sql-tool --plugin postgres12 --ep timescaledb -p 5432 --db temporal_visibility --user ${POSTGRES_USER:-quantum} --pw ${POSTGRES_PASSWORD:-quantum} create-database || true
+        temporal-sql-tool --plugin postgres12 --ep timescaledb -p 5432 --db temporal --user ${POSTGRES_USER:-quantum} --pw ${POSTGRES_PASSWORD:-quantum} setup-schema -v 0.0 || true
+        temporal-sql-tool --plugin postgres12 --ep timescaledb -p 5432 --db temporal --user ${POSTGRES_USER:-quantum} --pw ${POSTGRES_PASSWORD:-quantum} update-schema -d /etc/temporal/schema/postgresql/v12/temporal/versioned
+        temporal-sql-tool --plugin postgres12 --ep timescaledb -p 5432 --db temporal_visibility --user ${POSTGRES_USER:-quantum} --pw ${POSTGRES_PASSWORD:-quantum} setup-schema -v 0.0 || true
+        temporal-sql-tool --plugin postgres12 --ep timescaledb -p 5432 --db temporal_visibility --user ${POSTGRES_USER:-quantum} --pw ${POSTGRES_PASSWORD:-quantum} update-schema -d /etc/temporal/schema/postgresql/v12/visibility/versioned
+        touch /tmp/temporal-schema-ready
+        for i in $(seq 1 60); do
+          if temporal operator cluster health --address temporal:7233 >/dev/null 2>&1; then
+            break
+          fi
+          sleep 2
+        done
+        temporal operator cluster health --address temporal:7233 >/dev/null
+        for ns in default algorand datafeed doordash; do
+          if temporal operator namespace describe --address temporal:7233 --namespace "$$ns" >/dev/null 2>&1; then
+            echo "Temporal namespace exists: $$ns"
+          else
+            echo "Creating Temporal namespace: $$ns"
+            temporal operator namespace create --address temporal:7233 --namespace "$$ns" --description "$$ns namespace" --retention 72h
+          fi
+        done
+        touch /tmp/temporal-namespaces-ready
+        tail -f /dev/null
     healthcheck:
-      test: ["CMD-SHELL", "temporal operator cluster health --address temporal:7233 >/dev/null 2>&1 || tctl cluster health --address temporal:7233 >/dev/null 2>&1"]
-      interval: 20s
-      timeout: 10s
-      retries: 6
-      start_period: 20s
+      test:
+        [
+          "CMD-SHELL",
+          "if temporal operator cluster health --address temporal:7233 >/dev/null 2>&1; then [ -f /tmp/temporal-namespaces-ready ]; else [ -f /tmp/temporal-schema-ready ]; fi",
+        ]
+      interval: 2s
+      timeout: 2s
+      retries: 60
+      start_period: 0s
 
   temporal-ui:
     image: temporalio/ui:latest
@@ -175,73 +462,60 @@ services:
       retries: 12
       start_period: 20s
 
-  otel-collector:
-    image: otel/opentelemetry-collector-contrib:latest
-    container_name: otel
-    command: ["--config=/etc/otel/config.yaml"]
+  alloy:
+    image: grafana/alloy:latest
+    container_name: alloy
+    command:
+      - run
+      - --server.http.listen-addr=0.0.0.0:12345
+      - --storage.path=/var/lib/alloy/data
+      - /etc/alloy/config.alloy
     volumes:
-      - ./ops/otel/collector.yaml:/etc/otel/config.yaml:ro
+      - ./infra/otel/alloy.hcl:/etc/alloy/config.alloy:ro
+      - alloy_data:/var/lib/alloy/data
     ports:
       - "4317:4317"
       - "4318:4318"
-      - "9464:9464"
-      - "13133:13133"
+      - "12345:12345"
     depends_on:
       tempo:
-        condition: service_healthy
+        condition: service_started
       loki:
-        condition: service_healthy
-    healthcheck:
-      test: ["CMD-SHELL", "if command -v curl >/dev/null 2>&1; then curl -fsS http://127.0.0.1:13133/ >/dev/null; elif command -v wget >/dev/null 2>&1; then wget -q -O- http://127.0.0.1:13133/ >/dev/null; else exit 1; fi"]
-      interval: 15s
-      timeout: 5s
-      retries: 12
-      start_period: 20s
+        condition: service_started
 
   tempo:
     image: grafana/tempo:latest
     container_name: tempo
     command: ["-config.file=/etc/tempo.yaml"]
     volumes:
-      - ./ops/tempo/tempo.yaml:/etc/tempo.yaml:ro
-      - tempo_data:/tmp/tempo
+      - ./infra/tempo/tempo.yaml:/etc/tempo.yaml:ro
+      - tempo_data:/var/tempo
     ports:
       - "3200:3200"
-    healthcheck:
-      test: ["CMD-SHELL", "if command -v curl >/dev/null 2>&1; then curl -fsS http://127.0.0.1:3200/ready >/dev/null; elif command -v wget >/dev/null 2>&1; then wget -q -O- http://127.0.0.1:3200/ready >/dev/null; else exit 1; fi"]
-      interval: 15s
-      timeout: 5s
-      retries: 15
-      start_period: 20s
 
   loki:
     image: grafana/loki:latest
     container_name: loki
     command: ["-config.file=/etc/loki/loki.yaml"]
     volumes:
-      - ./ops/loki/loki.yaml:/etc/loki/loki.yaml:ro
+      - ./infra/loki/loki.yaml:/etc/loki/loki.yaml:ro
       - loki_data:/loki
     ports:
       - "3100:3100"
-    healthcheck:
-      test: ["CMD-SHELL", "if command -v curl >/dev/null 2>&1; then curl -fsS http://127.0.0.1:3100/ready >/dev/null; elif command -v wget >/dev/null 2>&1; then wget -q -O- http://127.0.0.1:3100/ready >/dev/null; else exit 1; fi"]
-      interval: 15s
-      timeout: 5s
-      retries: 15
-      start_period: 20s
 
   prometheus:
     image: prom/prometheus:latest
     container_name: prometheus
     command:
       - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--web.enable-remote-write-receiver"
     volumes:
-      - ./ops/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./infra/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
     ports:
       - "9090:9090"
     depends_on:
-      otel-collector:
-        condition: service_healthy
+      alloy:
+        condition: service_started
     healthcheck:
       test: ["CMD-SHELL", "if command -v curl >/dev/null 2>&1; then curl -fsS http://127.0.0.1:9090/-/healthy >/dev/null; elif command -v wget >/dev/null 2>&1; then wget -q -O- http://127.0.0.1:9090/-/healthy >/dev/null; else exit 1; fi"]
       interval: 15s
@@ -255,19 +529,34 @@ services:
     environment:
       GF_SECURITY_ADMIN_USER: admin
       GF_SECURITY_ADMIN_PASSWORD: admin
+      GF_SERVER_ROOT_URL: ${GRAFANA_ROOT_URL:-http://grafana.quantum.orb.local}
+      GF_AUTH_GENERIC_OAUTH_ENABLED: "true"
+      GF_AUTH_GENERIC_OAUTH_NAME: ${GRAFANA_OIDC_PROVIDER_DISPLAY_NAME:-Casdoor}
+      GF_AUTH_GENERIC_OAUTH_ALLOW_SIGN_UP: "true"
+      GF_AUTH_GENERIC_OAUTH_CLIENT_ID: ${GRAFANA_OIDC_CLIENT_ID:-}
+      GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET: ${GRAFANA_OIDC_CLIENT_SECRET:-}
+      GF_AUTH_GENERIC_OAUTH_SCOPES: ${GRAFANA_OIDC_SCOPE:-openid profile email}
+      GF_AUTH_GENERIC_OAUTH_AUTH_URL: ${GRAFANA_OIDC_AUTHORIZE_URL:-http://casdoor.quantum.orb.local/login/oauth/authorize}
+      GF_AUTH_GENERIC_OAUTH_TOKEN_URL: ${GRAFANA_OIDC_TOKEN_URL:-http://casdoor.quantum.orb.local/api/login/oauth/access_token}
+      GF_AUTH_GENERIC_OAUTH_API_URL: ${GRAFANA_OIDC_USERINFO_URL:-http://casdoor.quantum.orb.local/api/userinfo}
+      GF_AUTH_GENERIC_OAUTH_USE_PKCE: "true"
+      GF_AUTH_GENERIC_OAUTH_LOGIN_ATTRIBUTE_PATH: ${GRAFANA_OIDC_LOGIN_ATTRIBUTE_PATH:-preferred_username||email||sub}
+      GF_AUTH_GENERIC_OAUTH_NAME_ATTRIBUTE_PATH: ${GRAFANA_OIDC_NAME_ATTRIBUTE_PATH:-displayName||name||email}
+      GF_AUTH_GENERIC_OAUTH_EMAIL_ATTRIBUTE_PATH: ${GRAFANA_OIDC_EMAIL_ATTRIBUTE_PATH:-email}
+      GF_AUTH_GENERIC_OAUTH_ROLE_ATTRIBUTE_PATH: ${GRAFANA_OIDC_ROLE_ATTRIBUTE_PATH:-contains(groups[*],'admin@example.com')&&'Admin'||'Viewer'}
     volumes:
       - grafana_data:/var/lib/grafana
-      - ./ops/grafana/provisioning:/etc/grafana/provisioning:ro
-      - ./ops/grafana/dashboards:/var/lib/grafana/dashboards:ro
+      - ./infra/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./infra/grafana/dashboards:/var/lib/grafana/dashboards:ro
     ports:
       - "3001:3000"
     depends_on:
       prometheus:
         condition: service_healthy
       loki:
-        condition: service_healthy
+        condition: service_started
       tempo:
-        condition: service_healthy
+        condition: service_started
     healthcheck:
       test: ["CMD-SHELL", "if command -v curl >/dev/null 2>&1; then curl -fsS http://127.0.0.1:3000/api/health >/dev/null; elif command -v wget >/dev/null 2>&1; then wget -q -O- http://127.0.0.1:3000/api/health >/dev/null; else exit 1; fi"]
       interval: 15s
@@ -291,18 +580,26 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
+      redpanda:
+        condition: service_healthy
+      airflow:
+        condition: service_healthy
       consul:
         condition: service_healthy
       vault:
         condition: service_healthy
       temporal:
         condition: service_healthy
-      otel-collector:
-        condition: service_healthy
+      alloy:
+        condition: service_started
     ports:
       - "8080:8080"
+    volumes:
+      - algorand_data:/app/data
+      - ./infra/feast:/app/feast:ro
+      - ./api/gen/openapi:/app/openapi:ro
     healthcheck:
-      test: ["CMD-SHELL", "curl -fsS http://127.0.0.1:8080/healthz >/dev/null"]
+      test: ["CMD-SHELL", "if command -v curl >/dev/null 2>&1; then curl -fsS http://127.0.0.1:8080/healthz >/dev/null; elif command -v wget >/dev/null 2>&1; then wget -q -O- http://127.0.0.1:8080/healthz >/dev/null; else exit 1; fi"]
       interval: 10s
       timeout: 5s
       retries: 15
@@ -315,16 +612,32 @@ services:
     container_name: algorand-worker
     env_file:
       - .env
+    environment:
+      ALG_TEMPORAL_NAMESPACE: algorand
     command: ["algorand", "run-worker"]
     depends_on:
       algorand-api:
         condition: service_healthy
-    healthcheck:
-      test: ["CMD", "python", "-c", "import pathlib,sys;sys.exit(0 if b'run-worker' in pathlib.Path('/proc/1/cmdline').read_bytes() else 1)"]
-      interval: 20s
-      timeout: 5s
-      retries: 6
-      start_period: 20s
+      redpanda:
+        condition: service_healthy
+      temporal-admin-tools:
+        condition: service_healthy
+    volumes:
+      - algorand_data:/app/data
+      - ./infra/feast:/app/feast:ro
+
+  duckdb-ui:
+    image: duckdb/duckdb:1.4.4
+    container_name: duckdb-ui
+    command: ["duckdb", "/data/duckdb/quant.db", "-ui"]
+    network_mode: host
+    volumes:
+      - algorand_data:/data/duckdb
+    depends_on:
+      algorand-api:
+        condition: service_healthy
+    tty: true
+    stdin_open: true
 
   datafeed-api:
     build:
@@ -339,6 +652,8 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
+      redpanda:
+        condition: service_healthy
       consul:
         condition: service_healthy
       vault:
@@ -347,6 +662,14 @@ services:
         condition: service_healthy
     ports:
       - "8081:8081"
+    volumes:
+      - ./api/gen/openapi:/app/openapi:ro
+    healthcheck:
+      test: ["CMD-SHELL", "if command -v curl >/dev/null 2>&1; then curl -fsS http://127.0.0.1:8081/healthz >/dev/null; elif command -v wget >/dev/null 2>&1; then wget -q -O- http://127.0.0.1:8081/healthz >/dev/null; else exit 1; fi"]
+      interval: 10s
+      timeout: 5s
+      retries: 15
+      start_period: 20s
 
   datafeed-worker:
     build:
@@ -355,9 +678,16 @@ services:
     container_name: datafeed-worker
     env_file:
       - .env
+    environment:
+      DATAFEED_TEMPORAL_NAMESPACE: datafeed
     command: ["/app/datafeed-worker"]
     depends_on:
-      - datafeed-api
+      datafeed-api:
+        condition: service_healthy
+      redpanda:
+        condition: service_healthy
+      temporal-admin-tools:
+        condition: service_healthy
 
   doordash-api:
     build:
@@ -366,11 +696,13 @@ services:
     container_name: doordash-api
     env_file:
       - .env
-    command: ["java", "-jar", "/app/doordash.jar"]
+    command: ["/app/bin/doordash"]
     depends_on:
       timescaledb:
         condition: service_healthy
       redis:
+        condition: service_healthy
+      redpanda:
         condition: service_healthy
       consul:
         condition: service_healthy
@@ -380,12 +712,8 @@ services:
         condition: service_healthy
     ports:
       - "8082:8082"
-    healthcheck:
-      test: ["CMD-SHELL", "if command -v curl >/dev/null 2>&1; then curl -fsS http://127.0.0.1:8082/healthz >/dev/null; elif command -v wget >/dev/null 2>&1; then wget -q -O- http://127.0.0.1:8082/healthz >/dev/null; else exit 1; fi"]
-      interval: 10s
-      timeout: 5s
-      retries: 15
-      start_period: 30s
+    volumes:
+      - ./api/gen/openapi:/app/openapi:ro
 
   doordash-worker:
     build:
@@ -394,21 +722,23 @@ services:
     container_name: doordash-worker
     env_file:
       - .env
-    command: ["java", "-jar", "/app/doordash.jar", "worker"]
+    environment:
+      DOORDASH_TEMPORAL_NAMESPACE: doordash
+    command: ["/app/bin/doordash", "worker"]
     depends_on:
       doordash-api:
+        condition: service_started
+      redpanda:
         condition: service_healthy
-    healthcheck:
-      test: ["CMD-SHELL", "tr '\\000' ' ' </proc/1/cmdline | grep -q 'worker'"]
-      interval: 20s
-      timeout: 5s
-      retries: 6
-      start_period: 20s
+      temporal-admin-tools:
+        condition: service_healthy
 
   terminal:
     build:
       context: ./terminal
       dockerfile: Dockerfile
+      ssh:
+        - default
     container_name: terminal
     env_file:
       - .env
@@ -416,9 +746,9 @@ services:
       algorand-api:
         condition: service_healthy
       datafeed-api:
-        condition: service_started
-      doordash-api:
         condition: service_healthy
+      doordash-api:
+        condition: service_started
     ports:
       - "3000:3000"
     healthcheck:
@@ -430,11 +760,17 @@ services:
 
 volumes:
   pg_data:
+  redpanda_data:
   minio_data:
   consul_data:
   vault_data:
   pgadmin_data:
   redisinsight_data:
+  feast_data:
+  mlflow_data:
+  casdoor_data:
+  alloy_data:
   tempo_data:
   loki_data:
   grafana_data:
+  algorand_data:

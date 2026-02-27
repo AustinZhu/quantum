@@ -1,0 +1,18 @@
+{
+  "service": {
+    "id": "temporal",
+    "name": "temporal",
+    "address": "temporal",
+    "port": 7233,
+    "tags": ["infra", "workflow"],
+    "checks": [
+      {
+        "id": "temporal-tcp",
+        "name": "temporal tcp",
+        "tcp": "temporal:7233",
+        "interval": "10s",
+        "timeout": "3s"
+      }
+    ]
+  }
+}

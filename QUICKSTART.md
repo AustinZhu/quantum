@@ -4,7 +4,7 @@
 
 - Docker + Docker Compose
 - `buf` CLI
-- Optional for local non-container workflows: `uv`, Go 1.26.0+, Node 22+, Java 21+
+- Optional for local non-container workflows: `uv`, Go 1.26.0+, Node 22+, Java 25+
 
 ## 1) Configure environment
 
@@ -28,7 +28,7 @@ docker compose up --build --wait
 ## 3.1) Seed Consul and Vault (required for config/secret fetch mode)
 
 ```bash
-./ops/bootstrap/seed-consul-vault.sh
+./infra/bootstrap/seed-consul-vault.sh
 ```
 
 ## 4) Open key endpoints
@@ -41,14 +41,26 @@ docker compose up --build --wait
 - Grafana: http://localhost:3001 (admin/admin)
 - Prometheus: http://localhost:9090
 - MinIO: http://localhost:9001
+- Redpanda Console: http://localhost:8089
+- Redpanda Connect: http://localhost:4195
+- Algorand Scalar: http://localhost:8080/scalar
+- Datafeed Scalar: http://localhost:8081/scalar
+- Doordash Scalar: http://localhost:8082/scalar
+- Feast UI: http://localhost:6567
+- Airflow: http://localhost:8087
+- MLflow UI: http://localhost:5001
+- DuckDB UI: http://localhost:4213
 - Consul UI: http://localhost:8500
 - Vault: http://localhost:8200
+- Casdoor: http://localhost:8000
 - PgAdmin: http://localhost:5050
 - RedisInsight: http://localhost:5540
+- Generated OpenAPI: `api/gen/openapi/quantum.openapi.yml` and `api/gen/openapi/quantum.openapi.json`
 
 ## Common commands
 
 ```bash
+make help
 make bootstrap
 make generate
 make up
@@ -59,5 +71,8 @@ make down
 ## Notes
 
 - Compose image policy:
-  monitoring/OTEL and MinIO use `latest`; other infra uses explicit tags; Redis uses major-only tag (`redis:8`).
+  monitoring/OTEL (Grafana Alloy, Prometheus, Loki, Tempo, Grafana) and MinIO use `latest`; other infra uses explicit tags; Redis uses major-only tag (`redis:8`).
+- Temporal bootstraps DB/schema via `temporal-admin-tools`; there is no separate `temporal-schema` job container.
+- Casdoor uses the TimescaleDB/PostgreSQL cluster for persistence and Casbin for RBAC policy enforcement.
 - Datafeed uses `rueidis` as the Redis client.
+- First startup may take longer because `feast` and `mlflow` install pinned Python packages in their containers.

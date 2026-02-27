@@ -1,0 +1,18 @@
+{
+  "service": {
+    "id": "feast",
+    "name": "feast",
+    "address": "feast",
+    "port": 6566,
+    "tags": ["infra", "mlops", "feature-store"],
+    "checks": [
+      {
+        "id": "feast-tcp",
+        "name": "feast tcp",
+        "tcp": "feast:6566",
+        "interval": "15s",
+        "timeout": "5s"
+      }
+    ]
+  }
+}

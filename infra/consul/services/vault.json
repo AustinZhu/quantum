@@ -1,0 +1,18 @@
+{
+  "service": {
+    "id": "vault",
+    "name": "vault",
+    "address": "vault",
+    "port": 8200,
+    "tags": ["infra", "secrets"],
+    "checks": [
+      {
+        "id": "vault-http",
+        "name": "vault http",
+        "http": "http://vault:8200/v1/sys/health?standbyok=true&sealedcode=503&uninitcode=503",
+        "interval": "15s",
+        "timeout": "5s"
+      }
+    ]
+  }
+}

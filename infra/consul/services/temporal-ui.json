@@ -1,0 +1,18 @@
+{
+  "service": {
+    "id": "temporal-ui",
+    "name": "temporal-ui",
+    "address": "temporal-ui",
+    "port": 8080,
+    "tags": ["infra", "workflow", "ui"],
+    "checks": [
+      {
+        "id": "temporal-ui-http",
+        "name": "temporal-ui http",
+        "http": "http://temporal-ui:8080/",
+        "interval": "15s",
+        "timeout": "5s"
+      }
+    ]
+  }
+}

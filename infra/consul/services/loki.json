@@ -1,0 +1,18 @@
+{
+  "service": {
+    "id": "loki",
+    "name": "loki",
+    "address": "loki",
+    "port": 3100,
+    "tags": ["infra", "observability", "logs"],
+    "checks": [
+      {
+        "id": "loki-http",
+        "name": "loki http",
+        "http": "http://loki:3100/ready",
+        "interval": "15s",
+        "timeout": "5s"
+      }
+    ]
+  }
+}

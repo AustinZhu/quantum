@@ -4,6 +4,7 @@ import com.quantum.doordash.adapters.MockBroker
 import com.quantum.doordash.config.loadConfig
 import com.quantum.doordash.connect.installRoutes
 import com.quantum.doordash.events.RedisPublisher
+import com.quantum.doordash.events.RedpandaPublisher
 import com.quantum.doordash.risk.RuleEngine
 import com.quantum.doordash.storage.OrderRepository
 import com.quantum.doordash.storage.newDsl
@@ -25,7 +26,7 @@ class AppRuntime private constructor(
     fun runApi() {
         embeddedServer(Netty, port = config.httpPort, host = "0.0.0.0") {
             install(ContentNegotiation) { jackson() }
-            installRoutes(repository, broker, ruleEngine, publisher, config.apiKey)
+            installRoutes(repository, broker, ruleEngine, publisher, config.apiKey, config.openapiSpecPath)
         }.start(wait = true)
     }
 
@@ -45,7 +46,12 @@ class AppRuntime private constructor(
             val repository = OrderRepository(dsl)
             val broker = MockBroker()
             val ruleEngine = RuleEngine()
-            val publisher = RedisPublisher(config.redisUrl)
+            val redpandaPublisher = RedpandaPublisher(
+                brokers = config.redpandaBrokers,
+                orderTopic = config.redpandaOrderTopic,
+                riskTopic = config.redpandaRiskTopic,
+            )
+            val publisher = RedisPublisher(config.redisUrl, redpandaPublisher)
             return AppRuntime(repository, broker, ruleEngine, publisher, config)
         }
     }

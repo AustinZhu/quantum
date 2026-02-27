@@ -1,8 +1,13 @@
+# syntax=docker/dockerfile:1.7
+
 FROM node:22-alpine AS deps
 WORKDIR /app
 RUN corepack enable
+RUN apk add --no-cache git openssh-client
 COPY package.json pnpm-lock.yaml ./
-RUN pnpm install --frozen-lockfile
+RUN --mount=type=ssh mkdir -p -m 700 /root/.ssh \
+  && ssh-keyscan github.com >> /root/.ssh/known_hosts \
+  && pnpm install --frozen-lockfile
 
 FROM node:22-alpine AS build
 WORKDIR /app

@@ -2,14 +2,17 @@ package connect
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
+	"os"
 	"strconv"
 	"time"
 
 	"github.com/austin/quantum/datafeed/internal/app"
+	scalargo "github.com/bdpiprava/scalar-go"
 )
 
-func NewMux(service *app.Service, apiKey string) *http.ServeMux {
+func NewMux(service *app.Service, apiKey string, openAPISpecPath string) *http.ServeMux {
 	mux := http.NewServeMux()
 
 	mux.HandleFunc("/healthz", func(w http.ResponseWriter, _ *http.Request) {
@@ -25,6 +28,33 @@ func NewMux(service *app.Service, apiKey string) *http.ServeMux {
 	mux.HandleFunc("/metrics", func(w http.ResponseWriter, _ *http.Request) {
 		w.Header().Set("Content-Type", "text/plain")
 		_, _ = w.Write([]byte("# metrics scaffold\n"))
+	})
+
+	mux.HandleFunc("/openapi/connect.json", func(w http.ResponseWriter, _ *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		file, err := os.Open(openAPISpecPath)
+		if err != nil {
+			http.Error(w, fmt.Sprintf("openapi spec not found at %s", openAPISpecPath), http.StatusNotFound)
+			return
+		}
+		defer file.Close()
+		if _, err := file.WriteTo(w); err != nil {
+			http.Error(w, "failed to stream openapi spec", http.StatusInternalServerError)
+			return
+		}
+	})
+
+	mux.HandleFunc("/scalar", func(w http.ResponseWriter, _ *http.Request) {
+		html, err := scalargo.NewV2(
+			scalargo.WithSpecURL("/openapi/connect.json"),
+			scalargo.WithMetaDataOpts(scalargo.WithTitle("Datafeed Connect API")),
+		)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+		w.Header().Set("Content-Type", "text/html; charset=utf-8")
+		_, _ = w.Write([]byte(html))
 	})
 
 	mux.HandleFunc("/rpc/quant.datafeed.v1.DatafeedService/ReplayTicks", func(w http.ResponseWriter, r *http.Request) {

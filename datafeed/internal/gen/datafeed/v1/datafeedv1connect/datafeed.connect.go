@@ -48,6 +48,41 @@ const (
 	// DatafeedServiceListSocialProcedure is the fully-qualified name of the DatafeedService's
 	// ListSocial RPC.
 	DatafeedServiceListSocialProcedure = "/quant.datafeed.v1.DatafeedService/ListSocial"
+	// DatafeedServiceGetConfigProcedure is the fully-qualified name of the DatafeedService's GetConfig
+	// RPC.
+	DatafeedServiceGetConfigProcedure = "/quant.datafeed.v1.DatafeedService/GetConfig"
+	// DatafeedServiceGetTimeProcedure is the fully-qualified name of the DatafeedService's GetTime RPC.
+	DatafeedServiceGetTimeProcedure = "/quant.datafeed.v1.DatafeedService/GetTime"
+	// DatafeedServiceGetHistoryProcedure is the fully-qualified name of the DatafeedService's
+	// GetHistory RPC.
+	DatafeedServiceGetHistoryProcedure = "/quant.datafeed.v1.DatafeedService/GetHistory"
+	// DatafeedServiceGetQuotesProcedure is the fully-qualified name of the DatafeedService's GetQuotes
+	// RPC.
+	DatafeedServiceGetQuotesProcedure = "/quant.datafeed.v1.DatafeedService/GetQuotes"
+	// DatafeedServiceGetMarksProcedure is the fully-qualified name of the DatafeedService's GetMarks
+	// RPC.
+	DatafeedServiceGetMarksProcedure = "/quant.datafeed.v1.DatafeedService/GetMarks"
+	// DatafeedServiceGetTimescaleMarksProcedure is the fully-qualified name of the DatafeedService's
+	// GetTimescaleMarks RPC.
+	DatafeedServiceGetTimescaleMarksProcedure = "/quant.datafeed.v1.DatafeedService/GetTimescaleMarks"
+	// DatafeedServiceResolveSymbolProcedure is the fully-qualified name of the DatafeedService's
+	// ResolveSymbol RPC.
+	DatafeedServiceResolveSymbolProcedure = "/quant.datafeed.v1.DatafeedService/ResolveSymbol"
+	// DatafeedServiceGetSymbolGroupInfoProcedure is the fully-qualified name of the DatafeedService's
+	// GetSymbolGroupInfo RPC.
+	DatafeedServiceGetSymbolGroupInfoProcedure = "/quant.datafeed.v1.DatafeedService/GetSymbolGroupInfo"
+	// DatafeedServiceSearchSymbolsProcedure is the fully-qualified name of the DatafeedService's
+	// SearchSymbols RPC.
+	DatafeedServiceSearchSymbolsProcedure = "/quant.datafeed.v1.DatafeedService/SearchSymbols"
+	// DatafeedServiceStreamBarsProcedure is the fully-qualified name of the DatafeedService's
+	// StreamBars RPC.
+	DatafeedServiceStreamBarsProcedure = "/quant.datafeed.v1.DatafeedService/StreamBars"
+	// DatafeedServiceScanSymbolsProcedure is the fully-qualified name of the DatafeedService's
+	// ScanSymbols RPC.
+	DatafeedServiceScanSymbolsProcedure = "/quant.datafeed.v1.DatafeedService/ScanSymbols"
+	// DatafeedServiceListSymbolsProcedure is the fully-qualified name of the DatafeedService's
+	// ListSymbols RPC.
+	DatafeedServiceListSymbolsProcedure = "/quant.datafeed.v1.DatafeedService/ListSymbols"
 )
 
 // DatafeedServiceClient is a client for the quant.datafeed.v1.DatafeedService service.
@@ -57,6 +92,18 @@ type DatafeedServiceClient interface {
 	QueryBars(context.Context, *connect.Request[v1.QueryBarsRequest]) (*connect.Response[v1.QueryBarsResponse], error)
 	ListNews(context.Context, *connect.Request[v1.ListNewsRequest]) (*connect.Response[v1.ListNewsResponse], error)
 	ListSocial(context.Context, *connect.Request[v1.ListSocialRequest]) (*connect.Response[v1.ListSocialResponse], error)
+	GetConfig(context.Context, *connect.Request[v1.GetConfigRequest]) (*connect.Response[v1.GetConfigResponse], error)
+	GetTime(context.Context, *connect.Request[v1.GetTimeRequest]) (*connect.Response[v1.GetTimeResponse], error)
+	GetHistory(context.Context, *connect.Request[v1.GetHistoryRequest]) (*connect.Response[v1.GetHistoryResponse], error)
+	GetQuotes(context.Context, *connect.Request[v1.GetQuotesRequest]) (*connect.Response[v1.GetQuotesResponse], error)
+	GetMarks(context.Context, *connect.Request[v1.GetMarksRequest]) (*connect.Response[v1.GetMarksResponse], error)
+	GetTimescaleMarks(context.Context, *connect.Request[v1.GetTimescaleMarksRequest]) (*connect.Response[v1.GetTimescaleMarksResponse], error)
+	ResolveSymbol(context.Context, *connect.Request[v1.ResolveSymbolRequest]) (*connect.Response[v1.ResolveSymbolResponse], error)
+	GetSymbolGroupInfo(context.Context, *connect.Request[v1.GetSymbolGroupInfoRequest]) (*connect.Response[v1.GetSymbolGroupInfoResponse], error)
+	SearchSymbols(context.Context, *connect.Request[v1.SearchSymbolsRequest]) (*connect.Response[v1.SearchSymbolsResponse], error)
+	StreamBars(context.Context, *connect.Request[v1.StreamBarsRequest]) (*connect.ServerStreamForClient[v1.StreamBarsResponse], error)
+	ScanSymbols(context.Context, *connect.Request[v1.ScanSymbolsRequest]) (*connect.Response[v1.ScanSymbolsResponse], error)
+	ListSymbols(context.Context, *connect.Request[v1.ListSymbolsRequest]) (*connect.Response[v1.ListSymbolsResponse], error)
 }
 
 // NewDatafeedServiceClient constructs a client for the quant.datafeed.v1.DatafeedService service.
@@ -100,16 +147,100 @@ func NewDatafeedServiceClient(httpClient connect.HTTPClient, baseURL string, opt
 			connect.WithSchema(datafeedServiceMethods.ByName("ListSocial")),
 			connect.WithClientOptions(opts...),
 		),
+		getConfig: connect.NewClient[v1.GetConfigRequest, v1.GetConfigResponse](
+			httpClient,
+			baseURL+DatafeedServiceGetConfigProcedure,
+			connect.WithSchema(datafeedServiceMethods.ByName("GetConfig")),
+			connect.WithClientOptions(opts...),
+		),
+		getTime: connect.NewClient[v1.GetTimeRequest, v1.GetTimeResponse](
+			httpClient,
+			baseURL+DatafeedServiceGetTimeProcedure,
+			connect.WithSchema(datafeedServiceMethods.ByName("GetTime")),
+			connect.WithClientOptions(opts...),
+		),
+		getHistory: connect.NewClient[v1.GetHistoryRequest, v1.GetHistoryResponse](
+			httpClient,
+			baseURL+DatafeedServiceGetHistoryProcedure,
+			connect.WithSchema(datafeedServiceMethods.ByName("GetHistory")),
+			connect.WithClientOptions(opts...),
+		),
+		getQuotes: connect.NewClient[v1.GetQuotesRequest, v1.GetQuotesResponse](
+			httpClient,
+			baseURL+DatafeedServiceGetQuotesProcedure,
+			connect.WithSchema(datafeedServiceMethods.ByName("GetQuotes")),
+			connect.WithClientOptions(opts...),
+		),
+		getMarks: connect.NewClient[v1.GetMarksRequest, v1.GetMarksResponse](
+			httpClient,
+			baseURL+DatafeedServiceGetMarksProcedure,
+			connect.WithSchema(datafeedServiceMethods.ByName("GetMarks")),
+			connect.WithClientOptions(opts...),
+		),
+		getTimescaleMarks: connect.NewClient[v1.GetTimescaleMarksRequest, v1.GetTimescaleMarksResponse](
+			httpClient,
+			baseURL+DatafeedServiceGetTimescaleMarksProcedure,
+			connect.WithSchema(datafeedServiceMethods.ByName("GetTimescaleMarks")),
+			connect.WithClientOptions(opts...),
+		),
+		resolveSymbol: connect.NewClient[v1.ResolveSymbolRequest, v1.ResolveSymbolResponse](
+			httpClient,
+			baseURL+DatafeedServiceResolveSymbolProcedure,
+			connect.WithSchema(datafeedServiceMethods.ByName("ResolveSymbol")),
+			connect.WithClientOptions(opts...),
+		),
+		getSymbolGroupInfo: connect.NewClient[v1.GetSymbolGroupInfoRequest, v1.GetSymbolGroupInfoResponse](
+			httpClient,
+			baseURL+DatafeedServiceGetSymbolGroupInfoProcedure,
+			connect.WithSchema(datafeedServiceMethods.ByName("GetSymbolGroupInfo")),
+			connect.WithClientOptions(opts...),
+		),
+		searchSymbols: connect.NewClient[v1.SearchSymbolsRequest, v1.SearchSymbolsResponse](
+			httpClient,
+			baseURL+DatafeedServiceSearchSymbolsProcedure,
+			connect.WithSchema(datafeedServiceMethods.ByName("SearchSymbols")),
+			connect.WithClientOptions(opts...),
+		),
+		streamBars: connect.NewClient[v1.StreamBarsRequest, v1.StreamBarsResponse](
+			httpClient,
+			baseURL+DatafeedServiceStreamBarsProcedure,
+			connect.WithSchema(datafeedServiceMethods.ByName("StreamBars")),
+			connect.WithClientOptions(opts...),
+		),
+		scanSymbols: connect.NewClient[v1.ScanSymbolsRequest, v1.ScanSymbolsResponse](
+			httpClient,
+			baseURL+DatafeedServiceScanSymbolsProcedure,
+			connect.WithSchema(datafeedServiceMethods.ByName("ScanSymbols")),
+			connect.WithClientOptions(opts...),
+		),
+		listSymbols: connect.NewClient[v1.ListSymbolsRequest, v1.ListSymbolsResponse](
+			httpClient,
+			baseURL+DatafeedServiceListSymbolsProcedure,
+			connect.WithSchema(datafeedServiceMethods.ByName("ListSymbols")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
 // datafeedServiceClient implements DatafeedServiceClient.
 type datafeedServiceClient struct {
-	ingestTicks *connect.Client[v1.IngestTicksRequest, v1.IngestTicksResponse]
-	replayTicks *connect.Client[v1.ReplayTicksRequest, v1.ReplayTicksResponse]
-	queryBars   *connect.Client[v1.QueryBarsRequest, v1.QueryBarsResponse]
-	listNews    *connect.Client[v1.ListNewsRequest, v1.ListNewsResponse]
-	listSocial  *connect.Client[v1.ListSocialRequest, v1.ListSocialResponse]
+	ingestTicks        *connect.Client[v1.IngestTicksRequest, v1.IngestTicksResponse]
+	replayTicks        *connect.Client[v1.ReplayTicksRequest, v1.ReplayTicksResponse]
+	queryBars          *connect.Client[v1.QueryBarsRequest, v1.QueryBarsResponse]
+	listNews           *connect.Client[v1.ListNewsRequest, v1.ListNewsResponse]
+	listSocial         *connect.Client[v1.ListSocialRequest, v1.ListSocialResponse]
+	getConfig          *connect.Client[v1.GetConfigRequest, v1.GetConfigResponse]
+	getTime            *connect.Client[v1.GetTimeRequest, v1.GetTimeResponse]
+	getHistory         *connect.Client[v1.GetHistoryRequest, v1.GetHistoryResponse]
+	getQuotes          *connect.Client[v1.GetQuotesRequest, v1.GetQuotesResponse]
+	getMarks           *connect.Client[v1.GetMarksRequest, v1.GetMarksResponse]
+	getTimescaleMarks  *connect.Client[v1.GetTimescaleMarksRequest, v1.GetTimescaleMarksResponse]
+	resolveSymbol      *connect.Client[v1.ResolveSymbolRequest, v1.ResolveSymbolResponse]
+	getSymbolGroupInfo *connect.Client[v1.GetSymbolGroupInfoRequest, v1.GetSymbolGroupInfoResponse]
+	searchSymbols      *connect.Client[v1.SearchSymbolsRequest, v1.SearchSymbolsResponse]
+	streamBars         *connect.Client[v1.StreamBarsRequest, v1.StreamBarsResponse]
+	scanSymbols        *connect.Client[v1.ScanSymbolsRequest, v1.ScanSymbolsResponse]
+	listSymbols        *connect.Client[v1.ListSymbolsRequest, v1.ListSymbolsResponse]
 }
 
 // IngestTicks calls quant.datafeed.v1.DatafeedService.IngestTicks.
@@ -137,6 +268,66 @@ func (c *datafeedServiceClient) ListSocial(ctx context.Context, req *connect.Req
 	return c.listSocial.CallUnary(ctx, req)
 }
 
+// GetConfig calls quant.datafeed.v1.DatafeedService.GetConfig.
+func (c *datafeedServiceClient) GetConfig(ctx context.Context, req *connect.Request[v1.GetConfigRequest]) (*connect.Response[v1.GetConfigResponse], error) {
+	return c.getConfig.CallUnary(ctx, req)
+}
+
+// GetTime calls quant.datafeed.v1.DatafeedService.GetTime.
+func (c *datafeedServiceClient) GetTime(ctx context.Context, req *connect.Request[v1.GetTimeRequest]) (*connect.Response[v1.GetTimeResponse], error) {
+	return c.getTime.CallUnary(ctx, req)
+}
+
+// GetHistory calls quant.datafeed.v1.DatafeedService.GetHistory.
+func (c *datafeedServiceClient) GetHistory(ctx context.Context, req *connect.Request[v1.GetHistoryRequest]) (*connect.Response[v1.GetHistoryResponse], error) {
+	return c.getHistory.CallUnary(ctx, req)
+}
+
+// GetQuotes calls quant.datafeed.v1.DatafeedService.GetQuotes.
+func (c *datafeedServiceClient) GetQuotes(ctx context.Context, req *connect.Request[v1.GetQuotesRequest]) (*connect.Response[v1.GetQuotesResponse], error) {
+	return c.getQuotes.CallUnary(ctx, req)
+}
+
+// GetMarks calls quant.datafeed.v1.DatafeedService.GetMarks.
+func (c *datafeedServiceClient) GetMarks(ctx context.Context, req *connect.Request[v1.GetMarksRequest]) (*connect.Response[v1.GetMarksResponse], error) {
+	return c.getMarks.CallUnary(ctx, req)
+}
+
+// GetTimescaleMarks calls quant.datafeed.v1.DatafeedService.GetTimescaleMarks.
+func (c *datafeedServiceClient) GetTimescaleMarks(ctx context.Context, req *connect.Request[v1.GetTimescaleMarksRequest]) (*connect.Response[v1.GetTimescaleMarksResponse], error) {
+	return c.getTimescaleMarks.CallUnary(ctx, req)
+}
+
+// ResolveSymbol calls quant.datafeed.v1.DatafeedService.ResolveSymbol.
+func (c *datafeedServiceClient) ResolveSymbol(ctx context.Context, req *connect.Request[v1.ResolveSymbolRequest]) (*connect.Response[v1.ResolveSymbolResponse], error) {
+	return c.resolveSymbol.CallUnary(ctx, req)
+}
+
+// GetSymbolGroupInfo calls quant.datafeed.v1.DatafeedService.GetSymbolGroupInfo.
+func (c *datafeedServiceClient) GetSymbolGroupInfo(ctx context.Context, req *connect.Request[v1.GetSymbolGroupInfoRequest]) (*connect.Response[v1.GetSymbolGroupInfoResponse], error) {
+	return c.getSymbolGroupInfo.CallUnary(ctx, req)
+}
+
+// SearchSymbols calls quant.datafeed.v1.DatafeedService.SearchSymbols.
+func (c *datafeedServiceClient) SearchSymbols(ctx context.Context, req *connect.Request[v1.SearchSymbolsRequest]) (*connect.Response[v1.SearchSymbolsResponse], error) {
+	return c.searchSymbols.CallUnary(ctx, req)
+}
+
+// StreamBars calls quant.datafeed.v1.DatafeedService.StreamBars.
+func (c *datafeedServiceClient) StreamBars(ctx context.Context, req *connect.Request[v1.StreamBarsRequest]) (*connect.ServerStreamForClient[v1.StreamBarsResponse], error) {
+	return c.streamBars.CallServerStream(ctx, req)
+}
+
+// ScanSymbols calls quant.datafeed.v1.DatafeedService.ScanSymbols.
+func (c *datafeedServiceClient) ScanSymbols(ctx context.Context, req *connect.Request[v1.ScanSymbolsRequest]) (*connect.Response[v1.ScanSymbolsResponse], error) {
+	return c.scanSymbols.CallUnary(ctx, req)
+}
+
+// ListSymbols calls quant.datafeed.v1.DatafeedService.ListSymbols.
+func (c *datafeedServiceClient) ListSymbols(ctx context.Context, req *connect.Request[v1.ListSymbolsRequest]) (*connect.Response[v1.ListSymbolsResponse], error) {
+	return c.listSymbols.CallUnary(ctx, req)
+}
+
 // DatafeedServiceHandler is an implementation of the quant.datafeed.v1.DatafeedService service.
 type DatafeedServiceHandler interface {
 	IngestTicks(context.Context, *connect.Request[v1.IngestTicksRequest]) (*connect.Response[v1.IngestTicksResponse], error)
@@ -144,6 +335,18 @@ type DatafeedServiceHandler interface {
 	QueryBars(context.Context, *connect.Request[v1.QueryBarsRequest]) (*connect.Response[v1.QueryBarsResponse], error)
 	ListNews(context.Context, *connect.Request[v1.ListNewsRequest]) (*connect.Response[v1.ListNewsResponse], error)
 	ListSocial(context.Context, *connect.Request[v1.ListSocialRequest]) (*connect.Response[v1.ListSocialResponse], error)
+	GetConfig(context.Context, *connect.Request[v1.GetConfigRequest]) (*connect.Response[v1.GetConfigResponse], error)
+	GetTime(context.Context, *connect.Request[v1.GetTimeRequest]) (*connect.Response[v1.GetTimeResponse], error)
+	GetHistory(context.Context, *connect.Request[v1.GetHistoryRequest]) (*connect.Response[v1.GetHistoryResponse], error)
+	GetQuotes(context.Context, *connect.Request[v1.GetQuotesRequest]) (*connect.Response[v1.GetQuotesResponse], error)
+	GetMarks(context.Context, *connect.Request[v1.GetMarksRequest]) (*connect.Response[v1.GetMarksResponse], error)
+	GetTimescaleMarks(context.Context, *connect.Request[v1.GetTimescaleMarksRequest]) (*connect.Response[v1.GetTimescaleMarksResponse], error)
+	ResolveSymbol(context.Context, *connect.Request[v1.ResolveSymbolRequest]) (*connect.Response[v1.ResolveSymbolResponse], error)
+	GetSymbolGroupInfo(context.Context, *connect.Request[v1.GetSymbolGroupInfoRequest]) (*connect.Response[v1.GetSymbolGroupInfoResponse], error)
+	SearchSymbols(context.Context, *connect.Request[v1.SearchSymbolsRequest]) (*connect.Response[v1.SearchSymbolsResponse], error)
+	StreamBars(context.Context, *connect.Request[v1.StreamBarsRequest], *connect.ServerStream[v1.StreamBarsResponse]) error
+	ScanSymbols(context.Context, *connect.Request[v1.ScanSymbolsRequest]) (*connect.Response[v1.ScanSymbolsResponse], error)
+	ListSymbols(context.Context, *connect.Request[v1.ListSymbolsRequest]) (*connect.Response[v1.ListSymbolsResponse], error)
 }
 
 // NewDatafeedServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -183,6 +386,78 @@ func NewDatafeedServiceHandler(svc DatafeedServiceHandler, opts ...connect.Handl
 		connect.WithSchema(datafeedServiceMethods.ByName("ListSocial")),
 		connect.WithHandlerOptions(opts...),
 	)
+	datafeedServiceGetConfigHandler := connect.NewUnaryHandler(
+		DatafeedServiceGetConfigProcedure,
+		svc.GetConfig,
+		connect.WithSchema(datafeedServiceMethods.ByName("GetConfig")),
+		connect.WithHandlerOptions(opts...),
+	)
+	datafeedServiceGetTimeHandler := connect.NewUnaryHandler(
+		DatafeedServiceGetTimeProcedure,
+		svc.GetTime,
+		connect.WithSchema(datafeedServiceMethods.ByName("GetTime")),
+		connect.WithHandlerOptions(opts...),
+	)
+	datafeedServiceGetHistoryHandler := connect.NewUnaryHandler(
+		DatafeedServiceGetHistoryProcedure,
+		svc.GetHistory,
+		connect.WithSchema(datafeedServiceMethods.ByName("GetHistory")),
+		connect.WithHandlerOptions(opts...),
+	)
+	datafeedServiceGetQuotesHandler := connect.NewUnaryHandler(
+		DatafeedServiceGetQuotesProcedure,
+		svc.GetQuotes,
+		connect.WithSchema(datafeedServiceMethods.ByName("GetQuotes")),
+		connect.WithHandlerOptions(opts...),
+	)
+	datafeedServiceGetMarksHandler := connect.NewUnaryHandler(
+		DatafeedServiceGetMarksProcedure,
+		svc.GetMarks,
+		connect.WithSchema(datafeedServiceMethods.ByName("GetMarks")),
+		connect.WithHandlerOptions(opts...),
+	)
+	datafeedServiceGetTimescaleMarksHandler := connect.NewUnaryHandler(
+		DatafeedServiceGetTimescaleMarksProcedure,
+		svc.GetTimescaleMarks,
+		connect.WithSchema(datafeedServiceMethods.ByName("GetTimescaleMarks")),
+		connect.WithHandlerOptions(opts...),
+	)
+	datafeedServiceResolveSymbolHandler := connect.NewUnaryHandler(
+		DatafeedServiceResolveSymbolProcedure,
+		svc.ResolveSymbol,
+		connect.WithSchema(datafeedServiceMethods.ByName("ResolveSymbol")),
+		connect.WithHandlerOptions(opts...),
+	)
+	datafeedServiceGetSymbolGroupInfoHandler := connect.NewUnaryHandler(
+		DatafeedServiceGetSymbolGroupInfoProcedure,
+		svc.GetSymbolGroupInfo,
+		connect.WithSchema(datafeedServiceMethods.ByName("GetSymbolGroupInfo")),
+		connect.WithHandlerOptions(opts...),
+	)
+	datafeedServiceSearchSymbolsHandler := connect.NewUnaryHandler(
+		DatafeedServiceSearchSymbolsProcedure,
+		svc.SearchSymbols,
+		connect.WithSchema(datafeedServiceMethods.ByName("SearchSymbols")),
+		connect.WithHandlerOptions(opts...),
+	)
+	datafeedServiceStreamBarsHandler := connect.NewServerStreamHandler(
+		DatafeedServiceStreamBarsProcedure,
+		svc.StreamBars,
+		connect.WithSchema(datafeedServiceMethods.ByName("StreamBars")),
+		connect.WithHandlerOptions(opts...),
+	)
+	datafeedServiceScanSymbolsHandler := connect.NewUnaryHandler(
+		DatafeedServiceScanSymbolsProcedure,
+		svc.ScanSymbols,
+		connect.WithSchema(datafeedServiceMethods.ByName("ScanSymbols")),
+		connect.WithHandlerOptions(opts...),
+	)
+	datafeedServiceListSymbolsHandler := connect.NewUnaryHandler(
+		DatafeedServiceListSymbolsProcedure,
+		svc.ListSymbols,
+		connect.WithSchema(datafeedServiceMethods.ByName("ListSymbols")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/quant.datafeed.v1.DatafeedService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case DatafeedServiceIngestTicksProcedure:
@@ -195,6 +470,30 @@ func NewDatafeedServiceHandler(svc DatafeedServiceHandler, opts ...connect.Handl
 			datafeedServiceListNewsHandler.ServeHTTP(w, r)
 		case DatafeedServiceListSocialProcedure:
 			datafeedServiceListSocialHandler.ServeHTTP(w, r)
+		case DatafeedServiceGetConfigProcedure:
+			datafeedServiceGetConfigHandler.ServeHTTP(w, r)
+		case DatafeedServiceGetTimeProcedure:
+			datafeedServiceGetTimeHandler.ServeHTTP(w, r)
+		case DatafeedServiceGetHistoryProcedure:
+			datafeedServiceGetHistoryHandler.ServeHTTP(w, r)
+		case DatafeedServiceGetQuotesProcedure:
+			datafeedServiceGetQuotesHandler.ServeHTTP(w, r)
+		case DatafeedServiceGetMarksProcedure:
+			datafeedServiceGetMarksHandler.ServeHTTP(w, r)
+		case DatafeedServiceGetTimescaleMarksProcedure:
+			datafeedServiceGetTimescaleMarksHandler.ServeHTTP(w, r)
+		case DatafeedServiceResolveSymbolProcedure:
+			datafeedServiceResolveSymbolHandler.ServeHTTP(w, r)
+		case DatafeedServiceGetSymbolGroupInfoProcedure:
+			datafeedServiceGetSymbolGroupInfoHandler.ServeHTTP(w, r)
+		case DatafeedServiceSearchSymbolsProcedure:
+			datafeedServiceSearchSymbolsHandler.ServeHTTP(w, r)
+		case DatafeedServiceStreamBarsProcedure:
+			datafeedServiceStreamBarsHandler.ServeHTTP(w, r)
+		case DatafeedServiceScanSymbolsProcedure:
+			datafeedServiceScanSymbolsHandler.ServeHTTP(w, r)
+		case DatafeedServiceListSymbolsProcedure:
+			datafeedServiceListSymbolsHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -222,4 +521,52 @@ func (UnimplementedDatafeedServiceHandler) ListNews(context.Context, *connect.Re
 
 func (UnimplementedDatafeedServiceHandler) ListSocial(context.Context, *connect.Request[v1.ListSocialRequest]) (*connect.Response[v1.ListSocialResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("quant.datafeed.v1.DatafeedService.ListSocial is not implemented"))
+}
+
+func (UnimplementedDatafeedServiceHandler) GetConfig(context.Context, *connect.Request[v1.GetConfigRequest]) (*connect.Response[v1.GetConfigResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("quant.datafeed.v1.DatafeedService.GetConfig is not implemented"))
+}
+
+func (UnimplementedDatafeedServiceHandler) GetTime(context.Context, *connect.Request[v1.GetTimeRequest]) (*connect.Response[v1.GetTimeResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("quant.datafeed.v1.DatafeedService.GetTime is not implemented"))
+}
+
+func (UnimplementedDatafeedServiceHandler) GetHistory(context.Context, *connect.Request[v1.GetHistoryRequest]) (*connect.Response[v1.GetHistoryResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("quant.datafeed.v1.DatafeedService.GetHistory is not implemented"))
+}
+
+func (UnimplementedDatafeedServiceHandler) GetQuotes(context.Context, *connect.Request[v1.GetQuotesRequest]) (*connect.Response[v1.GetQuotesResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("quant.datafeed.v1.DatafeedService.GetQuotes is not implemented"))
+}
+
+func (UnimplementedDatafeedServiceHandler) GetMarks(context.Context, *connect.Request[v1.GetMarksRequest]) (*connect.Response[v1.GetMarksResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("quant.datafeed.v1.DatafeedService.GetMarks is not implemented"))
+}
+
+func (UnimplementedDatafeedServiceHandler) GetTimescaleMarks(context.Context, *connect.Request[v1.GetTimescaleMarksRequest]) (*connect.Response[v1.GetTimescaleMarksResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("quant.datafeed.v1.DatafeedService.GetTimescaleMarks is not implemented"))
+}
+
+func (UnimplementedDatafeedServiceHandler) ResolveSymbol(context.Context, *connect.Request[v1.ResolveSymbolRequest]) (*connect.Response[v1.ResolveSymbolResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("quant.datafeed.v1.DatafeedService.ResolveSymbol is not implemented"))
+}
+
+func (UnimplementedDatafeedServiceHandler) GetSymbolGroupInfo(context.Context, *connect.Request[v1.GetSymbolGroupInfoRequest]) (*connect.Response[v1.GetSymbolGroupInfoResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("quant.datafeed.v1.DatafeedService.GetSymbolGroupInfo is not implemented"))
+}
+
+func (UnimplementedDatafeedServiceHandler) SearchSymbols(context.Context, *connect.Request[v1.SearchSymbolsRequest]) (*connect.Response[v1.SearchSymbolsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("quant.datafeed.v1.DatafeedService.SearchSymbols is not implemented"))
+}
+
+func (UnimplementedDatafeedServiceHandler) StreamBars(context.Context, *connect.Request[v1.StreamBarsRequest], *connect.ServerStream[v1.StreamBarsResponse]) error {
+	return connect.NewError(connect.CodeUnimplemented, errors.New("quant.datafeed.v1.DatafeedService.StreamBars is not implemented"))
+}
+
+func (UnimplementedDatafeedServiceHandler) ScanSymbols(context.Context, *connect.Request[v1.ScanSymbolsRequest]) (*connect.Response[v1.ScanSymbolsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("quant.datafeed.v1.DatafeedService.ScanSymbols is not implemented"))
+}
+
+func (UnimplementedDatafeedServiceHandler) ListSymbols(context.Context, *connect.Request[v1.ListSymbolsRequest]) (*connect.Response[v1.ListSymbolsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("quant.datafeed.v1.DatafeedService.ListSymbols is not implemented"))
 }

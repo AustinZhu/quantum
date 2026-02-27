@@ -39,12 +39,19 @@ const (
 	// MLServiceGetModelVersionsProcedure is the fully-qualified name of the MLService's
 	// GetModelVersions RPC.
 	MLServiceGetModelVersionsProcedure = "/quant.algorand.v1.MLService/GetModelVersions"
+	// MLServiceClusterStocksProcedure is the fully-qualified name of the MLService's ClusterStocks RPC.
+	MLServiceClusterStocksProcedure = "/quant.algorand.v1.MLService/ClusterStocks"
+	// MLServiceFindSimilarStocksProcedure is the fully-qualified name of the MLService's
+	// FindSimilarStocks RPC.
+	MLServiceFindSimilarStocksProcedure = "/quant.algorand.v1.MLService/FindSimilarStocks"
 )
 
 // MLServiceClient is a client for the quant.algorand.v1.MLService service.
 type MLServiceClient interface {
 	RunTrainingJob(context.Context, *connect.Request[v1.RunTrainingJobRequest]) (*connect.Response[v1.RunTrainingJobResponse], error)
 	GetModelVersions(context.Context, *connect.Request[v1.GetModelVersionsRequest]) (*connect.Response[v1.GetModelVersionsResponse], error)
+	ClusterStocks(context.Context, *connect.Request[v1.ClusterStocksRequest]) (*connect.Response[v1.ClusterStocksResponse], error)
+	FindSimilarStocks(context.Context, *connect.Request[v1.FindSimilarStocksRequest]) (*connect.Response[v1.FindSimilarStocksResponse], error)
 }
 
 // NewMLServiceClient constructs a client for the quant.algorand.v1.MLService service. By default,
@@ -70,13 +77,27 @@ func NewMLServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...c
 			connect.WithSchema(mLServiceMethods.ByName("GetModelVersions")),
 			connect.WithClientOptions(opts...),
 		),
+		clusterStocks: connect.NewClient[v1.ClusterStocksRequest, v1.ClusterStocksResponse](
+			httpClient,
+			baseURL+MLServiceClusterStocksProcedure,
+			connect.WithSchema(mLServiceMethods.ByName("ClusterStocks")),
+			connect.WithClientOptions(opts...),
+		),
+		findSimilarStocks: connect.NewClient[v1.FindSimilarStocksRequest, v1.FindSimilarStocksResponse](
+			httpClient,
+			baseURL+MLServiceFindSimilarStocksProcedure,
+			connect.WithSchema(mLServiceMethods.ByName("FindSimilarStocks")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
 // mLServiceClient implements MLServiceClient.
 type mLServiceClient struct {
-	runTrainingJob   *connect.Client[v1.RunTrainingJobRequest, v1.RunTrainingJobResponse]
-	getModelVersions *connect.Client[v1.GetModelVersionsRequest, v1.GetModelVersionsResponse]
+	runTrainingJob    *connect.Client[v1.RunTrainingJobRequest, v1.RunTrainingJobResponse]
+	getModelVersions  *connect.Client[v1.GetModelVersionsRequest, v1.GetModelVersionsResponse]
+	clusterStocks     *connect.Client[v1.ClusterStocksRequest, v1.ClusterStocksResponse]
+	findSimilarStocks *connect.Client[v1.FindSimilarStocksRequest, v1.FindSimilarStocksResponse]
 }
 
 // RunTrainingJob calls quant.algorand.v1.MLService.RunTrainingJob.
@@ -89,10 +110,22 @@ func (c *mLServiceClient) GetModelVersions(ctx context.Context, req *connect.Req
 	return c.getModelVersions.CallUnary(ctx, req)
 }
 
+// ClusterStocks calls quant.algorand.v1.MLService.ClusterStocks.
+func (c *mLServiceClient) ClusterStocks(ctx context.Context, req *connect.Request[v1.ClusterStocksRequest]) (*connect.Response[v1.ClusterStocksResponse], error) {
+	return c.clusterStocks.CallUnary(ctx, req)
+}
+
+// FindSimilarStocks calls quant.algorand.v1.MLService.FindSimilarStocks.
+func (c *mLServiceClient) FindSimilarStocks(ctx context.Context, req *connect.Request[v1.FindSimilarStocksRequest]) (*connect.Response[v1.FindSimilarStocksResponse], error) {
+	return c.findSimilarStocks.CallUnary(ctx, req)
+}
+
 // MLServiceHandler is an implementation of the quant.algorand.v1.MLService service.
 type MLServiceHandler interface {
 	RunTrainingJob(context.Context, *connect.Request[v1.RunTrainingJobRequest]) (*connect.Response[v1.RunTrainingJobResponse], error)
 	GetModelVersions(context.Context, *connect.Request[v1.GetModelVersionsRequest]) (*connect.Response[v1.GetModelVersionsResponse], error)
+	ClusterStocks(context.Context, *connect.Request[v1.ClusterStocksRequest]) (*connect.Response[v1.ClusterStocksResponse], error)
+	FindSimilarStocks(context.Context, *connect.Request[v1.FindSimilarStocksRequest]) (*connect.Response[v1.FindSimilarStocksResponse], error)
 }
 
 // NewMLServiceHandler builds an HTTP handler from the service implementation. It returns the path
@@ -114,12 +147,28 @@ func NewMLServiceHandler(svc MLServiceHandler, opts ...connect.HandlerOption) (s
 		connect.WithSchema(mLServiceMethods.ByName("GetModelVersions")),
 		connect.WithHandlerOptions(opts...),
 	)
+	mLServiceClusterStocksHandler := connect.NewUnaryHandler(
+		MLServiceClusterStocksProcedure,
+		svc.ClusterStocks,
+		connect.WithSchema(mLServiceMethods.ByName("ClusterStocks")),
+		connect.WithHandlerOptions(opts...),
+	)
+	mLServiceFindSimilarStocksHandler := connect.NewUnaryHandler(
+		MLServiceFindSimilarStocksProcedure,
+		svc.FindSimilarStocks,
+		connect.WithSchema(mLServiceMethods.ByName("FindSimilarStocks")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/quant.algorand.v1.MLService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case MLServiceRunTrainingJobProcedure:
 			mLServiceRunTrainingJobHandler.ServeHTTP(w, r)
 		case MLServiceGetModelVersionsProcedure:
 			mLServiceGetModelVersionsHandler.ServeHTTP(w, r)
+		case MLServiceClusterStocksProcedure:
+			mLServiceClusterStocksHandler.ServeHTTP(w, r)
+		case MLServiceFindSimilarStocksProcedure:
+			mLServiceFindSimilarStocksHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -135,4 +184,12 @@ func (UnimplementedMLServiceHandler) RunTrainingJob(context.Context, *connect.Re
 
 func (UnimplementedMLServiceHandler) GetModelVersions(context.Context, *connect.Request[v1.GetModelVersionsRequest]) (*connect.Response[v1.GetModelVersionsResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("quant.algorand.v1.MLService.GetModelVersions is not implemented"))
+}
+
+func (UnimplementedMLServiceHandler) ClusterStocks(context.Context, *connect.Request[v1.ClusterStocksRequest]) (*connect.Response[v1.ClusterStocksResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("quant.algorand.v1.MLService.ClusterStocks is not implemented"))
+}
+
+func (UnimplementedMLServiceHandler) FindSimilarStocks(context.Context, *connect.Request[v1.FindSimilarStocksRequest]) (*connect.Response[v1.FindSimilarStocksResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("quant.algorand.v1.MLService.FindSimilarStocks is not implemented"))
 }

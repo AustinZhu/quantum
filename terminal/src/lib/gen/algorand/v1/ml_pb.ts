@@ -4,7 +4,7 @@
 
 import type { GenFile, GenMessage, GenService } from "@bufbuild/protobuf/codegenv2";
 import { fileDesc, messageDesc, serviceDesc } from "@bufbuild/protobuf/codegenv2";
-import type { ModelVersionId, TimeRange } from "../../common/v1/common_pb";
+import type { ModelVersionId, PlotlyFigureSpec, TimeRange } from "../../common/v1/common_pb";
 import { file_common_v1_common } from "../../common/v1/common_pb";
 import type { Message } from "@bufbuild/protobuf";
 
@@ -12,7 +12,7 @@ import type { Message } from "@bufbuild/protobuf";
  * Describes the file algorand/v1/ml.proto.
  */
 export const file_algorand_v1_ml: GenFile = /*@__PURE__*/
-  fileDesc("ChRhbGdvcmFuZC92MS9tbC5wcm90bxIRcXVhbnQuYWxnb3JhbmQudjEi8QEKFVJ1blRyYWluaW5nSm9iUmVxdWVzdBISCgptb2RlbF9uYW1lGAEgASgJEjQKDnRyYWluaW5nX3JhbmdlGAIgASgLMhwucXVhbnQuYWxnb3JhbmQudjEuVGltZVJhbmdlElYKD2h5cGVycGFyYW1ldGVycxgDIAMoCzI9LnF1YW50LmFsZ29yYW5kLnYxLlJ1blRyYWluaW5nSm9iUmVxdWVzdC5IeXBlcnBhcmFtZXRlcnNFbnRyeRo2ChRIeXBlcnBhcmFtZXRlcnNFbnRyeRILCgNrZXkYASABKAkSDQoFdmFsdWUYAiABKAk6AjgBIjgKFlJ1blRyYWluaW5nSm9iUmVzcG9uc2USDgoGam9iX2lkGAEgASgJEg4KBnN0YXR1cxgCIAEoCSItChdHZXRNb2RlbFZlcnNpb25zUmVxdWVzdBISCgptb2RlbF9uYW1lGAEgASgJIvUBCgxNb2RlbFZlcnNpb24SOwoQbW9kZWxfdmVyc2lvbl9pZBgBIAEoCzIhLnF1YW50LmFsZ29yYW5kLnYxLk1vZGVsVmVyc2lvbklkEhIKCm1vZGVsX25hbWUYAiABKAkSDgoGc3RhdHVzGAMgASgJEhUKDXRyYWluZWRfdHNfbXMYBCABKAMSPQoHbWV0cmljcxgFIAMoCzIsLnF1YW50LmFsZ29yYW5kLnYxLk1vZGVsVmVyc2lvbi5NZXRyaWNzRW50cnkaLgoMTWV0cmljc0VudHJ5EgsKA2tleRgBIAEoCRINCgV2YWx1ZRgCIAEoCToCOAEiTQoYR2V0TW9kZWxWZXJzaW9uc1Jlc3BvbnNlEjEKCHZlcnNpb25zGAEgAygLMh8ucXVhbnQuYWxnb3JhbmQudjEuTW9kZWxWZXJzaW9uMt8BCglNTFNlcnZpY2USZQoOUnVuVHJhaW5pbmdKb2ISKC5xdWFudC5hbGdvcmFuZC52MS5SdW5UcmFpbmluZ0pvYlJlcXVlc3QaKS5xdWFudC5hbGdvcmFuZC52MS5SdW5UcmFpbmluZ0pvYlJlc3BvbnNlEmsKEEdldE1vZGVsVmVyc2lvbnMSKi5xdWFudC5hbGdvcmFuZC52MS5HZXRNb2RlbFZlcnNpb25zUmVxdWVzdBorLnF1YW50LmFsZ29yYW5kLnYxLkdldE1vZGVsVmVyc2lvbnNSZXNwb25zZUJIWkZnaXRodWIuY29tL2F1c3Rpbi9xdWFudHVtL2RhdGFmZWVkL2ludGVybmFsL2dlbi9hbGdvcmFuZC92MTthbGdvcmFuZHYxYgZwcm90bzM", [file_common_v1_common]);
+  fileDesc("ChRhbGdvcmFuZC92MS9tbC5wcm90bxIRcXVhbnQuYWxnb3JhbmQudjEi8QEKFVJ1blRyYWluaW5nSm9iUmVxdWVzdBISCgptb2RlbF9uYW1lGAEgASgJEjQKDnRyYWluaW5nX3JhbmdlGAIgASgLMhwucXVhbnQuYWxnb3JhbmQudjEuVGltZVJhbmdlElYKD2h5cGVycGFyYW1ldGVycxgDIAMoCzI9LnF1YW50LmFsZ29yYW5kLnYxLlJ1blRyYWluaW5nSm9iUmVxdWVzdC5IeXBlcnBhcmFtZXRlcnNFbnRyeRo2ChRIeXBlcnBhcmFtZXRlcnNFbnRyeRILCgNrZXkYASABKAkSDQoFdmFsdWUYAiABKAk6AjgBIjgKFlJ1blRyYWluaW5nSm9iUmVzcG9uc2USDgoGam9iX2lkGAEgASgJEg4KBnN0YXR1cxgCIAEoCSItChdHZXRNb2RlbFZlcnNpb25zUmVxdWVzdBISCgptb2RlbF9uYW1lGAEgASgJIvUBCgxNb2RlbFZlcnNpb24SOwoQbW9kZWxfdmVyc2lvbl9pZBgBIAEoCzIhLnF1YW50LmFsZ29yYW5kLnYxLk1vZGVsVmVyc2lvbklkEhIKCm1vZGVsX25hbWUYAiABKAkSDgoGc3RhdHVzGAMgASgJEhUKDXRyYWluZWRfdHNfbXMYBCABKAMSPQoHbWV0cmljcxgFIAMoCzIsLnF1YW50LmFsZ29yYW5kLnYxLk1vZGVsVmVyc2lvbi5NZXRyaWNzRW50cnkaLgoMTWV0cmljc0VudHJ5EgsKA2tleRgBIAEoCRINCgV2YWx1ZRgCIAEoCToCOAEiTQoYR2V0TW9kZWxWZXJzaW9uc1Jlc3BvbnNlEjEKCHZlcnNpb25zGAEgAygLMh8ucXVhbnQuYWxnb3JhbmQudjEuTW9kZWxWZXJzaW9uIjEKCURhdGVSYW5nZRISCgpzdGFydF9kYXRlGAEgASgJEhAKCGVuZF9kYXRlGAIgASgJIl8KClRpbWVXaW5kb3cSFQoLd2luZG93X2JhcnMYASABKAVIABIyCgpkYXRlX3JhbmdlGAIgASgLMhwucXVhbnQuYWxnb3JhbmQudjEuRGF0ZVJhbmdlSABCBgoEbW9kZSJ+ChFTaW1pbGFyaXR5V2VpZ2h0cxIbChNwcmljZV9hY3Rpb25fd2VpZ2h0GAEgASgBEhkKEXZvbGF0aWxpdHlfd2VpZ2h0GAIgASgBEhoKEnBlcmZvcm1hbmNlX3dlaWdodBgDIAEoARIVCg1zZWN0b3Jfd2VpZ2h0GAQgASgBIm4KDUNsdXN0ZXJNZW1iZXISDgoGc3ltYm9sGAEgASgJEg4KBnNlY3RvchgCIAEoCRISCgpjbHVzdGVyX2lkGAMgASgFEhUKDXBlcmlvZF9yZXR1cm4YBCABKAESEgoKdm9sYXRpbGl0eRgFIAEoASL3AQoMU2ltaWxhclN0b2NrEg4KBnN5bWJvbBgBIAEoCRIOCgZzZWN0b3IYAiABKAkSEgoKY2x1c3Rlcl9pZBgDIAEoBRINCgVzY29yZRgEIAEoARIfChdwcmljZV9hY3Rpb25fc2ltaWxhcml0eRgFIAEoARIdChV2b2xhdGlsaXR5X3NpbWlsYXJpdHkYBiABKAESHgoWcGVyZm9ybWFuY2Vfc2ltaWxhcml0eRgHIAEoARIZChFzZWN0b3Jfc2ltaWxhcml0eRgIIAEoARIVCg1wZXJpb2RfcmV0dXJuGAkgASgBEhIKCnZvbGF0aWxpdHkYCiABKAEi0AEKFENsdXN0ZXJTdG9ja3NSZXF1ZXN0Eg8KB3N5bWJvbHMYASADKAkSEAoIaW50ZXJ2YWwYAiABKAkSMgoLdGltZV93aW5kb3cYAyABKAsyHS5xdWFudC5hbGdvcmFuZC52MS5UaW1lV2luZG93EhQKDG1pbl9jbHVzdGVycxgEIAEoBRIUCgxtYXhfY2x1c3RlcnMYBSABKAUSNQoHd2VpZ2h0cxgGIAEoCzIkLnF1YW50LmFsZ29yYW5kLnYxLlNpbWlsYXJpdHlXZWlnaHRzIrABChVDbHVzdGVyU3RvY2tzUmVzcG9uc2USMQoHbWVtYmVycxgBIAMoCzIgLnF1YW50LmFsZ29yYW5kLnYxLkNsdXN0ZXJNZW1iZXISFQoNY2x1c3Rlcl9jb3VudBgCIAEoBRI0CgdmaWd1cmVzGAMgAygLMiMucXVhbnQuYWxnb3JhbmQudjEuUGxvdGx5RmlndXJlU3BlYxIXCg9kcm9wcGVkX3N5bWJvbHMYBCADKAki+gEKGEZpbmRTaW1pbGFyU3RvY2tzUmVxdWVzdBIVCg10YXJnZXRfc3ltYm9sGAEgASgJEg8KB3N5bWJvbHMYAiADKAkSEAoIaW50ZXJ2YWwYAyABKAkSMgoLdGltZV93aW5kb3cYBCABKAsyHS5xdWFudC5hbGdvcmFuZC52MS5UaW1lV2luZG93Eg0KBXRvcF9rGAUgASgFEhQKDG1pbl9jbHVzdGVycxgGIAEoBRIUCgxtYXhfY2x1c3RlcnMYByABKAUSNQoHd2VpZ2h0cxgIIAEoCzIkLnF1YW50LmFsZ29yYW5kLnYxLlNpbWlsYXJpdHlXZWlnaHRzIpgCChlGaW5kU2ltaWxhclN0b2Nrc1Jlc3BvbnNlEhUKDXRhcmdldF9zeW1ib2wYASABKAkSGQoRdGFyZ2V0X2NsdXN0ZXJfaWQYAiABKAUSMQoHbWVtYmVycxgDIAMoCzIgLnF1YW50LmFsZ29yYW5kLnYxLkNsdXN0ZXJNZW1iZXISMAoHc2ltaWxhchgEIAMoCzIfLnF1YW50LmFsZ29yYW5kLnYxLlNpbWlsYXJTdG9jaxIVCg1jbHVzdGVyX2NvdW50GAUgASgFEjQKB2ZpZ3VyZXMYBiADKAsyIy5xdWFudC5hbGdvcmFuZC52MS5QbG90bHlGaWd1cmVTcGVjEhcKD2Ryb3BwZWRfc3ltYm9scxgHIAMoCTKzAwoJTUxTZXJ2aWNlEmUKDlJ1blRyYWluaW5nSm9iEigucXVhbnQuYWxnb3JhbmQudjEuUnVuVHJhaW5pbmdKb2JSZXF1ZXN0GikucXVhbnQuYWxnb3JhbmQudjEuUnVuVHJhaW5pbmdKb2JSZXNwb25zZRJrChBHZXRNb2RlbFZlcnNpb25zEioucXVhbnQuYWxnb3JhbmQudjEuR2V0TW9kZWxWZXJzaW9uc1JlcXVlc3QaKy5xdWFudC5hbGdvcmFuZC52MS5HZXRNb2RlbFZlcnNpb25zUmVzcG9uc2USYgoNQ2x1c3RlclN0b2NrcxInLnF1YW50LmFsZ29yYW5kLnYxLkNsdXN0ZXJTdG9ja3NSZXF1ZXN0GigucXVhbnQuYWxnb3JhbmQudjEuQ2x1c3RlclN0b2Nrc1Jlc3BvbnNlEm4KEUZpbmRTaW1pbGFyU3RvY2tzEisucXVhbnQuYWxnb3JhbmQudjEuRmluZFNpbWlsYXJTdG9ja3NSZXF1ZXN0GiwucXVhbnQuYWxnb3JhbmQudjEuRmluZFNpbWlsYXJTdG9ja3NSZXNwb25zZUJIWkZnaXRodWIuY29tL2F1c3Rpbi9xdWFudHVtL2RhdGFmZWVkL2ludGVybmFsL2dlbi9hbGdvcmFuZC92MTthbGdvcmFuZHYxYgZwcm90bzM", [file_common_v1_common]);
 
 /**
  * @generated from message quant.algorand.v1.RunTrainingJobRequest
@@ -135,6 +135,361 @@ export const GetModelVersionsResponseSchema: GenMessage<GetModelVersionsResponse
   messageDesc(file_algorand_v1_ml, 4);
 
 /**
+ * @generated from message quant.algorand.v1.DateRange
+ */
+export type DateRange = Message<"quant.algorand.v1.DateRange"> & {
+  /**
+   * @generated from field: string start_date = 1;
+   */
+  startDate: string;
+
+  /**
+   * @generated from field: string end_date = 2;
+   */
+  endDate: string;
+};
+
+/**
+ * Describes the message quant.algorand.v1.DateRange.
+ * Use `create(DateRangeSchema)` to create a new message.
+ */
+export const DateRangeSchema: GenMessage<DateRange> = /*@__PURE__*/
+  messageDesc(file_algorand_v1_ml, 5);
+
+/**
+ * @generated from message quant.algorand.v1.TimeWindow
+ */
+export type TimeWindow = Message<"quant.algorand.v1.TimeWindow"> & {
+  /**
+   * @generated from oneof quant.algorand.v1.TimeWindow.mode
+   */
+  mode: {
+    /**
+     * @generated from field: int32 window_bars = 1;
+     */
+    value: number;
+    case: "windowBars";
+  } | {
+    /**
+     * @generated from field: quant.algorand.v1.DateRange date_range = 2;
+     */
+    value: DateRange;
+    case: "dateRange";
+  } | { case: undefined; value?: undefined };
+};
+
+/**
+ * Describes the message quant.algorand.v1.TimeWindow.
+ * Use `create(TimeWindowSchema)` to create a new message.
+ */
+export const TimeWindowSchema: GenMessage<TimeWindow> = /*@__PURE__*/
+  messageDesc(file_algorand_v1_ml, 6);
+
+/**
+ * @generated from message quant.algorand.v1.SimilarityWeights
+ */
+export type SimilarityWeights = Message<"quant.algorand.v1.SimilarityWeights"> & {
+  /**
+   * @generated from field: double price_action_weight = 1;
+   */
+  priceActionWeight: number;
+
+  /**
+   * @generated from field: double volatility_weight = 2;
+   */
+  volatilityWeight: number;
+
+  /**
+   * @generated from field: double performance_weight = 3;
+   */
+  performanceWeight: number;
+
+  /**
+   * @generated from field: double sector_weight = 4;
+   */
+  sectorWeight: number;
+};
+
+/**
+ * Describes the message quant.algorand.v1.SimilarityWeights.
+ * Use `create(SimilarityWeightsSchema)` to create a new message.
+ */
+export const SimilarityWeightsSchema: GenMessage<SimilarityWeights> = /*@__PURE__*/
+  messageDesc(file_algorand_v1_ml, 7);
+
+/**
+ * @generated from message quant.algorand.v1.ClusterMember
+ */
+export type ClusterMember = Message<"quant.algorand.v1.ClusterMember"> & {
+  /**
+   * @generated from field: string symbol = 1;
+   */
+  symbol: string;
+
+  /**
+   * @generated from field: string sector = 2;
+   */
+  sector: string;
+
+  /**
+   * @generated from field: int32 cluster_id = 3;
+   */
+  clusterId: number;
+
+  /**
+   * @generated from field: double period_return = 4;
+   */
+  periodReturn: number;
+
+  /**
+   * @generated from field: double volatility = 5;
+   */
+  volatility: number;
+};
+
+/**
+ * Describes the message quant.algorand.v1.ClusterMember.
+ * Use `create(ClusterMemberSchema)` to create a new message.
+ */
+export const ClusterMemberSchema: GenMessage<ClusterMember> = /*@__PURE__*/
+  messageDesc(file_algorand_v1_ml, 8);
+
+/**
+ * @generated from message quant.algorand.v1.SimilarStock
+ */
+export type SimilarStock = Message<"quant.algorand.v1.SimilarStock"> & {
+  /**
+   * @generated from field: string symbol = 1;
+   */
+  symbol: string;
+
+  /**
+   * @generated from field: string sector = 2;
+   */
+  sector: string;
+
+  /**
+   * @generated from field: int32 cluster_id = 3;
+   */
+  clusterId: number;
+
+  /**
+   * @generated from field: double score = 4;
+   */
+  score: number;
+
+  /**
+   * @generated from field: double price_action_similarity = 5;
+   */
+  priceActionSimilarity: number;
+
+  /**
+   * @generated from field: double volatility_similarity = 6;
+   */
+  volatilitySimilarity: number;
+
+  /**
+   * @generated from field: double performance_similarity = 7;
+   */
+  performanceSimilarity: number;
+
+  /**
+   * @generated from field: double sector_similarity = 8;
+   */
+  sectorSimilarity: number;
+
+  /**
+   * @generated from field: double period_return = 9;
+   */
+  periodReturn: number;
+
+  /**
+   * @generated from field: double volatility = 10;
+   */
+  volatility: number;
+};
+
+/**
+ * Describes the message quant.algorand.v1.SimilarStock.
+ * Use `create(SimilarStockSchema)` to create a new message.
+ */
+export const SimilarStockSchema: GenMessage<SimilarStock> = /*@__PURE__*/
+  messageDesc(file_algorand_v1_ml, 9);
+
+/**
+ * @generated from message quant.algorand.v1.ClusterStocksRequest
+ */
+export type ClusterStocksRequest = Message<"quant.algorand.v1.ClusterStocksRequest"> & {
+  /**
+   * @generated from field: repeated string symbols = 1;
+   */
+  symbols: string[];
+
+  /**
+   * @generated from field: string interval = 2;
+   */
+  interval: string;
+
+  /**
+   * @generated from field: quant.algorand.v1.TimeWindow time_window = 3;
+   */
+  timeWindow?: TimeWindow;
+
+  /**
+   * @generated from field: int32 min_clusters = 4;
+   */
+  minClusters: number;
+
+  /**
+   * @generated from field: int32 max_clusters = 5;
+   */
+  maxClusters: number;
+
+  /**
+   * @generated from field: quant.algorand.v1.SimilarityWeights weights = 6;
+   */
+  weights?: SimilarityWeights;
+};
+
+/**
+ * Describes the message quant.algorand.v1.ClusterStocksRequest.
+ * Use `create(ClusterStocksRequestSchema)` to create a new message.
+ */
+export const ClusterStocksRequestSchema: GenMessage<ClusterStocksRequest> = /*@__PURE__*/
+  messageDesc(file_algorand_v1_ml, 10);
+
+/**
+ * @generated from message quant.algorand.v1.ClusterStocksResponse
+ */
+export type ClusterStocksResponse = Message<"quant.algorand.v1.ClusterStocksResponse"> & {
+  /**
+   * @generated from field: repeated quant.algorand.v1.ClusterMember members = 1;
+   */
+  members: ClusterMember[];
+
+  /**
+   * @generated from field: int32 cluster_count = 2;
+   */
+  clusterCount: number;
+
+  /**
+   * @generated from field: repeated quant.algorand.v1.PlotlyFigureSpec figures = 3;
+   */
+  figures: PlotlyFigureSpec[];
+
+  /**
+   * @generated from field: repeated string dropped_symbols = 4;
+   */
+  droppedSymbols: string[];
+};
+
+/**
+ * Describes the message quant.algorand.v1.ClusterStocksResponse.
+ * Use `create(ClusterStocksResponseSchema)` to create a new message.
+ */
+export const ClusterStocksResponseSchema: GenMessage<ClusterStocksResponse> = /*@__PURE__*/
+  messageDesc(file_algorand_v1_ml, 11);
+
+/**
+ * @generated from message quant.algorand.v1.FindSimilarStocksRequest
+ */
+export type FindSimilarStocksRequest = Message<"quant.algorand.v1.FindSimilarStocksRequest"> & {
+  /**
+   * @generated from field: string target_symbol = 1;
+   */
+  targetSymbol: string;
+
+  /**
+   * @generated from field: repeated string symbols = 2;
+   */
+  symbols: string[];
+
+  /**
+   * @generated from field: string interval = 3;
+   */
+  interval: string;
+
+  /**
+   * @generated from field: quant.algorand.v1.TimeWindow time_window = 4;
+   */
+  timeWindow?: TimeWindow;
+
+  /**
+   * @generated from field: int32 top_k = 5;
+   */
+  topK: number;
+
+  /**
+   * @generated from field: int32 min_clusters = 6;
+   */
+  minClusters: number;
+
+  /**
+   * @generated from field: int32 max_clusters = 7;
+   */
+  maxClusters: number;
+
+  /**
+   * @generated from field: quant.algorand.v1.SimilarityWeights weights = 8;
+   */
+  weights?: SimilarityWeights;
+};
+
+/**
+ * Describes the message quant.algorand.v1.FindSimilarStocksRequest.
+ * Use `create(FindSimilarStocksRequestSchema)` to create a new message.
+ */
+export const FindSimilarStocksRequestSchema: GenMessage<FindSimilarStocksRequest> = /*@__PURE__*/
+  messageDesc(file_algorand_v1_ml, 12);
+
+/**
+ * @generated from message quant.algorand.v1.FindSimilarStocksResponse
+ */
+export type FindSimilarStocksResponse = Message<"quant.algorand.v1.FindSimilarStocksResponse"> & {
+  /**
+   * @generated from field: string target_symbol = 1;
+   */
+  targetSymbol: string;
+
+  /**
+   * @generated from field: int32 target_cluster_id = 2;
+   */
+  targetClusterId: number;
+
+  /**
+   * @generated from field: repeated quant.algorand.v1.ClusterMember members = 3;
+   */
+  members: ClusterMember[];
+
+  /**
+   * @generated from field: repeated quant.algorand.v1.SimilarStock similar = 4;
+   */
+  similar: SimilarStock[];
+
+  /**
+   * @generated from field: int32 cluster_count = 5;
+   */
+  clusterCount: number;
+
+  /**
+   * @generated from field: repeated quant.algorand.v1.PlotlyFigureSpec figures = 6;
+   */
+  figures: PlotlyFigureSpec[];
+
+  /**
+   * @generated from field: repeated string dropped_symbols = 7;
+   */
+  droppedSymbols: string[];
+};
+
+/**
+ * Describes the message quant.algorand.v1.FindSimilarStocksResponse.
+ * Use `create(FindSimilarStocksResponseSchema)` to create a new message.
+ */
+export const FindSimilarStocksResponseSchema: GenMessage<FindSimilarStocksResponse> = /*@__PURE__*/
+  messageDesc(file_algorand_v1_ml, 13);
+
+/**
  * @generated from service quant.algorand.v1.MLService
  */
 export const MLService: GenService<{
@@ -153,6 +508,22 @@ export const MLService: GenService<{
     methodKind: "unary";
     input: typeof GetModelVersionsRequestSchema;
     output: typeof GetModelVersionsResponseSchema;
+  },
+  /**
+   * @generated from rpc quant.algorand.v1.MLService.ClusterStocks
+   */
+  clusterStocks: {
+    methodKind: "unary";
+    input: typeof ClusterStocksRequestSchema;
+    output: typeof ClusterStocksResponseSchema;
+  },
+  /**
+   * @generated from rpc quant.algorand.v1.MLService.FindSimilarStocks
+   */
+  findSimilarStocks: {
+    methodKind: "unary";
+    input: typeof FindSimilarStocksRequestSchema;
+    output: typeof FindSimilarStocksResponseSchema;
   },
 }> = /*@__PURE__*/
   serviceDesc(file_algorand_v1_ml, 0);

@@ -1,0 +1,6 @@
+project: quantum
+registry: /feast-data/registry.db
+provider: local
+online_store:
+  path: /feast-data/online_store.db
+entity_key_serialization_version: 2

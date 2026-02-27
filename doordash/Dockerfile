@@ -1,10 +1,10 @@
-FROM gradle:8.10.2-jdk21 AS builder
+FROM gradle:9.3.1-jdk25 AS builder
 WORKDIR /src
 COPY . .
-RUN gradle --no-daemon clean shadowJar
+RUN gradle --no-daemon clean installDist
 
-FROM eclipse-temurin:21-jre
+FROM eclipse-temurin:25-jre
 WORKDIR /app
-COPY --from=builder /src/build/libs/doordash-all.jar /app/doordash.jar
+COPY --from=builder /src/build/install/doordash /app
 EXPOSE 8082
-CMD ["java", "-jar", "/app/doordash.jar"]
+CMD ["/app/bin/doordash"]

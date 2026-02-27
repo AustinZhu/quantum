@@ -297,6 +297,744 @@ func (x *GetModelVersionsResponse) GetVersions() []*ModelVersion {
 	return nil
 }
 
+type DateRange struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	StartDate     string                 `protobuf:"bytes,1,opt,name=start_date,json=startDate,proto3" json:"start_date,omitempty"`
+	EndDate       string                 `protobuf:"bytes,2,opt,name=end_date,json=endDate,proto3" json:"end_date,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DateRange) Reset() {
+	*x = DateRange{}
+	mi := &file_algorand_v1_ml_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DateRange) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DateRange) ProtoMessage() {}
+
+func (x *DateRange) ProtoReflect() protoreflect.Message {
+	mi := &file_algorand_v1_ml_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DateRange.ProtoReflect.Descriptor instead.
+func (*DateRange) Descriptor() ([]byte, []int) {
+	return file_algorand_v1_ml_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *DateRange) GetStartDate() string {
+	if x != nil {
+		return x.StartDate
+	}
+	return ""
+}
+
+func (x *DateRange) GetEndDate() string {
+	if x != nil {
+		return x.EndDate
+	}
+	return ""
+}
+
+type TimeWindow struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Types that are valid to be assigned to Mode:
+	//
+	//	*TimeWindow_WindowBars
+	//	*TimeWindow_DateRange
+	Mode          isTimeWindow_Mode `protobuf_oneof:"mode"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TimeWindow) Reset() {
+	*x = TimeWindow{}
+	mi := &file_algorand_v1_ml_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TimeWindow) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TimeWindow) ProtoMessage() {}
+
+func (x *TimeWindow) ProtoReflect() protoreflect.Message {
+	mi := &file_algorand_v1_ml_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TimeWindow.ProtoReflect.Descriptor instead.
+func (*TimeWindow) Descriptor() ([]byte, []int) {
+	return file_algorand_v1_ml_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *TimeWindow) GetMode() isTimeWindow_Mode {
+	if x != nil {
+		return x.Mode
+	}
+	return nil
+}
+
+func (x *TimeWindow) GetWindowBars() int32 {
+	if x != nil {
+		if x, ok := x.Mode.(*TimeWindow_WindowBars); ok {
+			return x.WindowBars
+		}
+	}
+	return 0
+}
+
+func (x *TimeWindow) GetDateRange() *DateRange {
+	if x != nil {
+		if x, ok := x.Mode.(*TimeWindow_DateRange); ok {
+			return x.DateRange
+		}
+	}
+	return nil
+}
+
+type isTimeWindow_Mode interface {
+	isTimeWindow_Mode()
+}
+
+type TimeWindow_WindowBars struct {
+	WindowBars int32 `protobuf:"varint,1,opt,name=window_bars,json=windowBars,proto3,oneof"`
+}
+
+type TimeWindow_DateRange struct {
+	DateRange *DateRange `protobuf:"bytes,2,opt,name=date_range,json=dateRange,proto3,oneof"`
+}
+
+func (*TimeWindow_WindowBars) isTimeWindow_Mode() {}
+
+func (*TimeWindow_DateRange) isTimeWindow_Mode() {}
+
+type SimilarityWeights struct {
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	PriceActionWeight float64                `protobuf:"fixed64,1,opt,name=price_action_weight,json=priceActionWeight,proto3" json:"price_action_weight,omitempty"`
+	VolatilityWeight  float64                `protobuf:"fixed64,2,opt,name=volatility_weight,json=volatilityWeight,proto3" json:"volatility_weight,omitempty"`
+	PerformanceWeight float64                `protobuf:"fixed64,3,opt,name=performance_weight,json=performanceWeight,proto3" json:"performance_weight,omitempty"`
+	SectorWeight      float64                `protobuf:"fixed64,4,opt,name=sector_weight,json=sectorWeight,proto3" json:"sector_weight,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *SimilarityWeights) Reset() {
+	*x = SimilarityWeights{}
+	mi := &file_algorand_v1_ml_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SimilarityWeights) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SimilarityWeights) ProtoMessage() {}
+
+func (x *SimilarityWeights) ProtoReflect() protoreflect.Message {
+	mi := &file_algorand_v1_ml_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SimilarityWeights.ProtoReflect.Descriptor instead.
+func (*SimilarityWeights) Descriptor() ([]byte, []int) {
+	return file_algorand_v1_ml_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *SimilarityWeights) GetPriceActionWeight() float64 {
+	if x != nil {
+		return x.PriceActionWeight
+	}
+	return 0
+}
+
+func (x *SimilarityWeights) GetVolatilityWeight() float64 {
+	if x != nil {
+		return x.VolatilityWeight
+	}
+	return 0
+}
+
+func (x *SimilarityWeights) GetPerformanceWeight() float64 {
+	if x != nil {
+		return x.PerformanceWeight
+	}
+	return 0
+}
+
+func (x *SimilarityWeights) GetSectorWeight() float64 {
+	if x != nil {
+		return x.SectorWeight
+	}
+	return 0
+}
+
+type ClusterMember struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Symbol        string                 `protobuf:"bytes,1,opt,name=symbol,proto3" json:"symbol,omitempty"`
+	Sector        string                 `protobuf:"bytes,2,opt,name=sector,proto3" json:"sector,omitempty"`
+	ClusterId     int32                  `protobuf:"varint,3,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	PeriodReturn  float64                `protobuf:"fixed64,4,opt,name=period_return,json=periodReturn,proto3" json:"period_return,omitempty"`
+	Volatility    float64                `protobuf:"fixed64,5,opt,name=volatility,proto3" json:"volatility,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ClusterMember) Reset() {
+	*x = ClusterMember{}
+	mi := &file_algorand_v1_ml_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ClusterMember) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ClusterMember) ProtoMessage() {}
+
+func (x *ClusterMember) ProtoReflect() protoreflect.Message {
+	mi := &file_algorand_v1_ml_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ClusterMember.ProtoReflect.Descriptor instead.
+func (*ClusterMember) Descriptor() ([]byte, []int) {
+	return file_algorand_v1_ml_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *ClusterMember) GetSymbol() string {
+	if x != nil {
+		return x.Symbol
+	}
+	return ""
+}
+
+func (x *ClusterMember) GetSector() string {
+	if x != nil {
+		return x.Sector
+	}
+	return ""
+}
+
+func (x *ClusterMember) GetClusterId() int32 {
+	if x != nil {
+		return x.ClusterId
+	}
+	return 0
+}
+
+func (x *ClusterMember) GetPeriodReturn() float64 {
+	if x != nil {
+		return x.PeriodReturn
+	}
+	return 0
+}
+
+func (x *ClusterMember) GetVolatility() float64 {
+	if x != nil {
+		return x.Volatility
+	}
+	return 0
+}
+
+type SimilarStock struct {
+	state                 protoimpl.MessageState `protogen:"open.v1"`
+	Symbol                string                 `protobuf:"bytes,1,opt,name=symbol,proto3" json:"symbol,omitempty"`
+	Sector                string                 `protobuf:"bytes,2,opt,name=sector,proto3" json:"sector,omitempty"`
+	ClusterId             int32                  `protobuf:"varint,3,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	Score                 float64                `protobuf:"fixed64,4,opt,name=score,proto3" json:"score,omitempty"`
+	PriceActionSimilarity float64                `protobuf:"fixed64,5,opt,name=price_action_similarity,json=priceActionSimilarity,proto3" json:"price_action_similarity,omitempty"`
+	VolatilitySimilarity  float64                `protobuf:"fixed64,6,opt,name=volatility_similarity,json=volatilitySimilarity,proto3" json:"volatility_similarity,omitempty"`
+	PerformanceSimilarity float64                `protobuf:"fixed64,7,opt,name=performance_similarity,json=performanceSimilarity,proto3" json:"performance_similarity,omitempty"`
+	SectorSimilarity      float64                `protobuf:"fixed64,8,opt,name=sector_similarity,json=sectorSimilarity,proto3" json:"sector_similarity,omitempty"`
+	PeriodReturn          float64                `protobuf:"fixed64,9,opt,name=period_return,json=periodReturn,proto3" json:"period_return,omitempty"`
+	Volatility            float64                `protobuf:"fixed64,10,opt,name=volatility,proto3" json:"volatility,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
+func (x *SimilarStock) Reset() {
+	*x = SimilarStock{}
+	mi := &file_algorand_v1_ml_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SimilarStock) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SimilarStock) ProtoMessage() {}
+
+func (x *SimilarStock) ProtoReflect() protoreflect.Message {
+	mi := &file_algorand_v1_ml_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SimilarStock.ProtoReflect.Descriptor instead.
+func (*SimilarStock) Descriptor() ([]byte, []int) {
+	return file_algorand_v1_ml_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *SimilarStock) GetSymbol() string {
+	if x != nil {
+		return x.Symbol
+	}
+	return ""
+}
+
+func (x *SimilarStock) GetSector() string {
+	if x != nil {
+		return x.Sector
+	}
+	return ""
+}
+
+func (x *SimilarStock) GetClusterId() int32 {
+	if x != nil {
+		return x.ClusterId
+	}
+	return 0
+}
+
+func (x *SimilarStock) GetScore() float64 {
+	if x != nil {
+		return x.Score
+	}
+	return 0
+}
+
+func (x *SimilarStock) GetPriceActionSimilarity() float64 {
+	if x != nil {
+		return x.PriceActionSimilarity
+	}
+	return 0
+}
+
+func (x *SimilarStock) GetVolatilitySimilarity() float64 {
+	if x != nil {
+		return x.VolatilitySimilarity
+	}
+	return 0
+}
+
+func (x *SimilarStock) GetPerformanceSimilarity() float64 {
+	if x != nil {
+		return x.PerformanceSimilarity
+	}
+	return 0
+}
+
+func (x *SimilarStock) GetSectorSimilarity() float64 {
+	if x != nil {
+		return x.SectorSimilarity
+	}
+	return 0
+}
+
+func (x *SimilarStock) GetPeriodReturn() float64 {
+	if x != nil {
+		return x.PeriodReturn
+	}
+	return 0
+}
+
+func (x *SimilarStock) GetVolatility() float64 {
+	if x != nil {
+		return x.Volatility
+	}
+	return 0
+}
+
+type ClusterStocksRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Symbols       []string               `protobuf:"bytes,1,rep,name=symbols,proto3" json:"symbols,omitempty"`
+	Interval      string                 `protobuf:"bytes,2,opt,name=interval,proto3" json:"interval,omitempty"`
+	TimeWindow    *TimeWindow            `protobuf:"bytes,3,opt,name=time_window,json=timeWindow,proto3" json:"time_window,omitempty"`
+	MinClusters   int32                  `protobuf:"varint,4,opt,name=min_clusters,json=minClusters,proto3" json:"min_clusters,omitempty"`
+	MaxClusters   int32                  `protobuf:"varint,5,opt,name=max_clusters,json=maxClusters,proto3" json:"max_clusters,omitempty"`
+	Weights       *SimilarityWeights     `protobuf:"bytes,6,opt,name=weights,proto3" json:"weights,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ClusterStocksRequest) Reset() {
+	*x = ClusterStocksRequest{}
+	mi := &file_algorand_v1_ml_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ClusterStocksRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ClusterStocksRequest) ProtoMessage() {}
+
+func (x *ClusterStocksRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_algorand_v1_ml_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ClusterStocksRequest.ProtoReflect.Descriptor instead.
+func (*ClusterStocksRequest) Descriptor() ([]byte, []int) {
+	return file_algorand_v1_ml_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *ClusterStocksRequest) GetSymbols() []string {
+	if x != nil {
+		return x.Symbols
+	}
+	return nil
+}
+
+func (x *ClusterStocksRequest) GetInterval() string {
+	if x != nil {
+		return x.Interval
+	}
+	return ""
+}
+
+func (x *ClusterStocksRequest) GetTimeWindow() *TimeWindow {
+	if x != nil {
+		return x.TimeWindow
+	}
+	return nil
+}
+
+func (x *ClusterStocksRequest) GetMinClusters() int32 {
+	if x != nil {
+		return x.MinClusters
+	}
+	return 0
+}
+
+func (x *ClusterStocksRequest) GetMaxClusters() int32 {
+	if x != nil {
+		return x.MaxClusters
+	}
+	return 0
+}
+
+func (x *ClusterStocksRequest) GetWeights() *SimilarityWeights {
+	if x != nil {
+		return x.Weights
+	}
+	return nil
+}
+
+type ClusterStocksResponse struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	Members        []*ClusterMember       `protobuf:"bytes,1,rep,name=members,proto3" json:"members,omitempty"`
+	ClusterCount   int32                  `protobuf:"varint,2,opt,name=cluster_count,json=clusterCount,proto3" json:"cluster_count,omitempty"`
+	Figures        []*PlotlyFigureSpec    `protobuf:"bytes,3,rep,name=figures,proto3" json:"figures,omitempty"`
+	DroppedSymbols []string               `protobuf:"bytes,4,rep,name=dropped_symbols,json=droppedSymbols,proto3" json:"dropped_symbols,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *ClusterStocksResponse) Reset() {
+	*x = ClusterStocksResponse{}
+	mi := &file_algorand_v1_ml_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ClusterStocksResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ClusterStocksResponse) ProtoMessage() {}
+
+func (x *ClusterStocksResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_algorand_v1_ml_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ClusterStocksResponse.ProtoReflect.Descriptor instead.
+func (*ClusterStocksResponse) Descriptor() ([]byte, []int) {
+	return file_algorand_v1_ml_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *ClusterStocksResponse) GetMembers() []*ClusterMember {
+	if x != nil {
+		return x.Members
+	}
+	return nil
+}
+
+func (x *ClusterStocksResponse) GetClusterCount() int32 {
+	if x != nil {
+		return x.ClusterCount
+	}
+	return 0
+}
+
+func (x *ClusterStocksResponse) GetFigures() []*PlotlyFigureSpec {
+	if x != nil {
+		return x.Figures
+	}
+	return nil
+}
+
+func (x *ClusterStocksResponse) GetDroppedSymbols() []string {
+	if x != nil {
+		return x.DroppedSymbols
+	}
+	return nil
+}
+
+type FindSimilarStocksRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	TargetSymbol  string                 `protobuf:"bytes,1,opt,name=target_symbol,json=targetSymbol,proto3" json:"target_symbol,omitempty"`
+	Symbols       []string               `protobuf:"bytes,2,rep,name=symbols,proto3" json:"symbols,omitempty"`
+	Interval      string                 `protobuf:"bytes,3,opt,name=interval,proto3" json:"interval,omitempty"`
+	TimeWindow    *TimeWindow            `protobuf:"bytes,4,opt,name=time_window,json=timeWindow,proto3" json:"time_window,omitempty"`
+	TopK          int32                  `protobuf:"varint,5,opt,name=top_k,json=topK,proto3" json:"top_k,omitempty"`
+	MinClusters   int32                  `protobuf:"varint,6,opt,name=min_clusters,json=minClusters,proto3" json:"min_clusters,omitempty"`
+	MaxClusters   int32                  `protobuf:"varint,7,opt,name=max_clusters,json=maxClusters,proto3" json:"max_clusters,omitempty"`
+	Weights       *SimilarityWeights     `protobuf:"bytes,8,opt,name=weights,proto3" json:"weights,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *FindSimilarStocksRequest) Reset() {
+	*x = FindSimilarStocksRequest{}
+	mi := &file_algorand_v1_ml_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *FindSimilarStocksRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FindSimilarStocksRequest) ProtoMessage() {}
+
+func (x *FindSimilarStocksRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_algorand_v1_ml_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FindSimilarStocksRequest.ProtoReflect.Descriptor instead.
+func (*FindSimilarStocksRequest) Descriptor() ([]byte, []int) {
+	return file_algorand_v1_ml_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *FindSimilarStocksRequest) GetTargetSymbol() string {
+	if x != nil {
+		return x.TargetSymbol
+	}
+	return ""
+}
+
+func (x *FindSimilarStocksRequest) GetSymbols() []string {
+	if x != nil {
+		return x.Symbols
+	}
+	return nil
+}
+
+func (x *FindSimilarStocksRequest) GetInterval() string {
+	if x != nil {
+		return x.Interval
+	}
+	return ""
+}
+
+func (x *FindSimilarStocksRequest) GetTimeWindow() *TimeWindow {
+	if x != nil {
+		return x.TimeWindow
+	}
+	return nil
+}
+
+func (x *FindSimilarStocksRequest) GetTopK() int32 {
+	if x != nil {
+		return x.TopK
+	}
+	return 0
+}
+
+func (x *FindSimilarStocksRequest) GetMinClusters() int32 {
+	if x != nil {
+		return x.MinClusters
+	}
+	return 0
+}
+
+func (x *FindSimilarStocksRequest) GetMaxClusters() int32 {
+	if x != nil {
+		return x.MaxClusters
+	}
+	return 0
+}
+
+func (x *FindSimilarStocksRequest) GetWeights() *SimilarityWeights {
+	if x != nil {
+		return x.Weights
+	}
+	return nil
+}
+
+type FindSimilarStocksResponse struct {
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	TargetSymbol    string                 `protobuf:"bytes,1,opt,name=target_symbol,json=targetSymbol,proto3" json:"target_symbol,omitempty"`
+	TargetClusterId int32                  `protobuf:"varint,2,opt,name=target_cluster_id,json=targetClusterId,proto3" json:"target_cluster_id,omitempty"`
+	Members         []*ClusterMember       `protobuf:"bytes,3,rep,name=members,proto3" json:"members,omitempty"`
+	Similar         []*SimilarStock        `protobuf:"bytes,4,rep,name=similar,proto3" json:"similar,omitempty"`
+	ClusterCount    int32                  `protobuf:"varint,5,opt,name=cluster_count,json=clusterCount,proto3" json:"cluster_count,omitempty"`
+	Figures         []*PlotlyFigureSpec    `protobuf:"bytes,6,rep,name=figures,proto3" json:"figures,omitempty"`
+	DroppedSymbols  []string               `protobuf:"bytes,7,rep,name=dropped_symbols,json=droppedSymbols,proto3" json:"dropped_symbols,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *FindSimilarStocksResponse) Reset() {
+	*x = FindSimilarStocksResponse{}
+	mi := &file_algorand_v1_ml_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *FindSimilarStocksResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*FindSimilarStocksResponse) ProtoMessage() {}
+
+func (x *FindSimilarStocksResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_algorand_v1_ml_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use FindSimilarStocksResponse.ProtoReflect.Descriptor instead.
+func (*FindSimilarStocksResponse) Descriptor() ([]byte, []int) {
+	return file_algorand_v1_ml_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *FindSimilarStocksResponse) GetTargetSymbol() string {
+	if x != nil {
+		return x.TargetSymbol
+	}
+	return ""
+}
+
+func (x *FindSimilarStocksResponse) GetTargetClusterId() int32 {
+	if x != nil {
+		return x.TargetClusterId
+	}
+	return 0
+}
+
+func (x *FindSimilarStocksResponse) GetMembers() []*ClusterMember {
+	if x != nil {
+		return x.Members
+	}
+	return nil
+}
+
+func (x *FindSimilarStocksResponse) GetSimilar() []*SimilarStock {
+	if x != nil {
+		return x.Similar
+	}
+	return nil
+}
+
+func (x *FindSimilarStocksResponse) GetClusterCount() int32 {
+	if x != nil {
+		return x.ClusterCount
+	}
+	return 0
+}
+
+func (x *FindSimilarStocksResponse) GetFigures() []*PlotlyFigureSpec {
+	if x != nil {
+		return x.Figures
+	}
+	return nil
+}
+
+func (x *FindSimilarStocksResponse) GetDroppedSymbols() []string {
+	if x != nil {
+		return x.DroppedSymbols
+	}
+	return nil
+}
+
 var File_algorand_v1_ml_proto protoreflect.FileDescriptor
 
 const file_algorand_v1_ml_proto_rawDesc = "" +
@@ -327,10 +1065,83 @@ const file_algorand_v1_ml_proto_rawDesc = "" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"W\n" +
 	"\x18GetModelVersionsResponse\x12;\n" +
-	"\bversions\x18\x01 \x03(\v2\x1f.quant.algorand.v1.ModelVersionR\bversions2\xdf\x01\n" +
+	"\bversions\x18\x01 \x03(\v2\x1f.quant.algorand.v1.ModelVersionR\bversions\"E\n" +
+	"\tDateRange\x12\x1d\n" +
+	"\n" +
+	"start_date\x18\x01 \x01(\tR\tstartDate\x12\x19\n" +
+	"\bend_date\x18\x02 \x01(\tR\aendDate\"v\n" +
+	"\n" +
+	"TimeWindow\x12!\n" +
+	"\vwindow_bars\x18\x01 \x01(\x05H\x00R\n" +
+	"windowBars\x12=\n" +
+	"\n" +
+	"date_range\x18\x02 \x01(\v2\x1c.quant.algorand.v1.DateRangeH\x00R\tdateRangeB\x06\n" +
+	"\x04mode\"\xc4\x01\n" +
+	"\x11SimilarityWeights\x12.\n" +
+	"\x13price_action_weight\x18\x01 \x01(\x01R\x11priceActionWeight\x12+\n" +
+	"\x11volatility_weight\x18\x02 \x01(\x01R\x10volatilityWeight\x12-\n" +
+	"\x12performance_weight\x18\x03 \x01(\x01R\x11performanceWeight\x12#\n" +
+	"\rsector_weight\x18\x04 \x01(\x01R\fsectorWeight\"\xa3\x01\n" +
+	"\rClusterMember\x12\x16\n" +
+	"\x06symbol\x18\x01 \x01(\tR\x06symbol\x12\x16\n" +
+	"\x06sector\x18\x02 \x01(\tR\x06sector\x12\x1d\n" +
+	"\n" +
+	"cluster_id\x18\x03 \x01(\x05R\tclusterId\x12#\n" +
+	"\rperiod_return\x18\x04 \x01(\x01R\fperiodReturn\x12\x1e\n" +
+	"\n" +
+	"volatility\x18\x05 \x01(\x01R\n" +
+	"volatility\"\x89\x03\n" +
+	"\fSimilarStock\x12\x16\n" +
+	"\x06symbol\x18\x01 \x01(\tR\x06symbol\x12\x16\n" +
+	"\x06sector\x18\x02 \x01(\tR\x06sector\x12\x1d\n" +
+	"\n" +
+	"cluster_id\x18\x03 \x01(\x05R\tclusterId\x12\x14\n" +
+	"\x05score\x18\x04 \x01(\x01R\x05score\x126\n" +
+	"\x17price_action_similarity\x18\x05 \x01(\x01R\x15priceActionSimilarity\x123\n" +
+	"\x15volatility_similarity\x18\x06 \x01(\x01R\x14volatilitySimilarity\x125\n" +
+	"\x16performance_similarity\x18\a \x01(\x01R\x15performanceSimilarity\x12+\n" +
+	"\x11sector_similarity\x18\b \x01(\x01R\x10sectorSimilarity\x12#\n" +
+	"\rperiod_return\x18\t \x01(\x01R\fperiodReturn\x12\x1e\n" +
+	"\n" +
+	"volatility\x18\n" +
+	" \x01(\x01R\n" +
+	"volatility\"\x92\x02\n" +
+	"\x14ClusterStocksRequest\x12\x18\n" +
+	"\asymbols\x18\x01 \x03(\tR\asymbols\x12\x1a\n" +
+	"\binterval\x18\x02 \x01(\tR\binterval\x12>\n" +
+	"\vtime_window\x18\x03 \x01(\v2\x1d.quant.algorand.v1.TimeWindowR\n" +
+	"timeWindow\x12!\n" +
+	"\fmin_clusters\x18\x04 \x01(\x05R\vminClusters\x12!\n" +
+	"\fmax_clusters\x18\x05 \x01(\x05R\vmaxClusters\x12>\n" +
+	"\aweights\x18\x06 \x01(\v2$.quant.algorand.v1.SimilarityWeightsR\aweights\"\xe0\x01\n" +
+	"\x15ClusterStocksResponse\x12:\n" +
+	"\amembers\x18\x01 \x03(\v2 .quant.algorand.v1.ClusterMemberR\amembers\x12#\n" +
+	"\rcluster_count\x18\x02 \x01(\x05R\fclusterCount\x12=\n" +
+	"\afigures\x18\x03 \x03(\v2#.quant.algorand.v1.PlotlyFigureSpecR\afigures\x12'\n" +
+	"\x0fdropped_symbols\x18\x04 \x03(\tR\x0edroppedSymbols\"\xd0\x02\n" +
+	"\x18FindSimilarStocksRequest\x12#\n" +
+	"\rtarget_symbol\x18\x01 \x01(\tR\ftargetSymbol\x12\x18\n" +
+	"\asymbols\x18\x02 \x03(\tR\asymbols\x12\x1a\n" +
+	"\binterval\x18\x03 \x01(\tR\binterval\x12>\n" +
+	"\vtime_window\x18\x04 \x01(\v2\x1d.quant.algorand.v1.TimeWindowR\n" +
+	"timeWindow\x12\x13\n" +
+	"\x05top_k\x18\x05 \x01(\x05R\x04topK\x12!\n" +
+	"\fmin_clusters\x18\x06 \x01(\x05R\vminClusters\x12!\n" +
+	"\fmax_clusters\x18\a \x01(\x05R\vmaxClusters\x12>\n" +
+	"\aweights\x18\b \x01(\v2$.quant.algorand.v1.SimilarityWeightsR\aweights\"\xf0\x02\n" +
+	"\x19FindSimilarStocksResponse\x12#\n" +
+	"\rtarget_symbol\x18\x01 \x01(\tR\ftargetSymbol\x12*\n" +
+	"\x11target_cluster_id\x18\x02 \x01(\x05R\x0ftargetClusterId\x12:\n" +
+	"\amembers\x18\x03 \x03(\v2 .quant.algorand.v1.ClusterMemberR\amembers\x129\n" +
+	"\asimilar\x18\x04 \x03(\v2\x1f.quant.algorand.v1.SimilarStockR\asimilar\x12#\n" +
+	"\rcluster_count\x18\x05 \x01(\x05R\fclusterCount\x12=\n" +
+	"\afigures\x18\x06 \x03(\v2#.quant.algorand.v1.PlotlyFigureSpecR\afigures\x12'\n" +
+	"\x0fdropped_symbols\x18\a \x03(\tR\x0edroppedSymbols2\xb3\x03\n" +
 	"\tMLService\x12e\n" +
 	"\x0eRunTrainingJob\x12(.quant.algorand.v1.RunTrainingJobRequest\x1a).quant.algorand.v1.RunTrainingJobResponse\x12k\n" +
-	"\x10GetModelVersions\x12*.quant.algorand.v1.GetModelVersionsRequest\x1a+.quant.algorand.v1.GetModelVersionsResponseBHZFgithub.com/austin/quantum/datafeed/internal/gen/algorand/v1;algorandv1b\x06proto3"
+	"\x10GetModelVersions\x12*.quant.algorand.v1.GetModelVersionsRequest\x1a+.quant.algorand.v1.GetModelVersionsResponse\x12b\n" +
+	"\rClusterStocks\x12'.quant.algorand.v1.ClusterStocksRequest\x1a(.quant.algorand.v1.ClusterStocksResponse\x12n\n" +
+	"\x11FindSimilarStocks\x12+.quant.algorand.v1.FindSimilarStocksRequest\x1a,.quant.algorand.v1.FindSimilarStocksResponseBHZFgithub.com/austin/quantum/datafeed/internal/gen/algorand/v1;algorandv1b\x06proto3"
 
 var (
 	file_algorand_v1_ml_proto_rawDescOnce sync.Once
@@ -344,33 +1155,57 @@ func file_algorand_v1_ml_proto_rawDescGZIP() []byte {
 	return file_algorand_v1_ml_proto_rawDescData
 }
 
-var file_algorand_v1_ml_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
+var file_algorand_v1_ml_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
 var file_algorand_v1_ml_proto_goTypes = []any{
-	(*RunTrainingJobRequest)(nil),    // 0: quant.algorand.v1.RunTrainingJobRequest
-	(*RunTrainingJobResponse)(nil),   // 1: quant.algorand.v1.RunTrainingJobResponse
-	(*GetModelVersionsRequest)(nil),  // 2: quant.algorand.v1.GetModelVersionsRequest
-	(*ModelVersion)(nil),             // 3: quant.algorand.v1.ModelVersion
-	(*GetModelVersionsResponse)(nil), // 4: quant.algorand.v1.GetModelVersionsResponse
-	nil,                              // 5: quant.algorand.v1.RunTrainingJobRequest.HyperparametersEntry
-	nil,                              // 6: quant.algorand.v1.ModelVersion.MetricsEntry
-	(*TimeRange)(nil),                // 7: quant.algorand.v1.TimeRange
-	(*ModelVersionId)(nil),           // 8: quant.algorand.v1.ModelVersionId
+	(*RunTrainingJobRequest)(nil),     // 0: quant.algorand.v1.RunTrainingJobRequest
+	(*RunTrainingJobResponse)(nil),    // 1: quant.algorand.v1.RunTrainingJobResponse
+	(*GetModelVersionsRequest)(nil),   // 2: quant.algorand.v1.GetModelVersionsRequest
+	(*ModelVersion)(nil),              // 3: quant.algorand.v1.ModelVersion
+	(*GetModelVersionsResponse)(nil),  // 4: quant.algorand.v1.GetModelVersionsResponse
+	(*DateRange)(nil),                 // 5: quant.algorand.v1.DateRange
+	(*TimeWindow)(nil),                // 6: quant.algorand.v1.TimeWindow
+	(*SimilarityWeights)(nil),         // 7: quant.algorand.v1.SimilarityWeights
+	(*ClusterMember)(nil),             // 8: quant.algorand.v1.ClusterMember
+	(*SimilarStock)(nil),              // 9: quant.algorand.v1.SimilarStock
+	(*ClusterStocksRequest)(nil),      // 10: quant.algorand.v1.ClusterStocksRequest
+	(*ClusterStocksResponse)(nil),     // 11: quant.algorand.v1.ClusterStocksResponse
+	(*FindSimilarStocksRequest)(nil),  // 12: quant.algorand.v1.FindSimilarStocksRequest
+	(*FindSimilarStocksResponse)(nil), // 13: quant.algorand.v1.FindSimilarStocksResponse
+	nil,                               // 14: quant.algorand.v1.RunTrainingJobRequest.HyperparametersEntry
+	nil,                               // 15: quant.algorand.v1.ModelVersion.MetricsEntry
+	(*TimeRange)(nil),                 // 16: quant.algorand.v1.TimeRange
+	(*ModelVersionId)(nil),            // 17: quant.algorand.v1.ModelVersionId
+	(*PlotlyFigureSpec)(nil),          // 18: quant.algorand.v1.PlotlyFigureSpec
 }
 var file_algorand_v1_ml_proto_depIdxs = []int32{
-	7, // 0: quant.algorand.v1.RunTrainingJobRequest.training_range:type_name -> quant.algorand.v1.TimeRange
-	5, // 1: quant.algorand.v1.RunTrainingJobRequest.hyperparameters:type_name -> quant.algorand.v1.RunTrainingJobRequest.HyperparametersEntry
-	8, // 2: quant.algorand.v1.ModelVersion.model_version_id:type_name -> quant.algorand.v1.ModelVersionId
-	6, // 3: quant.algorand.v1.ModelVersion.metrics:type_name -> quant.algorand.v1.ModelVersion.MetricsEntry
-	3, // 4: quant.algorand.v1.GetModelVersionsResponse.versions:type_name -> quant.algorand.v1.ModelVersion
-	0, // 5: quant.algorand.v1.MLService.RunTrainingJob:input_type -> quant.algorand.v1.RunTrainingJobRequest
-	2, // 6: quant.algorand.v1.MLService.GetModelVersions:input_type -> quant.algorand.v1.GetModelVersionsRequest
-	1, // 7: quant.algorand.v1.MLService.RunTrainingJob:output_type -> quant.algorand.v1.RunTrainingJobResponse
-	4, // 8: quant.algorand.v1.MLService.GetModelVersions:output_type -> quant.algorand.v1.GetModelVersionsResponse
-	7, // [7:9] is the sub-list for method output_type
-	5, // [5:7] is the sub-list for method input_type
-	5, // [5:5] is the sub-list for extension type_name
-	5, // [5:5] is the sub-list for extension extendee
-	0, // [0:5] is the sub-list for field type_name
+	16, // 0: quant.algorand.v1.RunTrainingJobRequest.training_range:type_name -> quant.algorand.v1.TimeRange
+	14, // 1: quant.algorand.v1.RunTrainingJobRequest.hyperparameters:type_name -> quant.algorand.v1.RunTrainingJobRequest.HyperparametersEntry
+	17, // 2: quant.algorand.v1.ModelVersion.model_version_id:type_name -> quant.algorand.v1.ModelVersionId
+	15, // 3: quant.algorand.v1.ModelVersion.metrics:type_name -> quant.algorand.v1.ModelVersion.MetricsEntry
+	3,  // 4: quant.algorand.v1.GetModelVersionsResponse.versions:type_name -> quant.algorand.v1.ModelVersion
+	5,  // 5: quant.algorand.v1.TimeWindow.date_range:type_name -> quant.algorand.v1.DateRange
+	6,  // 6: quant.algorand.v1.ClusterStocksRequest.time_window:type_name -> quant.algorand.v1.TimeWindow
+	7,  // 7: quant.algorand.v1.ClusterStocksRequest.weights:type_name -> quant.algorand.v1.SimilarityWeights
+	8,  // 8: quant.algorand.v1.ClusterStocksResponse.members:type_name -> quant.algorand.v1.ClusterMember
+	18, // 9: quant.algorand.v1.ClusterStocksResponse.figures:type_name -> quant.algorand.v1.PlotlyFigureSpec
+	6,  // 10: quant.algorand.v1.FindSimilarStocksRequest.time_window:type_name -> quant.algorand.v1.TimeWindow
+	7,  // 11: quant.algorand.v1.FindSimilarStocksRequest.weights:type_name -> quant.algorand.v1.SimilarityWeights
+	8,  // 12: quant.algorand.v1.FindSimilarStocksResponse.members:type_name -> quant.algorand.v1.ClusterMember
+	9,  // 13: quant.algorand.v1.FindSimilarStocksResponse.similar:type_name -> quant.algorand.v1.SimilarStock
+	18, // 14: quant.algorand.v1.FindSimilarStocksResponse.figures:type_name -> quant.algorand.v1.PlotlyFigureSpec
+	0,  // 15: quant.algorand.v1.MLService.RunTrainingJob:input_type -> quant.algorand.v1.RunTrainingJobRequest
+	2,  // 16: quant.algorand.v1.MLService.GetModelVersions:input_type -> quant.algorand.v1.GetModelVersionsRequest
+	10, // 17: quant.algorand.v1.MLService.ClusterStocks:input_type -> quant.algorand.v1.ClusterStocksRequest
+	12, // 18: quant.algorand.v1.MLService.FindSimilarStocks:input_type -> quant.algorand.v1.FindSimilarStocksRequest
+	1,  // 19: quant.algorand.v1.MLService.RunTrainingJob:output_type -> quant.algorand.v1.RunTrainingJobResponse
+	4,  // 20: quant.algorand.v1.MLService.GetModelVersions:output_type -> quant.algorand.v1.GetModelVersionsResponse
+	11, // 21: quant.algorand.v1.MLService.ClusterStocks:output_type -> quant.algorand.v1.ClusterStocksResponse
+	13, // 22: quant.algorand.v1.MLService.FindSimilarStocks:output_type -> quant.algorand.v1.FindSimilarStocksResponse
+	19, // [19:23] is the sub-list for method output_type
+	15, // [15:19] is the sub-list for method input_type
+	15, // [15:15] is the sub-list for extension type_name
+	15, // [15:15] is the sub-list for extension extendee
+	0,  // [0:15] is the sub-list for field type_name
 }
 
 func init() { file_algorand_v1_ml_proto_init() }
@@ -379,13 +1214,17 @@ func file_algorand_v1_ml_proto_init() {
 		return
 	}
 	file_common_v1_common_proto_init()
+	file_algorand_v1_ml_proto_msgTypes[6].OneofWrappers = []any{
+		(*TimeWindow_WindowBars)(nil),
+		(*TimeWindow_DateRange)(nil),
+	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_algorand_v1_ml_proto_rawDesc), len(file_algorand_v1_ml_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   7,
+			NumMessages:   16,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

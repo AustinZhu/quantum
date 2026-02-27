@@ -1,0 +1,18 @@
+{
+  "service": {
+    "id": "airflow",
+    "name": "airflow",
+    "address": "airflow",
+    "port": 8080,
+    "tags": ["infra", "mlops", "workflow"],
+    "checks": [
+      {
+        "id": "airflow-http",
+        "name": "airflow http",
+        "http": "http://airflow:8080/health",
+        "interval": "15s",
+        "timeout": "5s"
+      }
+    ]
+  }
+}

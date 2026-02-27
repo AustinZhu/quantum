@@ -1,0 +1,18 @@
+{
+  "service": {
+    "id": "redpanda",
+    "name": "redpanda",
+    "address": "redpanda",
+    "port": 9092,
+    "tags": ["infra", "streaming", "kafka"],
+    "checks": [
+      {
+        "id": "redpanda-tcp",
+        "name": "redpanda tcp",
+        "tcp": "redpanda:9092",
+        "interval": "10s",
+        "timeout": "3s"
+      }
+    ]
+  }
+}

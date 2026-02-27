@@ -13,6 +13,7 @@ dependencies = [
     "fastapi>=0.115.5",
     "hmmlearn>=0.3.3",
     "httpx>=0.28.1",
+    "kafka-python>=2.3.0",
     "lightgbm>=4.6.0",
     "lppls>=0.6.23",
     "mfdfa>=0.4.3",
@@ -33,6 +34,7 @@ dependencies = [
     "quantstats>=0.0.81",
     "redis>=7.2.1",
     "scikit-learn>=1.7.2",
+    "scalar-fastapi>=1.6.2",
     "temporalio>=1.9.0",
     "tortoise-orm>=1.1.5",
     "typer>=0.19.2",
@@ -46,6 +48,11 @@ dev = [
     "pytest>=8.4.2",
     "pytest-asyncio>=1.2.0",
     "ruff>=0.13.0",
+]
+mlops = [
+    "apache-airflow-client>=2.9.0",
+    "feast>=0.59.0",
+    "mlflow>=3.9.0",
 ]
 
 [project.scripts]

@@ -1,18 +1,90 @@
-# Terminal
+# Terminal Service
 
-Next.js admin dashboard for market visualization, strategy/risk configuration, and service health.
+Next.js admin dashboard and BFF for operating the quantum platform.
 
-## Architecture
+## Responsibilities
 
-- App Router UI (`src/app/*`)
-- BFF proxy routes (`src/app/api/*`) to backend services
-- ConnectRPC client wrappers in `src/lib/connect`
-- Chart rendering adapters for TradingView and Plotly artifacts
-- Tailwind CSS v4 enabled via PostCSS (`postcss.config.mjs` + `@import "tailwindcss"`)
+- render market/backtest/model dashboards
+- provide strategy, signal, order, and risk-management panels
+- expose service health and platform status
+- proxy browser requests to backend ConnectRPC endpoints through server-side route handlers
 
-## Tooling
+## Stack
 
-- Lint: `pnpm run lint` (OXC `oxlint`)
-- Format check: `pnpm run fmt:check` (OXC `oxfmt`)
-- Format write: `pnpm run fmt`
-- Shadcn CLI: `pnpm dlx shadcn@latest add <component>`
+- Next.js App Router (TypeScript)
+- ConnectRPC web clients
+- Tailwind CSS v4 + shadcn/ui
+- OXC toolchain (`oxlint` + `oxfmt`)
+- Vitest for tests
+- TradingView `charting_library` + Plotly for charting
+
+## Layout
+
+```text
+terminal/
+├── src/app/                          # pages + route handlers
+│   └── api/                          # BFF proxy routes
+├── src/components/                   # UI components (including shadcn)
+├── src/lib/bff/                      # upstream proxy helpers
+├── src/lib/gen/                      # generated protobuf/connect clients
+├── public/charting_library/          # copied from package postinstall
+└── package.json
+```
+
+## Local Development
+
+```bash
+cd terminal
+pnpm install
+pnpm run dev
+```
+
+Build and run:
+
+```bash
+pnpm run build
+pnpm run start
+```
+
+## BFF Routes
+
+- `src/app/api/algorand/[...rpc]/route.ts`
+- `src/app/api/datafeed/[...rpc]/route.ts`
+- `src/app/api/doordash/[...rpc]/route.ts`
+- `src/app/api/system/[...rpc]/route.ts`
+- `src/app/api/metrics/route.ts`
+
+The browser calls only terminal endpoints; upstream service URLs and keys are held server-side via env vars.
+
+## Key Environment Variables
+
+- `NEXT_PUBLIC_API_BASE`
+- `BFF_ALGORAND_URL`
+- `BFF_DATAFEED_URL`
+- `BFF_DOORDASH_URL`
+- `BFF_SYSTEM_URL`
+- `BFF_SERVICE_KEY`
+- `BFF_ALGORAND_API_KEY`, `BFF_DATAFEED_API_KEY`, `BFF_DOORDASH_API_KEY`, `BFF_SYSTEM_API_KEY`
+- `BFF_UPSTREAM_TIMEOUT_MS`
+
+## Tooling Commands
+
+```bash
+pnpm run lint
+pnpm run lint:fix
+pnpm run fmt
+pnpm run fmt:check
+pnpm run test
+pnpm run test:watch
+```
+
+## Shadcn and Tailwind
+
+- add components: `pnpm dlx shadcn@latest add <component>`
+- Tailwind v4 is configured via `postcss.config.mjs` and global CSS import.
+
+## TradingView Charting Library
+
+- dependency: `charting_library` from GitHub
+- postinstall copies artifacts to `public/charting_library`
+- Docker builds require SSH auth for GitHub access because dependency is fetched from git.

@@ -1,0 +1,18 @@
+{
+  "service": {
+    "id": "mlflow",
+    "name": "mlflow",
+    "address": "mlflow",
+    "port": 5000,
+    "tags": ["infra", "mlops", "tracking"],
+    "checks": [
+      {
+        "id": "mlflow-http",
+        "name": "mlflow http",
+        "http": "http://mlflow:5000/",
+        "interval": "15s",
+        "timeout": "5s"
+      }
+    ]
+  }
+}

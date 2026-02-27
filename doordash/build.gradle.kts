@@ -1,8 +1,20 @@
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+
 plugins {
     kotlin("jvm") version "2.3.10"
     application
     id("org.flywaydb.flyway") version "12.0.2"
     id("com.gradleup.shadow") version "9.3.1"
+}
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(25))
+    }
+}
+
+kotlin {
+    jvmToolchain(25)
 }
 
 repositories {
@@ -21,6 +33,7 @@ dependencies {
     implementation("org.postgresql:postgresql:42.7.10")
     implementation("org.jooq:jooq:3.20.11")
     implementation("org.flywaydb:flyway-core:12.0.2")
+    implementation("org.flywaydb:flyway-database-postgresql:12.0.2")
 
     implementation("org.drools:drools-core:10.1.0")
     implementation("org.drools:drools-compiler:10.1.0")
@@ -28,7 +41,9 @@ dependencies {
     implementation("org.kie:kie-ci:10.1.0")
 
     implementation("io.lettuce:lettuce-core:7.4.0.RELEASE")
+    implementation("org.apache.kafka:kafka-clients:4.1.0")
     implementation("io.temporal:temporal-sdk:1.33.0")
+    implementation("com.scalar.maven:scalar-core:0.5.24")
 
     implementation("ch.qos.logback:logback-classic:1.5.32")
     testImplementation(kotlin("test"))
@@ -40,4 +55,8 @@ application {
 
 tasks.test {
     useJUnitPlatform()
+}
+
+tasks.named<ShadowJar>("shadowJar") {
+    mergeServiceFiles()
 }

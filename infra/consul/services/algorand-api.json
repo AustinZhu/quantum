@@ -1,0 +1,18 @@
+{
+  "service": {
+    "id": "algorand-api",
+    "name": "algorand-api",
+    "address": "algorand-api",
+    "port": 8080,
+    "tags": ["app", "python", "connectrpc", "api"],
+    "checks": [
+      {
+        "id": "algorand-api-http",
+        "name": "algorand-api http",
+        "http": "http://algorand-api:8080/healthz",
+        "interval": "10s",
+        "timeout": "5s"
+      }
+    ]
+  }
+}

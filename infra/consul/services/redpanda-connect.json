@@ -1,0 +1,18 @@
+{
+  "service": {
+    "id": "redpanda-connect",
+    "name": "redpanda-connect",
+    "address": "redpanda-connect",
+    "port": 4195,
+    "tags": ["infra", "streaming", "processor"],
+    "checks": [
+      {
+        "id": "redpanda-connect-tcp",
+        "name": "redpanda-connect tcp",
+        "tcp": "redpanda-connect:4195",
+        "interval": "10s",
+        "timeout": "3s"
+      }
+    ]
+  }
+}

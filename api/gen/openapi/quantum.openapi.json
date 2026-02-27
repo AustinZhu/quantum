@@ -1,0 +1,7033 @@
+{
+  "openapi": "3.1.0",
+  "info": {},
+  "paths": {
+    "/quant.algorand.v1.AlertService/ListAlertEvents": {
+      "post": {
+        "tags": [
+          "AlertService"
+        ],
+        "summary": "ListAlertEvents",
+        "operationId": "AlertService_ListAlertEvents",
+        "parameters": [
+          {
+            "name": "Connect-Protocol-Version",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/connect-protocol-version"
+            }
+          },
+          {
+            "name": "Connect-Timeout-Ms",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/connect-timeout-header"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/quant.algorand.v1.ListAlertEventsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/connect.error"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/quant.algorand.v1.ListAlertEventsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quant.algorand.v1.AlertService/TestAlert": {
+      "post": {
+        "tags": [
+          "AlertService"
+        ],
+        "summary": "TestAlert",
+        "operationId": "AlertService_TestAlert",
+        "parameters": [
+          {
+            "name": "Connect-Protocol-Version",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/connect-protocol-version"
+            }
+          },
+          {
+            "name": "Connect-Timeout-Ms",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/connect-timeout-header"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/quant.algorand.v1.TestAlertRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/connect.error"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/quant.algorand.v1.TestAlertResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quant.algorand.v1.AnalyticsService/GetPerformanceSummary": {
+      "post": {
+        "tags": [
+          "AnalyticsService"
+        ],
+        "summary": "GetPerformanceSummary",
+        "operationId": "AnalyticsService_GetPerformanceSummary",
+        "parameters": [
+          {
+            "name": "Connect-Protocol-Version",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/connect-protocol-version"
+            }
+          },
+          {
+            "name": "Connect-Timeout-Ms",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/connect-timeout-header"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/quant.algorand.v1.GetPerformanceSummaryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/connect.error"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/quant.algorand.v1.GetPerformanceSummaryResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quant.algorand.v1.AnalyticsService/GetPlotlyArtifact": {
+      "post": {
+        "tags": [
+          "AnalyticsService"
+        ],
+        "summary": "GetPlotlyArtifact",
+        "operationId": "AnalyticsService_GetPlotlyArtifact",
+        "parameters": [
+          {
+            "name": "Connect-Protocol-Version",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/connect-protocol-version"
+            }
+          },
+          {
+            "name": "Connect-Timeout-Ms",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/connect-timeout-header"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/quant.algorand.v1.GetPlotlyArtifactRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/connect.error"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/quant.algorand.v1.GetPlotlyArtifactResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quant.algorand.v1.AnalyticsService/GetTradingViewSeries": {
+      "post": {
+        "tags": [
+          "AnalyticsService"
+        ],
+        "summary": "GetTradingViewSeries",
+        "operationId": "AnalyticsService_GetTradingViewSeries",
+        "parameters": [
+          {
+            "name": "Connect-Protocol-Version",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/connect-protocol-version"
+            }
+          },
+          {
+            "name": "Connect-Timeout-Ms",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/connect-timeout-header"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/quant.algorand.v1.GetTradingViewSeriesRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/connect.error"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/quant.algorand.v1.GetTradingViewSeriesResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quant.algorand.v1.BacktestService/GetRun": {
+      "post": {
+        "tags": [
+          "BacktestService"
+        ],
+        "summary": "GetRun",
+        "operationId": "BacktestService_GetRun",
+        "parameters": [
+          {
+            "name": "Connect-Protocol-Version",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/connect-protocol-version"
+            }
+          },
+          {
+            "name": "Connect-Timeout-Ms",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/connect-timeout-header"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/quant.algorand.v1.GetRunRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/connect.error"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/quant.algorand.v1.GetRunResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quant.algorand.v1.BacktestService/ListRuns": {
+      "post": {
+        "tags": [
+          "BacktestService"
+        ],
+        "summary": "ListRuns",
+        "operationId": "BacktestService_ListRuns",
+        "parameters": [
+          {
+            "name": "Connect-Protocol-Version",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/connect-protocol-version"
+            }
+          },
+          {
+            "name": "Connect-Timeout-Ms",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/connect-timeout-header"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/quant.algorand.v1.ListRunsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/connect.error"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/quant.algorand.v1.ListRunsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quant.algorand.v1.BacktestService/RunBacktest": {
+      "post": {
+        "tags": [
+          "BacktestService"
+        ],
+        "summary": "RunBacktest",
+        "operationId": "BacktestService_RunBacktest",
+        "parameters": [
+          {
+            "name": "Connect-Protocol-Version",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/connect-protocol-version"
+            }
+          },
+          {
+            "name": "Connect-Timeout-Ms",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/connect-timeout-header"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/quant.algorand.v1.RunBacktestRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/connect.error"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/quant.algorand.v1.RunBacktestResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quant.algorand.v1.CatalogService/ListIndicators": {
+      "post": {
+        "tags": [
+          "CatalogService"
+        ],
+        "summary": "ListIndicators",
+        "operationId": "CatalogService_ListIndicators",
+        "parameters": [
+          {
+            "name": "Connect-Protocol-Version",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/connect-protocol-version"
+            }
+          },
+          {
+            "name": "Connect-Timeout-Ms",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/connect-timeout-header"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/quant.algorand.v1.ListIndicatorsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/connect.error"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/quant.algorand.v1.ListIndicatorsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quant.algorand.v1.CatalogService/ListSignals": {
+      "post": {
+        "tags": [
+          "CatalogService"
+        ],
+        "summary": "ListSignals",
+        "operationId": "CatalogService_ListSignals",
+        "parameters": [
+          {
+            "name": "Connect-Protocol-Version",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/connect-protocol-version"
+            }
+          },
+          {
+            "name": "Connect-Timeout-Ms",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/connect-timeout-header"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/quant.algorand.v1.ListSignalsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/connect.error"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/quant.algorand.v1.ListSignalsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quant.algorand.v1.CatalogService/ListStrategies": {
+      "post": {
+        "tags": [
+          "CatalogService"
+        ],
+        "summary": "ListStrategies",
+        "operationId": "CatalogService_ListStrategies",
+        "parameters": [
+          {
+            "name": "Connect-Protocol-Version",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/connect-protocol-version"
+            }
+          },
+          {
+            "name": "Connect-Timeout-Ms",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/connect-timeout-header"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/quant.algorand.v1.ListStrategiesRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/connect.error"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/quant.algorand.v1.ListStrategiesResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quant.algorand.v1.MLService/ClusterStocks": {
+      "post": {
+        "tags": [
+          "MLService"
+        ],
+        "summary": "ClusterStocks",
+        "operationId": "MLService_ClusterStocks",
+        "parameters": [
+          {
+            "name": "Connect-Protocol-Version",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/connect-protocol-version"
+            }
+          },
+          {
+            "name": "Connect-Timeout-Ms",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/connect-timeout-header"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/quant.algorand.v1.ClusterStocksRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/connect.error"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/quant.algorand.v1.ClusterStocksResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quant.algorand.v1.MLService/FindSimilarStocks": {
+      "post": {
+        "tags": [
+          "MLService"
+        ],
+        "summary": "FindSimilarStocks",
+        "operationId": "MLService_FindSimilarStocks",
+        "parameters": [
+          {
+            "name": "Connect-Protocol-Version",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/connect-protocol-version"
+            }
+          },
+          {
+            "name": "Connect-Timeout-Ms",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/connect-timeout-header"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/quant.algorand.v1.FindSimilarStocksRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/connect.error"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/quant.algorand.v1.FindSimilarStocksResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quant.algorand.v1.MLService/GetModelVersions": {
+      "post": {
+        "tags": [
+          "MLService"
+        ],
+        "summary": "GetModelVersions",
+        "operationId": "MLService_GetModelVersions",
+        "parameters": [
+          {
+            "name": "Connect-Protocol-Version",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/connect-protocol-version"
+            }
+          },
+          {
+            "name": "Connect-Timeout-Ms",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/connect-timeout-header"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/quant.algorand.v1.GetModelVersionsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/connect.error"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/quant.algorand.v1.GetModelVersionsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quant.algorand.v1.MLService/RunTrainingJob": {
+      "post": {
+        "tags": [
+          "MLService"
+        ],
+        "summary": "RunTrainingJob",
+        "operationId": "MLService_RunTrainingJob",
+        "parameters": [
+          {
+            "name": "Connect-Protocol-Version",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/connect-protocol-version"
+            }
+          },
+          {
+            "name": "Connect-Timeout-Ms",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/connect-timeout-header"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/quant.algorand.v1.RunTrainingJobRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/connect.error"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/quant.algorand.v1.RunTrainingJobResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quant.datafeed.v1.DatafeedService/GetConfig": {
+      "post": {
+        "tags": [
+          "UDF",
+          "Datafeed",
+          "DatafeedService"
+        ],
+        "summary": "Get Datafeed Config",
+        "description": "Returns datafeed configuration in chart-library UDF format.",
+        "operationId": "DatafeedService_GetConfig",
+        "parameters": [
+          {
+            "name": "Connect-Protocol-Version",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/connect-protocol-version"
+            }
+          },
+          {
+            "name": "Connect-Timeout-Ms",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/connect-timeout-header"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/quant.datafeed.v1.GetConfigRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/connect.error"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/quant.datafeed.v1.GetConfigResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quant.datafeed.v1.DatafeedService/GetHistory": {
+      "post": {
+        "tags": [
+          "UDF",
+          "Datafeed",
+          "DatafeedService"
+        ],
+        "summary": "Get Historical Bars",
+        "description": "Returns historical OHLCV data in UDF history format.",
+        "operationId": "DatafeedService_GetHistory",
+        "parameters": [
+          {
+            "name": "Connect-Protocol-Version",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/connect-protocol-version"
+            }
+          },
+          {
+            "name": "Connect-Timeout-Ms",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/connect-timeout-header"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/quant.datafeed.v1.GetHistoryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/connect.error"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/quant.datafeed.v1.GetHistoryResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quant.datafeed.v1.DatafeedService/GetMarks": {
+      "post": {
+        "tags": [
+          "UDF",
+          "Datafeed",
+          "DatafeedService"
+        ],
+        "summary": "Get Marks",
+        "description": "Returns marks in UDF response-as-table format.",
+        "operationId": "DatafeedService_GetMarks",
+        "parameters": [
+          {
+            "name": "Connect-Protocol-Version",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/connect-protocol-version"
+            }
+          },
+          {
+            "name": "Connect-Timeout-Ms",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/connect-timeout-header"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/quant.datafeed.v1.GetMarksRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/connect.error"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/quant.datafeed.v1.GetMarksResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quant.datafeed.v1.DatafeedService/GetQuotes": {
+      "post": {
+        "tags": [
+          "UDF",
+          "Datafeed",
+          "DatafeedService"
+        ],
+        "summary": "Get Quotes",
+        "description": "Returns quote payload in UDF quotes format.",
+        "operationId": "DatafeedService_GetQuotes",
+        "parameters": [
+          {
+            "name": "Connect-Protocol-Version",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/connect-protocol-version"
+            }
+          },
+          {
+            "name": "Connect-Timeout-Ms",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/connect-timeout-header"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/quant.datafeed.v1.GetQuotesRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/connect.error"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/quant.datafeed.v1.GetQuotesResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quant.datafeed.v1.DatafeedService/GetSymbolGroupInfo": {
+      "post": {
+        "tags": [
+          "UDF",
+          "Datafeed",
+          "DatafeedService"
+        ],
+        "summary": "Get Symbol Group Info",
+        "description": "Returns symbol_info response-as-table payload.",
+        "operationId": "DatafeedService_GetSymbolGroupInfo",
+        "parameters": [
+          {
+            "name": "Connect-Protocol-Version",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/connect-protocol-version"
+            }
+          },
+          {
+            "name": "Connect-Timeout-Ms",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/connect-timeout-header"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/quant.datafeed.v1.GetSymbolGroupInfoRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/connect.error"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/quant.datafeed.v1.GetSymbolGroupInfoResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quant.datafeed.v1.DatafeedService/GetTime": {
+      "post": {
+        "tags": [
+          "UDF",
+          "Datafeed",
+          "DatafeedService"
+        ],
+        "summary": "Get Server Time",
+        "description": "Returns current server time as UNIX seconds.",
+        "operationId": "DatafeedService_GetTime",
+        "parameters": [
+          {
+            "name": "Connect-Protocol-Version",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/connect-protocol-version"
+            }
+          },
+          {
+            "name": "Connect-Timeout-Ms",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/connect-timeout-header"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/quant.datafeed.v1.GetTimeRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/connect.error"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/quant.datafeed.v1.GetTimeResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quant.datafeed.v1.DatafeedService/GetTimescaleMarks": {
+      "post": {
+        "tags": [
+          "UDF",
+          "Datafeed",
+          "DatafeedService"
+        ],
+        "summary": "Get Timescale Marks",
+        "description": "Returns timescale marks in UDF format.",
+        "operationId": "DatafeedService_GetTimescaleMarks",
+        "parameters": [
+          {
+            "name": "Connect-Protocol-Version",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/connect-protocol-version"
+            }
+          },
+          {
+            "name": "Connect-Timeout-Ms",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/connect-timeout-header"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/quant.datafeed.v1.GetTimescaleMarksRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/connect.error"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/quant.datafeed.v1.GetTimescaleMarksResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quant.datafeed.v1.DatafeedService/IngestTicks": {
+      "post": {
+        "tags": [
+          "DatafeedService"
+        ],
+        "summary": "IngestTicks",
+        "operationId": "DatafeedService_IngestTicks",
+        "parameters": [
+          {
+            "name": "Connect-Protocol-Version",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/connect-protocol-version"
+            }
+          },
+          {
+            "name": "Connect-Timeout-Ms",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/connect-timeout-header"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/quant.datafeed.v1.IngestTicksRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/connect.error"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/quant.datafeed.v1.IngestTicksResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quant.datafeed.v1.DatafeedService/ListNews": {
+      "post": {
+        "tags": [
+          "DatafeedService"
+        ],
+        "summary": "ListNews",
+        "operationId": "DatafeedService_ListNews",
+        "parameters": [
+          {
+            "name": "Connect-Protocol-Version",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/connect-protocol-version"
+            }
+          },
+          {
+            "name": "Connect-Timeout-Ms",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/connect-timeout-header"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/quant.datafeed.v1.ListNewsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/connect.error"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/quant.datafeed.v1.ListNewsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quant.datafeed.v1.DatafeedService/ListSocial": {
+      "post": {
+        "tags": [
+          "DatafeedService"
+        ],
+        "summary": "ListSocial",
+        "operationId": "DatafeedService_ListSocial",
+        "parameters": [
+          {
+            "name": "Connect-Protocol-Version",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/connect-protocol-version"
+            }
+          },
+          {
+            "name": "Connect-Timeout-Ms",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/connect-timeout-header"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/quant.datafeed.v1.ListSocialRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/connect.error"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/quant.datafeed.v1.ListSocialResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quant.datafeed.v1.DatafeedService/ListSymbols": {
+      "post": {
+        "tags": [
+          "UDF",
+          "Scanner",
+          "Datafeed",
+          "DatafeedService"
+        ],
+        "summary": "List Symbols",
+        "description": "Returns symbols in common LibrarySymbolInfo format for all symbol catalogs.",
+        "operationId": "DatafeedService_ListSymbols",
+        "parameters": [
+          {
+            "name": "Connect-Protocol-Version",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/connect-protocol-version"
+            }
+          },
+          {
+            "name": "Connect-Timeout-Ms",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/connect-timeout-header"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/quant.datafeed.v1.ListSymbolsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/connect.error"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/quant.datafeed.v1.ListSymbolsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quant.datafeed.v1.DatafeedService/QueryBars": {
+      "post": {
+        "tags": [
+          "DatafeedService"
+        ],
+        "summary": "QueryBars",
+        "operationId": "DatafeedService_QueryBars",
+        "parameters": [
+          {
+            "name": "Connect-Protocol-Version",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/connect-protocol-version"
+            }
+          },
+          {
+            "name": "Connect-Timeout-Ms",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/connect-timeout-header"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/quant.datafeed.v1.QueryBarsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/connect.error"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/quant.datafeed.v1.QueryBarsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quant.datafeed.v1.DatafeedService/ReplayTicks": {
+      "post": {
+        "tags": [
+          "DatafeedService"
+        ],
+        "summary": "ReplayTicks",
+        "operationId": "DatafeedService_ReplayTicks",
+        "parameters": [
+          {
+            "name": "Connect-Protocol-Version",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/connect-protocol-version"
+            }
+          },
+          {
+            "name": "Connect-Timeout-Ms",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/connect-timeout-header"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/quant.datafeed.v1.ReplayTicksRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/connect.error"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/quant.datafeed.v1.ReplayTicksResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quant.datafeed.v1.DatafeedService/ResolveSymbol": {
+      "post": {
+        "tags": [
+          "UDF",
+          "Datafeed",
+          "DatafeedService"
+        ],
+        "summary": "Resolve Symbol",
+        "description": "Resolves symbol metadata in common LibrarySymbolInfo format.",
+        "operationId": "DatafeedService_ResolveSymbol",
+        "parameters": [
+          {
+            "name": "Connect-Protocol-Version",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/connect-protocol-version"
+            }
+          },
+          {
+            "name": "Connect-Timeout-Ms",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/connect-timeout-header"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/quant.datafeed.v1.ResolveSymbolRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/connect.error"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/quant.datafeed.v1.ResolveSymbolResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quant.datafeed.v1.DatafeedService/ScanSymbols": {
+      "post": {
+        "tags": [
+          "Scanner",
+          "Datafeed",
+          "DatafeedService"
+        ],
+        "summary": "Scan Symbols",
+        "description": "Scans symbols using scanner filter/sort schema.",
+        "operationId": "DatafeedService_ScanSymbols",
+        "parameters": [
+          {
+            "name": "Connect-Protocol-Version",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/connect-protocol-version"
+            }
+          },
+          {
+            "name": "Connect-Timeout-Ms",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/connect-timeout-header"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/quant.datafeed.v1.ScanSymbolsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/connect.error"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/quant.datafeed.v1.ScanSymbolsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quant.datafeed.v1.DatafeedService/SearchSymbols": {
+      "post": {
+        "tags": [
+          "UDF",
+          "Datafeed",
+          "DatafeedService"
+        ],
+        "summary": "Search Symbols",
+        "description": "Searches symbols using UDF search payload format.",
+        "operationId": "DatafeedService_SearchSymbols",
+        "parameters": [
+          {
+            "name": "Connect-Protocol-Version",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/connect-protocol-version"
+            }
+          },
+          {
+            "name": "Connect-Timeout-Ms",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/connect-timeout-header"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/quant.datafeed.v1.SearchSymbolsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/connect.error"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/quant.datafeed.v1.SearchSymbolsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quant.datafeed.v1.DatafeedService/StreamBars": {},
+    "/quant.doordash.v1.OrderService/GetOrder": {
+      "post": {
+        "tags": [
+          "OrderService"
+        ],
+        "summary": "GetOrder",
+        "operationId": "OrderService_GetOrder",
+        "parameters": [
+          {
+            "name": "Connect-Protocol-Version",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/connect-protocol-version"
+            }
+          },
+          {
+            "name": "Connect-Timeout-Ms",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/connect-timeout-header"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/quant.doordash.v1.GetOrderRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/connect.error"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/quant.doordash.v1.GetOrderResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quant.doordash.v1.OrderService/ListOrders": {
+      "post": {
+        "tags": [
+          "OrderService"
+        ],
+        "summary": "ListOrders",
+        "operationId": "OrderService_ListOrders",
+        "parameters": [
+          {
+            "name": "Connect-Protocol-Version",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/connect-protocol-version"
+            }
+          },
+          {
+            "name": "Connect-Timeout-Ms",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/connect-timeout-header"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/quant.doordash.v1.ListOrdersRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/connect.error"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/quant.doordash.v1.ListOrdersResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quant.doordash.v1.OrderService/PlaceOrder": {
+      "post": {
+        "tags": [
+          "OrderService"
+        ],
+        "summary": "PlaceOrder",
+        "operationId": "OrderService_PlaceOrder",
+        "parameters": [
+          {
+            "name": "Connect-Protocol-Version",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/connect-protocol-version"
+            }
+          },
+          {
+            "name": "Connect-Timeout-Ms",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/connect-timeout-header"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/quant.doordash.v1.PlaceOrderRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/connect.error"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/quant.doordash.v1.PlaceOrderResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quant.doordash.v1.RiskService/EvaluateRisk": {
+      "post": {
+        "tags": [
+          "RiskService"
+        ],
+        "summary": "EvaluateRisk",
+        "operationId": "RiskService_EvaluateRisk",
+        "parameters": [
+          {
+            "name": "Connect-Protocol-Version",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/connect-protocol-version"
+            }
+          },
+          {
+            "name": "Connect-Timeout-Ms",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/connect-timeout-header"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/quant.doordash.v1.EvaluateRiskRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/connect.error"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/quant.doordash.v1.EvaluateRiskResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quant.doordash.v1.RiskService/ListRules": {
+      "post": {
+        "tags": [
+          "RiskService"
+        ],
+        "summary": "ListRules",
+        "operationId": "RiskService_ListRules",
+        "parameters": [
+          {
+            "name": "Connect-Protocol-Version",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/connect-protocol-version"
+            }
+          },
+          {
+            "name": "Connect-Timeout-Ms",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/connect-timeout-header"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/quant.doordash.v1.ListRulesRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/connect.error"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/quant.doordash.v1.ListRulesResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quant.doordash.v1.RiskService/UpsertRule": {
+      "post": {
+        "tags": [
+          "RiskService"
+        ],
+        "summary": "UpsertRule",
+        "operationId": "RiskService_UpsertRule",
+        "parameters": [
+          {
+            "name": "Connect-Protocol-Version",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/connect-protocol-version"
+            }
+          },
+          {
+            "name": "Connect-Timeout-Ms",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/connect-timeout-header"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/quant.doordash.v1.UpsertRuleRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/connect.error"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/quant.doordash.v1.UpsertRuleResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quant.system.v1.SystemService/GetHealth": {
+      "post": {
+        "tags": [
+          "SystemService"
+        ],
+        "summary": "GetHealth",
+        "operationId": "SystemService_GetHealth",
+        "parameters": [
+          {
+            "name": "Connect-Protocol-Version",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/connect-protocol-version"
+            }
+          },
+          {
+            "name": "Connect-Timeout-Ms",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/connect-timeout-header"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/quant.system.v1.HealthRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/connect.error"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/quant.system.v1.HealthResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quant.system.v1.SystemService/GetReadiness": {
+      "post": {
+        "tags": [
+          "SystemService"
+        ],
+        "summary": "GetReadiness",
+        "operationId": "SystemService_GetReadiness",
+        "parameters": [
+          {
+            "name": "Connect-Protocol-Version",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/connect-protocol-version"
+            }
+          },
+          {
+            "name": "Connect-Timeout-Ms",
+            "in": "header",
+            "schema": {
+              "$ref": "#/components/schemas/connect-timeout-header"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/quant.system.v1.ReadinessRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "default": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/connect.error"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/quant.system.v1.ReadinessResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "connect-protocol-version": {
+        "type": "number",
+        "title": "Connect-Protocol-Version",
+        "enum": [
+          1
+        ],
+        "description": "Define the version of the Connect protocol",
+        "const": 1
+      },
+      "connect-timeout-header": {
+        "type": "number",
+        "title": "Connect-Timeout-Ms",
+        "description": "Define the timeout, in ms"
+      },
+      "connect.error": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "examples": [
+              "not_found"
+            ],
+            "enum": [
+              "canceled",
+              "unknown",
+              "invalid_argument",
+              "deadline_exceeded",
+              "not_found",
+              "already_exists",
+              "permission_denied",
+              "resource_exhausted",
+              "failed_precondition",
+              "aborted",
+              "out_of_range",
+              "unimplemented",
+              "internal",
+              "unavailable",
+              "data_loss",
+              "unauthenticated"
+            ],
+            "description": "The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code]."
+          },
+          "message": {
+            "type": "string",
+            "description": "A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client."
+          },
+          "details": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/connect.error_details.Any"
+            },
+            "description": "A list of messages that carry the error details. There is no limit on the number of messages."
+          }
+        },
+        "title": "Connect Error",
+        "additionalProperties": true,
+        "description": "Error type returned by Connect: https://connectrpc.com/docs/go/errors/#http-representation"
+      },
+      "connect.error_details.Any": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "A URL that acts as a globally unique identifier for the type of the serialized message. For example: `type.googleapis.com/google.rpc.ErrorInfo`. This is used to determine the schema of the data in the `value` field and is the discriminator for the `debug` field."
+          },
+          "value": {
+            "type": "string",
+            "format": "binary",
+            "description": "The Protobuf message, serialized as bytes and base64-encoded. The specific message type is identified by the `type` field."
+          },
+          "debug": {
+            "oneOf": [
+              {
+                "type": "object",
+                "title": "Any",
+                "additionalProperties": true,
+                "description": "Detailed error information."
+              }
+            ],
+            "discriminator": {
+              "propertyName": "type"
+            },
+            "title": "Debug",
+            "description": "Deserialized error detail payload. The 'type' field indicates the schema. This field is for easier debugging and should not be relied upon for application logic."
+          }
+        },
+        "additionalProperties": true,
+        "description": "Contains an arbitrary serialized message along with a @type that describes the type of the serialized message, with an additional debug field for ConnectRPC error details."
+      },
+      "google.protobuf.BoolValue": {
+        "type": "boolean",
+        "description": "Wrapper message for `bool`.\n\n The JSON representation for `BoolValue` is JSON `true` and `false`.\n\n Not recommended for use in new APIs, but still useful for legacy APIs and\n has no plan to be removed."
+      },
+      "google.protobuf.DoubleValue": {
+        "oneOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "number"
+          }
+        ],
+        "description": "Wrapper message for `double`.\n\n The JSON representation for `DoubleValue` is JSON number.\n\n Not recommended for use in new APIs, but still useful for legacy APIs and\n has no plan to be removed."
+      },
+      "google.protobuf.ListValue": {
+        "type": "object",
+        "properties": {
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/google.protobuf.Value"
+            },
+            "title": "values",
+            "description": "Repeated field of dynamically typed values."
+          }
+        },
+        "title": "ListValue",
+        "additionalProperties": false,
+        "description": "`ListValue` is a wrapper around a repeated field of values.\n\n The JSON representation for `ListValue` is JSON array."
+      },
+      "google.protobuf.NullValue": {
+        "type": "string",
+        "title": "NullValue",
+        "enum": [
+          "NULL_VALUE"
+        ],
+        "description": "`NullValue` is a singleton enumeration to represent the null value for the\n `Value` type union.\n\n The JSON representation for `NullValue` is JSON `null`."
+      },
+      "google.protobuf.StringValue": {
+        "type": "string",
+        "description": "Wrapper message for `string`.\n\n The JSON representation for `StringValue` is JSON string.\n\n Not recommended for use in new APIs, but still useful for legacy APIs and\n has no plan to be removed."
+      },
+      "google.protobuf.Struct": {
+        "type": "object",
+        "additionalProperties": {
+          "$ref": "#/components/schemas/google.protobuf.Value"
+        },
+        "description": "`Struct` represents a structured data value, consisting of fields\n which map to dynamically typed values. In some languages, `Struct`\n might be supported by a native representation. For example, in\n scripting languages like JS a struct is represented as an\n object. The details of that representation are described together\n with the proto support for the language.\n\n The JSON representation for `Struct` is JSON object."
+      },
+      "google.protobuf.Struct.FieldsEntry": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "title": "key"
+          },
+          "value": {
+            "title": "value",
+            "$ref": "#/components/schemas/google.protobuf.Value"
+          }
+        },
+        "title": "FieldsEntry",
+        "additionalProperties": false
+      },
+      "google.protobuf.Value": {
+        "oneOf": [
+          {
+            "type": "null"
+          },
+          {
+            "type": "number"
+          },
+          {
+            "type": "string"
+          },
+          {
+            "type": "boolean"
+          },
+          {
+            "type": "array"
+          },
+          {
+            "type": "object",
+            "additionalProperties": true
+          }
+        ],
+        "description": "`Value` represents a dynamically typed value which can be either\n null, a number, a string, a boolean, a recursive struct value, or a\n list of values. A producer of value is expected to set one of these\n variants. Absence of any variant indicates an error.\n\n The JSON representation for `Value` is JSON value."
+      },
+      "quant.algorand.v1.AlertEvent": {
+        "type": "object",
+        "properties": {
+          "eventId": {
+            "type": "string",
+            "title": "event_id"
+          },
+          "runId": {
+            "title": "run_id",
+            "$ref": "#/components/schemas/quant.algorand.v1.RunId"
+          },
+          "channel": {
+            "type": "string",
+            "title": "channel"
+          },
+          "target": {
+            "type": "string",
+            "title": "target"
+          },
+          "status": {
+            "type": "string",
+            "title": "status"
+          },
+          "createdTsMs": {
+            "type": [
+              "integer",
+              "string"
+            ],
+            "title": "created_ts_ms",
+            "format": "int64"
+          }
+        },
+        "title": "AlertEvent",
+        "additionalProperties": false
+      },
+      "quant.algorand.v1.ClusterMember": {
+        "type": "object",
+        "properties": {
+          "symbol": {
+            "type": "string",
+            "title": "symbol"
+          },
+          "sector": {
+            "type": "string",
+            "title": "sector"
+          },
+          "clusterId": {
+            "type": "integer",
+            "title": "cluster_id",
+            "format": "int32"
+          },
+          "periodReturn": {
+            "type": "number",
+            "title": "period_return",
+            "format": "double"
+          },
+          "volatility": {
+            "type": "number",
+            "title": "volatility",
+            "format": "double"
+          }
+        },
+        "title": "ClusterMember",
+        "additionalProperties": false
+      },
+      "quant.algorand.v1.ClusterStocksRequest": {
+        "type": "object",
+        "properties": {
+          "symbols": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "title": "symbols"
+          },
+          "interval": {
+            "type": "string",
+            "title": "interval"
+          },
+          "timeWindow": {
+            "title": "time_window",
+            "$ref": "#/components/schemas/quant.algorand.v1.TimeWindow"
+          },
+          "minClusters": {
+            "type": "integer",
+            "title": "min_clusters",
+            "format": "int32"
+          },
+          "maxClusters": {
+            "type": "integer",
+            "title": "max_clusters",
+            "format": "int32"
+          },
+          "weights": {
+            "title": "weights",
+            "$ref": "#/components/schemas/quant.algorand.v1.SimilarityWeights"
+          }
+        },
+        "title": "ClusterStocksRequest",
+        "additionalProperties": false
+      },
+      "quant.algorand.v1.ClusterStocksResponse": {
+        "type": "object",
+        "properties": {
+          "members": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/quant.algorand.v1.ClusterMember"
+            },
+            "title": "members"
+          },
+          "clusterCount": {
+            "type": "integer",
+            "title": "cluster_count",
+            "format": "int32"
+          },
+          "figures": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/quant.algorand.v1.PlotlyFigureSpec"
+            },
+            "title": "figures"
+          },
+          "droppedSymbols": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "title": "dropped_symbols"
+          }
+        },
+        "title": "ClusterStocksResponse",
+        "additionalProperties": false
+      },
+      "quant.algorand.v1.DateRange": {
+        "type": "object",
+        "properties": {
+          "startDate": {
+            "type": "string",
+            "title": "start_date"
+          },
+          "endDate": {
+            "type": "string",
+            "title": "end_date"
+          }
+        },
+        "title": "DateRange",
+        "additionalProperties": false
+      },
+      "quant.algorand.v1.FindSimilarStocksRequest": {
+        "type": "object",
+        "properties": {
+          "targetSymbol": {
+            "type": "string",
+            "title": "target_symbol"
+          },
+          "symbols": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "title": "symbols"
+          },
+          "interval": {
+            "type": "string",
+            "title": "interval"
+          },
+          "timeWindow": {
+            "title": "time_window",
+            "$ref": "#/components/schemas/quant.algorand.v1.TimeWindow"
+          },
+          "topK": {
+            "type": "integer",
+            "title": "top_k",
+            "format": "int32"
+          },
+          "minClusters": {
+            "type": "integer",
+            "title": "min_clusters",
+            "format": "int32"
+          },
+          "maxClusters": {
+            "type": "integer",
+            "title": "max_clusters",
+            "format": "int32"
+          },
+          "weights": {
+            "title": "weights",
+            "$ref": "#/components/schemas/quant.algorand.v1.SimilarityWeights"
+          }
+        },
+        "title": "FindSimilarStocksRequest",
+        "additionalProperties": false
+      },
+      "quant.algorand.v1.FindSimilarStocksResponse": {
+        "type": "object",
+        "properties": {
+          "targetSymbol": {
+            "type": "string",
+            "title": "target_symbol"
+          },
+          "targetClusterId": {
+            "type": "integer",
+            "title": "target_cluster_id",
+            "format": "int32"
+          },
+          "members": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/quant.algorand.v1.ClusterMember"
+            },
+            "title": "members"
+          },
+          "similar": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/quant.algorand.v1.SimilarStock"
+            },
+            "title": "similar"
+          },
+          "clusterCount": {
+            "type": "integer",
+            "title": "cluster_count",
+            "format": "int32"
+          },
+          "figures": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/quant.algorand.v1.PlotlyFigureSpec"
+            },
+            "title": "figures"
+          },
+          "droppedSymbols": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "title": "dropped_symbols"
+          }
+        },
+        "title": "FindSimilarStocksResponse",
+        "additionalProperties": false
+      },
+      "quant.algorand.v1.GetModelVersionsRequest": {
+        "type": "object",
+        "properties": {
+          "modelName": {
+            "type": "string",
+            "title": "model_name"
+          }
+        },
+        "title": "GetModelVersionsRequest",
+        "additionalProperties": false
+      },
+      "quant.algorand.v1.GetModelVersionsResponse": {
+        "type": "object",
+        "properties": {
+          "versions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/quant.algorand.v1.ModelVersion"
+            },
+            "title": "versions"
+          }
+        },
+        "title": "GetModelVersionsResponse",
+        "additionalProperties": false
+      },
+      "quant.algorand.v1.GetPerformanceSummaryRequest": {
+        "type": "object",
+        "properties": {
+          "runId": {
+            "title": "run_id",
+            "$ref": "#/components/schemas/quant.algorand.v1.RunId"
+          }
+        },
+        "title": "GetPerformanceSummaryRequest",
+        "additionalProperties": false
+      },
+      "quant.algorand.v1.GetPerformanceSummaryResponse": {
+        "type": "object",
+        "properties": {
+          "runId": {
+            "title": "run_id",
+            "$ref": "#/components/schemas/quant.algorand.v1.RunId"
+          },
+          "metrics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/quant.algorand.v1.Metric"
+            },
+            "title": "metrics"
+          }
+        },
+        "title": "GetPerformanceSummaryResponse",
+        "additionalProperties": false
+      },
+      "quant.algorand.v1.GetPlotlyArtifactRequest": {
+        "type": "object",
+        "properties": {
+          "artifactId": {
+            "type": "string",
+            "title": "artifact_id"
+          }
+        },
+        "title": "GetPlotlyArtifactRequest",
+        "additionalProperties": false
+      },
+      "quant.algorand.v1.GetPlotlyArtifactResponse": {
+        "type": "object",
+        "properties": {
+          "spec": {
+            "title": "spec",
+            "$ref": "#/components/schemas/quant.algorand.v1.PlotlyFigureSpec"
+          }
+        },
+        "title": "GetPlotlyArtifactResponse",
+        "additionalProperties": false
+      },
+      "quant.algorand.v1.GetRunRequest": {
+        "type": "object",
+        "properties": {
+          "runId": {
+            "title": "run_id",
+            "$ref": "#/components/schemas/quant.algorand.v1.RunId"
+          }
+        },
+        "title": "GetRunRequest",
+        "additionalProperties": false
+      },
+      "quant.algorand.v1.GetRunResponse": {
+        "type": "object",
+        "properties": {
+          "runId": {
+            "title": "run_id",
+            "$ref": "#/components/schemas/quant.algorand.v1.RunId"
+          },
+          "status": {
+            "type": "string",
+            "title": "status"
+          },
+          "symbol": {
+            "type": "string",
+            "title": "symbol"
+          },
+          "interval": {
+            "type": "string",
+            "title": "interval"
+          },
+          "strategyId": {
+            "title": "strategy_id",
+            "$ref": "#/components/schemas/quant.algorand.v1.StrategyId"
+          },
+          "metadata": {
+            "type": "object",
+            "title": "metadata",
+            "additionalProperties": {
+              "type": "string",
+              "title": "value"
+            }
+          }
+        },
+        "title": "GetRunResponse",
+        "additionalProperties": false
+      },
+      "quant.algorand.v1.GetRunResponse.MetadataEntry": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "title": "key"
+          },
+          "value": {
+            "type": "string",
+            "title": "value"
+          }
+        },
+        "title": "MetadataEntry",
+        "additionalProperties": false
+      },
+      "quant.algorand.v1.GetTradingViewSeriesRequest": {
+        "type": "object",
+        "properties": {
+          "runId": {
+            "title": "run_id",
+            "$ref": "#/components/schemas/quant.algorand.v1.RunId"
+          },
+          "symbol": {
+            "type": "string",
+            "title": "symbol"
+          },
+          "interval": {
+            "type": "string",
+            "title": "interval"
+          }
+        },
+        "title": "GetTradingViewSeriesRequest",
+        "additionalProperties": false
+      },
+      "quant.algorand.v1.GetTradingViewSeriesResponse": {
+        "type": "object",
+        "properties": {
+          "series": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/quant.algorand.v1.TradingViewSeries"
+            },
+            "title": "series"
+          },
+          "meta": {
+            "title": "meta",
+            "$ref": "#/components/schemas/quant.algorand.v1.TradingViewResponseMeta"
+          }
+        },
+        "title": "GetTradingViewSeriesResponse",
+        "additionalProperties": false
+      },
+      "quant.algorand.v1.IndicatorDefinition": {
+        "type": "object",
+        "properties": {
+          "indicatorId": {
+            "type": "string",
+            "title": "indicator_id"
+          },
+          "version": {
+            "type": "string",
+            "title": "version"
+          },
+          "displayName": {
+            "type": "string",
+            "title": "display_name"
+          },
+          "description": {
+            "type": "string",
+            "title": "description"
+          }
+        },
+        "title": "IndicatorDefinition",
+        "additionalProperties": false
+      },
+      "quant.algorand.v1.IndicatorId": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "title": "value"
+          }
+        },
+        "title": "IndicatorId",
+        "additionalProperties": false
+      },
+      "quant.algorand.v1.ListAlertEventsRequest": {
+        "type": "object",
+        "properties": {
+          "runId": {
+            "title": "run_id",
+            "$ref": "#/components/schemas/quant.algorand.v1.RunId"
+          },
+          "paging": {
+            "title": "paging",
+            "$ref": "#/components/schemas/quant.algorand.v1.Paging"
+          }
+        },
+        "title": "ListAlertEventsRequest",
+        "additionalProperties": false
+      },
+      "quant.algorand.v1.ListAlertEventsResponse": {
+        "type": "object",
+        "properties": {
+          "events": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/quant.algorand.v1.AlertEvent"
+            },
+            "title": "events"
+          },
+          "page": {
+            "title": "page",
+            "$ref": "#/components/schemas/quant.algorand.v1.PageInfo"
+          }
+        },
+        "title": "ListAlertEventsResponse",
+        "additionalProperties": false
+      },
+      "quant.algorand.v1.ListIndicatorsRequest": {
+        "type": "object",
+        "title": "ListIndicatorsRequest",
+        "additionalProperties": false
+      },
+      "quant.algorand.v1.ListIndicatorsResponse": {
+        "type": "object",
+        "properties": {
+          "indicators": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/quant.algorand.v1.IndicatorDefinition"
+            },
+            "title": "indicators"
+          }
+        },
+        "title": "ListIndicatorsResponse",
+        "additionalProperties": false
+      },
+      "quant.algorand.v1.ListRunsRequest": {
+        "type": "object",
+        "properties": {
+          "paging": {
+            "title": "paging",
+            "$ref": "#/components/schemas/quant.algorand.v1.Paging"
+          }
+        },
+        "title": "ListRunsRequest",
+        "additionalProperties": false
+      },
+      "quant.algorand.v1.ListRunsResponse": {
+        "type": "object",
+        "properties": {
+          "runs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/quant.algorand.v1.GetRunResponse"
+            },
+            "title": "runs"
+          },
+          "page": {
+            "title": "page",
+            "$ref": "#/components/schemas/quant.algorand.v1.PageInfo"
+          }
+        },
+        "title": "ListRunsResponse",
+        "additionalProperties": false
+      },
+      "quant.algorand.v1.ListSignalsRequest": {
+        "type": "object",
+        "title": "ListSignalsRequest",
+        "additionalProperties": false
+      },
+      "quant.algorand.v1.ListSignalsResponse": {
+        "type": "object",
+        "properties": {
+          "signals": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/quant.algorand.v1.SignalDefinition"
+            },
+            "title": "signals"
+          }
+        },
+        "title": "ListSignalsResponse",
+        "additionalProperties": false
+      },
+      "quant.algorand.v1.ListStrategiesRequest": {
+        "type": "object",
+        "title": "ListStrategiesRequest",
+        "additionalProperties": false
+      },
+      "quant.algorand.v1.ListStrategiesResponse": {
+        "type": "object",
+        "properties": {
+          "strategies": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/quant.algorand.v1.StrategyDefinition"
+            },
+            "title": "strategies"
+          }
+        },
+        "title": "ListStrategiesResponse",
+        "additionalProperties": false
+      },
+      "quant.algorand.v1.Metric": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "name"
+          },
+          "value": {
+            "type": "number",
+            "title": "value",
+            "format": "double"
+          },
+          "unit": {
+            "type": "string",
+            "title": "unit"
+          }
+        },
+        "title": "Metric",
+        "additionalProperties": false
+      },
+      "quant.algorand.v1.ModelVersion": {
+        "type": "object",
+        "properties": {
+          "modelVersionId": {
+            "title": "model_version_id",
+            "$ref": "#/components/schemas/quant.algorand.v1.ModelVersionId"
+          },
+          "modelName": {
+            "type": "string",
+            "title": "model_name"
+          },
+          "status": {
+            "type": "string",
+            "title": "status"
+          },
+          "trainedTsMs": {
+            "type": [
+              "integer",
+              "string"
+            ],
+            "title": "trained_ts_ms",
+            "format": "int64"
+          },
+          "metrics": {
+            "type": "object",
+            "title": "metrics",
+            "additionalProperties": {
+              "type": "string",
+              "title": "value"
+            }
+          }
+        },
+        "title": "ModelVersion",
+        "additionalProperties": false
+      },
+      "quant.algorand.v1.ModelVersion.MetricsEntry": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "title": "key"
+          },
+          "value": {
+            "type": "string",
+            "title": "value"
+          }
+        },
+        "title": "MetricsEntry",
+        "additionalProperties": false
+      },
+      "quant.algorand.v1.ModelVersionId": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "title": "value"
+          }
+        },
+        "title": "ModelVersionId",
+        "additionalProperties": false
+      },
+      "quant.algorand.v1.PageInfo": {
+        "type": "object",
+        "properties": {
+          "nextPageToken": {
+            "type": "string",
+            "title": "next_page_token"
+          }
+        },
+        "title": "PageInfo",
+        "additionalProperties": false
+      },
+      "quant.algorand.v1.Paging": {
+        "type": "object",
+        "properties": {
+          "pageSize": {
+            "type": "integer",
+            "title": "page_size"
+          },
+          "pageToken": {
+            "type": "string",
+            "title": "page_token"
+          }
+        },
+        "title": "Paging",
+        "additionalProperties": false
+      },
+      "quant.algorand.v1.PlotlyFigureSpec": {
+        "type": "object",
+        "properties": {
+          "artifactId": {
+            "type": "string",
+            "title": "artifact_id"
+          },
+          "figureJson": {
+            "type": "string",
+            "title": "figure_json"
+          },
+          "kind": {
+            "type": "string",
+            "title": "kind"
+          }
+        },
+        "title": "PlotlyFigureSpec",
+        "additionalProperties": false
+      },
+      "quant.algorand.v1.RunBacktestRequest": {
+        "type": "object",
+        "properties": {
+          "symbol": {
+            "type": "string",
+            "title": "symbol"
+          },
+          "interval": {
+            "type": "string",
+            "title": "interval"
+          },
+          "timeRange": {
+            "title": "time_range",
+            "$ref": "#/components/schemas/quant.algorand.v1.TimeRange"
+          },
+          "strategyId": {
+            "title": "strategy_id",
+            "$ref": "#/components/schemas/quant.algorand.v1.StrategyId"
+          },
+          "strategyParams": {
+            "type": "object",
+            "title": "strategy_params",
+            "additionalProperties": {
+              "type": "string",
+              "title": "value"
+            }
+          }
+        },
+        "title": "RunBacktestRequest",
+        "additionalProperties": false
+      },
+      "quant.algorand.v1.RunBacktestRequest.StrategyParamsEntry": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "title": "key"
+          },
+          "value": {
+            "type": "string",
+            "title": "value"
+          }
+        },
+        "title": "StrategyParamsEntry",
+        "additionalProperties": false
+      },
+      "quant.algorand.v1.RunBacktestResponse": {
+        "type": "object",
+        "properties": {
+          "runId": {
+            "title": "run_id",
+            "$ref": "#/components/schemas/quant.algorand.v1.RunId"
+          },
+          "status": {
+            "type": "string",
+            "title": "status"
+          }
+        },
+        "title": "RunBacktestResponse",
+        "additionalProperties": false
+      },
+      "quant.algorand.v1.RunId": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "title": "value"
+          }
+        },
+        "title": "RunId",
+        "additionalProperties": false
+      },
+      "quant.algorand.v1.RunTrainingJobRequest": {
+        "type": "object",
+        "properties": {
+          "modelName": {
+            "type": "string",
+            "title": "model_name"
+          },
+          "trainingRange": {
+            "title": "training_range",
+            "$ref": "#/components/schemas/quant.algorand.v1.TimeRange"
+          },
+          "hyperparameters": {
+            "type": "object",
+            "title": "hyperparameters",
+            "additionalProperties": {
+              "type": "string",
+              "title": "value"
+            }
+          }
+        },
+        "title": "RunTrainingJobRequest",
+        "additionalProperties": false
+      },
+      "quant.algorand.v1.RunTrainingJobRequest.HyperparametersEntry": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "title": "key"
+          },
+          "value": {
+            "type": "string",
+            "title": "value"
+          }
+        },
+        "title": "HyperparametersEntry",
+        "additionalProperties": false
+      },
+      "quant.algorand.v1.RunTrainingJobResponse": {
+        "type": "object",
+        "properties": {
+          "jobId": {
+            "type": "string",
+            "title": "job_id"
+          },
+          "status": {
+            "type": "string",
+            "title": "status"
+          }
+        },
+        "title": "RunTrainingJobResponse",
+        "additionalProperties": false
+      },
+      "quant.algorand.v1.SignalDefinition": {
+        "type": "object",
+        "properties": {
+          "signalId": {
+            "type": "string",
+            "title": "signal_id"
+          },
+          "version": {
+            "type": "string",
+            "title": "version"
+          },
+          "displayName": {
+            "type": "string",
+            "title": "display_name"
+          },
+          "description": {
+            "type": "string",
+            "title": "description"
+          }
+        },
+        "title": "SignalDefinition",
+        "additionalProperties": false
+      },
+      "quant.algorand.v1.SimilarStock": {
+        "type": "object",
+        "properties": {
+          "symbol": {
+            "type": "string",
+            "title": "symbol"
+          },
+          "sector": {
+            "type": "string",
+            "title": "sector"
+          },
+          "clusterId": {
+            "type": "integer",
+            "title": "cluster_id",
+            "format": "int32"
+          },
+          "score": {
+            "type": "number",
+            "title": "score",
+            "format": "double"
+          },
+          "priceActionSimilarity": {
+            "type": "number",
+            "title": "price_action_similarity",
+            "format": "double"
+          },
+          "volatilitySimilarity": {
+            "type": "number",
+            "title": "volatility_similarity",
+            "format": "double"
+          },
+          "performanceSimilarity": {
+            "type": "number",
+            "title": "performance_similarity",
+            "format": "double"
+          },
+          "sectorSimilarity": {
+            "type": "number",
+            "title": "sector_similarity",
+            "format": "double"
+          },
+          "periodReturn": {
+            "type": "number",
+            "title": "period_return",
+            "format": "double"
+          },
+          "volatility": {
+            "type": "number",
+            "title": "volatility",
+            "format": "double"
+          }
+        },
+        "title": "SimilarStock",
+        "additionalProperties": false
+      },
+      "quant.algorand.v1.SimilarityWeights": {
+        "type": "object",
+        "properties": {
+          "priceActionWeight": {
+            "type": "number",
+            "title": "price_action_weight",
+            "format": "double"
+          },
+          "volatilityWeight": {
+            "type": "number",
+            "title": "volatility_weight",
+            "format": "double"
+          },
+          "performanceWeight": {
+            "type": "number",
+            "title": "performance_weight",
+            "format": "double"
+          },
+          "sectorWeight": {
+            "type": "number",
+            "title": "sector_weight",
+            "format": "double"
+          }
+        },
+        "title": "SimilarityWeights",
+        "additionalProperties": false
+      },
+      "quant.algorand.v1.StrategyDefinition": {
+        "type": "object",
+        "properties": {
+          "strategyId": {
+            "type": "string",
+            "title": "strategy_id"
+          },
+          "version": {
+            "type": "string",
+            "title": "version"
+          },
+          "displayName": {
+            "type": "string",
+            "title": "display_name"
+          },
+          "description": {
+            "type": "string",
+            "title": "description"
+          }
+        },
+        "title": "StrategyDefinition",
+        "additionalProperties": false
+      },
+      "quant.algorand.v1.StrategyId": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "title": "value"
+          }
+        },
+        "title": "StrategyId",
+        "additionalProperties": false
+      },
+      "quant.algorand.v1.TestAlertRequest": {
+        "type": "object",
+        "properties": {
+          "channel": {
+            "type": "string",
+            "title": "channel"
+          },
+          "target": {
+            "type": "string",
+            "title": "target"
+          },
+          "message": {
+            "type": "string",
+            "title": "message"
+          }
+        },
+        "title": "TestAlertRequest",
+        "additionalProperties": false
+      },
+      "quant.algorand.v1.TestAlertResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "status"
+          },
+          "eventId": {
+            "type": "string",
+            "title": "event_id"
+          }
+        },
+        "title": "TestAlertResponse",
+        "additionalProperties": false
+      },
+      "quant.algorand.v1.TimeRange": {
+        "type": "object",
+        "properties": {
+          "startTsMs": {
+            "type": [
+              "integer",
+              "string"
+            ],
+            "title": "start_ts_ms",
+            "format": "int64"
+          },
+          "endTsMs": {
+            "type": [
+              "integer",
+              "string"
+            ],
+            "title": "end_ts_ms",
+            "format": "int64"
+          }
+        },
+        "title": "TimeRange",
+        "additionalProperties": false
+      },
+      "quant.algorand.v1.TimeWindow": {
+        "type": "object",
+        "oneOf": [
+          {
+            "properties": {
+              "dateRange": {
+                "title": "date_range",
+                "$ref": "#/components/schemas/quant.algorand.v1.DateRange"
+              }
+            },
+            "title": "date_range",
+            "required": [
+              "dateRange"
+            ]
+          },
+          {
+            "properties": {
+              "windowBars": {
+                "type": "integer",
+                "title": "window_bars",
+                "format": "int32"
+              }
+            },
+            "title": "window_bars",
+            "required": [
+              "windowBars"
+            ]
+          }
+        ],
+        "title": "TimeWindow",
+        "additionalProperties": false
+      },
+      "quant.algorand.v1.TradingViewPoint": {
+        "type": "object",
+        "properties": {
+          "tsMs": {
+            "type": [
+              "integer",
+              "string"
+            ],
+            "title": "ts_ms",
+            "format": "int64"
+          },
+          "value": {
+            "type": "number",
+            "title": "value",
+            "format": "double"
+          }
+        },
+        "title": "TradingViewPoint",
+        "additionalProperties": false
+      },
+      "quant.algorand.v1.TradingViewResponseMeta": {
+        "type": "object",
+        "properties": {
+          "timezone": {
+            "type": "string",
+            "title": "timezone"
+          },
+          "symbol": {
+            "type": "string",
+            "title": "symbol"
+          },
+          "interval": {
+            "type": "string",
+            "title": "interval"
+          },
+          "sourceVersion": {
+            "type": "string",
+            "title": "source_version"
+          }
+        },
+        "title": "TradingViewResponseMeta",
+        "additionalProperties": false
+      },
+      "quant.algorand.v1.TradingViewSeries": {
+        "type": "object",
+        "properties": {
+          "seriesId": {
+            "type": "string",
+            "title": "series_id"
+          },
+          "name": {
+            "type": "string",
+            "title": "name"
+          },
+          "pane": {
+            "type": "string",
+            "title": "pane"
+          },
+          "color": {
+            "type": "string",
+            "title": "color"
+          },
+          "points": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/quant.algorand.v1.TradingViewPoint"
+            },
+            "title": "points"
+          }
+        },
+        "title": "TradingViewSeries",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.Bar": {
+        "type": "object",
+        "properties": {
+          "symbol": {
+            "type": "string",
+            "title": "symbol"
+          },
+          "interval": {
+            "type": "string",
+            "title": "interval"
+          },
+          "tsMs": {
+            "type": [
+              "integer",
+              "string"
+            ],
+            "title": "ts_ms",
+            "format": "int64"
+          },
+          "open": {
+            "type": "number",
+            "title": "open",
+            "format": "double"
+          },
+          "high": {
+            "type": "number",
+            "title": "high",
+            "format": "double"
+          },
+          "low": {
+            "type": "number",
+            "title": "low",
+            "format": "double"
+          },
+          "close": {
+            "type": "number",
+            "title": "close",
+            "format": "double"
+          },
+          "volume": {
+            "type": "number",
+            "title": "volume",
+            "format": "double"
+          }
+        },
+        "title": "Bar",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.BoolList": {
+        "type": "object",
+        "properties": {
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "boolean"
+            },
+            "title": "values"
+          }
+        },
+        "title": "BoolList",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.BoolOrBoolList": {
+        "type": "object",
+        "oneOf": [
+          {
+            "properties": {
+              "many": {
+                "title": "many",
+                "$ref": "#/components/schemas/quant.datafeed.v1.BoolList"
+              }
+            },
+            "title": "many",
+            "required": [
+              "many"
+            ]
+          },
+          {
+            "properties": {
+              "single": {
+                "type": "boolean",
+                "title": "single"
+              }
+            },
+            "title": "single",
+            "required": [
+              "single"
+            ]
+          }
+        ],
+        "title": "BoolOrBoolList",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.BoolOrNullableBoolList": {
+        "type": "object",
+        "oneOf": [
+          {
+            "properties": {
+              "many": {
+                "title": "many",
+                "$ref": "#/components/schemas/quant.datafeed.v1.NullableBoolList"
+              }
+            },
+            "title": "many",
+            "required": [
+              "many"
+            ]
+          },
+          {
+            "properties": {
+              "single": {
+                "type": "boolean",
+                "title": "single"
+              }
+            },
+            "title": "single",
+            "required": [
+              "single"
+            ]
+          }
+        ],
+        "title": "BoolOrNullableBoolList",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.CurrencyCodeEntry": {
+        "type": "object",
+        "oneOf": [
+          {
+            "properties": {
+              "code": {
+                "type": "string",
+                "title": "code"
+              }
+            },
+            "title": "code",
+            "required": [
+              "code"
+            ]
+          },
+          {
+            "properties": {
+              "item": {
+                "title": "item",
+                "$ref": "#/components/schemas/quant.datafeed.v1.CurrencyItem"
+              }
+            },
+            "title": "item",
+            "required": [
+              "item"
+            ]
+          }
+        ],
+        "title": "CurrencyCodeEntry",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.CurrencyItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "id"
+          },
+          "code": {
+            "type": "string",
+            "title": "code"
+          },
+          "description": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "description"
+          }
+        },
+        "title": "CurrencyItem",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.DataStatus": {
+        "type": "string",
+        "title": "DataStatus",
+        "enum": [
+          "DATA_STATUS_UNSPECIFIED",
+          "DATA_STATUS_STREAMING",
+          "DATA_STATUS_ENDOFDAY",
+          "DATA_STATUS_DELAYED_STREAMING"
+        ]
+      },
+      "quant.datafeed.v1.DoubleList": {
+        "type": "object",
+        "properties": {
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            },
+            "title": "values"
+          }
+        },
+        "title": "DoubleList",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.DoubleOrDoubleList": {
+        "type": "object",
+        "oneOf": [
+          {
+            "properties": {
+              "many": {
+                "title": "many",
+                "$ref": "#/components/schemas/quant.datafeed.v1.DoubleList"
+              }
+            },
+            "title": "many",
+            "required": [
+              "many"
+            ]
+          },
+          {
+            "properties": {
+              "single": {
+                "type": "number",
+                "title": "single",
+                "format": "double"
+              }
+            },
+            "title": "single",
+            "required": [
+              "single"
+            ]
+          }
+        ],
+        "title": "DoubleOrDoubleList",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.DoubleOrNullableDoubleList": {
+        "type": "object",
+        "oneOf": [
+          {
+            "properties": {
+              "many": {
+                "title": "many",
+                "$ref": "#/components/schemas/quant.datafeed.v1.NullableDoubleList"
+              }
+            },
+            "title": "many",
+            "required": [
+              "many"
+            ]
+          },
+          {
+            "properties": {
+              "single": {
+                "type": "number",
+                "title": "single",
+                "format": "double"
+              }
+            },
+            "title": "single",
+            "required": [
+              "single"
+            ]
+          }
+        ],
+        "title": "DoubleOrNullableDoubleList",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.ExchangeDescriptor": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "title": "value"
+          },
+          "name": {
+            "type": "string",
+            "title": "name"
+          },
+          "desc": {
+            "type": "string",
+            "title": "desc"
+          }
+        },
+        "title": "ExchangeDescriptor",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.GetConfigRequest": {
+        "type": "object",
+        "title": "GetConfigRequest",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.GetConfigResponse": {
+        "type": "object",
+        "properties": {
+          "supportedResolutions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "title": "supported_resolutions"
+          },
+          "supportsGroupRequest": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "title": "supports_group_request"
+          },
+          "supportsMarks": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "title": "supports_marks"
+          },
+          "supportsSearch": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "title": "supports_search"
+          },
+          "supportsTimescaleMarks": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "title": "supports_timescale_marks"
+          },
+          "supportsTime": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "title": "supports_time"
+          },
+          "exchanges": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/quant.datafeed.v1.ExchangeDescriptor"
+            },
+            "title": "exchanges"
+          },
+          "symbolsTypes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/quant.datafeed.v1.SymbolTypeDescriptor"
+            },
+            "title": "symbols_types"
+          },
+          "currencyCodes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/quant.datafeed.v1.CurrencyCodeEntry"
+            },
+            "title": "currency_codes"
+          },
+          "units": {
+            "type": "object",
+            "title": "units",
+            "additionalProperties": {
+              "title": "value",
+              "$ref": "#/components/schemas/quant.datafeed.v1.UnitList"
+            }
+          },
+          "symbolsGrouping": {
+            "type": "object",
+            "title": "symbols_grouping",
+            "additionalProperties": {
+              "type": "string",
+              "title": "value"
+            }
+          }
+        },
+        "title": "GetConfigResponse",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.GetConfigResponse.SymbolsGroupingEntry": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "title": "key"
+          },
+          "value": {
+            "type": "string",
+            "title": "value"
+          }
+        },
+        "title": "SymbolsGroupingEntry",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.GetConfigResponse.UnitsEntry": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "title": "key"
+          },
+          "value": {
+            "title": "value",
+            "$ref": "#/components/schemas/quant.datafeed.v1.UnitList"
+          }
+        },
+        "title": "UnitsEntry",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.GetHistoryError": {
+        "type": "object",
+        "properties": {
+          "errmsg": {
+            "type": "string",
+            "title": "errmsg"
+          }
+        },
+        "title": "GetHistoryError",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.GetHistoryNoData": {
+        "type": "object",
+        "properties": {
+          "nextTime": {
+            "type": [
+              "integer",
+              "string",
+              "null"
+            ],
+            "title": "next_time",
+            "format": "int64"
+          }
+        },
+        "title": "GetHistoryNoData",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.GetHistoryOk": {
+        "type": "object",
+        "properties": {
+          "t": {
+            "type": "array",
+            "items": {
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int64"
+            },
+            "title": "t"
+          },
+          "c": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            },
+            "title": "c"
+          },
+          "o": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            },
+            "title": "o"
+          },
+          "h": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            },
+            "title": "h"
+          },
+          "l": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            },
+            "title": "l"
+          },
+          "v": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            },
+            "title": "v"
+          }
+        },
+        "title": "GetHistoryOk",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.GetHistoryRequest": {
+        "type": "object",
+        "properties": {
+          "symbol": {
+            "type": "string",
+            "title": "symbol",
+            "minLength": 1
+          },
+          "from": {
+            "type": [
+              "integer",
+              "string"
+            ],
+            "title": "from",
+            "format": "int64"
+          },
+          "to": {
+            "type": [
+              "integer",
+              "string"
+            ],
+            "title": "to",
+            "format": "int64"
+          },
+          "resolution": {
+            "type": "string",
+            "title": "resolution",
+            "minLength": 1
+          },
+          "countback": {
+            "exclusiveMinimum": 0,
+            "type": "integer",
+            "title": "countback"
+          }
+        },
+        "title": "GetHistoryRequest",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.GetHistoryResponse": {
+        "type": "object",
+        "oneOf": [
+          {
+            "properties": {
+              "error": {
+                "title": "error",
+                "$ref": "#/components/schemas/quant.datafeed.v1.GetHistoryError"
+              }
+            },
+            "title": "error",
+            "required": [
+              "error"
+            ]
+          },
+          {
+            "properties": {
+              "noData": {
+                "title": "no_data",
+                "$ref": "#/components/schemas/quant.datafeed.v1.GetHistoryNoData"
+              }
+            },
+            "title": "no_data",
+            "required": [
+              "noData"
+            ]
+          },
+          {
+            "properties": {
+              "ok": {
+                "title": "ok",
+                "$ref": "#/components/schemas/quant.datafeed.v1.GetHistoryOk"
+              }
+            },
+            "title": "ok",
+            "required": [
+              "ok"
+            ]
+          }
+        ],
+        "title": "GetHistoryResponse",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.GetMarksRequest": {
+        "type": "object",
+        "properties": {
+          "symbol": {
+            "type": "string",
+            "title": "symbol",
+            "minLength": 1
+          },
+          "from": {
+            "type": [
+              "integer",
+              "string"
+            ],
+            "title": "from",
+            "format": "int64"
+          },
+          "to": {
+            "type": [
+              "integer",
+              "string"
+            ],
+            "title": "to",
+            "format": "int64"
+          },
+          "resolution": {
+            "type": "string",
+            "title": "resolution",
+            "minLength": 1
+          }
+        },
+        "title": "GetMarksRequest",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.GetMarksResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/quant.datafeed.v1.MarkId"
+            },
+            "title": "id"
+          },
+          "time": {
+            "title": "time",
+            "$ref": "#/components/schemas/quant.datafeed.v1.Int64OrInt64List"
+          },
+          "color": {
+            "title": "color",
+            "$ref": "#/components/schemas/quant.datafeed.v1.StringOrStringList"
+          },
+          "text": {
+            "title": "text",
+            "$ref": "#/components/schemas/quant.datafeed.v1.StringOrStringList"
+          },
+          "label": {
+            "title": "label",
+            "$ref": "#/components/schemas/quant.datafeed.v1.StringOrStringList"
+          },
+          "labelFontColor": {
+            "title": "label_font_color",
+            "$ref": "#/components/schemas/quant.datafeed.v1.StringOrStringList"
+          },
+          "minSize": {
+            "title": "min_size",
+            "$ref": "#/components/schemas/quant.datafeed.v1.DoubleOrDoubleList"
+          },
+          "borderWidth": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/quant.datafeed.v1.DoubleOrNullableDoubleList"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "border_width"
+          },
+          "hoveredBorderWidth": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/quant.datafeed.v1.DoubleOrNullableDoubleList"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "hovered_border_width"
+          },
+          "imageUrl": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/quant.datafeed.v1.StringOrNullableStringList"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "image_url"
+          },
+          "showLabelWhenImageLoaded": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/quant.datafeed.v1.BoolOrNullableBoolList"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "show_label_when_image_loaded"
+          }
+        },
+        "title": "GetMarksResponse",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.GetQuotesError": {
+        "type": "object",
+        "properties": {
+          "errmsg": {
+            "type": "string",
+            "title": "errmsg"
+          }
+        },
+        "title": "GetQuotesError",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.GetQuotesOk": {
+        "type": "object",
+        "properties": {
+          "d": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/quant.datafeed.v1.QuoteData"
+            },
+            "title": "d"
+          }
+        },
+        "title": "GetQuotesOk",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.GetQuotesRequest": {
+        "type": "object",
+        "properties": {
+          "symbols": {
+            "type": "string",
+            "title": "symbols",
+            "minLength": 1
+          }
+        },
+        "title": "GetQuotesRequest",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.GetQuotesResponse": {
+        "type": "object",
+        "oneOf": [
+          {
+            "properties": {
+              "error": {
+                "title": "error",
+                "$ref": "#/components/schemas/quant.datafeed.v1.GetQuotesError"
+              }
+            },
+            "title": "error",
+            "required": [
+              "error"
+            ]
+          },
+          {
+            "properties": {
+              "ok": {
+                "title": "ok",
+                "$ref": "#/components/schemas/quant.datafeed.v1.GetQuotesOk"
+              }
+            },
+            "title": "ok",
+            "required": [
+              "ok"
+            ]
+          }
+        ],
+        "title": "GetQuotesResponse",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.GetSymbolGroupInfoRequest": {
+        "type": "object",
+        "properties": {
+          "group": {
+            "type": "string",
+            "title": "group",
+            "minLength": 1
+          }
+        },
+        "title": "GetSymbolGroupInfoRequest",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.GetSymbolGroupInfoResponse": {
+        "type": "object",
+        "properties": {
+          "symbol": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "title": "symbol"
+          },
+          "description": {
+            "title": "description",
+            "$ref": "#/components/schemas/quant.datafeed.v1.StringOrStringList"
+          },
+          "minmov": {
+            "title": "minmov",
+            "$ref": "#/components/schemas/quant.datafeed.v1.DoubleOrDoubleList"
+          },
+          "pricescale": {
+            "title": "pricescale",
+            "$ref": "#/components/schemas/quant.datafeed.v1.DoubleOrDoubleList"
+          },
+          "type": {
+            "title": "type",
+            "$ref": "#/components/schemas/quant.datafeed.v1.StringOrStringList"
+          },
+          "timezone": {
+            "title": "timezone",
+            "$ref": "#/components/schemas/quant.datafeed.v1.StringOrStringList"
+          },
+          "exchange-listed": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/quant.datafeed.v1.StringOrStringList"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "exchange_listed"
+          },
+          "exchange-traded": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/quant.datafeed.v1.StringOrStringList"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "exchange_traded"
+          },
+          "minmov2": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/quant.datafeed.v1.DoubleOrDoubleList"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "minmov2"
+          },
+          "fractional": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/quant.datafeed.v1.BoolOrBoolList"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "fractional"
+          },
+          "has-intraday": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/quant.datafeed.v1.BoolOrBoolList"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "has_intraday"
+          },
+          "has-daily": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/quant.datafeed.v1.BoolOrBoolList"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "has_daily"
+          },
+          "has-weekly-and-monthly": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/quant.datafeed.v1.BoolOrBoolList"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "has_weekly_and_monthly"
+          },
+          "has-empty-bars": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/quant.datafeed.v1.BoolOrBoolList"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "has_empty_bars"
+          },
+          "visible-plots-set": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/quant.datafeed.v1.VisiblePlotsSetOrList"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "visible_plots_set"
+          },
+          "ticker": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/quant.datafeed.v1.StringOrStringList"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "ticker"
+          },
+          "session-regular": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/quant.datafeed.v1.StringOrStringList"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "session_regular"
+          },
+          "session-holidays": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/quant.datafeed.v1.StringOrStringList"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "session_holidays"
+          },
+          "corrections": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/quant.datafeed.v1.StringOrStringList"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "corrections"
+          },
+          "supported-resolutions": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/quant.datafeed.v1.StringListOrStringListList"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "supported_resolutions"
+          },
+          "force-session-rebuild": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/quant.datafeed.v1.BoolOrBoolList"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "force_session_rebuild"
+          },
+          "intraday-multipliers": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/quant.datafeed.v1.StringListOrStringListList"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "intraday_multipliers"
+          },
+          "volumePrecision": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/quant.datafeed.v1.DoubleOrDoubleList"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "volume_precision"
+          }
+        },
+        "title": "GetSymbolGroupInfoResponse",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.GetTimeRequest": {
+        "type": "object",
+        "title": "GetTimeRequest",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.GetTimeResponse": {
+        "type": "object",
+        "properties": {
+          "unixTime": {
+            "type": [
+              "integer",
+              "string"
+            ],
+            "title": "unix_time",
+            "format": "int64"
+          }
+        },
+        "title": "GetTimeResponse",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.GetTimescaleMarksRequest": {
+        "type": "object",
+        "properties": {
+          "symbol": {
+            "type": "string",
+            "title": "symbol",
+            "minLength": 1
+          },
+          "from": {
+            "type": [
+              "integer",
+              "string"
+            ],
+            "title": "from",
+            "format": "int64"
+          },
+          "to": {
+            "type": [
+              "integer",
+              "string"
+            ],
+            "title": "to",
+            "format": "int64"
+          },
+          "resolution": {
+            "type": "string",
+            "title": "resolution",
+            "minLength": 1
+          }
+        },
+        "title": "GetTimescaleMarksRequest",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.GetTimescaleMarksResponse": {
+        "type": "object",
+        "properties": {
+          "marks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/quant.datafeed.v1.TimescaleMark"
+            },
+            "title": "marks"
+          }
+        },
+        "title": "GetTimescaleMarksResponse",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.IngestTicksRequest": {
+        "type": "object",
+        "properties": {
+          "ticks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/quant.datafeed.v1.Tick"
+            },
+            "title": "ticks"
+          }
+        },
+        "title": "IngestTicksRequest",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.IngestTicksResponse": {
+        "type": "object",
+        "properties": {
+          "inserted": {
+            "type": "integer",
+            "title": "inserted"
+          }
+        },
+        "title": "IngestTicksResponse",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.Int64List": {
+        "type": "object",
+        "properties": {
+          "values": {
+            "type": "array",
+            "items": {
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int64"
+            },
+            "title": "values"
+          }
+        },
+        "title": "Int64List",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.Int64OrInt64List": {
+        "type": "object",
+        "oneOf": [
+          {
+            "properties": {
+              "many": {
+                "title": "many",
+                "$ref": "#/components/schemas/quant.datafeed.v1.Int64List"
+              }
+            },
+            "title": "many",
+            "required": [
+              "many"
+            ]
+          },
+          {
+            "properties": {
+              "single": {
+                "type": [
+                  "integer",
+                  "string"
+                ],
+                "title": "single",
+                "format": "int64"
+              }
+            },
+            "title": "single",
+            "required": [
+              "single"
+            ]
+          }
+        ],
+        "title": "Int64OrInt64List",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.LibrarySymbolInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "name",
+            "minLength": 1
+          },
+          "ticker": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "ticker",
+            "minLength": 1
+          },
+          "description": {
+            "type": "string",
+            "title": "description",
+            "minLength": 1
+          },
+          "type": {
+            "type": "string",
+            "title": "type",
+            "minLength": 1
+          },
+          "session": {
+            "type": "string",
+            "title": "session",
+            "minLength": 1
+          },
+          "sessionHolidays": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "session_holidays"
+          },
+          "sessionDisplay": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "session_display"
+          },
+          "corrections": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "corrections"
+          },
+          "timezone": {
+            "type": "string",
+            "title": "timezone",
+            "minLength": 1
+          },
+          "exchange": {
+            "type": "string",
+            "title": "exchange",
+            "minLength": 1
+          },
+          "listedExchange": {
+            "type": "string",
+            "title": "listed_exchange",
+            "minLength": 1
+          },
+          "format": {
+            "title": "format",
+            "$ref": "#/components/schemas/quant.datafeed.v1.SeriesFormat"
+          },
+          "minmov": {
+            "exclusiveMinimum": 0,
+            "type": "integer",
+            "title": "minmov",
+            "format": "int32"
+          },
+          "pricescale": {
+            "exclusiveMinimum": 0,
+            "type": "integer",
+            "title": "pricescale",
+            "format": "int32"
+          },
+          "minmove2": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "title": "minmove2",
+            "minimum": 0,
+            "format": "int32"
+          },
+          "fractional": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "title": "fractional"
+          },
+          "variableTickSize": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "variable_tick_size"
+          },
+          "hasIntraday": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "title": "has_intraday"
+          },
+          "hasDaily": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "title": "has_daily"
+          },
+          "hasWeeklyAndMonthly": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "title": "has_weekly_and_monthly"
+          },
+          "hasSeconds": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "title": "has_seconds"
+          },
+          "hasTicks": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "title": "has_ticks"
+          },
+          "hasEmptyBars": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "title": "has_empty_bars"
+          },
+          "buildSecondsFromTicks": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "title": "build_seconds_from_ticks"
+          },
+          "supportedResolutions": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "title": "supported_resolutions"
+          },
+          "intradayMultipliers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "title": "intraday_multipliers"
+          },
+          "secondsMultipliers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "title": "seconds_multipliers"
+          },
+          "dailyMultipliers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "title": "daily_multipliers"
+          },
+          "weeklyMultipliers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "title": "weekly_multipliers"
+          },
+          "monthlyMultipliers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "title": "monthly_multipliers"
+          },
+          "volumePrecision": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "title": "volume_precision",
+            "minimum": 0,
+            "format": "int32"
+          },
+          "dataStatus": {
+            "title": "data_status",
+            "$ref": "#/components/schemas/quant.datafeed.v1.DataStatus"
+          },
+          "delay": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "title": "delay",
+            "minimum": 0,
+            "format": "int32"
+          },
+          "expired": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "title": "expired"
+          },
+          "expirationDate": {
+            "exclusiveMinimum": 0,
+            "type": [
+              "integer",
+              "string",
+              "null"
+            ],
+            "title": "expiration_date",
+            "format": "int64"
+          },
+          "sector": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "sector"
+          },
+          "industry": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "industry"
+          },
+          "currencyCode": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "currency_code"
+          },
+          "originalCurrencyCode": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "original_currency_code"
+          },
+          "unitId": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "unit_id"
+          },
+          "originalUnitId": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "original_unit_id"
+          },
+          "unitConversionTypes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "title": "unit_conversion_types"
+          },
+          "visiblePlotsSet": {
+            "title": "visible_plots_set",
+            "$ref": "#/components/schemas/quant.datafeed.v1.VisiblePlotsSet"
+          },
+          "exchangeLogo": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "exchange_logo"
+          },
+          "logoUrls": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "title": "logo_urls",
+            "maxItems": 2,
+            "minItems": 1
+          },
+          "longDescription": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "long_description"
+          },
+          "baseName": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "title": "base_name"
+          },
+          "priceSources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/quant.datafeed.v1.SymbolPriceSource"
+            },
+            "title": "price_sources"
+          },
+          "priceSourceId": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "price_source_id",
+            "minLength": 1
+          },
+          "subsessions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/quant.datafeed.v1.SubsessionInfo"
+            },
+            "title": "subsessions"
+          },
+          "subsessionId": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "subsession_id",
+            "minLength": 1
+          },
+          "libraryCustomFields": {
+            "type": "object",
+            "title": "library_custom_fields",
+            "additionalProperties": {
+              "title": "value",
+              "$ref": "#/components/schemas/google.protobuf.Value"
+            }
+          }
+        },
+        "title": "LibrarySymbolInfo",
+        "additionalProperties": false,
+        "description": "Common symbol format used across UDF and scanner integrations."
+      },
+      "quant.datafeed.v1.LibrarySymbolInfo.LibraryCustomFieldsEntry": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "title": "key"
+          },
+          "value": {
+            "title": "value",
+            "$ref": "#/components/schemas/google.protobuf.Value"
+          }
+        },
+        "title": "LibraryCustomFieldsEntry",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.ListNewsRequest": {
+        "type": "object",
+        "properties": {
+          "symbol": {
+            "type": "string",
+            "title": "symbol"
+          },
+          "limit": {
+            "type": "integer",
+            "title": "limit"
+          }
+        },
+        "title": "ListNewsRequest",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.ListNewsResponse": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/quant.datafeed.v1.NewsEvent"
+            },
+            "title": "items"
+          }
+        },
+        "title": "ListNewsResponse",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.ListSocialRequest": {
+        "type": "object",
+        "properties": {
+          "symbol": {
+            "type": "string",
+            "title": "symbol"
+          },
+          "limit": {
+            "type": "integer",
+            "title": "limit"
+          }
+        },
+        "title": "ListSocialRequest",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.ListSocialResponse": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/quant.datafeed.v1.SocialEvent"
+            },
+            "title": "items"
+          }
+        },
+        "title": "ListSocialResponse",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.ListSymbolsRequest": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "query",
+            "maxLength": 256,
+            "minLength": 1
+          },
+          "type": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "type",
+            "minLength": 1
+          },
+          "exchange": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "exchange",
+            "minLength": 1
+          },
+          "limit": {
+            "exclusiveMinimum": 0,
+            "type": [
+              "integer",
+              "null"
+            ],
+            "title": "limit",
+            "maximum": 500
+          },
+          "offset": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "title": "offset",
+            "maximum": 1000000
+          },
+          "markets": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "maxLength": 64,
+              "minLength": 1
+            },
+            "title": "markets",
+            "maxItems": 25
+          },
+          "symbols": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "maxLength": 128,
+              "minLength": 1
+            },
+            "title": "symbols",
+            "maxItems": 1000
+          },
+          "includeExpired": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "title": "include_expired"
+          },
+          "sortBy": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "sort_by",
+            "maxLength": 64,
+            "minLength": 1
+          },
+          "sortOrder": {
+            "title": "sort_order",
+            "$ref": "#/components/schemas/quant.datafeed.v1.SortOrder"
+          }
+        },
+        "title": "ListSymbolsRequest",
+        "additionalProperties": false,
+        "description": "Query model for listing symbols in common LibrarySymbolInfo format."
+      },
+      "quant.datafeed.v1.ListSymbolsResponse": {
+        "type": "object",
+        "properties": {
+          "totalCount": {
+            "type": "integer",
+            "title": "total_count"
+          },
+          "symbols": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/quant.datafeed.v1.LibrarySymbolInfo"
+            },
+            "title": "symbols"
+          }
+        },
+        "title": "ListSymbolsResponse",
+        "additionalProperties": false,
+        "description": "Paged symbol list in common LibrarySymbolInfo format."
+      },
+      "quant.datafeed.v1.MarkId": {
+        "type": "object",
+        "oneOf": [
+          {
+            "properties": {
+              "numericId": {
+                "type": [
+                  "integer",
+                  "string"
+                ],
+                "title": "numeric_id",
+                "format": "int64"
+              }
+            },
+            "title": "numeric_id",
+            "required": [
+              "numericId"
+            ]
+          },
+          {
+            "properties": {
+              "stringId": {
+                "type": "string",
+                "title": "string_id"
+              }
+            },
+            "title": "string_id",
+            "required": [
+              "stringId"
+            ]
+          }
+        ],
+        "title": "MarkId",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.NewsEvent": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "id"
+          },
+          "symbol": {
+            "type": "string",
+            "title": "symbol"
+          },
+          "title": {
+            "type": "string",
+            "title": "title"
+          },
+          "url": {
+            "type": "string",
+            "title": "url"
+          },
+          "tsMs": {
+            "type": [
+              "integer",
+              "string"
+            ],
+            "title": "ts_ms",
+            "format": "int64"
+          },
+          "source": {
+            "type": "string",
+            "title": "source"
+          }
+        },
+        "title": "NewsEvent",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.NullableBoolList": {
+        "type": "object",
+        "properties": {
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/google.protobuf.BoolValue"
+            },
+            "title": "values"
+          }
+        },
+        "title": "NullableBoolList",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.NullableDoubleList": {
+        "type": "object",
+        "properties": {
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/google.protobuf.DoubleValue"
+            },
+            "title": "values"
+          }
+        },
+        "title": "NullableDoubleList",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.NullableStringList": {
+        "type": "object",
+        "properties": {
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/google.protobuf.StringValue"
+            },
+            "title": "values"
+          }
+        },
+        "title": "NullableStringList",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.QueryBarsRequest": {
+        "type": "object",
+        "properties": {
+          "symbol": {
+            "type": "string",
+            "title": "symbol"
+          },
+          "interval": {
+            "type": "string",
+            "title": "interval"
+          },
+          "startTsMs": {
+            "type": [
+              "integer",
+              "string"
+            ],
+            "title": "start_ts_ms",
+            "format": "int64"
+          },
+          "endTsMs": {
+            "type": [
+              "integer",
+              "string"
+            ],
+            "title": "end_ts_ms",
+            "format": "int64"
+          },
+          "limit": {
+            "type": "integer",
+            "title": "limit"
+          }
+        },
+        "title": "QueryBarsRequest",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.QueryBarsResponse": {
+        "type": "object",
+        "properties": {
+          "bars": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/quant.datafeed.v1.Bar"
+            },
+            "title": "bars"
+          }
+        },
+        "title": "QueryBarsResponse",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.QuoteData": {
+        "type": "object",
+        "properties": {
+          "s": {
+            "type": "string",
+            "title": "s"
+          },
+          "n": {
+            "type": "string",
+            "title": "n"
+          },
+          "v": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/quant.datafeed.v1.QuoteValues"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "v"
+          }
+        },
+        "title": "QuoteData",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.QuoteValues": {
+        "type": "object",
+        "properties": {
+          "ch": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "title": "ch",
+            "format": "double"
+          },
+          "chp": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "title": "chp",
+            "format": "double"
+          },
+          "shortName": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "short_name"
+          },
+          "exchange": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "exchange"
+          },
+          "description": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "description"
+          },
+          "lp": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "title": "lp",
+            "format": "double"
+          },
+          "ask": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "title": "ask",
+            "format": "double"
+          },
+          "bid": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "title": "bid",
+            "format": "double"
+          },
+          "openPrice": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "title": "open_price",
+            "format": "double"
+          },
+          "highPrice": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "title": "high_price",
+            "format": "double"
+          },
+          "lowPrice": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "title": "low_price",
+            "format": "double"
+          },
+          "prevClosePrice": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "title": "prev_close_price",
+            "format": "double"
+          },
+          "volume": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "title": "volume",
+            "format": "double"
+          },
+          "originalName": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "original_name"
+          },
+          "spread": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "title": "spread",
+            "format": "double"
+          },
+          "rtc": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "title": "rtc",
+            "format": "double"
+          },
+          "rtcTime": {
+            "type": [
+              "integer",
+              "string",
+              "null"
+            ],
+            "title": "rtc_time",
+            "format": "int64"
+          },
+          "rch": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "title": "rch",
+            "format": "double"
+          },
+          "rchp": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "title": "rchp",
+            "format": "double"
+          }
+        },
+        "title": "QuoteValues",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.ReplayTicksRequest": {
+        "type": "object",
+        "properties": {
+          "symbol": {
+            "type": "string",
+            "title": "symbol"
+          },
+          "startTsMs": {
+            "type": [
+              "integer",
+              "string"
+            ],
+            "title": "start_ts_ms",
+            "format": "int64"
+          },
+          "endTsMs": {
+            "type": [
+              "integer",
+              "string"
+            ],
+            "title": "end_ts_ms",
+            "format": "int64"
+          },
+          "limit": {
+            "type": "integer",
+            "title": "limit"
+          }
+        },
+        "title": "ReplayTicksRequest",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.ReplayTicksResponse": {
+        "type": "object",
+        "properties": {
+          "ticks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/quant.datafeed.v1.Tick"
+            },
+            "title": "ticks"
+          }
+        },
+        "title": "ReplayTicksResponse",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.ResolveSymbolRequest": {
+        "type": "object",
+        "properties": {
+          "symbol": {
+            "type": "string",
+            "title": "symbol",
+            "minLength": 1
+          },
+          "currencyCode": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "currency_code"
+          },
+          "unitId": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "unit_id"
+          },
+          "session": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "session"
+          }
+        },
+        "title": "ResolveSymbolRequest",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.ResolveSymbolResponse": {
+        "type": "object",
+        "properties": {
+          "symbol": {
+            "title": "symbol",
+            "$ref": "#/components/schemas/quant.datafeed.v1.LibrarySymbolInfo"
+          }
+        },
+        "title": "ResolveSymbolResponse",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.ScanSymbolRow": {
+        "type": "object",
+        "properties": {
+          "s": {
+            "type": "string",
+            "title": "s"
+          },
+          "d": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/google.protobuf.Value"
+            },
+            "title": "d"
+          }
+        },
+        "title": "ScanSymbolRow",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.ScanSymbolsRequest": {
+        "type": "object",
+        "properties": {
+          "columns": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "title": "columns"
+          },
+          "filter": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/quant.datafeed.v1.ScannerFilter"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "filter"
+          },
+          "sort": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/quant.datafeed.v1.ScannerSort"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "sort"
+          },
+          "range": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/quant.datafeed.v1.ScannerRange"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "range"
+          },
+          "options": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/quant.datafeed.v1.ScannerOptions"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "options"
+          },
+          "ignoreUnknownFields": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "title": "ignore_unknown_fields"
+          },
+          "markets": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "title": "markets"
+          },
+          "symbols": {
+            "type": "object",
+            "title": "symbols",
+            "additionalProperties": {
+              "title": "value",
+              "$ref": "#/components/schemas/google.protobuf.Value"
+            }
+          }
+        },
+        "title": "ScanSymbolsRequest",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.ScanSymbolsRequest.SymbolsEntry": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "title": "key"
+          },
+          "value": {
+            "title": "value",
+            "$ref": "#/components/schemas/google.protobuf.Value"
+          }
+        },
+        "title": "SymbolsEntry",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.ScanSymbolsResponse": {
+        "type": "object",
+        "properties": {
+          "totalCount": {
+            "type": "integer",
+            "title": "total_count"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/quant.datafeed.v1.ScanSymbolRow"
+            },
+            "title": "data"
+          }
+        },
+        "title": "ScanSymbolsResponse",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.ScannerFilter": {
+        "type": "object",
+        "properties": {
+          "operator": {
+            "title": "operator",
+            "$ref": "#/components/schemas/quant.datafeed.v1.ScannerLogicalOperator"
+          },
+          "operands": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/quant.datafeed.v1.ScannerFilterNode"
+            },
+            "title": "operands"
+          }
+        },
+        "title": "ScannerFilter",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.ScannerFilterExpression": {
+        "type": "object",
+        "properties": {
+          "left": {
+            "type": "string",
+            "title": "left"
+          },
+          "operation": {
+            "title": "operation",
+            "$ref": "#/components/schemas/quant.datafeed.v1.ScannerFilterOperation"
+          },
+          "right": {
+            "title": "right",
+            "$ref": "#/components/schemas/quant.datafeed.v1.ScannerFilterValue"
+          }
+        },
+        "title": "ScannerFilterExpression",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.ScannerFilterGroup": {
+        "type": "object",
+        "properties": {
+          "operator": {
+            "title": "operator",
+            "$ref": "#/components/schemas/quant.datafeed.v1.ScannerLogicalOperator"
+          },
+          "operands": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/quant.datafeed.v1.ScannerFilterNode"
+            },
+            "title": "operands"
+          }
+        },
+        "title": "ScannerFilterGroup",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.ScannerFilterNode": {
+        "type": "object",
+        "properties": {
+          "expression": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/quant.datafeed.v1.ScannerFilterExpression"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "expression"
+          },
+          "operation": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/quant.datafeed.v1.ScannerFilterGroup"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "operation"
+          }
+        },
+        "title": "ScannerFilterNode",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.ScannerFilterOperation": {
+        "type": "string",
+        "title": "ScannerFilterOperation",
+        "enum": [
+          "SCANNER_FILTER_OPERATION_UNSPECIFIED",
+          "SCANNER_FILTER_OPERATION_EQUAL",
+          "SCANNER_FILTER_OPERATION_NOT_EQUAL",
+          "SCANNER_FILTER_OPERATION_GREATER",
+          "SCANNER_FILTER_OPERATION_GREATER_OR_EQUAL",
+          "SCANNER_FILTER_OPERATION_LESS",
+          "SCANNER_FILTER_OPERATION_LESS_OR_EQUAL",
+          "SCANNER_FILTER_OPERATION_IN_RANGE",
+          "SCANNER_FILTER_OPERATION_NOT_IN_RANGE",
+          "SCANNER_FILTER_OPERATION_HAS",
+          "SCANNER_FILTER_OPERATION_HAS_NONE_OF",
+          "SCANNER_FILTER_OPERATION_MATCH",
+          "SCANNER_FILTER_OPERATION_NOT_MATCH"
+        ]
+      },
+      "quant.datafeed.v1.ScannerFilterValue": {
+        "type": "object",
+        "oneOf": [
+          {
+            "properties": {
+              "boolValue": {
+                "type": "boolean",
+                "title": "bool_value"
+              }
+            },
+            "title": "bool_value",
+            "required": [
+              "boolValue"
+            ]
+          },
+          {
+            "properties": {
+              "numberList": {
+                "title": "number_list",
+                "$ref": "#/components/schemas/quant.datafeed.v1.DoubleList"
+              }
+            },
+            "title": "number_list",
+            "required": [
+              "numberList"
+            ]
+          },
+          {
+            "properties": {
+              "numberValue": {
+                "type": "number",
+                "title": "number_value",
+                "format": "double"
+              }
+            },
+            "title": "number_value",
+            "required": [
+              "numberValue"
+            ]
+          },
+          {
+            "properties": {
+              "stringList": {
+                "title": "string_list",
+                "$ref": "#/components/schemas/quant.datafeed.v1.StringList"
+              }
+            },
+            "title": "string_list",
+            "required": [
+              "stringList"
+            ]
+          },
+          {
+            "properties": {
+              "stringValue": {
+                "type": "string",
+                "title": "string_value"
+              }
+            },
+            "title": "string_value",
+            "required": [
+              "stringValue"
+            ]
+          }
+        ],
+        "title": "ScannerFilterValue",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.ScannerLogicalOperator": {
+        "type": "string",
+        "title": "ScannerLogicalOperator",
+        "enum": [
+          "SCANNER_LOGICAL_OPERATOR_UNSPECIFIED",
+          "SCANNER_LOGICAL_OPERATOR_AND",
+          "SCANNER_LOGICAL_OPERATOR_OR"
+        ]
+      },
+      "quant.datafeed.v1.ScannerOptions": {
+        "type": "object",
+        "properties": {
+          "lang": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "lang"
+          }
+        },
+        "title": "ScannerOptions",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.ScannerRange": {
+        "type": "object",
+        "properties": {
+          "start": {
+            "type": "integer",
+            "title": "start"
+          },
+          "end": {
+            "type": "integer",
+            "title": "end"
+          }
+        },
+        "title": "ScannerRange",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.ScannerSort": {
+        "type": "object",
+        "properties": {
+          "sortBy": {
+            "type": "string",
+            "title": "sort_by"
+          },
+          "sortOrder": {
+            "title": "sort_order",
+            "$ref": "#/components/schemas/quant.datafeed.v1.SortOrder"
+          }
+        },
+        "title": "ScannerSort",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.SearchResultItem": {
+        "type": "object",
+        "properties": {
+          "symbol": {
+            "type": "string",
+            "title": "symbol",
+            "minLength": 1
+          },
+          "description": {
+            "type": "string",
+            "title": "description",
+            "minLength": 1
+          },
+          "exchange": {
+            "type": "string",
+            "title": "exchange",
+            "minLength": 1
+          },
+          "type": {
+            "type": "string",
+            "title": "type",
+            "minLength": 1
+          },
+          "ticker": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "ticker"
+          },
+          "exchangeLogo": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "exchange_logo"
+          },
+          "logoUrls": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "title": "logo_urls",
+            "maxItems": 2,
+            "minItems": 1
+          }
+        },
+        "title": "SearchResultItem",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.SearchSymbolsRequest": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "title": "query",
+            "maxLength": 256,
+            "minLength": 1
+          },
+          "type": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "type"
+          },
+          "exchange": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "exchange"
+          },
+          "limit": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "title": "limit",
+            "minimum": 1
+          }
+        },
+        "title": "SearchSymbolsRequest",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.SearchSymbolsResponse": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/quant.datafeed.v1.SearchResultItem"
+            },
+            "title": "items"
+          }
+        },
+        "title": "SearchSymbolsResponse",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.SeriesFormat": {
+        "type": "string",
+        "title": "SeriesFormat",
+        "enum": [
+          "SERIES_FORMAT_UNSPECIFIED",
+          "SERIES_FORMAT_PRICE",
+          "SERIES_FORMAT_VOLUME"
+        ]
+      },
+      "quant.datafeed.v1.SocialEvent": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "id"
+          },
+          "symbol": {
+            "type": "string",
+            "title": "symbol"
+          },
+          "platform": {
+            "type": "string",
+            "title": "platform"
+          },
+          "author": {
+            "type": "string",
+            "title": "author"
+          },
+          "text": {
+            "type": "string",
+            "title": "text"
+          },
+          "tsMs": {
+            "type": [
+              "integer",
+              "string"
+            ],
+            "title": "ts_ms",
+            "format": "int64"
+          },
+          "sentiment": {
+            "type": "number",
+            "title": "sentiment",
+            "format": "double"
+          }
+        },
+        "title": "SocialEvent",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.SortOrder": {
+        "type": "string",
+        "title": "SortOrder",
+        "enum": [
+          "SORT_ORDER_UNSPECIFIED",
+          "SORT_ORDER_ASC",
+          "SORT_ORDER_DESC"
+        ]
+      },
+      "quant.datafeed.v1.StreamBarsRequest": {
+        "type": "object",
+        "properties": {
+          "symbolInfo": {
+            "title": "symbol_info",
+            "$ref": "#/components/schemas/quant.datafeed.v1.LibrarySymbolInfo"
+          },
+          "resolution": {
+            "type": "string",
+            "title": "resolution",
+            "minLength": 1
+          },
+          "listenerGuid": {
+            "type": "string",
+            "title": "listener_guid",
+            "minLength": 1
+          }
+        },
+        "title": "StreamBarsRequest",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.StreamBarsResponse": {
+        "type": "object",
+        "properties": {
+          "t": {
+            "type": "array",
+            "items": {
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int64"
+            },
+            "title": "t"
+          },
+          "c": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            },
+            "title": "c"
+          },
+          "o": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            },
+            "title": "o"
+          },
+          "h": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            },
+            "title": "h"
+          },
+          "l": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            },
+            "title": "l"
+          },
+          "v": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            },
+            "title": "v"
+          }
+        },
+        "title": "StreamBarsResponse",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.StringList": {
+        "type": "object",
+        "properties": {
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "title": "values"
+          }
+        },
+        "title": "StringList",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.StringListList": {
+        "type": "object",
+        "properties": {
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/quant.datafeed.v1.StringList"
+            },
+            "title": "values"
+          }
+        },
+        "title": "StringListList",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.StringListOrStringListList": {
+        "type": "object",
+        "oneOf": [
+          {
+            "properties": {
+              "many": {
+                "title": "many",
+                "$ref": "#/components/schemas/quant.datafeed.v1.StringListList"
+              }
+            },
+            "title": "many",
+            "required": [
+              "many"
+            ]
+          },
+          {
+            "properties": {
+              "single": {
+                "title": "single",
+                "$ref": "#/components/schemas/quant.datafeed.v1.StringList"
+              }
+            },
+            "title": "single",
+            "required": [
+              "single"
+            ]
+          }
+        ],
+        "title": "StringListOrStringListList",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.StringOrNullableStringList": {
+        "type": "object",
+        "oneOf": [
+          {
+            "properties": {
+              "many": {
+                "title": "many",
+                "$ref": "#/components/schemas/quant.datafeed.v1.NullableStringList"
+              }
+            },
+            "title": "many",
+            "required": [
+              "many"
+            ]
+          },
+          {
+            "properties": {
+              "single": {
+                "type": "string",
+                "title": "single"
+              }
+            },
+            "title": "single",
+            "required": [
+              "single"
+            ]
+          }
+        ],
+        "title": "StringOrNullableStringList",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.StringOrStringList": {
+        "type": "object",
+        "oneOf": [
+          {
+            "properties": {
+              "many": {
+                "title": "many",
+                "$ref": "#/components/schemas/quant.datafeed.v1.StringList"
+              }
+            },
+            "title": "many",
+            "required": [
+              "many"
+            ]
+          },
+          {
+            "properties": {
+              "single": {
+                "type": "string",
+                "title": "single"
+              }
+            },
+            "title": "single",
+            "required": [
+              "single"
+            ]
+          }
+        ],
+        "title": "StringOrStringList",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.SubsessionInfo": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "id",
+            "minLength": 1
+          },
+          "description": {
+            "type": "string",
+            "title": "description",
+            "minLength": 1
+          },
+          "session": {
+            "type": "string",
+            "title": "session",
+            "minLength": 1
+          },
+          "session-correction": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "session_correction"
+          },
+          "session-display": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "title": "session_display"
+          }
+        },
+        "title": "SubsessionInfo",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.SymbolPriceSource": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "id",
+            "minLength": 1
+          },
+          "name": {
+            "type": "string",
+            "title": "name",
+            "minLength": 1
+          }
+        },
+        "title": "SymbolPriceSource",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.SymbolTypeDescriptor": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "name"
+          },
+          "value": {
+            "type": "string",
+            "title": "value"
+          }
+        },
+        "title": "SymbolTypeDescriptor",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.Tick": {
+        "type": "object",
+        "properties": {
+          "symbol": {
+            "type": "string",
+            "title": "symbol"
+          },
+          "tsMs": {
+            "type": [
+              "integer",
+              "string"
+            ],
+            "title": "ts_ms",
+            "format": "int64"
+          },
+          "price": {
+            "type": "number",
+            "title": "price",
+            "format": "double"
+          },
+          "size": {
+            "type": "number",
+            "title": "size",
+            "format": "double"
+          },
+          "source": {
+            "type": "string",
+            "title": "source"
+          }
+        },
+        "title": "Tick",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.TimescaleMark": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "title": "id",
+            "$ref": "#/components/schemas/quant.datafeed.v1.MarkId"
+          },
+          "color": {
+            "type": "string",
+            "title": "color"
+          },
+          "label": {
+            "type": "string",
+            "title": "label"
+          },
+          "time": {
+            "type": [
+              "integer",
+              "string"
+            ],
+            "title": "time",
+            "format": "int64"
+          },
+          "tooltip": {
+            "type": "string",
+            "title": "tooltip"
+          },
+          "shape": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/quant.datafeed.v1.TimescaleMarkShape"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "shape"
+          }
+        },
+        "title": "TimescaleMark",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.TimescaleMarkShape": {
+        "type": "string",
+        "title": "TimescaleMarkShape",
+        "enum": [
+          "TIMESCALE_MARK_SHAPE_UNSPECIFIED",
+          "TIMESCALE_MARK_SHAPE_CIRCLE",
+          "TIMESCALE_MARK_SHAPE_EARNING_UP",
+          "TIMESCALE_MARK_SHAPE_EARNING_DOWN",
+          "TIMESCALE_MARK_SHAPE_EARNING"
+        ]
+      },
+      "quant.datafeed.v1.UnitItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "id"
+          },
+          "name": {
+            "type": "string",
+            "title": "name"
+          },
+          "description": {
+            "type": "string",
+            "title": "description"
+          }
+        },
+        "title": "UnitItem",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.UnitList": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/quant.datafeed.v1.UnitItem"
+            },
+            "title": "items"
+          }
+        },
+        "title": "UnitList",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.VisiblePlotsSet": {
+        "type": "string",
+        "title": "VisiblePlotsSet",
+        "enum": [
+          "VISIBLE_PLOTS_SET_UNSPECIFIED",
+          "VISIBLE_PLOTS_SET_OHLCV",
+          "VISIBLE_PLOTS_SET_OHLC",
+          "VISIBLE_PLOTS_SET_C",
+          "VISIBLE_PLOTS_SET_HLC"
+        ]
+      },
+      "quant.datafeed.v1.VisiblePlotsSetList": {
+        "type": "object",
+        "properties": {
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/quant.datafeed.v1.VisiblePlotsSet"
+            },
+            "title": "values"
+          }
+        },
+        "title": "VisiblePlotsSetList",
+        "additionalProperties": false
+      },
+      "quant.datafeed.v1.VisiblePlotsSetOrList": {
+        "type": "object",
+        "oneOf": [
+          {
+            "properties": {
+              "many": {
+                "title": "many",
+                "$ref": "#/components/schemas/quant.datafeed.v1.VisiblePlotsSetList"
+              }
+            },
+            "title": "many",
+            "required": [
+              "many"
+            ]
+          },
+          {
+            "properties": {
+              "single": {
+                "title": "single",
+                "$ref": "#/components/schemas/quant.datafeed.v1.VisiblePlotsSet"
+              }
+            },
+            "title": "single",
+            "required": [
+              "single"
+            ]
+          }
+        ],
+        "title": "VisiblePlotsSetOrList",
+        "additionalProperties": false
+      },
+      "quant.doordash.v1.EvaluateRiskRequest": {
+        "type": "object",
+        "properties": {
+          "orderId": {
+            "type": "string",
+            "title": "order_id"
+          },
+          "accountId": {
+            "type": "string",
+            "title": "account_id"
+          },
+          "symbol": {
+            "type": "string",
+            "title": "symbol"
+          },
+          "side": {
+            "type": "string",
+            "title": "side"
+          },
+          "quantity": {
+            "type": "number",
+            "title": "quantity",
+            "format": "double"
+          }
+        },
+        "title": "EvaluateRiskRequest",
+        "additionalProperties": false
+      },
+      "quant.doordash.v1.EvaluateRiskResponse": {
+        "type": "object",
+        "properties": {
+          "decisionId": {
+            "type": "string",
+            "title": "decision_id"
+          },
+          "verdict": {
+            "type": "string",
+            "title": "verdict"
+          },
+          "reasons": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "title": "reasons"
+          }
+        },
+        "title": "EvaluateRiskResponse",
+        "additionalProperties": false
+      },
+      "quant.doordash.v1.GetOrderRequest": {
+        "type": "object",
+        "properties": {
+          "orderId": {
+            "type": "string",
+            "title": "order_id"
+          }
+        },
+        "title": "GetOrderRequest",
+        "additionalProperties": false
+      },
+      "quant.doordash.v1.GetOrderResponse": {
+        "type": "object",
+        "properties": {
+          "orderId": {
+            "type": "string",
+            "title": "order_id"
+          },
+          "status": {
+            "type": "string",
+            "title": "status"
+          },
+          "symbol": {
+            "type": "string",
+            "title": "symbol"
+          },
+          "side": {
+            "type": "string",
+            "title": "side"
+          },
+          "quantity": {
+            "type": "number",
+            "title": "quantity",
+            "format": "double"
+          },
+          "accountId": {
+            "type": "string",
+            "title": "account_id"
+          }
+        },
+        "title": "GetOrderResponse",
+        "additionalProperties": false
+      },
+      "quant.doordash.v1.ListOrdersRequest": {
+        "type": "object",
+        "properties": {
+          "accountId": {
+            "type": "string",
+            "title": "account_id"
+          },
+          "limit": {
+            "type": "integer",
+            "title": "limit"
+          }
+        },
+        "title": "ListOrdersRequest",
+        "additionalProperties": false
+      },
+      "quant.doordash.v1.ListOrdersResponse": {
+        "type": "object",
+        "properties": {
+          "orders": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/quant.doordash.v1.GetOrderResponse"
+            },
+            "title": "orders"
+          }
+        },
+        "title": "ListOrdersResponse",
+        "additionalProperties": false
+      },
+      "quant.doordash.v1.ListRulesRequest": {
+        "type": "object",
+        "title": "ListRulesRequest",
+        "additionalProperties": false
+      },
+      "quant.doordash.v1.ListRulesResponse": {
+        "type": "object",
+        "properties": {
+          "rules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/quant.doordash.v1.RuleVersion"
+            },
+            "title": "rules"
+          }
+        },
+        "title": "ListRulesResponse",
+        "additionalProperties": false
+      },
+      "quant.doordash.v1.PlaceOrderRequest": {
+        "type": "object",
+        "properties": {
+          "symbol": {
+            "type": "string",
+            "title": "symbol"
+          },
+          "side": {
+            "type": "string",
+            "title": "side"
+          },
+          "quantity": {
+            "type": "number",
+            "title": "quantity",
+            "format": "double"
+          },
+          "orderType": {
+            "type": "string",
+            "title": "order_type"
+          },
+          "limitPrice": {
+            "type": "number",
+            "title": "limit_price",
+            "format": "double"
+          },
+          "accountId": {
+            "type": "string",
+            "title": "account_id"
+          }
+        },
+        "title": "PlaceOrderRequest",
+        "additionalProperties": false
+      },
+      "quant.doordash.v1.PlaceOrderResponse": {
+        "type": "object",
+        "properties": {
+          "orderId": {
+            "type": "string",
+            "title": "order_id"
+          },
+          "status": {
+            "type": "string",
+            "title": "status"
+          }
+        },
+        "title": "PlaceOrderResponse",
+        "additionalProperties": false
+      },
+      "quant.doordash.v1.RuleVersion": {
+        "type": "object",
+        "properties": {
+          "ruleId": {
+            "type": "string",
+            "title": "rule_id"
+          },
+          "version": {
+            "type": "string",
+            "title": "version"
+          },
+          "enabled": {
+            "type": "boolean",
+            "title": "enabled"
+          },
+          "updatedTsMs": {
+            "type": [
+              "integer",
+              "string"
+            ],
+            "title": "updated_ts_ms",
+            "format": "int64"
+          }
+        },
+        "title": "RuleVersion",
+        "additionalProperties": false
+      },
+      "quant.doordash.v1.UpsertRuleRequest": {
+        "type": "object",
+        "properties": {
+          "ruleId": {
+            "type": "string",
+            "title": "rule_id"
+          },
+          "version": {
+            "type": "string",
+            "title": "version"
+          },
+          "drl": {
+            "type": "string",
+            "title": "drl"
+          },
+          "enabled": {
+            "type": "boolean",
+            "title": "enabled"
+          }
+        },
+        "title": "UpsertRuleRequest",
+        "additionalProperties": false
+      },
+      "quant.doordash.v1.UpsertRuleResponse": {
+        "type": "object",
+        "properties": {
+          "ruleId": {
+            "type": "string",
+            "title": "rule_id"
+          },
+          "version": {
+            "type": "string",
+            "title": "version"
+          }
+        },
+        "title": "UpsertRuleResponse",
+        "additionalProperties": false
+      },
+      "quant.system.v1.DependencyStatus": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "name"
+          },
+          "status": {
+            "type": "string",
+            "title": "status"
+          },
+          "detail": {
+            "type": "string",
+            "title": "detail"
+          }
+        },
+        "title": "DependencyStatus",
+        "additionalProperties": false
+      },
+      "quant.system.v1.HealthRequest": {
+        "type": "object",
+        "title": "HealthRequest",
+        "additionalProperties": false
+      },
+      "quant.system.v1.HealthResponse": {
+        "type": "object",
+        "properties": {
+          "service": {
+            "type": "string",
+            "title": "service"
+          },
+          "status": {
+            "type": "string",
+            "title": "status"
+          },
+          "tsMs": {
+            "type": [
+              "integer",
+              "string"
+            ],
+            "title": "ts_ms",
+            "format": "int64"
+          }
+        },
+        "title": "HealthResponse",
+        "additionalProperties": false
+      },
+      "quant.system.v1.ReadinessRequest": {
+        "type": "object",
+        "title": "ReadinessRequest",
+        "additionalProperties": false
+      },
+      "quant.system.v1.ReadinessResponse": {
+        "type": "object",
+        "properties": {
+          "service": {
+            "type": "string",
+            "title": "service"
+          },
+          "status": {
+            "type": "string",
+            "title": "status"
+          },
+          "dependencies": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/quant.system.v1.DependencyStatus"
+            },
+            "title": "dependencies"
+          }
+        },
+        "title": "ReadinessResponse",
+        "additionalProperties": false
+      }
+    }
+  },
+  "security": [],
+  "tags": [
+    {
+      "name": "AlertService"
+    },
+    {
+      "name": "AnalyticsService"
+    },
+    {
+      "name": "BacktestService"
+    },
+    {
+      "name": "CatalogService"
+    },
+    {
+      "name": "MLService"
+    },
+    {
+      "name": "SystemService"
+    },
+    {
+      "name": "DatafeedService"
+    },
+    {
+      "name": "OrderService"
+    },
+    {
+      "name": "RiskService"
+    }
+  ]
+}

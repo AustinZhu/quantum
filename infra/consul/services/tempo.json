@@ -1,0 +1,18 @@
+{
+  "service": {
+    "id": "tempo",
+    "name": "tempo",
+    "address": "tempo",
+    "port": 3200,
+    "tags": ["infra", "observability", "tracing"],
+    "checks": [
+      {
+        "id": "tempo-http",
+        "name": "tempo http",
+        "http": "http://tempo:3200/ready",
+        "interval": "15s",
+        "timeout": "5s"
+      }
+    ]
+  }
+}

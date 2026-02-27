@@ -9,7 +9,6 @@ from tortoise import Tortoise
 
 from algorand.core.config import Settings
 
-
 _initialized = False
 
 
@@ -18,7 +17,8 @@ async def _init_db_async(settings: Settings) -> None:
         db_url=settings.db_url,
         modules={"models": ["algorand.infra.db.models"]},
     )
-    await Tortoise.generate_schemas(safe=True)
+    if settings.db_generate_schemas:
+        await Tortoise.generate_schemas(safe=True)
 
 
 async def _close_db_async() -> None:

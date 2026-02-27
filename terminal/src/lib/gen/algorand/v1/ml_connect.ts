@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { GetModelVersionsRequest, GetModelVersionsResponse, RunTrainingJobRequest, RunTrainingJobResponse } from "./ml_pb.js";
+import { ClusterStocksRequest, ClusterStocksResponse, FindSimilarStocksRequest, FindSimilarStocksResponse, GetModelVersionsRequest, GetModelVersionsResponse, RunTrainingJobRequest, RunTrainingJobResponse } from "./ml_pb.js";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -28,6 +28,24 @@ export const MLService = {
       name: "GetModelVersions",
       I: GetModelVersionsRequest,
       O: GetModelVersionsResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc quant.algorand.v1.MLService.ClusterStocks
+     */
+    clusterStocks: {
+      name: "ClusterStocks",
+      I: ClusterStocksRequest,
+      O: ClusterStocksResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc quant.algorand.v1.MLService.FindSimilarStocks
+     */
+    findSimilarStocks: {
+      name: "FindSimilarStocks",
+      I: FindSimilarStocksRequest,
+      O: FindSimilarStocksResponse,
       kind: MethodKind.Unary,
     },
   }

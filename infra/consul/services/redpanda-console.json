@@ -1,0 +1,18 @@
+{
+  "service": {
+    "id": "redpanda-console",
+    "name": "redpanda-console",
+    "address": "redpanda-console",
+    "port": 8080,
+    "tags": ["infra", "streaming", "ui"],
+    "checks": [
+      {
+        "id": "redpanda-console-http",
+        "name": "redpanda-console http",
+        "http": "http://redpanda-console:8080/",
+        "interval": "15s",
+        "timeout": "5s"
+      }
+    ]
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "service": {
+    "id": "redisinsight",
+    "name": "redisinsight",
+    "address": "redisinsight",
+    "port": 5540,
+    "tags": ["infra", "redis-admin"],
+    "checks": [
+      {
+        "id": "redisinsight-http",
+        "name": "redisinsight http",
+        "http": "http://redisinsight:5540/api/health/",
+        "interval": "15s",
+        "timeout": "5s"
+      }
+    ]
+  }
+}

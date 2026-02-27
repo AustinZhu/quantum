@@ -5,8 +5,10 @@
 **/.mypy_cache
 **/.ruff_cache
 **/node_modules
+**/.pnpm-store
 **/.next
 **/build
 **/.gradle
+**/public/charting_library
 .DS_Store
 .env

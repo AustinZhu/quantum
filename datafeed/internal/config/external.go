@@ -116,6 +116,12 @@ func mergeConfigMap(cfg *Config, payload map[string]any) {
 	if value := asString(payload["redis_url"]); value != "" {
 		cfg.RedisURL = value
 	}
+	if value := asString(payload["redpanda_brokers"]); value != "" {
+		cfg.RedpandaBrokers = value
+	}
+	if value := asString(payload["redpanda_tick_topic"]); value != "" {
+		cfg.RedpandaTickTopic = value
+	}
 	if value := asString(payload["temporal_address"]); value != "" {
 		cfg.TemporalAddress = value
 	}
@@ -127,6 +133,9 @@ func mergeConfigMap(cfg *Config, payload map[string]any) {
 	}
 	if value := asString(payload["api_key"]); value != "" {
 		cfg.APIKey = value
+	}
+	if value := asString(payload["openapi_spec_path"]); value != "" {
+		cfg.OpenAPISpecPath = value
 	}
 }
 

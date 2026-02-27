@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { IngestTicksRequest, IngestTicksResponse, ListNewsRequest, ListNewsResponse, ListSocialRequest, ListSocialResponse, QueryBarsRequest, QueryBarsResponse, ReplayTicksRequest, ReplayTicksResponse } from "./datafeed_pb.js";
+import { GetConfigRequest, GetConfigResponse, GetHistoryRequest, GetHistoryResponse, GetMarksRequest, GetMarksResponse, GetQuotesRequest, GetQuotesResponse, GetSymbolGroupInfoRequest, GetSymbolGroupInfoResponse, GetTimeRequest, GetTimeResponse, GetTimescaleMarksRequest, GetTimescaleMarksResponse, IngestTicksRequest, IngestTicksResponse, ListNewsRequest, ListNewsResponse, ListSocialRequest, ListSocialResponse, ListSymbolsRequest, ListSymbolsResponse, QueryBarsRequest, QueryBarsResponse, ReplayTicksRequest, ReplayTicksResponse, ResolveSymbolRequest, ResolveSymbolResponse, ScanSymbolsRequest, ScanSymbolsResponse, SearchSymbolsRequest, SearchSymbolsResponse, StreamBarsRequest, StreamBarsResponse } from "./datafeed_pb.js";
 import { MethodKind } from "@bufbuild/protobuf";
 
 /**
@@ -55,6 +55,114 @@ export const DatafeedService = {
       name: "ListSocial",
       I: ListSocialRequest,
       O: ListSocialResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc quant.datafeed.v1.DatafeedService.GetConfig
+     */
+    getConfig: {
+      name: "GetConfig",
+      I: GetConfigRequest,
+      O: GetConfigResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc quant.datafeed.v1.DatafeedService.GetTime
+     */
+    getTime: {
+      name: "GetTime",
+      I: GetTimeRequest,
+      O: GetTimeResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc quant.datafeed.v1.DatafeedService.GetHistory
+     */
+    getHistory: {
+      name: "GetHistory",
+      I: GetHistoryRequest,
+      O: GetHistoryResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc quant.datafeed.v1.DatafeedService.GetQuotes
+     */
+    getQuotes: {
+      name: "GetQuotes",
+      I: GetQuotesRequest,
+      O: GetQuotesResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc quant.datafeed.v1.DatafeedService.GetMarks
+     */
+    getMarks: {
+      name: "GetMarks",
+      I: GetMarksRequest,
+      O: GetMarksResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc quant.datafeed.v1.DatafeedService.GetTimescaleMarks
+     */
+    getTimescaleMarks: {
+      name: "GetTimescaleMarks",
+      I: GetTimescaleMarksRequest,
+      O: GetTimescaleMarksResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc quant.datafeed.v1.DatafeedService.ResolveSymbol
+     */
+    resolveSymbol: {
+      name: "ResolveSymbol",
+      I: ResolveSymbolRequest,
+      O: ResolveSymbolResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc quant.datafeed.v1.DatafeedService.GetSymbolGroupInfo
+     */
+    getSymbolGroupInfo: {
+      name: "GetSymbolGroupInfo",
+      I: GetSymbolGroupInfoRequest,
+      O: GetSymbolGroupInfoResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc quant.datafeed.v1.DatafeedService.SearchSymbols
+     */
+    searchSymbols: {
+      name: "SearchSymbols",
+      I: SearchSymbolsRequest,
+      O: SearchSymbolsResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc quant.datafeed.v1.DatafeedService.StreamBars
+     */
+    streamBars: {
+      name: "StreamBars",
+      I: StreamBarsRequest,
+      O: StreamBarsResponse,
+      kind: MethodKind.ServerStreaming,
+    },
+    /**
+     * @generated from rpc quant.datafeed.v1.DatafeedService.ScanSymbols
+     */
+    scanSymbols: {
+      name: "ScanSymbols",
+      I: ScanSymbolsRequest,
+      O: ScanSymbolsResponse,
+      kind: MethodKind.Unary,
+    },
+    /**
+     * @generated from rpc quant.datafeed.v1.DatafeedService.ListSymbols
+     */
+    listSymbols: {
+      name: "ListSymbols",
+      I: ListSymbolsRequest,
+      O: ListSymbolsResponse,
       kind: MethodKind.Unary,
     },
   }

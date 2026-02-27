@@ -1,0 +1,18 @@
+{
+  "service": {
+    "id": "minio",
+    "name": "minio",
+    "address": "minio",
+    "port": 9000,
+    "tags": ["infra", "object-storage"],
+    "checks": [
+      {
+        "id": "minio-http",
+        "name": "minio http",
+        "http": "http://minio:9000/minio/health/live",
+        "interval": "15s",
+        "timeout": "5s"
+      }
+    ]
+  }
+}

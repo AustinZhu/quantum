@@ -1,0 +1,18 @@
+{
+  "service": {
+    "id": "alloy",
+    "name": "alloy",
+    "address": "alloy",
+    "port": 4318,
+    "tags": ["infra", "observability", "otel"],
+    "checks": [
+      {
+        "id": "alloy-http",
+        "name": "alloy http",
+        "http": "http://alloy:12345/-/ready",
+        "interval": "15s",
+        "timeout": "5s"
+      }
+    ]
+  }
+}
