@@ -1,5 +1,6 @@
+import { getTranslations } from "next-intl/server";
 import { PageHeader } from "@/components/page-header";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Clock, ExternalLink } from "lucide-react";
 
@@ -12,14 +13,12 @@ const articles = [
   { title: "Amazon Cloud Growth Accelerates, AWS Revenue Up 19%", source: "Reuters", time: "5h ago", sentiment: "Positive", symbols: ["AMZN"], category: "Earnings" },
 ];
 
-export default function NewsPage() {
+export default async function NewsPage() {
+  const t = await getTranslations("pages.news");
+
   return (
     <div className="space-y-6">
-      <PageHeader
-        title="News Feed"
-        description="Market news, earnings, and macro event aggregation"
-        
-      />
+      <PageHeader title={t("title")} description={t("description")} />
 
       <div className="space-y-3">
         {articles.map((a, i) => (
@@ -40,7 +39,7 @@ export default function NewsPage() {
                       variant={a.sentiment === "Positive" ? "default" : "destructive"}
                       className="font-mono text-xs"
                     >
-                      {a.sentiment}
+                      {a.sentiment === "Positive" ? t("sentimentPositive") : t("sentimentNegative")}
                     </Badge>
                     {a.symbols.map((s) => (
                       <Badge key={s} variant="secondary" className="font-mono text-xs">{s}</Badge>

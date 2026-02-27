@@ -1,3 +1,4 @@
+import { getTranslations } from "next-intl/server";
 import { PageHeader } from "@/components/page-header";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -6,45 +7,44 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-export default function SettingsPage() {
+export default async function SettingsPage() {
+  const t = await getTranslations("pages.settings");
+  const tc = await getTranslations("common");
+
   return (
     <div className="space-y-6">
-      <PageHeader
-        title="Settings"
-        description="System configuration and parameter tuning"
-        
-      />
+      <PageHeader title={t("title")} description={t("description")} />
 
       <Tabs defaultValue="general">
         <TabsList>
-          <TabsTrigger value="general">General</TabsTrigger>
-          <TabsTrigger value="trading">Trading</TabsTrigger>
-          <TabsTrigger value="notifications">Notifications</TabsTrigger>
-          <TabsTrigger value="api">API Keys</TabsTrigger>
+          <TabsTrigger value="general">{t("tabGeneral")}</TabsTrigger>
+          <TabsTrigger value="trading">{t("tabTrading")}</TabsTrigger>
+          <TabsTrigger value="notifications">{t("tabNotifications")}</TabsTrigger>
+          <TabsTrigger value="api">{t("tabApi")}</TabsTrigger>
         </TabsList>
 
         <TabsContent value="general" className="mt-4 space-y-4">
           <Card>
             <CardHeader>
-              <CardTitle className="text-base">System Parameters</CardTitle>
-              <CardDescription>Core system configuration</CardDescription>
+              <CardTitle className="text-base">{t("systemParams")}</CardTitle>
+              <CardDescription>{t("systemParamsDesc")}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="space-y-2">
-                  <label className="font-mono text-xs text-muted-foreground uppercase tracking-wider">BFF Upstream Timeout (ms)</label>
+                  <label className="font-mono text-xs text-muted-foreground uppercase tracking-wider">{t("bffTimeout")}</label>
                   <Input type="number" defaultValue="10000" className="font-mono" />
                 </div>
                 <div className="space-y-2">
-                  <label className="font-mono text-xs text-muted-foreground uppercase tracking-wider">Max Concurrent Requests</label>
+                  <label className="font-mono text-xs text-muted-foreground uppercase tracking-wider">{t("maxConcurrent")}</label>
                   <Input type="number" defaultValue="50" className="font-mono" />
                 </div>
                 <div className="space-y-2">
-                  <label className="font-mono text-xs text-muted-foreground uppercase tracking-wider">Data Retention (days)</label>
+                  <label className="font-mono text-xs text-muted-foreground uppercase tracking-wider">{t("dataRetention")}</label>
                   <Input type="number" defaultValue="365" className="font-mono" />
                 </div>
                 <div className="space-y-2">
-                  <label className="font-mono text-xs text-muted-foreground uppercase tracking-wider">Log Level</label>
+                  <label className="font-mono text-xs text-muted-foreground uppercase tracking-wider">{t("logLevel")}</label>
                   <Input defaultValue="info" className="font-mono" />
                 </div>
               </div>
@@ -52,28 +52,28 @@ export default function SettingsPage() {
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <div>
-                    <div className="text-sm font-medium">Enable Debug Mode</div>
-                    <div className="text-xs text-muted-foreground">Show detailed logging and diagnostics</div>
+                    <div className="text-sm font-medium">{t("debugMode")}</div>
+                    <div className="text-xs text-muted-foreground">{t("debugModeDesc")}</div>
                   </div>
                   <Switch />
                 </div>
                 <div className="flex items-center justify-between">
                   <div>
-                    <div className="text-sm font-medium">Auto-refresh Dashboard</div>
-                    <div className="text-xs text-muted-foreground">Automatically refresh data every 5 seconds</div>
+                    <div className="text-sm font-medium">{t("autoRefresh")}</div>
+                    <div className="text-xs text-muted-foreground">{t("autoRefreshDesc")}</div>
                   </div>
                   <Switch defaultChecked />
                 </div>
                 <div className="flex items-center justify-between">
                   <div>
-                    <div className="text-sm font-medium">Maintenance Mode</div>
-                    <div className="text-xs text-muted-foreground">Halt all trading and show maintenance banner</div>
+                    <div className="text-sm font-medium">{t("maintenanceMode")}</div>
+                    <div className="text-xs text-muted-foreground">{t("maintenanceModeDesc")}</div>
                   </div>
                   <Switch />
                 </div>
               </div>
               <div className="flex justify-end">
-                <Button>Save Changes</Button>
+                <Button>{tc("saveChanges")}</Button>
               </div>
             </CardContent>
           </Card>
@@ -82,30 +82,30 @@ export default function SettingsPage() {
         <TabsContent value="trading" className="mt-4">
           <Card>
             <CardHeader>
-              <CardTitle className="text-base">Trading Parameters</CardTitle>
-              <CardDescription>Strategy and execution parameter tuning</CardDescription>
+              <CardTitle className="text-base">{t("tradingParams")}</CardTitle>
+              <CardDescription>{t("tradingParamsDesc")}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="grid gap-4 sm:grid-cols-2">
                 <div className="space-y-2">
-                  <label className="font-mono text-xs text-muted-foreground uppercase tracking-wider">Default Lookback (days)</label>
+                  <label className="font-mono text-xs text-muted-foreground uppercase tracking-wider">{t("defaultLookback")}</label>
                   <Input type="number" defaultValue="252" className="font-mono" />
                 </div>
                 <div className="space-y-2">
-                  <label className="font-mono text-xs text-muted-foreground uppercase tracking-wider">Volatility Scaling Factor</label>
+                  <label className="font-mono text-xs text-muted-foreground uppercase tracking-wider">{t("volScaling")}</label>
                   <Input type="number" defaultValue="0.15" step="0.01" className="font-mono" />
                 </div>
                 <div className="space-y-2">
-                  <label className="font-mono text-xs text-muted-foreground uppercase tracking-wider">Max Position Size ($)</label>
+                  <label className="font-mono text-xs text-muted-foreground uppercase tracking-wider">{t("maxPosition")}</label>
                   <Input type="number" defaultValue="500000" className="font-mono" />
                 </div>
                 <div className="space-y-2">
-                  <label className="font-mono text-xs text-muted-foreground uppercase tracking-wider">Stop Loss (%)</label>
+                  <label className="font-mono text-xs text-muted-foreground uppercase tracking-wider">{t("stopLoss")}</label>
                   <Input type="number" defaultValue="2.0" step="0.1" className="font-mono" />
                 </div>
               </div>
               <div className="flex justify-end">
-                <Button>Save Changes</Button>
+                <Button>{tc("saveChanges")}</Button>
               </div>
             </CardContent>
           </Card>
@@ -114,7 +114,7 @@ export default function SettingsPage() {
         <TabsContent value="notifications" className="mt-4">
           <Card>
             <CardContent className="flex h-[200px] items-center justify-center pt-6">
-              <p className="text-muted-foreground">Notification preferences and channel configuration</p>
+              <p className="text-muted-foreground">{t("notificationsPlaceholder")}</p>
             </CardContent>
           </Card>
         </TabsContent>
@@ -122,7 +122,7 @@ export default function SettingsPage() {
         <TabsContent value="api" className="mt-4">
           <Card>
             <CardContent className="flex h-[200px] items-center justify-center pt-6">
-              <p className="text-muted-foreground">API key management for external services</p>
+              <p className="text-muted-foreground">{t("apiPlaceholder")}</p>
             </CardContent>
           </Card>
         </TabsContent>

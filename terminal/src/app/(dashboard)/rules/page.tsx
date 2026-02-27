@@ -1,7 +1,8 @@
+import { getTranslations } from "next-intl/server";
 import { PageHeader } from "@/components/page-header";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
+import { Badge } from "@/components/ui/badge";
 
 const rules = [
   { id: "risk_notional", label: "Notional Limit", version: "v1.2", enabled: true, threshold: "$500K", description: "Max notional per order" },
@@ -11,26 +12,24 @@ const rules = [
   { id: "risk_concentration", label: "Concentration", version: "v1.0", enabled: true, threshold: "15%", description: "Max allocation per position" },
 ];
 
-export default function RulesPage() {
+export default async function RulesPage() {
+  const t = await getTranslations("pages.rules");
+
   return (
     <div className="space-y-6">
-      <PageHeader
-        title="Risk Rules"
-        description="Pre-trade and post-trade risk management rules"
-        
-      />
+      <PageHeader title={t("title")} description={t("description")} />
 
       <Card>
         <CardHeader>
-          <CardTitle className="text-base">Rule Configuration</CardTitle>
-          <CardDescription>Manage risk rules for the decision expert system</CardDescription>
+          <CardTitle className="text-base">{t("ruleConfiguration")}</CardTitle>
+          <CardDescription>{t("ruleConfigurationDesc")}</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b">
-                  {["Rule", "Description", "Version", "Threshold", "Enabled"].map((h) => (
+                  {[t("colRule"), t("colDescription"), t("colVersion"), t("colThreshold"), t("colEnabled")].map((h) => (
                     <th
                       key={h}
                       className="pb-2 pr-4 text-left font-mono text-xs font-medium text-muted-foreground uppercase tracking-wider last:text-right last:pr-0"

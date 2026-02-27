@@ -1,7 +1,7 @@
+import { getTranslations } from "next-intl/server";
 import { PageHeader } from "@/components/page-header";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Progress } from "@/components/ui/progress";
 
@@ -56,21 +56,19 @@ const strategies = [
   },
 ];
 
-export default function StrategiesPage() {
+export default async function StrategiesPage() {
+  const t = await getTranslations("pages.strategies");
+
   return (
     <div className="space-y-6">
-      <PageHeader
-        title="Strategies"
-        description="Strategy algorithms, indicators, and configuration"
-        
-      />
+      <PageHeader title={t("title")} description={t("description")} />
 
       <Tabs defaultValue="overview">
         <TabsList>
-          <TabsTrigger value="overview">Overview</TabsTrigger>
-          <TabsTrigger value="tsmom">TSMOM</TabsTrigger>
-          <TabsTrigger value="csmom">CSMOM</TabsTrigger>
-          <TabsTrigger value="config">Configuration</TabsTrigger>
+          <TabsTrigger value="overview">{t("tabOverview")}</TabsTrigger>
+          <TabsTrigger value="tsmom">{t("tabTsmom")}</TabsTrigger>
+          <TabsTrigger value="csmom">{t("tabCsmom")}</TabsTrigger>
+          <TabsTrigger value="config">{t("tabConfig")}</TabsTrigger>
         </TabsList>
 
         <TabsContent value="overview" className="mt-4 space-y-4">
@@ -78,16 +76,14 @@ export default function StrategiesPage() {
             <Card key={s.name}>
               <CardHeader>
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div>
-                      <CardTitle className="text-base">{s.name}</CardTitle>
-                      <CardDescription>{s.description}</CardDescription>
-                    </div>
+                  <div>
+                    <CardTitle className="text-base">{s.name}</CardTitle>
+                    <CardDescription>{s.description}</CardDescription>
                   </div>
                   <div className="flex items-center gap-2">
                     <Badge variant="outline" className="font-mono text-xs">{s.version}</Badge>
                     <Badge variant={s.status === "Active" ? "default" : "secondary"} className="font-mono text-xs">
-                      {s.status}
+                      {s.status === "Active" ? t("statusActive") : t("statusPaused")}
                     </Badge>
                   </div>
                 </div>
@@ -95,25 +91,25 @@ export default function StrategiesPage() {
               <CardContent>
                 <div className="grid gap-4 sm:grid-cols-5">
                   <div>
-                    <div className="font-mono text-xs text-muted-foreground uppercase tracking-wider">YTD PnL</div>
+                    <div className="font-mono text-xs text-muted-foreground uppercase tracking-wider">{t("colYtdPnl")}</div>
                     <div className={`mt-1 font-mono text-lg font-bold ${s.pnl.startsWith("+") ? "text-positive" : "text-negative"}`}>
                       {s.pnl}
                     </div>
                   </div>
                   <div>
-                    <div className="font-mono text-xs text-muted-foreground uppercase tracking-wider">Sharpe</div>
+                    <div className="font-mono text-xs text-muted-foreground uppercase tracking-wider">{t("colSharpe")}</div>
                     <div className="mt-1 font-mono text-lg font-bold">{s.sharpe}</div>
                   </div>
                   <div>
-                    <div className="font-mono text-xs text-muted-foreground uppercase tracking-wider">Max DD</div>
+                    <div className="font-mono text-xs text-muted-foreground uppercase tracking-wider">{t("colDrawdown")}</div>
                     <div className="mt-1 font-mono text-lg font-bold text-negative">{s.maxDrawdown}</div>
                   </div>
                   <div>
-                    <div className="font-mono text-xs text-muted-foreground uppercase tracking-wider">Win Rate</div>
+                    <div className="font-mono text-xs text-muted-foreground uppercase tracking-wider">{t("colWinRate")}</div>
                     <div className="mt-1 font-mono text-lg font-bold">{s.winRate}</div>
                   </div>
                   <div>
-                    <div className="font-mono text-xs text-muted-foreground uppercase tracking-wider">Positions</div>
+                    <div className="font-mono text-xs text-muted-foreground uppercase tracking-wider">{t("colPositions")}</div>
                     <div className="mt-1 font-mono text-lg font-bold">{s.positions}</div>
                   </div>
                 </div>
@@ -125,21 +121,21 @@ export default function StrategiesPage() {
         <TabsContent value="tsmom" className="mt-4">
           <Card>
             <CardContent className="flex h-[300px] items-center justify-center pt-6">
-              <p className="text-muted-foreground">TSMOM strategy parameter tuning interface</p>
+              <p className="text-muted-foreground">{t("tsmomPlaceholder")}</p>
             </CardContent>
           </Card>
         </TabsContent>
         <TabsContent value="csmom" className="mt-4">
           <Card>
             <CardContent className="flex h-[300px] items-center justify-center pt-6">
-              <p className="text-muted-foreground">CSMOM strategy parameter tuning interface</p>
+              <p className="text-muted-foreground">{t("csmomPlaceholder")}</p>
             </CardContent>
           </Card>
         </TabsContent>
         <TabsContent value="config" className="mt-4">
           <Card>
             <CardContent className="flex h-[300px] items-center justify-center pt-6">
-              <p className="text-muted-foreground">Strategy configuration and indicator settings</p>
+              <p className="text-muted-foreground">{t("configPlaceholder")}</p>
             </CardContent>
           </Card>
         </TabsContent>

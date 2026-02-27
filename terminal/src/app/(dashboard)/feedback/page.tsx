@@ -1,3 +1,4 @@
+import { getTranslations } from "next-intl/server";
 import { PageHeader } from "@/components/page-header";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -13,32 +14,30 @@ const feedbackItems = [
   { id: "fb_036", signal: "CSMOM Sell NVDA", outcome: "Missed opportunity", pnl: "Missed +5.2%", rating: "negative", note: "Signal was correct but timing was early", time: "4d ago" },
 ];
 
-export default function FeedbackPage() {
+export default async function FeedbackPage() {
+  const t = await getTranslations("pages.feedback");
+
   return (
     <div className="space-y-6">
-      <PageHeader
-        title="Feedback Loop"
-        description="Human-in-the-loop feedback on signals, trades, and model decisions"
-        
-      />
+      <PageHeader title={t("title")} description={t("description")} />
 
       <div className="grid gap-4 sm:grid-cols-3">
         <Card>
           <CardContent className="pt-6">
-            <div className="font-mono text-xs text-muted-foreground uppercase tracking-wider">Feedback Items</div>
+            <div className="font-mono text-xs text-muted-foreground uppercase tracking-wider">{t("feedbackItems")}</div>
             <div className="mt-1 font-mono text-3xl font-bold">{feedbackItems.length}</div>
-            <div className="mt-1 text-xs text-muted-foreground">Last 7 days</div>
+            <div className="mt-1 text-xs text-muted-foreground">{t("last7Days")}</div>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="pt-6">
-            <div className="font-mono text-xs text-muted-foreground uppercase tracking-wider">Positive Rate</div>
+            <div className="font-mono text-xs text-muted-foreground uppercase tracking-wider">{t("positiveRate")}</div>
             <div className="mt-1 font-mono text-3xl font-bold text-positive">67%</div>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="pt-6">
-            <div className="font-mono text-xs text-muted-foreground uppercase tracking-wider">Pending Review</div>
+            <div className="font-mono text-xs text-muted-foreground uppercase tracking-wider">{t("pendingReview")}</div>
             <div className="mt-1 font-mono text-3xl font-bold">3</div>
           </CardContent>
         </Card>
@@ -48,12 +47,12 @@ export default function FeedbackPage() {
         <CardHeader>
           <div className="flex items-center justify-between">
             <div>
-              <CardTitle className="text-base">Feedback History</CardTitle>
-              <CardDescription>Signal and trade outcome evaluations</CardDescription>
+              <CardTitle className="text-base">{t("feedbackHistory")}</CardTitle>
+              <CardDescription>{t("feedbackHistoryDesc")}</CardDescription>
             </div>
             <Button variant="outline" size="sm">
               <MessageCircle className="mr-2 h-4 w-4" />
-              New Feedback
+              {t("newFeedback")}
             </Button>
           </div>
         </CardHeader>

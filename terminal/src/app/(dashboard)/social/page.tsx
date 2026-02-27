@@ -1,3 +1,4 @@
+import { getTranslations } from "next-intl/server";
 import { PageHeader } from "@/components/page-header";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -15,14 +16,12 @@ const sentiments = [
   { symbol: "JPM", score: 0.45, mentions: 2891, trend: "down", volume_change: "-12%" },
 ];
 
-export default function SocialPage() {
+export default async function SocialPage() {
+  const t = await getTranslations("pages.social");
+
   return (
     <div className="space-y-6">
-      <PageHeader
-        title="Social Sentiment"
-        description="Social media sentiment analysis and trending topics"
-        
-      />
+      <PageHeader title={t("title")} description={t("description")} />
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {sentiments.slice(0, 4).map((s) => (
@@ -40,7 +39,7 @@ export default function SocialPage() {
               </div>
               <div className="mt-2">
                 <div className="mb-1 flex justify-between text-xs">
-                  <span className="text-muted-foreground">Sentiment</span>
+                  <span className="text-muted-foreground">{t("colScore")}</span>
                   <span className="font-mono">{(s.score * 100).toFixed(0)}%</span>
                 </div>
                 <Progress value={s.score * 100} className="h-1.5" />
@@ -56,15 +55,15 @@ export default function SocialPage() {
 
       <Card>
         <CardHeader>
-          <CardTitle className="text-base">Sentiment Tracker</CardTitle>
-          <CardDescription>Real-time social media sentiment scores</CardDescription>
+          <CardTitle className="text-base">{t("sentimentTracker")}</CardTitle>
+          <CardDescription>{t("sentimentTrackerDesc")}</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b">
-                  {["Symbol", "Score", "Trend", "Mentions (24h)", "Vol Change"].map((h) => (
+                  {[t("colSymbol"), t("colScore"), t("colTrend"), t("colMentions"), t("colVolChange")].map((h) => (
                     <th key={h} className="pb-2 pr-4 text-left font-mono text-xs font-medium text-muted-foreground uppercase tracking-wider">
                       {h}
                     </th>

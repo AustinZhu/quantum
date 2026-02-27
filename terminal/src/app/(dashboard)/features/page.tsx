@@ -1,7 +1,7 @@
+import { getTranslations } from "next-intl/server";
 import { PageHeader } from "@/components/page-header";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const features = [
   { name: "returns_1d", group: "Price", dtype: "float64", freshness: "1m ago", source: "TimescaleDB", used_by: 4 },
@@ -14,31 +14,29 @@ const features = [
   { name: "regime_state", group: "Macro", dtype: "int8", freshness: "1d ago", source: "Internal", used_by: 2 },
 ];
 
-export default function FeaturesPage() {
+export default async function FeaturesPage() {
+  const t = await getTranslations("pages.features");
+
   return (
     <div className="space-y-6">
-      <PageHeader
-        title="Feature Store"
-        description="Centralized feature repository for ML models and strategies"
-        
-      />
+      <PageHeader title={t("title")} description={t("description")} />
 
       <div className="grid gap-4 sm:grid-cols-3">
         <Card>
           <CardContent className="pt-6">
-            <div className="font-mono text-xs text-muted-foreground uppercase tracking-wider">Total Features</div>
+            <div className="font-mono text-xs text-muted-foreground uppercase tracking-wider">{t("totalFeatures")}</div>
             <div className="mt-1 font-mono text-3xl font-bold">{features.length}</div>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="pt-6">
-            <div className="font-mono text-xs text-muted-foreground uppercase tracking-wider">Feature Groups</div>
+            <div className="font-mono text-xs text-muted-foreground uppercase tracking-wider">{t("featureGroups")}</div>
             <div className="mt-1 font-mono text-3xl font-bold">{new Set(features.map(f => f.group)).size}</div>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="pt-6">
-            <div className="font-mono text-xs text-muted-foreground uppercase tracking-wider">Avg Freshness</div>
+            <div className="font-mono text-xs text-muted-foreground uppercase tracking-wider">{t("avgFreshness")}</div>
             <div className="mt-1 font-mono text-3xl font-bold">&lt;5m</div>
           </CardContent>
         </Card>
@@ -46,15 +44,15 @@ export default function FeaturesPage() {
 
       <Card>
         <CardHeader>
-          <CardTitle className="text-base">Feature Catalog</CardTitle>
-          <CardDescription>Available features with metadata and lineage</CardDescription>
+          <CardTitle className="text-base">{t("featureCatalog")}</CardTitle>
+          <CardDescription>{t("featureCatalogDesc")}</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b">
-                  {["Feature", "Group", "Type", "Freshness", "Source", "Used By"].map((h) => (
+                  {[t("colFeature"), t("colGroup"), t("colType"), t("colFreshness"), t("colSource"), t("colUsedBy")].map((h) => (
                     <th key={h} className="pb-2 pr-4 text-left font-mono text-xs font-medium text-muted-foreground uppercase tracking-wider">
                       {h}
                     </th>

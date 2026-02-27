@@ -84,6 +84,11 @@ Auth:
 - `DATAFEED_OPENAPI_SPEC_PATH` (default `/app/openapi/quantum.openapi.json`)
 - `DATAFEED_CONFIG_FROM_CONSUL`, `DATAFEED_CONSUL_*`
 - `DATAFEED_SECRETS_FROM_VAULT`, `DATAFEED_VAULT_*`
+- `DATAFEED_OKX_REST_BASE_URL` (default `https://www.okx.com`)
+- `DATAFEED_OKX_WS_PUBLIC_URL` (default `wss://ws.okx.com:8443/ws/v5/public`)
+- `DATAFEED_OKX_WS_BUSINESS_URL` (default `wss://ws.okx.com:8443/ws/v5/business`)
+- `DATAFEED_OKX_INST_TYPES` (comma-separated, default `SPOT`)
+- `DATAFEED_OKX_HTTP_TIMEOUT_SEC`, `DATAFEED_OKX_SYMBOL_CACHE_SEC`
 
 ## Migrations and Storage
 

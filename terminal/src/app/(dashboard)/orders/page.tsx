@@ -1,3 +1,4 @@
+import { getTranslations } from "next-intl/server";
 import { PageHeader } from "@/components/page-header";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -13,14 +14,21 @@ const rows = [
   { orderId: "ord_4816", symbol: "META", side: "SELL", qty: 75, price: "$510.22", status: "Rejected", strategy: "Stat Arb" },
 ];
 
-export default function OrdersPage() {
+export default async function OrdersPage() {
+  const t = await getTranslations("pages.orders");
+  const tc = await getTranslations("common");
+
+  const statusLabel = (s: string) => {
+    if (s === "Filled") return t("statusFilled");
+    if (s === "Partial") return t("statusPartial");
+    if (s === "Pending") return t("statusPending");
+    if (s === "Rejected") return t("statusRejected");
+    return s;
+  };
+
   return (
     <div className="space-y-6">
-      <PageHeader
-        title="Orders"
-        description="Order entry, execution, and management"
-        
-      />
+      <PageHeader title={t("title")} description={t("description")} />
 
       <OrderEntryForm />
 
@@ -28,11 +36,11 @@ export default function OrdersPage() {
         <CardHeader>
           <div className="flex items-center justify-between">
             <div>
-              <CardTitle className="text-base">Order Management</CardTitle>
-              <CardDescription>Active and recent orders</CardDescription>
+              <CardTitle className="text-base">{t("orderManagement")}</CardTitle>
+              <CardDescription>{t("orderManagementDesc")}</CardDescription>
             </div>
             <Button variant="outline" size="sm" className="font-mono text-xs">
-              Export
+              {tc("export")}
             </Button>
           </div>
         </CardHeader>
@@ -41,7 +49,7 @@ export default function OrdersPage() {
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b">
-                  {["ID", "Symbol", "Side", "Qty", "Price", "Strategy", "Status"].map((h) => (
+                  {[t("colId"), t("colSymbol"), t("colSide"), t("colQty"), t("colPrice"), t("colStrategy"), t("colStatus")].map((h) => (
                     <th
                       key={h}
                       className="pb-2 pr-4 text-left font-mono text-xs font-medium text-muted-foreground uppercase tracking-wider last:text-right last:pr-0"
@@ -69,7 +77,7 @@ export default function OrdersPage() {
                         variant={row.status === "Filled" ? "default" : row.status === "Rejected" ? "destructive" : "outline"}
                         className="font-mono text-xs"
                       >
-                        {row.status}
+                        {statusLabel(row.status)}
                       </Badge>
                     </td>
                   </tr>

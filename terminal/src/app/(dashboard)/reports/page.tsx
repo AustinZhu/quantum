@@ -1,3 +1,4 @@
+import { getTranslations } from "next-intl/server";
 import { PageHeader } from "@/components/page-header";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -12,25 +13,23 @@ const reports = [
   { name: "Annual Performance Review", date: "2025-12-31", type: "Annual", trades: 15240, pnl: "+$891,204", status: "Ready" },
 ];
 
-export default function ReportsPage() {
+export default async function ReportsPage() {
+  const t = await getTranslations("pages.reports");
+
   return (
     <div className="space-y-6">
-      <PageHeader
-        title="Reports"
-        description="Historical trade reports, performance summaries, and exports"
-        
-      />
+      <PageHeader title={t("title")} description={t("description")} />
 
       <Card>
         <CardHeader>
           <div className="flex items-center justify-between">
             <div>
-              <CardTitle className="text-base">Report Library</CardTitle>
-              <CardDescription>Generated reports and historical summaries</CardDescription>
+              <CardTitle className="text-base">{t("reportLibrary")}</CardTitle>
+              <CardDescription>{t("reportLibraryDesc")}</CardDescription>
             </div>
             <Button size="sm">
               <FileText className="mr-2 h-4 w-4" />
-              Generate Report
+              {t("generateNew")}
             </Button>
           </div>
         </CardHeader>
@@ -39,7 +38,7 @@ export default function ReportsPage() {
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b">
-                  {["Report", "Date", "Type", "Trades", "PnL", ""].map((h, i) => (
+                  {[t("colReport"), t("colDate"), t("colTrades"), t("colPnl"), ""].map((h, i) => (
                     <th key={i} className="pb-2 pr-4 text-left font-mono text-xs font-medium text-muted-foreground uppercase tracking-wider">
                       {h}
                     </th>
@@ -51,9 +50,6 @@ export default function ReportsPage() {
                   <tr key={r.name} className="border-b border-border/50 last:border-0">
                     <td className="py-2.5 pr-4 font-medium">{r.name}</td>
                     <td className="py-2.5 pr-4 font-mono text-xs text-muted-foreground">{r.date}</td>
-                    <td className="py-2.5 pr-4">
-                      <Badge variant="outline" className="font-mono text-xs">{r.type}</Badge>
-                    </td>
                     <td className="py-2.5 pr-4 font-mono">{r.trades.toLocaleString()}</td>
                     <td className="py-2.5 pr-4 font-mono text-positive">{r.pnl}</td>
                     <td className="py-2.5 pr-4">

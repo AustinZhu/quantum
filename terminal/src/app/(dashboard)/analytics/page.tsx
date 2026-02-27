@@ -1,34 +1,32 @@
+import { getTranslations } from "next-intl/server";
 import { PageHeader } from "@/components/page-header";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { BarChart3, TrendingUp, PieChart } from "lucide-react";
 
-const performanceMetrics = [
-  { label: "Total Return", value: "+27.8%", period: "YTD" },
-  { label: "Annualized Return", value: "+34.2%", period: "Since Inception" },
-  { label: "Sharpe Ratio", value: "1.68", period: "Rolling 12M" },
-  { label: "Sortino Ratio", value: "2.41", period: "Rolling 12M" },
-  { label: "Max Drawdown", value: "-8.5%", period: "YTD" },
-  { label: "Calmar Ratio", value: "4.02", period: "Rolling 12M" },
-  { label: "Win Rate", value: "56.3%", period: "YTD" },
-  { label: "Profit Factor", value: "1.84", period: "YTD" },
-];
+export default async function AnalyticsPage() {
+  const t = await getTranslations("pages.analytics");
 
-export default function AnalyticsPage() {
+  const performanceMetrics = [
+    { label: t("totalReturn"), value: "+27.8%", period: "YTD" },
+    { label: t("annualizedReturn"), value: "+34.2%", period: "Since Inception" },
+    { label: t("sharpeRatio"), value: "1.68", period: "Rolling 12M" },
+    { label: t("sortinoRatio"), value: "2.41", period: "Rolling 12M" },
+    { label: t("maxDrawdown"), value: "-8.5%", period: "YTD" },
+    { label: t("calmarRatio"), value: "4.02", period: "Rolling 12M" },
+    { label: t("winRate"), value: "56.3%", period: "YTD" },
+    { label: t("profitFactor"), value: "1.84", period: "YTD" },
+  ];
+
   return (
     <div className="space-y-6">
-      <PageHeader
-        title="Analytics"
-        description="Performance analytics, risk metrics, and attribution analysis"
-        
-      />
+      <PageHeader title={t("title")} description={t("description")} />
 
       <Tabs defaultValue="performance">
         <TabsList>
-          <TabsTrigger value="performance">Performance</TabsTrigger>
-          <TabsTrigger value="risk">Risk Analytics</TabsTrigger>
-          <TabsTrigger value="attribution">Attribution</TabsTrigger>
+          <TabsTrigger value="performance">{t("tabPerformance")}</TabsTrigger>
+          <TabsTrigger value="risk">{t("tabRisk")}</TabsTrigger>
+          <TabsTrigger value="attribution">{t("tabAttribution")}</TabsTrigger>
         </TabsList>
 
         <TabsContent value="performance" className="mt-4 space-y-4">
@@ -48,14 +46,14 @@ export default function AnalyticsPage() {
 
           <Card>
             <CardHeader>
-              <CardTitle className="text-base">Equity Curve</CardTitle>
-              <CardDescription>Portfolio value over time</CardDescription>
+              <CardTitle className="text-base">{t("equityCurve")}</CardTitle>
+              <CardDescription>{t("portfolioValueTime")}</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="flex h-[300px] items-center justify-center rounded-lg border border-dashed border-border/50">
                 <div className="text-center">
                   <TrendingUp className="mx-auto h-10 w-10 text-muted-foreground/30" />
-                  <p className="mt-2 text-sm text-muted-foreground">Equity curve chart</p>
+                  <p className="mt-2 text-sm text-muted-foreground">{t("equityCurveChart")}</p>
                 </div>
               </div>
             </CardContent>
@@ -67,7 +65,7 @@ export default function AnalyticsPage() {
             <CardContent className="flex h-[300px] items-center justify-center pt-6">
               <div className="text-center">
                 <BarChart3 className="mx-auto h-10 w-10 text-muted-foreground/30" />
-                <p className="mt-2 text-muted-foreground">VaR, drawdown analysis, and risk decomposition</p>
+                <p className="mt-2 text-muted-foreground">{t("riskPlaceholder")}</p>
               </div>
             </CardContent>
           </Card>
@@ -78,7 +76,7 @@ export default function AnalyticsPage() {
             <CardContent className="flex h-[300px] items-center justify-center pt-6">
               <div className="text-center">
                 <PieChart className="mx-auto h-10 w-10 text-muted-foreground/30" />
-                <p className="mt-2 text-muted-foreground">Return attribution by factor, strategy, and sector</p>
+                <p className="mt-2 text-muted-foreground">{t("attributionPlaceholder")}</p>
               </div>
             </CardContent>
           </Card>

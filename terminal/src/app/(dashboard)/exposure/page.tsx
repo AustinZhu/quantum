@@ -1,15 +1,7 @@
+import { getTranslations } from "next-intl/server";
 import { PageHeader } from "@/components/page-header";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { Separator } from "@/components/ui/separator";
-
-const exposureMetrics = [
-  { label: "Gross Exposure", value: "$2.41M", limit: "$3.00M", pct: 80.3 },
-  { label: "Net Exposure", value: "$0.92M", limit: "$1.50M", pct: 61.3 },
-  { label: "Margin Used", value: "$1.61M", limit: "$2.40M", pct: 67.3 },
-  { label: "Available Margin", value: "$0.79M", limit: "$2.40M", pct: 32.7 },
-];
 
 const sectorExposure = [
   { sector: "Technology", long: 42.8, short: -12.1, net: 30.7 },
@@ -20,14 +12,19 @@ const sectorExposure = [
   { sector: "Energy", long: 3.2, short: -5.2, net: -2.0 },
 ];
 
-export default function ExposurePage() {
+export default async function ExposurePage() {
+  const t = await getTranslations("pages.exposure");
+
+  const exposureMetrics = [
+    { label: t("grossExposure"), value: "$2.41M", limit: "$3.00M", pct: 80.3 },
+    { label: t("netExposure"), value: "$0.92M", limit: "$1.50M", pct: 61.3 },
+    { label: t("marginUsed"), value: "$1.61M", limit: "$2.40M", pct: 67.3 },
+    { label: t("availableMargin"), value: "$0.79M", limit: "$2.40M", pct: 32.7 },
+  ];
+
   return (
     <div className="space-y-6">
-      <PageHeader
-        title="Exposure"
-        description="Exposure, margin, and funding management"
-        
-      />
+      <PageHeader title={t("title")} description={t("description")} />
 
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         {exposureMetrics.map((m) => (
@@ -47,15 +44,15 @@ export default function ExposurePage() {
 
       <Card>
         <CardHeader>
-          <CardTitle className="text-base">Sector Exposure</CardTitle>
-          <CardDescription>Long, short, and net exposure by sector</CardDescription>
+          <CardTitle className="text-base">{t("sectorBreakdown")}</CardTitle>
+          <CardDescription>{t("sectorBreakdownDesc")}</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b">
-                  {["Sector", "Long %", "Short %", "Net %"].map((h) => (
+                  {[t("colSector"), t("colLong"), t("colShort"), t("colNet")].map((h) => (
                     <th key={h} className="pb-2 pr-4 text-left font-mono text-xs font-medium text-muted-foreground uppercase tracking-wider">
                       {h}
                     </th>

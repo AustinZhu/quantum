@@ -1,7 +1,7 @@
+import { getTranslations } from "next-intl/server";
 import { PageHeader } from "@/components/page-header";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Bell, Clock, Mail, MessageSquare, Smartphone } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 
@@ -22,14 +22,12 @@ const channels = [
   { name: "Push Notifications", icon: Smartphone, enabled: true, alerts: 87 },
 ];
 
-export default function AlertsPage() {
+export default async function AlertsPage() {
+  const t = await getTranslations("pages.alerts");
+
   return (
     <div className="space-y-6">
-      <PageHeader
-        title="Alerts"
-        description="Alert configuration and notification channels"
-        
-      />
+      <PageHeader title={t("title")} description={t("description")} />
 
       <div className="grid gap-4 sm:grid-cols-3">
         {channels.map((ch) => {
@@ -57,8 +55,8 @@ export default function AlertsPage() {
         <CardHeader>
           <div className="flex items-center justify-between">
             <div>
-              <CardTitle className="text-base">Alert History</CardTitle>
-              <CardDescription>Recent alerts across all channels</CardDescription>
+              <CardTitle className="text-base">{t("alertHistory")}</CardTitle>
+              <CardDescription>{t("alertHistoryDesc")}</CardDescription>
             </div>
             <Badge variant="outline" className="font-mono text-xs">
               <Bell className="mr-1 h-3 w-3" />

@@ -1,6 +1,6 @@
+import { getTranslations } from "next-intl/server";
 import { PageHeader } from "@/components/page-header";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 
 const costData = [
   { strategy: "TSMOM Equity L/S", trades: 284, avgSlippage: "0.8 bps", commission: "$4,218", impact: "1.2 bps", totalCost: "$12,480", costPct: "0.44%" },
@@ -9,31 +9,29 @@ const costData = [
   { strategy: "Macro Momentum", trades: 48, avgSlippage: "2.1 bps", commission: "$720", impact: "3.4 bps", totalCost: "$3,210", costPct: "1.12%" },
 ];
 
-export default function CostAnalysisPage() {
+export default async function CostAnalysisPage() {
+  const t = await getTranslations("pages.costAnalysis");
+
   return (
     <div className="space-y-6">
-      <PageHeader
-        title="Cost Analysis"
-        description="Trade cost analysis: slippage, commissions, and market impact"
-        
-      />
+      <PageHeader title={t("title")} description={t("description")} />
 
       <div className="grid gap-4 sm:grid-cols-3">
         <Card>
           <CardContent className="pt-6">
-            <div className="font-mono text-xs text-muted-foreground uppercase tracking-wider">Total Costs (MTD)</div>
+            <div className="font-mono text-xs text-muted-foreground uppercase tracking-wider">{t("totalCostsMtd")}</div>
             <div className="mt-1 font-mono text-2xl font-bold">$39,950</div>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="pt-6">
-            <div className="font-mono text-xs text-muted-foreground uppercase tracking-wider">Avg Slippage</div>
+            <div className="font-mono text-xs text-muted-foreground uppercase tracking-wider">{t("avgSlippage")}</div>
             <div className="mt-1 font-mono text-2xl font-bold">0.9 bps</div>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="pt-6">
-            <div className="font-mono text-xs text-muted-foreground uppercase tracking-wider">Total Trades</div>
+            <div className="font-mono text-xs text-muted-foreground uppercase tracking-wider">{t("totalTrades")}</div>
             <div className="mt-1 font-mono text-2xl font-bold">1,380</div>
           </CardContent>
         </Card>
@@ -41,15 +39,15 @@ export default function CostAnalysisPage() {
 
       <Card>
         <CardHeader>
-          <CardTitle className="text-base">Cost Breakdown by Strategy</CardTitle>
-          <CardDescription>Detailed trade cost attribution</CardDescription>
+          <CardTitle className="text-base">{t("costBreakdown")}</CardTitle>
+          <CardDescription>{t("costBreakdownDesc")}</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b">
-                  {["Strategy", "Trades", "Avg Slippage", "Commission", "Market Impact", "Total Cost", "Cost %"].map((h) => (
+                  {[t("colStrategy"), t("colTrades"), t("colAvgSlippage"), t("colCommission"), t("colMarketImpact"), t("colTotalCost"), t("colCostPct")].map((h) => (
                     <th key={h} className="pb-2 pr-4 text-left font-mono text-xs font-medium text-muted-foreground uppercase tracking-wider">
                       {h}
                     </th>

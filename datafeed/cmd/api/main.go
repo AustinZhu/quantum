@@ -5,9 +5,11 @@ import (
 	"log"
 	"net/http"
 	"os/signal"
+	"strings"
 	"syscall"
 	"time"
 
+	"github.com/austin/quantum/datafeed/internal/adapters/okx"
 	"github.com/austin/quantum/datafeed/internal/app"
 	"github.com/austin/quantum/datafeed/internal/config"
 	"github.com/austin/quantum/datafeed/internal/connect"
@@ -39,7 +41,16 @@ func main() {
 	}
 	defer publisher.Close()
 
-	service := app.NewService(repo, publisher)
+	okxClient := okx.NewClient(okx.Config{
+		RESTBaseURL:     cfg.OKXRESTBaseURL,
+		WSPublicURL:     cfg.OKXWSPublicURL,
+		WSBusinessURL:   cfg.OKXWSBusinessURL,
+		InstrumentTypes: splitAndTrim(cfg.OKXInstTypes),
+		HTTPTimeout:     time.Duration(cfg.OKXHTTPTimeoutSec) * time.Second,
+		SymbolCacheTTL:  time.Duration(cfg.OKXSymbolCacheSec) * time.Second,
+	})
+
+	service := app.NewService(repo, publisher, okxClient)
 	server := &http.Server{
 		Addr:    cfg.HTTPAddr,
 		Handler: connect.NewMux(service, cfg.APIKey, cfg.OpenAPISpecPath),
@@ -56,4 +67,17 @@ func main() {
 	if err := server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 		log.Fatalf("server error: %v", err)
 	}
+}
+
+func splitAndTrim(raw string) []string {
+	parts := strings.Split(raw, ",")
+	out := make([]string, 0, len(parts))
+	for _, part := range parts {
+		value := strings.TrimSpace(part)
+		if value == "" {
+			continue
+		}
+		out = append(out, value)
+	}
+	return out
 }

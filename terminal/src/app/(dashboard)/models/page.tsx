@@ -1,3 +1,4 @@
+import { getTranslations } from "next-intl/server";
 import { PageHeader } from "@/components/page-header";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -12,24 +13,23 @@ const models = [
   { name: "sentiment_nlp", version: "v2.0.0-rc1", type: "Transformer", stage: "Staging", updated: "1w ago", metrics: "F1 0.71" },
 ];
 
-export default function ModelsPage() {
+export default async function ModelsPage() {
+  const t = await getTranslations("pages.models");
+
   return (
     <div className="space-y-6">
-      <PageHeader
-        title="Model Registry"
-        description="Version-controlled model and strategy registry"
-      />
+      <PageHeader title={t("title")} description={t("description")} />
 
       <Card>
         <CardHeader>
           <div className="flex items-center justify-between">
             <div>
-              <CardTitle className="text-base">Registered Models</CardTitle>
-              <CardDescription>Model versions, stages, and performance metrics</CardDescription>
+              <CardTitle className="text-base">{t("modelCatalog")}</CardTitle>
+              <CardDescription>{t("modelCatalogDesc")}</CardDescription>
             </div>
             <Button variant="outline" size="sm">
               <GitBranch className="mr-2 h-4 w-4" />
-              Compare
+              {t("compare")}
             </Button>
           </div>
         </CardHeader>
@@ -38,7 +38,7 @@ export default function ModelsPage() {
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b">
-                  {["Model", "Version", "Type", "Stage", "Key Metric", "Updated"].map((h) => (
+                  {[t("colModel"), t("colVersion"), t("colType"), t("colEnv"), t("colMetric"), t("colUpdated")].map((h) => (
                     <th key={h} className="pb-2 pr-4 text-left font-mono text-xs font-medium text-muted-foreground uppercase tracking-wider">
                       {h}
                     </th>
@@ -55,7 +55,7 @@ export default function ModelsPage() {
                     <td className="py-2.5 pr-4 text-muted-foreground">{m.type}</td>
                     <td className="py-2.5 pr-4">
                       <Badge variant={m.stage === "Production" ? "default" : "secondary"} className="font-mono text-xs">
-                        {m.stage}
+                        {m.stage === "Production" ? t("envProduction") : t("envStaging")}
                       </Badge>
                     </td>
                     <td className="py-2.5 pr-4 font-mono text-xs">{m.metrics}</td>

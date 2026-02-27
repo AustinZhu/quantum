@@ -1,7 +1,10 @@
 {
-  "brand": {
-    "name": "量子",
-    "subtitle": "终端"
+  "brand": { "name": "量子", "subtitle": "终端" },
+  "theme": {
+    "toggle": "切换主题",
+    "light": "明亮",
+    "dark": "暗色",
+    "system": "系统"
   },
   "nav": {
     "groups": {
@@ -12,48 +15,304 @@
       "System": "系统"
     },
     "items": {
-      "Dashboard": "仪表板",
-      "Chart": "图表",
-      "Screening": "股票筛选",
-      "Strategies": "策略",
-      "Backtesting": "回测",
-      "Model Registry": "模型注册",
-      "Feature Store": "特征库",
-      "AI Research": "AI 研究",
-      "Live Feed": "实时行情",
-      "News": "新闻",
-      "Fundamentals": "基本面",
-      "Social Sentiment": "社交情绪",
-      "Alerts": "预警",
-      "Orders": "订单",
-      "Portfolio": "投资组合",
-      "Risk Rules": "风控规则",
-      "Exposure": "敞口",
-      "Cost Analysis": "成本分析",
-      "Health": "系统健康",
-      "Settings": "设置",
-      "Analytics": "分析",
-      "Reports": "报告",
-      "Feedback": "反馈",
-      "Similarity": "相似度"
+      "Dashboard": "仪表板", "Chart": "图表", "Screening": "股票筛选",
+      "Strategies": "策略", "Backtesting": "回测",
+      "Model Registry": "模型注册", "Feature Store": "特征库",
+      "AI Research": "AI 研究", "Live Feed": "实时行情", "News": "新闻",
+      "Fundamentals": "基本面", "Social Sentiment": "社交情绪",
+      "Alerts": "预警", "Orders": "订单", "Portfolio": "投资组合",
+      "Risk Rules": "风控规则", "Exposure": "敞口",
+      "Cost Analysis": "成本分析", "Health": "系统健康",
+      "Settings": "设置", "Analytics": "分析", "Reports": "报告",
+      "Feedback": "反馈", "Similarity": "相似度"
     }
   },
   "common": {
-    "online": "在线",
-    "signOut": "退出登录",
-    "settings": "设置",
-    "navigation": "导航"
+    "online": "在线", "signOut": "退出登录",
+    "settings": "设置", "navigation": "导航",
+    "viewAll": "查看全部", "export": "导出", "download": "下载",
+    "saveChanges": "保存更改", "edit": "编辑", "delete": "删除",
+    "short": "做空"
   },
   "login": {
     "title": "欢迎回来",
     "subtitle": "使用组织账户登录量子终端",
     "signIn": "通过 Casdoor SSO 登录",
-    "signingIn": "跳转中\u2026",
+    "signingIn": "跳转中…",
     "restricted": "仅限授权人员访问。本系统内容属机密专有信息，未经授权严禁访问。所有操作均受监控并留有记录。",
     "errors": {
       "no_code": "身份验证已取消，请重试。",
       "auth_failed": "身份验证失败，请重试或联系支持团队。",
       "unexpected": "发生了意外错误。"
+    }
+  },
+  "pages": {
+    "dashboard": {
+      "title": "仪表板",
+      "description": "量化交易系统实时概览",
+      "portfolioPnl": "投资组合盈亏", "activeSignals": "活跃信号",
+      "fillRate": "成交率", "riskScore": "风险评分",
+      "tradingActivity": "交易活动",
+      "cumulativePnl": "累计盈亏与信号量",
+      "chartPlaceholder": "TradingView 图表加载区",
+      "alertsSignals": "预警与信号",
+      "latestAlerts": "最新系统与交易预警",
+      "activeStrategies": "活跃策略",
+      "performanceSummary": "各策略绩效概览",
+      "colStrategy": "策略", "colStatus": "状态",
+      "colYtdPnl": "年初至今盈亏", "colSharpe": "夏普比率",
+      "exposureOverview": "敞口概览",
+      "currentAllocation": "当前投资组合配置",
+      "equityLong": "股票多头", "equityShort": "股票空头",
+      "futures": "期货", "cash": "现金",
+      "grossExposure": "总敞口", "netExposure": "净敞口", "marginUsed": "已用保证金",
+      "recentOrders": "最近订单",
+      "latestExecutions": "所有策略的最新订单执行",
+      "colOrderId": "订单编号", "colSymbol": "标的", "colSide": "方向",
+      "colQty": "数量", "colPrice": "价格",
+      "statusActive": "活跃", "statusPaused": "暂停",
+      "statusFilled": "已成交", "statusPartial": "部分成交",
+      "statusPending": "待处理", "statusRejected": "已拒绝"
+    },
+    "chart": {
+      "title": "图表",
+      "description": "交互式价格图表与技术分析"
+    },
+    "screening": {
+      "title": "股票筛选",
+      "description": "使用时间序列、订单簿和因子数据筛选与分析标的",
+      "screenerTitle": "筛选器", "screenerDesc": "按动量、成交量、行业及自定义因子筛选",
+      "searchPlaceholder": "搜索标的…",
+      "filter": "筛选",
+      "results": "筛选结果",
+      "resultsDesc": "符合条件的标的",
+      "colSymbol": "标的", "colName": "名称", "colSector": "行业",
+      "colMomentum": "30日动量", "colVolume": "平均成交量", "colSignal": "信号",
+      "strongBuy": "强力买入", "buy": "买入", "hold": "持有", "sell": "卖出"
+    },
+    "strategies": {
+      "title": "策略",
+      "description": "策略算法、指标与配置",
+      "tabOverview": "概览", "tabTsmom": "时序动量",
+      "tabCsmom": "截面动量", "tabConfig": "配置",
+      "strategyOverview": "策略概览",
+      "strategyOverviewDesc": "所有已注册策略及其当前绩效",
+      "colStrategy": "策略", "colVersion": "版本",
+      "colStatus": "状态", "colReturn": "收益率",
+      "colSharpe": "夏普比率", "colDrawdown": "最大回撤",
+      "colWinRate": "胜率", "colPositions": "持仓数",
+      "statusActive": "活跃", "statusPaused": "暂停",
+      "tsmomPlaceholder": "时序动量策略参数调优界面",
+      "csmomPlaceholder": "截面动量策略参数调优界面",
+      "configPlaceholder": "策略配置与指标设置"
+    },
+    "backtesting": {
+      "title": "回测",
+      "description": "运行并评估策略回测与模拟交易",
+      "tabHistory": "历史记录", "tabNew": "新建回测", "tabPaper": "模拟交易",
+      "newBacktest": "新建回测", "runBacktest": "运行回测",
+      "backtestHistory": "回测历史",
+      "backtestHistoryDesc": "历次回测记录与结果",
+      "colRunId": "运行编号", "colStrategy": "策略", "colPeriod": "周期",
+      "colSharpe": "夏普比率", "colReturns": "收益率",
+      "colDuration": "耗时", "colStatus": "状态",
+      "statusCompleted": "已完成", "statusRunning": "运行中", "statusFailed": "失败",
+      "paperPlaceholder": "模拟交易仿真引擎",
+      "newBacktestPlaceholder": "配置并启动新回测"
+    },
+    "models": {
+      "title": "模型注册",
+      "description": "版本控制的模型与策略注册库",
+      "modelCatalog": "模型目录",
+      "modelCatalogDesc": "所有环境中已注册的模型",
+      "compare": "比较",
+      "deploy": "部署", "archive": "归档",
+      "colModel": "模型", "colVersion": "版本", "colType": "类型",
+      "colEnv": "环境", "colMetric": "关键指标", "colUpdated": "更新时间",
+      "envProduction": "生产环境", "envStaging": "预发布环境"
+    },
+    "features": {
+      "title": "特征库",
+      "description": "机器学习模型与策略的集中特征仓库",
+      "totalFeatures": "特征总数", "featureGroups": "特征分组",
+      "avgFreshness": "平均新鲜度",
+      "featureCatalog": "特征目录",
+      "featureCatalogDesc": "所有已注册特征及其元数据",
+      "colFeature": "特征", "colGroup": "分组", "colType": "类型",
+      "colFreshness": "新鲜度", "colSource": "来源", "colUsedBy": "使用方"
+    },
+    "research": {
+      "title": "AI 研究",
+      "description": "智能代理研究、摘要生成与市场分析",
+      "newResearch": "新建研究", "templates": "模板",
+      "activeResearch": "进行中的研究",
+      "activeResearchDesc": "进行中与已完成的研究任务",
+      "statusCompleted": "已完成", "statusRunning": "运行中",
+      "confidence": "置信度"
+    },
+    "feed": {
+      "title": "实时行情",
+      "description": "实时逐笔数据、订单记录与市场数据流",
+      "ticksPerSec": "逐笔/秒", "symbols": "标的数",
+      "latency": "延迟", "status": "状态", "statusLive": "直播",
+      "streaming": "串流中",
+      "tickStream": "逐笔数据流",
+      "tickStreamDesc": "实时市场数据推送",
+      "colTime": "时间", "colSymbol": "标的", "colPrice": "价格",
+      "colSize": "数量", "colExchange": "交易所", "colType": "类型"
+    },
+    "news": {
+      "title": "新闻",
+      "description": "市场新闻、财报及宏观事件汇总",
+      "latestNews": "最新新闻",
+      "latestNewsDesc": "实时市场新闻与分析",
+      "sentimentPositive": "正面", "sentimentNegative": "负面",
+      "sentimentNeutral": "中性", "readMore": "阅读更多"
+    },
+    "fundamentals": {
+      "title": "基本面",
+      "description": "财务报表、估值指标与公司数据",
+      "financialOverview": "财务概览",
+      "financialOverviewDesc": "关键估值与财务指标",
+      "searchPlaceholder": "搜索标的…",
+      "colSymbol": "标的", "colPe": "市盈率", "colPb": "市净率",
+      "colDivYield": "股息率", "colMarketCap": "市值",
+      "colRevenue": "营收", "colEpsGrowth": "每股收益增长"
+    },
+    "social": {
+      "title": "社交情绪",
+      "description": "社交媒体情绪分析与热门话题",
+      "sentimentTracker": "情绪追踪",
+      "sentimentTrackerDesc": "所有被追踪标的",
+      "colSymbol": "标的", "colScore": "评分", "colTrend": "趋势",
+      "colMentions": "提及次数（24小时）", "colVolChange": "成交量变化"
+    },
+    "alerts": {
+      "title": "预警",
+      "description": "预警配置与通知渠道",
+      "newAlert": "新建预警",
+      "totalAlerts": "预警总数",
+      "alertHistory": "预警历史",
+      "alertHistoryDesc": "最近系统与交易预警",
+      "colType": "类型", "colSeverity": "严重程度", "colMessage": "消息",
+      "colChannel": "渠道", "colTime": "时间"
+    },
+    "orders": {
+      "title": "订单",
+      "description": "订单录入、执行与管理",
+      "orderManagement": "订单管理",
+      "orderManagementDesc": "活跃与近期订单",
+      "colId": "编号", "colSymbol": "标的", "colSide": "方向",
+      "colQty": "数量", "colPrice": "价格",
+      "colStrategy": "策略", "colStatus": "状态",
+      "statusFilled": "已成交", "statusPartial": "部分成交",
+      "statusPending": "待处理", "statusRejected": "已拒绝"
+    },
+    "portfolio": {
+      "title": "投资组合",
+      "description": "投资组合持仓、配置与资金管理",
+      "nav": "净值", "dayPnl": "当日盈亏", "positions": "持仓数", "cash": "现金",
+      "holdings": "持仓明细", "holdingsDesc": "当前投资组合持仓",
+      "colSymbol": "标的", "colShares": "股数", "colAvgCost": "平均成本",
+      "colCurrent": "当前价格", "colPnl": "盈亏", "colPnlPct": "盈亏比例",
+      "colWeight": "权重"
+    },
+    "rules": {
+      "title": "风控规则",
+      "description": "交易前与交易后风险管理规则",
+      "addRule": "添加规则",
+      "ruleConfiguration": "规则配置",
+      "ruleConfigurationDesc": "活跃交易风险规则",
+      "colRule": "规则", "colDescription": "说明", "colVersion": "版本",
+      "colThreshold": "阈值", "colStatus": "状态", "colEnabled": "已启用",
+      "colActions": "操作", "statusEnabled": "已启用", "statusDisabled": "已禁用"
+    },
+    "exposure": {
+      "title": "敞口",
+      "description": "敞口、保证金与资金管理",
+      "grossExposure": "总敞口", "netExposure": "净敞口",
+      "marginUsed": "已用保证金", "availableMargin": "可用保证金",
+      "sectorBreakdown": "行业分布",
+      "sectorBreakdownDesc": "各行业当前敞口",
+      "colSector": "行业", "colLong": "多头", "colShort": "空头", "colNet": "净敞口"
+    },
+    "costAnalysis": {
+      "title": "成本分析",
+      "description": "交易成本分析：滑点、手续费与市场冲击",
+      "totalCostsMtd": "本月累计成本", "avgSlippage": "平均滑点",
+      "totalTrades": "交易总数",
+      "costBreakdown": "成本明细",
+      "costBreakdownDesc": "各策略交易成本",
+      "colStrategy": "策略", "colTrades": "交易次数",
+      "colAvgSlippage": "平均滑点", "colCommission": "手续费",
+      "colMarketImpact": "市场冲击", "colTotalCost": "总成本", "colCostPct": "成本率"
+    },
+    "health": {
+      "title": "系统健康",
+      "description": "基础设施与服务监控",
+      "totalServices": "服务总数", "healthy": "健康", "degraded": "降级",
+      "uptime": "运行时间", "latency": "延迟", "openUi": "打开界面",
+      "statusHealthy": "健康", "statusDegraded": "降级"
+    },
+    "settings": {
+      "title": "设置",
+      "description": "系统配置与参数调整",
+      "tabGeneral": "常规", "tabTrading": "交易",
+      "tabNotifications": "通知", "tabApi": "API 密钥",
+      "systemParams": "系统参数", "systemParamsDesc": "核心系统配置",
+      "bffTimeout": "BFF 上游超时（毫秒）",
+      "maxConcurrent": "最大并发请求数",
+      "dataRetention": "数据保留天数",
+      "logLevel": "日志级别",
+      "debugMode": "启用调试模式",
+      "debugModeDesc": "显示详细日志与诊断信息",
+      "autoRefresh": "自动刷新仪表板",
+      "autoRefreshDesc": "每 5 秒自动刷新数据",
+      "maintenanceMode": "维护模式",
+      "maintenanceModeDesc": "暂停所有交易并显示维护横幅",
+      "tradingParams": "交易参数", "tradingParamsDesc": "策略与执行参数调整",
+      "defaultLookback": "默认回看天数",
+      "volScaling": "波动率缩放系数",
+      "maxPosition": "最大持仓规模（美元）",
+      "stopLoss": "止损比例（%）",
+      "notificationsPlaceholder": "通知偏好与渠道配置",
+      "apiPlaceholder": "外部服务 API 密钥管理"
+    },
+    "analytics": {
+      "title": "分析",
+      "description": "绩效分析、风险指标与归因分析",
+      "tabPerformance": "绩效", "tabRisk": "风险分析", "tabAttribution": "归因",
+      "equityCurve": "权益曲线", "portfolioValueTime": "投资组合价值随时间变化",
+      "equityCurveChart": "权益曲线图表",
+      "riskPlaceholder": "VaR、回撤分析与风险分解",
+      "attributionPlaceholder": "按因子、策略和行业的收益归因",
+      "totalReturn": "总收益率", "annualizedReturn": "年化收益率",
+      "sharpeRatio": "夏普比率", "sortinoRatio": "索提诺比率",
+      "maxDrawdown": "最大回撤", "calmarRatio": "卡玛比率",
+      "winRate": "胜率", "profitFactor": "盈利因子"
+    },
+    "reports": {
+      "title": "报告",
+      "description": "历史交易报告、绩效摘要与导出",
+      "generateNew": "生成新报告",
+      "reportLibrary": "报告库",
+      "reportLibraryDesc": "可用报告与导出",
+      "colReport": "报告", "colDate": "日期", "colTrades": "交易次数",
+      "colPnl": "盈亏", "colActions": "操作",
+      "view": "查看"
+    },
+    "feedback": {
+      "title": "反馈循环",
+      "description": "对信号、交易和模型决策的人工反馈",
+      "feedbackItems": "反馈条目", "last7Days": "近 7 天",
+      "positiveRate": "正面率", "pendingReview": "待审核",
+      "feedbackHistory": "反馈历史",
+      "feedbackHistoryDesc": "信号与交易结果评估",
+      "newFeedback": "新建反馈"
+    },
+    "similarity": {
+      "title": "相似度分析",
+      "description": "机器学习驱动的股票相似度与聚类工作台"
     }
   }
 }

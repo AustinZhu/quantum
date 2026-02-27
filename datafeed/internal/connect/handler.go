@@ -9,11 +9,18 @@ import (
 	"time"
 
 	"github.com/austin/quantum/datafeed/internal/app"
+	datafeedv1connect "github.com/austin/quantum/datafeed/internal/gen/datafeed/v1/datafeedv1connect"
 	scalargo "github.com/bdpiprava/scalar-go"
 )
 
 func NewMux(service *app.Service, apiKey string, openAPISpecPath string) *http.ServeMux {
 	mux := http.NewServeMux()
+
+	datafeedPath, datafeedHandler := datafeedv1connect.NewDatafeedServiceHandler(NewDatafeedRPCHandler(service))
+	mux.Handle(datafeedPath, authorizeHTTPHandler(datafeedHandler, apiKey))
+
+	scannerPath, scannerHandler := datafeedv1connect.NewScannerServiceHandler(NewScannerRPCHandler(service))
+	mux.Handle(scannerPath, authorizeHTTPHandler(scannerHandler, apiKey))
 
 	mux.HandleFunc("/healthz", func(w http.ResponseWriter, _ *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
@@ -106,4 +113,16 @@ func authorizeRPCRequest(w http.ResponseWriter, r *http.Request, apiKey string) 
 		return false
 	}
 	return true
+}
+
+func authorizeHTTPHandler(next http.Handler, apiKey string) http.Handler {
+	if apiKey == "" {
+		return next
+	}
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if !authorizeRPCRequest(w, r, apiKey) {
+			return
+		}
+		next.ServeHTTP(w, r)
+	})
 }

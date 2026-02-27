@@ -2,19 +2,24 @@ package app
 
 import (
 	"context"
+	"errors"
 	"time"
 
+	"github.com/austin/quantum/datafeed/internal/adapters/okx"
 	"github.com/austin/quantum/datafeed/internal/events"
 	"github.com/austin/quantum/datafeed/internal/storage"
 )
 
+var ErrMarketProviderUnavailable = errors.New("market provider unavailable")
+
 type Service struct {
 	repo      storage.Repository
 	publisher *events.Publisher
+	okxClient *okx.Client
 }
 
-func NewService(repo storage.Repository, publisher *events.Publisher) *Service {
-	return &Service{repo: repo, publisher: publisher}
+func NewService(repo storage.Repository, publisher *events.Publisher, okxClient *okx.Client) *Service {
+	return &Service{repo: repo, publisher: publisher, okxClient: okxClient}
 }
 
 func (s *Service) IngestTicks(ctx context.Context, ticks []storage.Tick) (int, error) {
@@ -50,4 +55,50 @@ func (s *Service) RecordSocial(ctx context.Context, item storage.SocialEvent) er
 		item.TsMS = time.Now().UnixMilli()
 	}
 	return s.repo.InsertSocial(ctx, item)
+}
+
+func (s *Service) HasMarketProvider() bool {
+	return s.okxClient != nil
+}
+
+func (s *Service) ListMarketSymbols(ctx context.Context) ([]okx.Symbol, error) {
+	if s.okxClient == nil {
+		return nil, ErrMarketProviderUnavailable
+	}
+	return s.okxClient.ListSymbols(ctx)
+}
+
+func (s *Service) GetMarketHistory(
+	ctx context.Context,
+	symbol string,
+	resolution string,
+	fromSec int64,
+	toSec int64,
+	countback uint32,
+) ([]okx.Candle, error) {
+	if s.okxClient == nil {
+		return nil, ErrMarketProviderUnavailable
+	}
+	return s.okxClient.GetHistoryCandles(ctx, symbol, resolution, fromSec, toSec, countback)
+}
+
+func (s *Service) GetMarketTickers(ctx context.Context, symbols []string) ([]okx.Ticker, error) {
+	if s.okxClient == nil {
+		return nil, ErrMarketProviderUnavailable
+	}
+	return s.okxClient.GetTickers(ctx, symbols)
+}
+
+func (s *Service) SubscribeMarketBars(ctx context.Context, symbol string, resolution string) (<-chan okx.Candle, <-chan error, error) {
+	if s.okxClient == nil {
+		return nil, nil, ErrMarketProviderUnavailable
+	}
+	return s.okxClient.SubscribeBars(ctx, symbol, resolution)
+}
+
+func (s *Service) SubscribeMarketTicks(ctx context.Context, symbol string) (<-chan okx.Ticker, <-chan error, error) {
+	if s.okxClient == nil {
+		return nil, nil, ErrMarketProviderUnavailable
+	}
+	return s.okxClient.SubscribeTicks(ctx, symbol)
 }

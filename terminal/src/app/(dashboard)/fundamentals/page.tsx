@@ -1,6 +1,6 @@
+import { getTranslations } from "next-intl/server";
 import { PageHeader } from "@/components/page-header";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 
@@ -15,34 +15,28 @@ const data = [
   { symbol: "TSLA", pe: "71.2", pb: "14.3", divYield: "—", marketCap: "$782B", revenue: "$97B", epsGrowth: "-8%" },
 ];
 
-export default function FundamentalsPage() {
+export default async function FundamentalsPage() {
+  const t = await getTranslations("pages.fundamentals");
+
   return (
     <div className="space-y-6">
-      <PageHeader
-        title="Fundamentals"
-        description="Financial statements, valuation metrics, and company data"
-        
-      />
+      <PageHeader title={t("title")} description={t("description")} />
 
       <Card>
         <CardHeader>
-          <div className="flex items-center justify-between">
-            <div>
-              <CardTitle className="text-base">Financial Overview</CardTitle>
-              <CardDescription>Key valuation and growth metrics</CardDescription>
-            </div>
-          </div>
+          <CardTitle className="text-base">{t("financialOverview")}</CardTitle>
+          <CardDescription>{t("financialOverviewDesc")}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-            <Input placeholder="Search by symbol..." className="pl-10" />
+            <Input placeholder={t("searchPlaceholder")} className="pl-10" />
           </div>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b">
-                  {["Symbol", "P/E", "P/B", "Div Yield", "Market Cap", "Revenue", "EPS Growth"].map((h) => (
+                  {[t("colSymbol"), t("colPe"), t("colPb"), t("colDivYield"), t("colMarketCap"), t("colRevenue"), t("colEpsGrowth")].map((h) => (
                     <th key={h} className="pb-2 pr-4 text-left font-mono text-xs font-medium text-muted-foreground uppercase tracking-wider">
                       {h}
                     </th>

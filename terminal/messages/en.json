@@ -86,8 +86,9 @@
       "filter": "Filter",
       "results": "Screening Results",
       "resultsDesc": "Symbols matching your criteria",
-      "colSymbol": "Symbol", "colMomentum": "30D Momentum",
-      "colVolume": "Avg Volume", "colSignal": "Signal",
+      "screenerTitle": "Screener", "screenerDesc": "Filter by momentum, volume, sector, and custom factors",
+      "colSymbol": "Symbol", "colName": "Name", "colSector": "Sector",
+      "colMomentum": "30D Momentum", "colVolume": "Avg Volume", "colSignal": "Signal",
       "strongBuy": "Strong Buy", "buy": "Buy", "hold": "Hold", "sell": "Sell"
     },
     "strategies": {
@@ -101,7 +102,10 @@
       "colStatus": "Status", "colReturn": "Return",
       "colSharpe": "Sharpe", "colDrawdown": "Max DD",
       "colWinRate": "Win Rate", "colPositions": "Positions",
-      "statusActive": "Active", "statusPaused": "Paused"
+      "statusActive": "Active", "statusPaused": "Paused",
+      "tsmomPlaceholder": "TSMOM strategy parameter tuning interface",
+      "csmomPlaceholder": "CSMOM strategy parameter tuning interface",
+      "configPlaceholder": "Strategy configuration and indicator settings"
     },
     "backtesting": {
       "title": "Backtesting",
@@ -114,6 +118,7 @@
       "colSharpe": "Sharpe", "colReturns": "Returns",
       "colDuration": "Duration", "colStatus": "Status",
       "statusCompleted": "Completed", "statusRunning": "Running", "statusFailed": "Failed",
+      "runBacktest": "Run Backtest",
       "paperPlaceholder": "Paper trading simulation engine",
       "newBacktestPlaceholder": "Configure and launch a new backtest run"
     },
@@ -125,6 +130,7 @@
       "deploy": "Deploy", "archive": "Archive",
       "colModel": "Model", "colVersion": "Version", "colType": "Type",
       "colEnv": "Environment", "colMetric": "Key Metric", "colUpdated": "Updated",
+      "compare": "Compare",
       "envProduction": "Production", "envStaging": "Staging"
     },
     "features": {
@@ -144,7 +150,7 @@
       "activeResearch": "Active Research",
       "activeResearchDesc": "Ongoing and completed research tasks",
       "statusCompleted": "Completed", "statusRunning": "Running",
-      "confidence": "confidence"
+      "confidence": "Confidence"
     },
     "feed": {
       "title": "Live Feed",
@@ -153,6 +159,7 @@
       "latency": "Latency", "status": "Status", "statusLive": "Live",
       "tickStream": "Tick Stream",
       "tickStreamDesc": "Live market data feed",
+      "streaming": "Streaming",
       "colTime": "Time", "colSymbol": "Symbol", "colPrice": "Price",
       "colSize": "Size", "colExchange": "Exchange", "colType": "Type"
     },
@@ -218,9 +225,9 @@
       "addRule": "Add Rule",
       "ruleConfiguration": "Rule Configuration",
       "ruleConfigurationDesc": "Active trading risk rules",
-      "colRule": "Rule", "colVersion": "Version", "colThreshold": "Threshold",
-      "colStatus": "Status", "colActions": "Actions",
-      "statusEnabled": "Enabled", "statusDisabled": "Disabled"
+      "colRule": "Rule", "colDescription": "Description", "colVersion": "Version",
+      "colThreshold": "Threshold", "colStatus": "Status", "colEnabled": "Enabled",
+      "colActions": "Actions", "statusEnabled": "Enabled", "statusDisabled": "Disabled"
     },
     "exposure": {
       "title": "Exposure",
@@ -238,9 +245,9 @@
       "totalTrades": "Total Trades",
       "costBreakdown": "Cost Breakdown",
       "costBreakdownDesc": "Trade costs by strategy",
-      "colStrategy": "Strategy", "colAvgSlippage": "Avg Slippage",
-      "colCommission": "Commission", "colMarketImpact": "Market Impact",
-      "colTotalCost": "Total Cost", "colCostPct": "Cost %"
+      "colStrategy": "Strategy", "colTrades": "Trades",
+      "colAvgSlippage": "Avg Slippage", "colCommission": "Commission",
+      "colMarketImpact": "Market Impact", "colTotalCost": "Total Cost", "colCostPct": "Cost %"
     },
     "health": {
       "title": "System Health",

@@ -8,6 +8,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 export const metadata: Metadata = {
   title: "Quantum",
   description: "Admin dashboard for strategies, market feeds, risk rules, and orders",
+  themeColor: "#5b5bd6",
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {

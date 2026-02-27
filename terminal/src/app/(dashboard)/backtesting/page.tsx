@@ -1,3 +1,4 @@
+import { getTranslations } from "next-intl/server";
 import { PageHeader } from "@/components/page-header";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -13,40 +14,45 @@ const runs = [
   { id: "bt_0087", strategy: "TSMOM v2.2", period: "2024-01—2025-06", sharpe: "1.71", returns: "+14.8%", status: "Completed", duration: "3m 42s" },
 ];
 
-export default function BacktestingPage() {
+export default async function BacktestingPage() {
+  const t = await getTranslations("pages.backtesting");
+
+  const statusLabel = (s: string) => {
+    if (s === "Completed") return t("statusCompleted");
+    if (s === "Running") return t("statusRunning");
+    if (s === "Failed") return t("statusFailed");
+    return s;
+  };
+
   return (
     <div className="space-y-6">
-      <PageHeader
-        title="Backtesting"
-        description="Run and evaluate strategy backtests and paper trading"
-        
-      />
+      <PageHeader title={t("title")} description={t("description")} />
 
       <Tabs defaultValue="history">
         <div className="flex items-center justify-between">
           <TabsList>
-            <TabsTrigger value="history">History</TabsTrigger>
-            <TabsTrigger value="new">New Backtest</TabsTrigger>
-            <TabsTrigger value="paper">Paper Trading</TabsTrigger>
+            <TabsTrigger value="history">{t("tabHistory")}</TabsTrigger>
+            <TabsTrigger value="new">{t("tabNew")}</TabsTrigger>
+            <TabsTrigger value="paper">{t("tabPaper")}</TabsTrigger>
           </TabsList>
           <Button size="sm">
             <Play className="mr-2 h-4 w-4" />
-            Run Backtest
+            {t("runBacktest")}
           </Button>
         </div>
 
         <TabsContent value="history" className="mt-4">
           <Card>
             <CardHeader>
-              <CardTitle className="text-base">Backtest History</CardTitle>
-              <CardDescription>Previous backtest runs and results</CardDescription>
+              <CardTitle className="text-base">{t("backtestHistory")}</CardTitle>
+              <CardDescription>{t("backtestHistoryDesc")}</CardDescription>
             </CardHeader>
             <CardContent>
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="border-b">
-                      {["Run ID", "Strategy", "Period", "Sharpe", "Returns", "Duration", "Status"].map((h) => (
+                      {[t("colRunId"), t("colStrategy"), t("colPeriod"), t("colSharpe"), t("colReturns"), t("colDuration"), t("colStatus")].map((h) => (
                         <th key={h} className="pb-2 pr-4 text-left font-mono text-xs font-medium text-muted-foreground uppercase tracking-wider last:text-right last:pr-0">
                           {h}
                         </th>
@@ -65,7 +71,7 @@ export default function BacktestingPage() {
                         </td>
                         <td className="py-2.5 pr-4 font-mono text-xs text-muted-foreground">{r.duration}</td>
                         <td className="py-2.5 text-right">
-                          <Badge variant="default" className="font-mono text-xs">{r.status}</Badge>
+                          <Badge variant="default" className="font-mono text-xs">{statusLabel(r.status)}</Badge>
                         </td>
                       </tr>
                     ))}
@@ -81,7 +87,7 @@ export default function BacktestingPage() {
             <CardContent className="flex h-[300px] items-center justify-center pt-6">
               <div className="text-center">
                 <FlaskConical className="mx-auto h-10 w-10 text-muted-foreground/30" />
-                <p className="mt-2 text-muted-foreground">Backtest configuration form</p>
+                <p className="mt-2 text-muted-foreground">{t("newBacktestPlaceholder")}</p>
               </div>
             </CardContent>
           </Card>
@@ -92,7 +98,7 @@ export default function BacktestingPage() {
             <CardContent className="flex h-[300px] items-center justify-center pt-6">
               <div className="text-center">
                 <FlaskConical className="mx-auto h-10 w-10 text-muted-foreground/30" />
-                <p className="mt-2 text-muted-foreground">Paper trading simulation dashboard</p>
+                <p className="mt-2 text-muted-foreground">{t("paperPlaceholder")}</p>
               </div>
             </CardContent>
           </Card>

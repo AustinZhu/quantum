@@ -30,7 +30,7 @@ func main() {
 	}
 	defer publisher.Close()
 
-	service := app.NewService(repo, publisher)
+	service := app.NewService(repo, publisher, nil)
 	worker := temporal.NewWorker(service)
 	if err := worker.Run(ctx); err != nil {
 		log.Printf("worker stopped: %v", err)

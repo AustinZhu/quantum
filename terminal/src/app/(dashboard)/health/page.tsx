@@ -1,20 +1,11 @@
+import { getTranslations } from "next-intl/server";
 import { PageHeader } from "@/components/page-header";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
 import { Button } from "@/components/ui/button";
 import {
-  Activity,
-  Clock,
-  Cpu,
-  Database,
-  HardDrive,
-  Server,
-  ExternalLink,
-  Shield,
-  Layers,
-  BarChart3,
-  LineChart,
+  Activity, Clock, Cpu, Database, HardDrive, Server, ExternalLink,
+  Shield, Layers, BarChart3, LineChart,
 } from "lucide-react";
 
 const services = [
@@ -39,25 +30,23 @@ const services = [
   { name: "Grafana", type: "Visualization", status: "healthy", uptime: "99.99%", latency: "5ms", icon: LineChart, url: "http://localhost:3001" },
 ];
 
-export default function HealthPage() {
+export default async function HealthPage() {
+  const t = await getTranslations("pages.health");
+
   return (
     <div className="space-y-6">
-      <PageHeader
-        title="System Health"
-        description="Infrastructure and service monitoring"
-      />
+      <PageHeader title={t("title")} description={t("description")} />
 
-      {/* Summary cards */}
       <div className="grid gap-4 sm:grid-cols-3">
         <Card>
           <CardContent className="pt-6">
-            <div className="font-mono text-xs text-muted-foreground uppercase tracking-wider">Total Services</div>
+            <div className="font-mono text-xs text-muted-foreground uppercase tracking-wider">{t("totalServices")}</div>
             <div className="mt-1 font-mono text-3xl font-bold">{services.length}</div>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="pt-6">
-            <div className="font-mono text-xs text-muted-foreground uppercase tracking-wider">Healthy</div>
+            <div className="font-mono text-xs text-muted-foreground uppercase tracking-wider">{t("healthy")}</div>
             <div className="mt-1 font-mono text-3xl font-bold text-positive">
               {services.filter((s) => s.status === "healthy").length}
             </div>
@@ -65,7 +54,7 @@ export default function HealthPage() {
         </Card>
         <Card>
           <CardContent className="pt-6">
-            <div className="font-mono text-xs text-muted-foreground uppercase tracking-wider">Degraded</div>
+            <div className="font-mono text-xs text-muted-foreground uppercase tracking-wider">{t("degraded")}</div>
             <div className="mt-1 font-mono text-3xl font-bold text-warning">
               {services.filter((s) => s.status === "degraded").length}
             </div>
@@ -73,7 +62,6 @@ export default function HealthPage() {
         </Card>
       </div>
 
-      {/* Service grid */}
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
         {services.map((svc) => {
           const Icon = svc.icon;
@@ -95,7 +83,7 @@ export default function HealthPage() {
                       <Button variant="ghost" size="icon-xs" asChild className="h-6 w-6">
                         <a href={svc.url} target="_blank" rel="noreferrer">
                           <ExternalLink className="h-3 w-3" />
-                          <span className="sr-only">Open UI</span>
+                          <span className="sr-only">{t("openUi")}</span>
                         </a>
                       </Button>
                     )}
@@ -103,18 +91,18 @@ export default function HealthPage() {
                       variant={svc.status === "healthy" ? "default" : "destructive"}
                       className="h-5 px-1.5 font-mono text-[10px]"
                     >
-                      {svc.status}
+                      {svc.status === "healthy" ? t("statusHealthy") : t("statusDegraded")}
                     </Badge>
                   </div>
                 </div>
               </CardHeader>
               <CardContent className="mt-auto space-y-2">
                 <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">Uptime</span>
+                  <span className="text-muted-foreground">{t("uptime")}</span>
                   <span className="font-mono">{svc.uptime}</span>
                 </div>
                 <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">Latency</span>
+                  <span className="text-muted-foreground">{t("latency")}</span>
                   <span className="font-mono">{svc.latency}</span>
                 </div>
               </CardContent>

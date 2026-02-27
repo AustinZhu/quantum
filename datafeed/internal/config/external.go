@@ -137,6 +137,18 @@ func mergeConfigMap(cfg *Config, payload map[string]any) {
 	if value := asString(payload["openapi_spec_path"]); value != "" {
 		cfg.OpenAPISpecPath = value
 	}
+	if value := asString(payload["okx_rest_base_url"]); value != "" {
+		cfg.OKXRESTBaseURL = value
+	}
+	if value := asString(payload["okx_ws_public_url"]); value != "" {
+		cfg.OKXWSPublicURL = value
+	}
+	if value := asString(payload["okx_ws_business_url"]); value != "" {
+		cfg.OKXWSBusinessURL = value
+	}
+	if value := asString(payload["okx_inst_types"]); value != "" {
+		cfg.OKXInstTypes = value
+	}
 }
 
 func asString(value any) string {

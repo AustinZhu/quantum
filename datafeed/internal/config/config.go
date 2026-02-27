@@ -27,6 +27,12 @@ type Config struct {
 	VaultKVMount      string
 	VaultSecretPath   string
 	VaultAPIKeyField  string
+	OKXRESTBaseURL    string
+	OKXWSPublicURL    string
+	OKXWSBusinessURL  string
+	OKXInstTypes      string
+	OKXHTTPTimeoutSec int
+	OKXSymbolCacheSec int
 }
 
 func Load() Config {
@@ -52,6 +58,12 @@ func Load() Config {
 		VaultKVMount:      getOrDefault("DATAFEED_VAULT_KV_MOUNT", "secret"),
 		VaultSecretPath:   getOrDefault("DATAFEED_VAULT_SECRET_PATH", "quantum/datafeed"),
 		VaultAPIKeyField:  getOrDefault("DATAFEED_VAULT_API_KEY_FIELD", "api_key"),
+		OKXRESTBaseURL:    getOrDefault("DATAFEED_OKX_REST_BASE_URL", "https://www.okx.com"),
+		OKXWSPublicURL:    getOrDefault("DATAFEED_OKX_WS_PUBLIC_URL", "wss://ws.okx.com:8443/ws/v5/public"),
+		OKXWSBusinessURL:  getOrDefault("DATAFEED_OKX_WS_BUSINESS_URL", "wss://ws.okx.com:8443/ws/v5/business"),
+		OKXInstTypes:      getOrDefault("DATAFEED_OKX_INST_TYPES", "SPOT"),
+		OKXHTTPTimeoutSec: getIntOrDefault("DATAFEED_OKX_HTTP_TIMEOUT_SEC", 10),
+		OKXSymbolCacheSec: getIntOrDefault("DATAFEED_OKX_SYMBOL_CACHE_SEC", 30),
 	}
 	return applyExternalConfig(cfg)
 }
@@ -66,6 +78,15 @@ func getOrDefault(key, fallback string) string {
 func getBoolOrDefault(key string, fallback bool) bool {
 	raw := getOrDefault(key, strconv.FormatBool(fallback))
 	parsed, err := strconv.ParseBool(raw)
+	if err != nil {
+		return fallback
+	}
+	return parsed
+}
+
+func getIntOrDefault(key string, fallback int) int {
+	raw := getOrDefault(key, strconv.Itoa(fallback))
+	parsed, err := strconv.Atoi(raw)
 	if err != nil {
 		return fallback
 	}

@@ -1,3 +1,4 @@
+import { getTranslations } from "next-intl/server";
 import { PageHeader } from "@/components/page-header";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -39,23 +40,21 @@ const researches = [
   },
 ];
 
-export default function ResearchPage() {
+export default async function ResearchPage() {
+  const t = await getTranslations("pages.research");
+
   return (
     <div className="space-y-6">
-      <PageHeader
-        title="AI Research"
-        description="Agentic research, summarization, and market analysis"
-        
-      />
+      <PageHeader title={t("title")} description={t("description")} />
 
       <div className="flex gap-3">
         <Button>
           <Sparkles className="mr-2 h-4 w-4" />
-          New Research
+          {t("newResearch")}
         </Button>
         <Button variant="outline">
           <FileText className="mr-2 h-4 w-4" />
-          Templates
+          {t("templates")}
         </Button>
       </div>
 
@@ -70,11 +69,11 @@ export default function ResearchPage() {
                     <Badge variant="outline" className="text-xs">{r.type}</Badge>
                     <Badge variant={r.status === "Completed" ? "default" : "secondary"} className="font-mono text-xs">
                       {r.status === "Running" && <span className="mr-1 inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-current" />}
-                      {r.status}
+                      {r.status === "Completed" ? t("statusCompleted") : t("statusRunning")}
                     </Badge>
                     {r.confidence !== "—" && (
                       <Badge variant="outline" className="text-xs">
-                        Confidence: {r.confidence}
+                        {t("confidence")}: {r.confidence}
                       </Badge>
                     )}
                   </div>
