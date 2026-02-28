@@ -418,7 +418,7 @@ class GetConfigRequest(_message.Message):
     def __init__(self) -> None: ...
 
 class GetConfigResponse(_message.Message):
-    __slots__ = ("supported_resolutions", "supports_group_request", "supports_marks", "supports_search", "supports_timescale_marks", "supports_time", "exchanges", "symbols_types", "currency_codes", "units", "symbols_grouping")
+    __slots__ = ("supported_resolutions", "supports_marks", "supports_timescale_marks", "supports_time", "exchanges", "symbols_types", "currency_codes", "units", "symbols_grouping")
     class UnitsEntry(_message.Message):
         __slots__ = ("key", "value")
         KEY_FIELD_NUMBER: _ClassVar[int]
@@ -434,9 +434,7 @@ class GetConfigResponse(_message.Message):
         value: str
         def __init__(self, key: _Optional[str] = ..., value: _Optional[str] = ...) -> None: ...
     SUPPORTED_RESOLUTIONS_FIELD_NUMBER: _ClassVar[int]
-    SUPPORTS_GROUP_REQUEST_FIELD_NUMBER: _ClassVar[int]
     SUPPORTS_MARKS_FIELD_NUMBER: _ClassVar[int]
-    SUPPORTS_SEARCH_FIELD_NUMBER: _ClassVar[int]
     SUPPORTS_TIMESCALE_MARKS_FIELD_NUMBER: _ClassVar[int]
     SUPPORTS_TIME_FIELD_NUMBER: _ClassVar[int]
     EXCHANGES_FIELD_NUMBER: _ClassVar[int]
@@ -445,9 +443,7 @@ class GetConfigResponse(_message.Message):
     UNITS_FIELD_NUMBER: _ClassVar[int]
     SYMBOLS_GROUPING_FIELD_NUMBER: _ClassVar[int]
     supported_resolutions: _containers.RepeatedScalarFieldContainer[str]
-    supports_group_request: bool
     supports_marks: bool
-    supports_search: bool
     supports_timescale_marks: bool
     supports_time: bool
     exchanges: _containers.RepeatedCompositeFieldContainer[ExchangeDescriptor]
@@ -455,7 +451,7 @@ class GetConfigResponse(_message.Message):
     currency_codes: _containers.RepeatedCompositeFieldContainer[CurrencyCodeEntry]
     units: _containers.MessageMap[str, UnitList]
     symbols_grouping: _containers.ScalarMap[str, str]
-    def __init__(self, supported_resolutions: _Optional[_Iterable[str]] = ..., supports_group_request: _Optional[bool] = ..., supports_marks: _Optional[bool] = ..., supports_search: _Optional[bool] = ..., supports_timescale_marks: _Optional[bool] = ..., supports_time: _Optional[bool] = ..., exchanges: _Optional[_Iterable[_Union[ExchangeDescriptor, _Mapping]]] = ..., symbols_types: _Optional[_Iterable[_Union[SymbolTypeDescriptor, _Mapping]]] = ..., currency_codes: _Optional[_Iterable[_Union[CurrencyCodeEntry, _Mapping]]] = ..., units: _Optional[_Mapping[str, UnitList]] = ..., symbols_grouping: _Optional[_Mapping[str, str]] = ...) -> None: ...
+    def __init__(self, supported_resolutions: _Optional[_Iterable[str]] = ..., supports_marks: _Optional[bool] = ..., supports_timescale_marks: _Optional[bool] = ..., supports_time: _Optional[bool] = ..., exchanges: _Optional[_Iterable[_Union[ExchangeDescriptor, _Mapping]]] = ..., symbols_types: _Optional[_Iterable[_Union[SymbolTypeDescriptor, _Mapping]]] = ..., currency_codes: _Optional[_Iterable[_Union[CurrencyCodeEntry, _Mapping]]] = ..., units: _Optional[_Mapping[str, UnitList]] = ..., symbols_grouping: _Optional[_Mapping[str, str]] = ...) -> None: ...
 
 class GetTimeRequest(_message.Message):
     __slots__ = ()
@@ -466,6 +462,45 @@ class GetTimeResponse(_message.Message):
     UNIX_TIME_FIELD_NUMBER: _ClassVar[int]
     unix_time: int
     def __init__(self, unix_time: _Optional[int] = ...) -> None: ...
+
+class ChartBar(_message.Message):
+    __slots__ = ("time", "open", "high", "low", "close", "volume")
+    TIME_FIELD_NUMBER: _ClassVar[int]
+    OPEN_FIELD_NUMBER: _ClassVar[int]
+    HIGH_FIELD_NUMBER: _ClassVar[int]
+    LOW_FIELD_NUMBER: _ClassVar[int]
+    CLOSE_FIELD_NUMBER: _ClassVar[int]
+    VOLUME_FIELD_NUMBER: _ClassVar[int]
+    time: int
+    open: float
+    high: float
+    low: float
+    close: float
+    volume: float
+    def __init__(self, time: _Optional[int] = ..., open: _Optional[float] = ..., high: _Optional[float] = ..., low: _Optional[float] = ..., close: _Optional[float] = ..., volume: _Optional[float] = ...) -> None: ...
+
+class GetBarsRequest(_message.Message):
+    __slots__ = ("symbol", "to", "resolution", "count_back")
+    SYMBOL_FIELD_NUMBER: _ClassVar[int]
+    FROM_FIELD_NUMBER: _ClassVar[int]
+    TO_FIELD_NUMBER: _ClassVar[int]
+    RESOLUTION_FIELD_NUMBER: _ClassVar[int]
+    COUNT_BACK_FIELD_NUMBER: _ClassVar[int]
+    symbol: str
+    to: int
+    resolution: str
+    count_back: int
+    def __init__(self, symbol: _Optional[str] = ..., to: _Optional[int] = ..., resolution: _Optional[str] = ..., count_back: _Optional[int] = ..., **kwargs) -> None: ...
+
+class GetBarsResponse(_message.Message):
+    __slots__ = ("bars", "no_data", "next_time")
+    BARS_FIELD_NUMBER: _ClassVar[int]
+    NO_DATA_FIELD_NUMBER: _ClassVar[int]
+    NEXT_TIME_FIELD_NUMBER: _ClassVar[int]
+    bars: _containers.RepeatedCompositeFieldContainer[ChartBar]
+    no_data: bool
+    next_time: int
+    def __init__(self, bars: _Optional[_Iterable[_Union[ChartBar, _Mapping]]] = ..., no_data: _Optional[bool] = ..., next_time: _Optional[int] = ...) -> None: ...
 
 class GetHistoryRequest(_message.Message):
     __slots__ = ("symbol", "to", "resolution", "countback")
@@ -809,6 +844,22 @@ class StreamBarsResponse(_message.Message):
     l: _containers.RepeatedScalarFieldContainer[float]
     v: _containers.RepeatedScalarFieldContainer[float]
     def __init__(self, t: _Optional[_Iterable[int]] = ..., c: _Optional[_Iterable[float]] = ..., o: _Optional[_Iterable[float]] = ..., h: _Optional[_Iterable[float]] = ..., l: _Optional[_Iterable[float]] = ..., v: _Optional[_Iterable[float]] = ...) -> None: ...
+
+class SubscribeBarsRequest(_message.Message):
+    __slots__ = ("symbol_info", "resolution", "listener_guid")
+    SYMBOL_INFO_FIELD_NUMBER: _ClassVar[int]
+    RESOLUTION_FIELD_NUMBER: _ClassVar[int]
+    LISTENER_GUID_FIELD_NUMBER: _ClassVar[int]
+    symbol_info: LibrarySymbolInfo
+    resolution: str
+    listener_guid: str
+    def __init__(self, symbol_info: _Optional[_Union[LibrarySymbolInfo, _Mapping]] = ..., resolution: _Optional[str] = ..., listener_guid: _Optional[str] = ...) -> None: ...
+
+class SubscribeBarsResponse(_message.Message):
+    __slots__ = ("bar",)
+    BAR_FIELD_NUMBER: _ClassVar[int]
+    bar: ChartBar
+    def __init__(self, bar: _Optional[_Union[ChartBar, _Mapping]] = ...) -> None: ...
 
 class Tick(_message.Message):
     __slots__ = ("symbol", "ts_ms", "price", "size", "source")

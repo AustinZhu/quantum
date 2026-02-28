@@ -6,6 +6,9 @@ cd "$ROOT_DIR/api"
 
 mkdir -p gen/openapi
 
+# Clean up stale Go output from legacy non-module buf generation.
+rm -rf "$ROOT_DIR/datafeed/internal/gen/github.com"
+
 if ! command -v buf >/dev/null 2>&1; then
   echo "buf CLI not found. Install from https://buf.build/docs/installation"
   exit 1

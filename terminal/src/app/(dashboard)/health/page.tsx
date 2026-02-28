@@ -88,8 +88,12 @@ export default async function HealthPage() {
                       </Button>
                     )}
                     <Badge
-                      variant={svc.status === "healthy" ? "default" : "destructive"}
-                      className="h-5 px-1.5 font-mono text-[10px]"
+                      variant={svc.status === "healthy" ? "outline" : "destructive"}
+                      className={
+                        svc.status === "healthy"
+                          ? "h-5 border-[var(--positive)]/40 bg-[var(--positive)]/10 px-1.5 font-mono text-[10px] text-[var(--positive)]"
+                          : "h-5 px-1.5 font-mono text-[10px]"
+                      }
                     >
                       {svc.status === "healthy" ? t("statusHealthy") : t("statusDegraded")}
                     </Badge>

@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Search, SlidersHorizontal } from "lucide-react";
+import { SimilarityWorkbench } from "@/components/similarity/similarity-workbench";
 
 const screenResults = [
   { symbol: "NVDA", name: "NVIDIA Corp", sector: "Technology", momentum: "+18.4%", volume: "52.3M", signal: "Strong Buy" },
@@ -84,6 +85,8 @@ export default async function ScreeningPage() {
           </div>
         </CardContent>
       </Card>
+
+      <SimilarityWorkbench />
     </div>
   );
 }

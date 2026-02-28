@@ -1,4 +1,4 @@
-from datafeed.v1 import datafeed_pb2 as _datafeed_pb2
+from buf.validate import validate_pb2 as _validate_pb2
 from gnostic.openapi.v3 import annotations_pb2 as _annotations_pb2
 from google.protobuf import struct_pb2 as _struct_pb2
 from google.protobuf.internal import containers as _containers
@@ -31,6 +31,12 @@ class ScannerFilterOperation(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     SCANNER_FILTER_OPERATION_HAS_NONE_OF: _ClassVar[ScannerFilterOperation]
     SCANNER_FILTER_OPERATION_MATCH: _ClassVar[ScannerFilterOperation]
     SCANNER_FILTER_OPERATION_NOT_MATCH: _ClassVar[ScannerFilterOperation]
+
+class ScannerSortOrder(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    SCANNER_SORT_ORDER_UNSPECIFIED: _ClassVar[ScannerSortOrder]
+    SCANNER_SORT_ORDER_ASC: _ClassVar[ScannerSortOrder]
+    SCANNER_SORT_ORDER_DESC: _ClassVar[ScannerSortOrder]
 SCANNER_LOGICAL_OPERATOR_UNSPECIFIED: ScannerLogicalOperator
 SCANNER_LOGICAL_OPERATOR_AND: ScannerLogicalOperator
 SCANNER_LOGICAL_OPERATOR_OR: ScannerLogicalOperator
@@ -47,6 +53,21 @@ SCANNER_FILTER_OPERATION_HAS: ScannerFilterOperation
 SCANNER_FILTER_OPERATION_HAS_NONE_OF: ScannerFilterOperation
 SCANNER_FILTER_OPERATION_MATCH: ScannerFilterOperation
 SCANNER_FILTER_OPERATION_NOT_MATCH: ScannerFilterOperation
+SCANNER_SORT_ORDER_UNSPECIFIED: ScannerSortOrder
+SCANNER_SORT_ORDER_ASC: ScannerSortOrder
+SCANNER_SORT_ORDER_DESC: ScannerSortOrder
+
+class ScannerStringList(_message.Message):
+    __slots__ = ("values",)
+    VALUES_FIELD_NUMBER: _ClassVar[int]
+    values: _containers.RepeatedScalarFieldContainer[str]
+    def __init__(self, values: _Optional[_Iterable[str]] = ...) -> None: ...
+
+class ScannerDoubleList(_message.Message):
+    __slots__ = ("values",)
+    VALUES_FIELD_NUMBER: _ClassVar[int]
+    values: _containers.RepeatedScalarFieldContainer[float]
+    def __init__(self, values: _Optional[_Iterable[float]] = ...) -> None: ...
 
 class ScannerFilterValue(_message.Message):
     __slots__ = ("string_value", "number_value", "bool_value", "string_list", "number_list")
@@ -58,9 +79,9 @@ class ScannerFilterValue(_message.Message):
     string_value: str
     number_value: float
     bool_value: bool
-    string_list: _datafeed_pb2.StringList
-    number_list: _datafeed_pb2.DoubleList
-    def __init__(self, string_value: _Optional[str] = ..., number_value: _Optional[float] = ..., bool_value: _Optional[bool] = ..., string_list: _Optional[_Union[_datafeed_pb2.StringList, _Mapping]] = ..., number_list: _Optional[_Union[_datafeed_pb2.DoubleList, _Mapping]] = ...) -> None: ...
+    string_list: ScannerStringList
+    number_list: ScannerDoubleList
+    def __init__(self, string_value: _Optional[str] = ..., number_value: _Optional[float] = ..., bool_value: _Optional[bool] = ..., string_list: _Optional[_Union[ScannerStringList, _Mapping]] = ..., number_list: _Optional[_Union[ScannerDoubleList, _Mapping]] = ...) -> None: ...
 
 class ScannerFilterExpression(_message.Message):
     __slots__ = ("left", "operation", "right")
@@ -101,8 +122,8 @@ class ScannerSort(_message.Message):
     SORT_BY_FIELD_NUMBER: _ClassVar[int]
     SORT_ORDER_FIELD_NUMBER: _ClassVar[int]
     sort_by: str
-    sort_order: _datafeed_pb2.SortOrder
-    def __init__(self, sort_by: _Optional[str] = ..., sort_order: _Optional[_Union[_datafeed_pb2.SortOrder, str]] = ...) -> None: ...
+    sort_order: ScannerSortOrder
+    def __init__(self, sort_by: _Optional[str] = ..., sort_order: _Optional[_Union[ScannerSortOrder, str]] = ...) -> None: ...
 
 class ScannerRange(_message.Message):
     __slots__ = ("start", "end")

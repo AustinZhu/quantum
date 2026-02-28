@@ -3,7 +3,7 @@ syntax = "proto3";
 package quant.datafeed.v1;
 option go_package = "github.com/austin/quantum/datafeed/internal/gen/datafeed/v1;datafeedv1";
 
-import "datafeed/v1/datafeed.proto";
+import "buf/validate/validate.proto";
 import "gnostic/openapi/v3/annotations.proto";
 import "google/protobuf/struct.proto";
 
@@ -41,18 +41,32 @@ enum ScannerFilterOperation {
   SCANNER_FILTER_OPERATION_NOT_MATCH = 12;
 }
 
+enum ScannerSortOrder {
+  SCANNER_SORT_ORDER_UNSPECIFIED = 0;
+  SCANNER_SORT_ORDER_ASC = 1;
+  SCANNER_SORT_ORDER_DESC = 2;
+}
+
+message ScannerStringList {
+  repeated string values = 1;
+}
+
+message ScannerDoubleList {
+  repeated double values = 1;
+}
+
 message ScannerFilterValue {
   oneof value {
-    string string_value = 1;
+    string string_value = 1 [(buf.validate.field).string.min_len = 1];
     double number_value = 2;
     bool bool_value = 3;
-    StringList string_list = 4;
-    DoubleList number_list = 5;
+    ScannerStringList string_list = 4;
+    ScannerDoubleList number_list = 5;
   }
 }
 
 message ScannerFilterExpression {
-  string left = 1;
+  string left = 1 [(buf.validate.field).string.min_len = 1];
   ScannerFilterOperation operation = 2;
   ScannerFilterValue right = 3;
 }
@@ -73,8 +87,8 @@ message ScannerFilter {
 }
 
 message ScannerSort {
-  string sort_by = 1;
-  SortOrder sort_order = 2;
+  string sort_by = 1 [(buf.validate.field).string.min_len = 1];
+  ScannerSortOrder sort_order = 2;
 }
 
 message ScannerRange {
@@ -87,7 +101,7 @@ message ScannerOptions {
 }
 
 message ScanSymbolsRequest {
-  repeated string columns = 1;
+  repeated string columns = 1 [(buf.validate.field).repeated.items.string.min_len = 1];
   optional ScannerFilter filter = 2;
   optional ScannerSort sort = 3;
   optional ScannerRange range = 4;

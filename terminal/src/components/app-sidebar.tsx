@@ -28,7 +28,6 @@ import {
   TrendingUp,
   FileText,
   MessageCircle,
-  GitCompareArrows,
   Menu,
   X,
   Hexagon,
@@ -101,14 +100,18 @@ const navigation: NavGroup[] = [
     ],
   },
   {
+    labelKey: "Retrospective",
+    items: [
+      { href: "/analytics", labelKey: "Analytics", icon: TrendingUp },
+      { href: "/reports", labelKey: "Reports", icon: FileText },
+      { href: "/feedback", labelKey: "Feedback", icon: MessageCircle },
+    ],
+  },
+  {
     labelKey: "System",
     items: [
       { href: "/health", labelKey: "Health", icon: HeartPulse },
       { href: "/settings", labelKey: "Settings", icon: Settings },
-      { href: "/analytics", labelKey: "Analytics", icon: TrendingUp },
-      { href: "/reports", labelKey: "Reports", icon: FileText },
-      { href: "/feedback", labelKey: "Feedback", icon: MessageCircle },
-      { href: "/similarity", labelKey: "Similarity", icon: GitCompareArrows },
     ],
   },
 ];
@@ -123,7 +126,7 @@ function UserAvatar({ user, size = "sm" }: { user: SessionUser; size?: "sm" | "x
     .toUpperCase()
     .slice(0, 2);
 
-  const dim = size === "xs" ? "h-7 w-7 text-[10px]" : "h-8 w-8 text-xs";
+  const dim = size === "xs" ? "h-6 w-6 text-[9px]" : "h-7 w-7 text-[10px]";
 
   if (user.avatar) {
     return (
@@ -154,23 +157,16 @@ function UserProfile({ user, isCollapsed }: { user: SessionUser; isCollapsed: bo
   const t = useTranslations("common");
   const displayName = user.displayName ?? user.name ?? "User";
 
-  const avatarWithDot = (
-    <div className="relative shrink-0">
-      <UserAvatar user={user} size={isCollapsed ? "xs" : "sm"} />
-      <span className="absolute -right-0.5 -bottom-0.5 flex h-2.5 w-2.5 items-center justify-center rounded-full bg-sidebar ring-1 ring-sidebar">
-        <span className="h-1.5 w-1.5 rounded-full bg-green-500" />
-      </span>
-    </div>
-  );
+  const avatar = <UserAvatar user={user} size={isCollapsed ? "xs" : "sm"} />;
 
   const trigger = isCollapsed ? (
     <Tooltip>
       <TooltipTrigger asChild>
         <button
-          className="flex w-full cursor-pointer items-center justify-center rounded-md p-1 hover:bg-accent"
+          className="flex h-7 w-7 cursor-pointer items-center justify-center rounded-md hover:bg-accent"
           aria-label={displayName}
         >
-          {avatarWithDot}
+          {avatar}
         </button>
       </TooltipTrigger>
       <TooltipContent side="right" sideOffset={10}>
@@ -180,15 +176,12 @@ function UserProfile({ user, isCollapsed }: { user: SessionUser; isCollapsed: bo
     </Tooltip>
   ) : (
     <button
-      className="flex w-full min-w-0 cursor-pointer items-center gap-2.5 rounded-md px-1 py-1 text-left hover:bg-accent"
+      className="flex w-full min-w-0 cursor-pointer items-center gap-2 rounded-md px-1 py-0.5 text-left hover:bg-accent"
       aria-label={displayName}
     >
-      {avatarWithDot}
-      <div className="min-w-0 flex-1">
-        <p className="truncate text-sm font-medium leading-tight">{displayName}</p>
-        {user.email && (
-          <p className="truncate font-mono text-[10px] text-muted-foreground">{user.email}</p>
-        )}
+      {avatar}
+      <div className="min-w-0 flex flex-1 items-center gap-2">
+        <p className="truncate text-xs font-medium leading-tight">{displayName}</p>
       </div>
     </button>
   );
@@ -248,7 +241,7 @@ function SidebarContent({
   const tCommon = useTranslations("common");
 
   return (
-    <div className="flex flex-1 flex-col overflow-hidden">
+    <div className="flex min-h-0 flex-1 flex-col overflow-hidden">
       {/* Brand */}
       <div
         className={cn(
@@ -280,104 +273,114 @@ function SidebarContent({
       <Separator />
 
       {/* Navigation */}
-      <ScrollArea className="flex-1 min-h-0 py-3">
-        <nav className={cn("space-y-5 px-3", isCollapsed && "px-2")}>
-          {navigation.map((group) => (
-            <div key={group.labelKey}>
-              {!isCollapsed && (
-                <div className="mb-1 flex items-center gap-2 px-2">
-                  <span className="font-mono text-[10px] font-medium tracking-widest text-muted-foreground uppercase">
-                    {tNav(`groups.${group.labelKey}`)}
-                  </span>
-                </div>
-              )}
-              <div className="space-y-0.5">
-                {group.items.map((item) => {
-                  const isActive = pathname === item.href;
-                  const Icon = item.icon;
+      <div className="relative h-0 flex-1">
+        <ScrollArea className="h-full">
+          <nav className={cn("space-y-5 px-3 pt-2 pb-1", isCollapsed && "px-2")}>
+            {navigation.map((group) => (
+              <div key={group.labelKey}>
+                {!isCollapsed && (
+                  <div className="mb-1 flex items-center gap-2 px-2">
+                    <span className="font-mono text-[10px] font-medium tracking-widest text-muted-foreground uppercase">
+                      {tNav(`groups.${group.labelKey}`)}
+                    </span>
+                  </div>
+                )}
+                <div className="space-y-0.5">
+                  {group.items.map((item) => {
+                    const isActive = pathname === item.href;
+                    const Icon = item.icon;
 
-                  const link = (
-                    <Link
-                      key={item.href}
-                      href={item.href as never}
-                      onClick={onNavigate}
-                      className={cn(
-                        "group flex items-center rounded-md px-2.5 py-1.5 text-sm font-medium transition-colors",
-                        isCollapsed ? "justify-center px-0" : "gap-2.5",
-                        isActive
-                          ? "bg-primary/10 text-primary"
-                          : "text-muted-foreground hover:bg-accent hover:text-accent-foreground"
-                      )}
-                    >
-                      <Icon
+                    const link = (
+                      <Link
+                        key={item.href}
+                        href={item.href as never}
+                        onClick={onNavigate}
                         className={cn(
-                          "h-4 w-4 shrink-0",
-                          isActive ? "text-primary" : "text-muted-foreground/70"
+                          "group flex items-center rounded-md px-2.5 py-1.5 text-sm font-medium transition-colors",
+                          isCollapsed ? "justify-center px-0" : "gap-2.5",
+                          isActive
+                            ? "bg-primary/10 text-primary"
+                            : "text-muted-foreground hover:bg-accent hover:text-accent-foreground"
                         )}
-                        strokeWidth={isActive ? 2.2 : 1.8}
-                      />
-                      {!isCollapsed && (
-                        <>
-                          <span className="truncate">{tNav(`items.${item.labelKey}`)}</span>
-                          {item.badge && (
-                            <Badge
-                              variant="default"
-                              className="ml-auto h-4 rounded px-1 font-mono text-[9px] font-normal leading-none"
-                            >
-                              {item.badge}
-                            </Badge>
+                      >
+                        <Icon
+                          className={cn(
+                            "h-4 w-4 shrink-0",
+                            isActive ? "text-primary" : "text-muted-foreground/70"
                           )}
-                        </>
-                      )}
-                    </Link>
-                  );
-
-                  if (isCollapsed) {
-                    return (
-                      <Tooltip key={item.href}>
-                        <TooltipTrigger asChild>{link}</TooltipTrigger>
-                        <TooltipContent side="right" sideOffset={10}>
-                          {tNav(`items.${item.labelKey}`)}
-                        </TooltipContent>
-                      </Tooltip>
+                          strokeWidth={isActive ? 2.2 : 1.8}
+                        />
+                        {!isCollapsed && (
+                          <>
+                            <span className="truncate">{tNav(`items.${item.labelKey}`)}</span>
+                            {item.badge && (
+                              <Badge
+                                variant="default"
+                                className="ml-auto h-4 rounded px-1 font-mono text-[9px] font-normal leading-none"
+                              >
+                                {item.badge}
+                              </Badge>
+                            )}
+                          </>
+                        )}
+                      </Link>
                     );
-                  }
 
-                  return link;
-                })}
+                    if (isCollapsed) {
+                      return (
+                        <Tooltip key={item.href}>
+                          <TooltipTrigger asChild>{link}</TooltipTrigger>
+                          <TooltipContent side="right" sideOffset={10}>
+                            {tNav(`items.${item.labelKey}`)}
+                          </TooltipContent>
+                        </Tooltip>
+                      );
+                    }
+
+                    return link;
+                  })}
+                </div>
               </div>
-            </div>
-          ))}
-        </nav>
-      </ScrollArea>
+            ))}
+          </nav>
+        </ScrollArea>
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-3 bg-gradient-to-b from-sidebar via-sidebar/70 to-transparent" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-3 bg-gradient-to-t from-sidebar via-sidebar/70 to-transparent" />
+      </div>
 
-      <Separator />
+      <div className="mt-auto shrink-0">
+        <Separator />
 
-      {/* Footer */}
-      <div
-        className={cn(
-          "flex shrink-0 items-center gap-1 px-3 py-3",
-          isCollapsed ? "flex-col justify-center px-0" : "justify-between"
-        )}
-      >
-        {user ? (
-          <div className={cn("min-w-0", isCollapsed ? "w-full flex justify-center" : "flex-1")}>
-            <UserProfile user={user} isCollapsed={isCollapsed} />
-          </div>
-        ) : (
-          !isCollapsed && (
-            <div className="flex items-center gap-2 text-nowrap">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
-              </span>
-              <span className="font-mono text-xs text-muted-foreground">{tCommon("online")}</span>
+        {/* Footer */}
+        <div
+          className={cn(
+            "flex shrink-0 items-center gap-1 px-3 py-2",
+            isCollapsed
+              ? "justify-center px-0"
+              : "justify-between"
+          )}
+        >
+          {user ? (
+            <div className={cn("min-w-0", isCollapsed ? "flex justify-center" : "flex-1")}>
+              <UserProfile user={user} isCollapsed={isCollapsed} />
             </div>
-          )
-        )}
-        <div className="flex items-center gap-1">
-          <LocaleToggle />
-          <ThemeToggle />
+          ) : (
+            !isCollapsed && (
+              <div className="flex items-center gap-2 text-nowrap">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
+                </span>
+                <span className="font-mono text-xs text-muted-foreground">{tCommon("online")}</span>
+              </div>
+            )
+          )}
+          {!isCollapsed && (
+            <div className="flex items-center gap-1">
+              <LocaleToggle />
+              <ThemeToggle />
+            </div>
+          )}
         </div>
       </div>
     </div>
@@ -396,12 +399,12 @@ export function AppSidebar({ user }: { user?: SessionUser | null }) {
       {/* Desktop sidebar */}
       <aside
         className={cn(
-          "hidden lg:flex h-full shrink-0 flex-col overflow-hidden border-r border-sidebar-border bg-sidebar transition-all duration-300 ease-in-out",
+          "hidden lg:flex h-full min-h-0 shrink-0 flex-col overflow-hidden border-r border-sidebar-border bg-sidebar transition-all duration-300 ease-in-out",
           isCollapsed ? "w-[64px]" : "w-[260px]"
         )}
       >
         {isCollapsed ? (
-          <div className="flex flex-1 flex-col">
+          <div className="flex min-h-0 flex-1 flex-col">
             <div className="flex h-14 shrink-0 items-center justify-center">
               <Button
                 variant="ghost"

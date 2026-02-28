@@ -10,6 +10,20 @@ const serviceUrlByKind: Record<ServiceKind, string | undefined> = {
   system: process.env.BFF_SYSTEM_URL,
 };
 
+const localFallbackUrlByKind: Record<ServiceKind, string> = {
+  algorand: "http://127.0.0.1:8080",
+  datafeed: "http://127.0.0.1:8081",
+  doordash: "http://127.0.0.1:8082",
+  system: "http://127.0.0.1:8080",
+};
+
+const serviceEnvVarByKind: Record<ServiceKind, string> = {
+  algorand: "BFF_ALGORAND_URL",
+  datafeed: "BFF_DATAFEED_URL",
+  doordash: "BFF_DOORDASH_URL",
+  system: "BFF_SYSTEM_URL",
+};
+
 const serviceApiKeyByKind: Record<ServiceKind, string | undefined> = {
   algorand: process.env.BFF_ALGORAND_API_KEY ?? process.env.BFF_SERVICE_KEY,
   datafeed: process.env.BFF_DATAFEED_API_KEY ?? process.env.BFF_SERVICE_KEY,
@@ -25,6 +39,12 @@ const servicePathPatternByKind: Record<ServiceKind, RegExp> = {
 };
 
 const rpcMethodPattern = /^[A-Za-z][A-Za-z0-9]*$/;
+const streamingMethodByKind: Record<ServiceKind, Set<string>> = {
+  algorand: new Set<string>(),
+  datafeed: new Set<string>(["StreamBars", "SubscribeBars"]),
+  doordash: new Set<string>(),
+  system: new Set<string>(),
+};
 
 function getUpstreamTimeoutMs(): number {
   const parsed = Number(process.env.BFF_UPSTREAM_TIMEOUT_MS ?? "10000");
@@ -34,45 +54,98 @@ function getUpstreamTimeoutMs(): number {
   return Math.floor(parsed);
 }
 
-function isAllowedRpcPath(serviceKind: ServiceKind, segments: string[]): boolean {
-  if (segments.length !== 3) {
-    return false;
+type ParsedRpcPath = {
+  upstreamPath: string;
+  method: string;
+};
+
+type UpstreamRequestArgs = {
+  req: NextRequest;
+  url: string;
+  headers: Headers;
+  body: ArrayBuffer | undefined;
+  signal: AbortSignal;
+};
+
+function isLocalRequest(req: NextRequest): boolean {
+  const hostname = req.nextUrl.hostname.toLowerCase();
+  return hostname === "localhost" || hostname === "127.0.0.1" || hostname === "[::1]";
+}
+
+function resolveServiceUrl(serviceKind: ServiceKind, req: NextRequest): string | undefined {
+  const configured = serviceUrlByKind[serviceKind]?.trim();
+  if (configured) {
+    return configured;
   }
-  const [prefix, servicePath, method] = segments;
-  if (prefix !== "rpc") {
-    return false;
+  if (process.env.NODE_ENV !== "production" || isLocalRequest(req)) {
+    return localFallbackUrlByKind[serviceKind];
   }
-  if (!servicePathPatternByKind[serviceKind].test(servicePath)) {
-    return false;
+  return undefined;
+}
+
+function parseRpcPath(serviceKind: ServiceKind, segments: string[]): ParsedRpcPath | null {
+  if (segments.length === 3) {
+    const [prefix, servicePath, method] = segments;
+    if (prefix !== "rpc") {
+      return null;
+    }
+    if (!servicePathPatternByKind[serviceKind].test(servicePath) || !rpcMethodPattern.test(method)) {
+      return null;
+    }
+    return { upstreamPath: segments.join("/"), method };
   }
-  return rpcMethodPattern.test(method);
+
+  if (segments.length === 2) {
+    const [servicePath, method] = segments;
+    if (!servicePathPatternByKind[serviceKind].test(servicePath) || !rpcMethodPattern.test(method)) {
+      return null;
+    }
+    return { upstreamPath: segments.join("/"), method };
+  }
+
+  return null;
+}
+
+async function fetchUpstream(args: UpstreamRequestArgs): Promise<Response> {
+  return fetch(args.url, {
+    method: args.req.method,
+    headers: args.headers,
+    body: args.body,
+    cache: "no-store",
+    signal: args.signal,
+  });
 }
 
 export async function forwardRpc(serviceKind: ServiceKind, segments: string[], req: NextRequest) {
-  const baseUrl = serviceUrlByKind[serviceKind];
+  const baseUrl = resolveServiceUrl(serviceKind, req);
   if (!baseUrl) {
-    return NextResponse.json({ error: "service_not_configured" }, { status: 500 });
+    return NextResponse.json(
+      {
+        error: "service_not_configured",
+        service: serviceKind,
+        envVar: serviceEnvVarByKind[serviceKind],
+      },
+      { status: 500 },
+    );
   }
-  if (!isAllowedRpcPath(serviceKind, segments)) {
+  const parsedPath = parseRpcPath(serviceKind, segments);
+  if (!parsedPath) {
     return NextResponse.json({ error: "invalid_rpc_path" }, { status: 400 });
   }
 
   const apiKey = serviceApiKeyByKind[serviceKind] ?? "";
   const requestId = req.headers.get("x-request-id") ?? randomUUID();
   const upstreamTimeoutMs = getUpstreamTimeoutMs();
-  const upstreamPath = segments.join("/");
-  const upstream = `${baseUrl.replace(/\/+$/, "")}/${upstreamPath}`;
-  const body = req.method === "GET" ? undefined : await req.text();
+  const isStreamingMethod = streamingMethodByKind[serviceKind].has(parsedPath.method);
+  const query = req.nextUrl.search;
+  const upstream = `${baseUrl.replace(/\/+$/, "")}/${parsedPath.upstreamPath}${query}`;
+  const body =
+    req.method === "GET" || req.method === "HEAD" ? undefined : await req.arrayBuffer();
 
-  const headers = new Headers();
-  const contentType = req.headers.get("content-type");
-  const accept = req.headers.get("accept");
-  if (contentType) {
-    headers.set("content-type", contentType);
-  }
-  if (accept) {
-    headers.set("accept", accept);
-  }
+  const headers = new Headers(req.headers);
+  headers.delete("host");
+  headers.delete("connection");
+  headers.delete("content-length");
   if (apiKey) {
     headers.set("x-api-key", apiKey);
     headers.set("x-service-key", apiKey);
@@ -80,20 +153,31 @@ export async function forwardRpc(serviceKind: ServiceKind, segments: string[], r
   headers.set("x-request-id", requestId);
 
   const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), upstreamTimeoutMs);
+  const clientAbort = () => controller.abort();
+  req.signal.addEventListener("abort", clientAbort);
+  let timedOut = false;
+  const timeout = isStreamingMethod
+    ? undefined
+    : setTimeout(() => {
+        timedOut = true;
+        controller.abort();
+      }, upstreamTimeoutMs);
 
   let response: Response;
   try {
-    response = await fetch(upstream, {
-      method: req.method,
+    response = await fetchUpstream({
+      req,
+      url: upstream,
       headers,
       body,
-      cache: "no-store",
       signal: controller.signal,
     });
   } catch (error) {
     if (error instanceof Error && error.name === "AbortError") {
-      return NextResponse.json({ error: "upstream_timeout" }, { status: 504 });
+      if (timedOut) {
+        return NextResponse.json({ error: "upstream_timeout" }, { status: 504 });
+      }
+      return new NextResponse(null, { status: 499 });
     }
     return NextResponse.json(
       {
@@ -102,19 +186,15 @@ export async function forwardRpc(serviceKind: ServiceKind, segments: string[], r
       { status: 502 },
     );
   } finally {
-    clearTimeout(timeout);
+    if (timeout) {
+      clearTimeout(timeout);
+    }
+    req.signal.removeEventListener("abort", clientAbort);
   }
 
-  const responseHeaders: Record<string, string> = {
-    "x-request-id": requestId,
-    "content-type": response.headers.get("content-type") ?? "application/json",
-  };
-  const cacheControl = response.headers.get("cache-control");
-  if (cacheControl) {
-    responseHeaders["cache-control"] = cacheControl;
-  }
-  const text = await response.text();
-  return new NextResponse(text, {
+  const responseHeaders = new Headers(response.headers);
+  responseHeaders.set("x-request-id", requestId);
+  return new NextResponse(response.body, {
     status: response.status,
     headers: responseHeaders,
   });

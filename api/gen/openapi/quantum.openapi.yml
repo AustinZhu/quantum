@@ -526,6 +526,44 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/quant.algorand.v1.RunTrainingJobResponse'
+  /quant.datafeed.v1.DatafeedService/GetBars:
+    post:
+      tags:
+        - Datafeed
+        - Chart
+        - DatafeedService
+      summary: Get Bars
+      description: Returns historical bars in chart datafeed API structure.
+      operationId: DatafeedService_GetBars
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/quant.datafeed.v1.GetBarsRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/quant.datafeed.v1.GetBarsResponse'
   /quant.datafeed.v1.DatafeedService/GetConfig:
     post:
       tags:
@@ -1083,6 +1121,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/quant.datafeed.v1.SearchSymbolsResponse'
   /quant.datafeed.v1.DatafeedService/StreamBars: {}
+  /quant.datafeed.v1.DatafeedService/SubscribeBars: {}
   /quant.datafeed.v1.ScannerService/ScanSymbols:
     post:
       tags:
@@ -2478,6 +2517,39 @@ components:
             - single
       title: BoolOrNullableBoolList
       additionalProperties: false
+    quant.datafeed.v1.ChartBar:
+      type: object
+      properties:
+        time:
+          type:
+            - integer
+            - string
+          title: time
+          format: int64
+        open:
+          type: number
+          title: open
+          format: double
+        high:
+          type: number
+          title: high
+          format: double
+        low:
+          type: number
+          title: low
+          format: double
+        close:
+          type: number
+          title: close
+          format: double
+        volume:
+          type:
+            - number
+            - "null"
+          title: volume
+          format: double
+      title: ChartBar
+      additionalProperties: false
     quant.datafeed.v1.CurrencyCodeEntry:
       type: object
       oneOf:
@@ -2586,6 +2658,55 @@ components:
           title: desc
       title: ExchangeDescriptor
       additionalProperties: false
+    quant.datafeed.v1.GetBarsRequest:
+      type: object
+      properties:
+        symbol:
+          type: string
+          title: symbol
+          minLength: 1
+        from:
+          type:
+            - integer
+            - string
+          title: from
+          format: int64
+        to:
+          type:
+            - integer
+            - string
+          title: to
+          format: int64
+        resolution:
+          type: string
+          title: resolution
+          minLength: 1
+        countBack:
+          exclusiveMinimum: 0
+          type: integer
+          title: count_back
+      title: GetBarsRequest
+      additionalProperties: false
+    quant.datafeed.v1.GetBarsResponse:
+      type: object
+      properties:
+        bars:
+          type: array
+          items:
+            $ref: '#/components/schemas/quant.datafeed.v1.ChartBar'
+          title: bars
+        noData:
+          type: boolean
+          title: no_data
+        nextTime:
+          type:
+            - integer
+            - string
+            - "null"
+          title: next_time
+          format: int64
+      title: GetBarsResponse
+      additionalProperties: false
     quant.datafeed.v1.GetConfigRequest:
       type: object
       title: GetConfigRequest
@@ -2598,21 +2719,11 @@ components:
           items:
             type: string
           title: supported_resolutions
-        supportsGroupRequest:
-          type:
-            - boolean
-            - "null"
-          title: supports_group_request
         supportsMarks:
           type:
             - boolean
             - "null"
           title: supports_marks
-        supportsSearch:
-          type:
-            - boolean
-            - "null"
-          title: supports_search
         supportsTimescaleMarks:
           type:
             - boolean
@@ -3871,6 +3982,7 @@ components:
           type: array
           items:
             type: string
+            minLength: 1
           title: columns
         filter:
           oneOf:
@@ -3934,6 +4046,17 @@ components:
           title: data
       title: ScanSymbolsResponse
       additionalProperties: false
+    quant.datafeed.v1.ScannerDoubleList:
+      type: object
+      properties:
+        values:
+          type: array
+          items:
+            type: number
+            format: double
+          title: values
+      title: ScannerDoubleList
+      additionalProperties: false
     quant.datafeed.v1.ScannerFilter:
       type: object
       properties:
@@ -3953,6 +4076,7 @@ components:
         left:
           type: string
           title: left
+          minLength: 1
         operation:
           title: operation
           $ref: '#/components/schemas/quant.datafeed.v1.ScannerFilterOperation'
@@ -4019,7 +4143,7 @@ components:
         - properties:
             numberList:
               title: number_list
-              $ref: '#/components/schemas/quant.datafeed.v1.DoubleList'
+              $ref: '#/components/schemas/quant.datafeed.v1.ScannerDoubleList'
           title: number_list
           required:
             - numberList
@@ -4034,7 +4158,7 @@ components:
         - properties:
             stringList:
               title: string_list
-              $ref: '#/components/schemas/quant.datafeed.v1.StringList'
+              $ref: '#/components/schemas/quant.datafeed.v1.ScannerStringList'
           title: string_list
           required:
             - stringList
@@ -4042,6 +4166,7 @@ components:
             stringValue:
               type: string
               title: string_value
+              minLength: 1
           title: string_value
           required:
             - stringValue
@@ -4081,10 +4206,28 @@ components:
         sortBy:
           type: string
           title: sort_by
+          minLength: 1
         sortOrder:
           title: sort_order
-          $ref: '#/components/schemas/quant.datafeed.v1.SortOrder'
+          $ref: '#/components/schemas/quant.datafeed.v1.ScannerSortOrder'
       title: ScannerSort
+      additionalProperties: false
+    quant.datafeed.v1.ScannerSortOrder:
+      type: string
+      title: ScannerSortOrder
+      enum:
+        - SCANNER_SORT_ORDER_UNSPECIFIED
+        - SCANNER_SORT_ORDER_ASC
+        - SCANNER_SORT_ORDER_DESC
+    quant.datafeed.v1.ScannerStringList:
+      type: object
+      properties:
+        values:
+          type: array
+          items:
+            type: string
+          title: values
+      title: ScannerStringList
       additionalProperties: false
     quant.datafeed.v1.SearchResultItem:
       type: object
@@ -4340,6 +4483,30 @@ components:
           required:
             - single
       title: StringOrStringList
+      additionalProperties: false
+    quant.datafeed.v1.SubscribeBarsRequest:
+      type: object
+      properties:
+        symbolInfo:
+          title: symbol_info
+          $ref: '#/components/schemas/quant.datafeed.v1.LibrarySymbolInfo'
+        resolution:
+          type: string
+          title: resolution
+          minLength: 1
+        listenerGuid:
+          type: string
+          title: listener_guid
+          minLength: 1
+      title: SubscribeBarsRequest
+      additionalProperties: false
+    quant.datafeed.v1.SubscribeBarsResponse:
+      type: object
+      properties:
+        bar:
+          title: bar
+          $ref: '#/components/schemas/quant.datafeed.v1.ChartBar'
+      title: SubscribeBarsResponse
       additionalProperties: false
     quant.datafeed.v1.SubsessionInfo:
       type: object

@@ -16,19 +16,17 @@ plugins:
       - module=github.com/austin/quantum/datafeed
   - remote: buf.build/protocolbuffers/kotlin
     out: ../doordash/build/generated/source/proto/main/kotlin
-  - remote: buf.build/protocolbuffers/js
-    out: ../terminal/src/lib/gen
-    opt:
-      - import_style=commonjs
-      - binary
   - remote: buf.build/bufbuild/es
     out: ../terminal/src/lib/gen
+    include_imports: true
     opt:
       - target=ts
+      - import_extension=none
   - remote: buf.build/connectrpc/es
     out: ../terminal/src/lib/gen
     opt:
       - target=ts
+      - import_extension=none
   - remote: buf.build/community/sudorandom-connect-openapi:v0.25.4
     out: gen/openapi
     opt:

@@ -125,9 +125,7 @@ func (h *DatafeedRPCHandler) GetConfig(
 ) (*connectrpc.Response[datafeedv1.GetConfigResponse], error) {
 	response := &datafeedv1.GetConfigResponse{
 		SupportedResolutions:   slices.Clone(supportedResolutions),
-		SupportsGroupRequest:   lo.ToPtr(false),
 		SupportsMarks:          lo.ToPtr(false),
-		SupportsSearch:         lo.ToPtr(true),
 		SupportsTimescaleMarks: lo.ToPtr(false),
 		SupportsTime:           lo.ToPtr(true),
 		Exchanges: []*datafeedv1.ExchangeDescriptor{
@@ -152,6 +150,55 @@ func (h *DatafeedRPCHandler) GetTime(
 	*connectrpc.Request[datafeedv1.GetTimeRequest],
 ) (*connectrpc.Response[datafeedv1.GetTimeResponse], error) {
 	return connectrpc.NewResponse(&datafeedv1.GetTimeResponse{UnixTime: time.Now().Unix()}), nil
+}
+
+func (h *DatafeedRPCHandler) GetBars(
+	ctx context.Context,
+	req *connectrpc.Request[datafeedv1.GetBarsRequest],
+) (*connectrpc.Response[datafeedv1.GetBarsResponse], error) {
+	countBack := req.Msg.GetCountBack()
+	// TradingView recommends returning at least two bars whenever available.
+	if countBack < 2 {
+		countBack = 2
+	}
+
+	candles, err := h.service.GetMarketHistory(
+		ctx,
+		req.Msg.GetSymbol(),
+		req.Msg.GetResolution(),
+		req.Msg.GetFrom(),
+		req.Msg.GetTo(),
+		countBack,
+	)
+	if err != nil {
+		if errors.Is(err, app.ErrMarketProviderUnavailable) {
+			return nil, connectrpc.NewError(connectrpc.CodeUnavailable, oops.Wrapf(err, "market provider unavailable"))
+		}
+		return nil, connectrpc.NewError(connectrpc.CodeInternal, oops.Wrapf(err, "get bars"))
+	}
+
+	if len(candles) == 0 {
+		return connectrpc.NewResponse(&datafeedv1.GetBarsResponse{
+			NoData:   true,
+			NextTime: lo.ToPtr(req.Msg.GetFrom() * 1000),
+		}), nil
+	}
+
+	bars := lo.Map(candles, func(item okx.Candle, _ int) *datafeedv1.ChartBar {
+		return &datafeedv1.ChartBar{
+			Time:   item.TsMS,
+			Open:   item.Open,
+			High:   item.High,
+			Low:    item.Low,
+			Close:  item.Close,
+			Volume: lo.ToPtr(item.Volume),
+		}
+	})
+
+	return connectrpc.NewResponse(&datafeedv1.GetBarsResponse{
+		Bars:   bars,
+		NoData: false,
+	}), nil
 }
 
 func (h *DatafeedRPCHandler) GetHistory(
@@ -391,6 +438,60 @@ func (h *DatafeedRPCHandler) StreamBars(
 	}
 }
 
+func (h *DatafeedRPCHandler) SubscribeBars(
+	ctx context.Context,
+	req *connectrpc.Request[datafeedv1.SubscribeBarsRequest],
+	stream *connectrpc.ServerStream[datafeedv1.SubscribeBarsResponse],
+) error {
+	info := req.Msg.GetSymbolInfo()
+	symbol := ""
+	if info != nil {
+		symbol = info.GetTicker()
+		if symbol == "" {
+			symbol = info.GetName()
+		}
+	}
+	if symbol == "" {
+		return connectrpc.NewError(connectrpc.CodeInvalidArgument, oops.Errorf("symbol_info.name or symbol_info.ticker is required"))
+	}
+
+	updates, errs, err := h.service.SubscribeMarketBars(ctx, symbol, req.Msg.GetResolution())
+	if err != nil {
+		if errors.Is(err, app.ErrMarketProviderUnavailable) {
+			return connectrpc.NewError(connectrpc.CodeUnavailable, oops.Wrapf(err, "market provider unavailable"))
+		}
+		return connectrpc.NewError(connectrpc.CodeInvalidArgument, oops.Wrapf(err, "subscribe market bars"))
+	}
+
+	for {
+		select {
+		case <-ctx.Done():
+			return nil
+		case err, ok := <-errs:
+			if !ok {
+				return nil
+			}
+			return connectrpc.NewError(connectrpc.CodeUnavailable, oops.Wrapf(err, "subscribe bars"))
+		case candle, ok := <-updates:
+			if !ok {
+				return nil
+			}
+			if err := stream.Send(&datafeedv1.SubscribeBarsResponse{
+				Bar: &datafeedv1.ChartBar{
+					Time:   candle.TsMS,
+					Open:   candle.Open,
+					High:   candle.High,
+					Low:    candle.Low,
+					Close:  candle.Close,
+					Volume: lo.ToPtr(candle.Volume),
+				},
+			}); err != nil {
+				return err
+			}
+		}
+	}
+}
+
 func (h *DatafeedRPCHandler) ListSymbols(
 	ctx context.Context,
 	req *connectrpc.Request[datafeedv1.ListSymbolsRequest],
@@ -472,7 +573,7 @@ func (h *ScannerRPCHandler) ScanSymbols(
 	sortOrder := datafeedv1.SortOrder_SORT_ORDER_UNSPECIFIED
 	if req.Msg.GetSort() != nil {
 		sortBy = req.Msg.GetSort().GetSortBy()
-		sortOrder = req.Msg.GetSort().GetSortOrder()
+		sortOrder = mapScannerSortOrder(req.Msg.GetSort().GetSortOrder())
 	}
 	sortLibrarySymbols(filtered, sortBy, sortOrder)
 
@@ -581,6 +682,17 @@ func symbolComparable(item *datafeedv1.LibrarySymbolInfo, field string) string {
 		return strings.ToLower(customFieldString(item, "state"))
 	default:
 		return strings.ToLower(item.GetName())
+	}
+}
+
+func mapScannerSortOrder(order datafeedv1.ScannerSortOrder) datafeedv1.SortOrder {
+	switch order {
+	case datafeedv1.ScannerSortOrder_SCANNER_SORT_ORDER_ASC:
+		return datafeedv1.SortOrder_SORT_ORDER_ASC
+	case datafeedv1.ScannerSortOrder_SCANNER_SORT_ORDER_DESC:
+		return datafeedv1.SortOrder_SORT_ORDER_DESC
+	default:
+		return datafeedv1.SortOrder_SORT_ORDER_UNSPECIFIED
 	}
 }
 

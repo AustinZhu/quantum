@@ -35,6 +35,16 @@ service DatafeedService {
     };
   }
 
+  rpc GetBars(GetBarsRequest) returns (GetBarsResponse) {
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "DatafeedService_GetBars"
+      summary: "Get Bars"
+      description: "Returns historical bars in chart datafeed API structure."
+      tags: "Datafeed"
+      tags: "Chart"
+    };
+  }
+
   rpc GetHistory(GetHistoryRequest) returns (GetHistoryResponse) {
     option (gnostic.openapi.v3.operation) = {
       operation_id: "DatafeedService_GetHistory"
@@ -112,6 +122,16 @@ service DatafeedService {
       description: "Streams incremental bar updates in UDF stream format."
       tags: "UDF"
       tags: "Datafeed"
+    };
+  }
+
+  rpc SubscribeBars(SubscribeBarsRequest) returns (stream SubscribeBarsResponse) {
+    option (gnostic.openapi.v3.operation) = {
+      operation_id: "DatafeedService_SubscribeBars"
+      summary: "Subscribe Bars"
+      description: "Streams realtime bar updates in chart datafeed API structure."
+      tags: "Datafeed"
+      tags: "Chart"
     };
   }
 
@@ -457,9 +477,9 @@ message GetConfigRequest {}
 
 message GetConfigResponse {
   repeated string supported_resolutions = 1;
-  optional bool supports_group_request = 2;
+  reserved 2;
   optional bool supports_marks = 3;
-  optional bool supports_search = 4;
+  reserved 4;
   optional bool supports_timescale_marks = 5;
   optional bool supports_time = 6;
   repeated ExchangeDescriptor exchanges = 7;
@@ -473,6 +493,29 @@ message GetTimeRequest {}
 
 message GetTimeResponse {
   int64 unix_time = 1;
+}
+
+message ChartBar {
+  int64 time = 1;
+  double open = 2;
+  double high = 3;
+  double low = 4;
+  double close = 5;
+  optional double volume = 6;
+}
+
+message GetBarsRequest {
+  string symbol = 1 [(buf.validate.field).string.min_len = 1];
+  int64 from = 2;
+  int64 to = 3;
+  string resolution = 4 [(buf.validate.field).string.min_len = 1];
+  uint32 count_back = 5 [(buf.validate.field).uint32.gt = 0];
+}
+
+message GetBarsResponse {
+  repeated ChartBar bars = 1;
+  bool no_data = 2;
+  optional int64 next_time = 3;
 }
 
 message GetHistoryRequest {
@@ -693,6 +736,16 @@ message StreamBarsResponse {
   repeated double h = 4;
   repeated double l = 5;
   repeated double v = 6;
+}
+
+message SubscribeBarsRequest {
+  LibrarySymbolInfo symbol_info = 1;
+  string resolution = 2 [(buf.validate.field).string.min_len = 1];
+  string listener_guid = 3 [(buf.validate.field).string.min_len = 1];
+}
+
+message SubscribeBarsResponse {
+  ChartBar bar = 1;
 }
 
 message Tick {

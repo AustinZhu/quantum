@@ -250,10 +250,13 @@ variable "oidc_redirect_uris" {
     "http://localhost:5001/callback",
     "http://localhost:5050/oauth2/authorize",
     "http://localhost:8087/oauth-authorized/casdoor",
+    "http://localhost:3000/api/auth/callback",
     "http://mlflow.quantum.orb.local/callback",
     "http://pgadmin.quantum.orb.local/oauth2/authorize",
     "http://feast.quantum.orb.local/oauth2/callback",
     "http://localhost:6567/oauth2/callback",
+    "http://terminal.quantum.orb.local/api/auth/callback",
+    "https://terminal.quantum.orb.local/api/auth/callback",
   ]
 }
 

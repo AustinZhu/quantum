@@ -2564,9 +2564,7 @@ func (*GetConfigRequest) Descriptor() ([]byte, []int) {
 type GetConfigResponse struct {
 	state                  protoimpl.MessageState  `protogen:"open.v1"`
 	SupportedResolutions   []string                `protobuf:"bytes,1,rep,name=supported_resolutions,json=supportedResolutions,proto3" json:"supported_resolutions,omitempty"`
-	SupportsGroupRequest   *bool                   `protobuf:"varint,2,opt,name=supports_group_request,json=supportsGroupRequest,proto3,oneof" json:"supports_group_request,omitempty"`
 	SupportsMarks          *bool                   `protobuf:"varint,3,opt,name=supports_marks,json=supportsMarks,proto3,oneof" json:"supports_marks,omitempty"`
-	SupportsSearch         *bool                   `protobuf:"varint,4,opt,name=supports_search,json=supportsSearch,proto3,oneof" json:"supports_search,omitempty"`
 	SupportsTimescaleMarks *bool                   `protobuf:"varint,5,opt,name=supports_timescale_marks,json=supportsTimescaleMarks,proto3,oneof" json:"supports_timescale_marks,omitempty"`
 	SupportsTime           *bool                   `protobuf:"varint,6,opt,name=supports_time,json=supportsTime,proto3,oneof" json:"supports_time,omitempty"`
 	Exchanges              []*ExchangeDescriptor   `protobuf:"bytes,7,rep,name=exchanges,proto3" json:"exchanges,omitempty"`
@@ -2615,23 +2613,9 @@ func (x *GetConfigResponse) GetSupportedResolutions() []string {
 	return nil
 }
 
-func (x *GetConfigResponse) GetSupportsGroupRequest() bool {
-	if x != nil && x.SupportsGroupRequest != nil {
-		return *x.SupportsGroupRequest
-	}
-	return false
-}
-
 func (x *GetConfigResponse) GetSupportsMarks() bool {
 	if x != nil && x.SupportsMarks != nil {
 		return *x.SupportsMarks
-	}
-	return false
-}
-
-func (x *GetConfigResponse) GetSupportsSearch() bool {
-	if x != nil && x.SupportsSearch != nil {
-		return *x.SupportsSearch
 	}
 	return false
 }
@@ -2765,6 +2749,226 @@ func (x *GetTimeResponse) GetUnixTime() int64 {
 	return 0
 }
 
+type ChartBar struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Time          int64                  `protobuf:"varint,1,opt,name=time,proto3" json:"time,omitempty"`
+	Open          float64                `protobuf:"fixed64,2,opt,name=open,proto3" json:"open,omitempty"`
+	High          float64                `protobuf:"fixed64,3,opt,name=high,proto3" json:"high,omitempty"`
+	Low           float64                `protobuf:"fixed64,4,opt,name=low,proto3" json:"low,omitempty"`
+	Close         float64                `protobuf:"fixed64,5,opt,name=close,proto3" json:"close,omitempty"`
+	Volume        *float64               `protobuf:"fixed64,6,opt,name=volume,proto3,oneof" json:"volume,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ChartBar) Reset() {
+	*x = ChartBar{}
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[33]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ChartBar) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ChartBar) ProtoMessage() {}
+
+func (x *ChartBar) ProtoReflect() protoreflect.Message {
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[33]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ChartBar.ProtoReflect.Descriptor instead.
+func (*ChartBar) Descriptor() ([]byte, []int) {
+	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{33}
+}
+
+func (x *ChartBar) GetTime() int64 {
+	if x != nil {
+		return x.Time
+	}
+	return 0
+}
+
+func (x *ChartBar) GetOpen() float64 {
+	if x != nil {
+		return x.Open
+	}
+	return 0
+}
+
+func (x *ChartBar) GetHigh() float64 {
+	if x != nil {
+		return x.High
+	}
+	return 0
+}
+
+func (x *ChartBar) GetLow() float64 {
+	if x != nil {
+		return x.Low
+	}
+	return 0
+}
+
+func (x *ChartBar) GetClose() float64 {
+	if x != nil {
+		return x.Close
+	}
+	return 0
+}
+
+func (x *ChartBar) GetVolume() float64 {
+	if x != nil && x.Volume != nil {
+		return *x.Volume
+	}
+	return 0
+}
+
+type GetBarsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Symbol        string                 `protobuf:"bytes,1,opt,name=symbol,proto3" json:"symbol,omitempty"`
+	From          int64                  `protobuf:"varint,2,opt,name=from,proto3" json:"from,omitempty"`
+	To            int64                  `protobuf:"varint,3,opt,name=to,proto3" json:"to,omitempty"`
+	Resolution    string                 `protobuf:"bytes,4,opt,name=resolution,proto3" json:"resolution,omitempty"`
+	CountBack     uint32                 `protobuf:"varint,5,opt,name=count_back,json=countBack,proto3" json:"count_back,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetBarsRequest) Reset() {
+	*x = GetBarsRequest{}
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[34]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetBarsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetBarsRequest) ProtoMessage() {}
+
+func (x *GetBarsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[34]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetBarsRequest.ProtoReflect.Descriptor instead.
+func (*GetBarsRequest) Descriptor() ([]byte, []int) {
+	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{34}
+}
+
+func (x *GetBarsRequest) GetSymbol() string {
+	if x != nil {
+		return x.Symbol
+	}
+	return ""
+}
+
+func (x *GetBarsRequest) GetFrom() int64 {
+	if x != nil {
+		return x.From
+	}
+	return 0
+}
+
+func (x *GetBarsRequest) GetTo() int64 {
+	if x != nil {
+		return x.To
+	}
+	return 0
+}
+
+func (x *GetBarsRequest) GetResolution() string {
+	if x != nil {
+		return x.Resolution
+	}
+	return ""
+}
+
+func (x *GetBarsRequest) GetCountBack() uint32 {
+	if x != nil {
+		return x.CountBack
+	}
+	return 0
+}
+
+type GetBarsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Bars          []*ChartBar            `protobuf:"bytes,1,rep,name=bars,proto3" json:"bars,omitempty"`
+	NoData        bool                   `protobuf:"varint,2,opt,name=no_data,json=noData,proto3" json:"no_data,omitempty"`
+	NextTime      *int64                 `protobuf:"varint,3,opt,name=next_time,json=nextTime,proto3,oneof" json:"next_time,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetBarsResponse) Reset() {
+	*x = GetBarsResponse{}
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[35]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetBarsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetBarsResponse) ProtoMessage() {}
+
+func (x *GetBarsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[35]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetBarsResponse.ProtoReflect.Descriptor instead.
+func (*GetBarsResponse) Descriptor() ([]byte, []int) {
+	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{35}
+}
+
+func (x *GetBarsResponse) GetBars() []*ChartBar {
+	if x != nil {
+		return x.Bars
+	}
+	return nil
+}
+
+func (x *GetBarsResponse) GetNoData() bool {
+	if x != nil {
+		return x.NoData
+	}
+	return false
+}
+
+func (x *GetBarsResponse) GetNextTime() int64 {
+	if x != nil && x.NextTime != nil {
+		return *x.NextTime
+	}
+	return 0
+}
+
 type GetHistoryRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Symbol        string                 `protobuf:"bytes,1,opt,name=symbol,proto3" json:"symbol,omitempty"`
@@ -2778,7 +2982,7 @@ type GetHistoryRequest struct {
 
 func (x *GetHistoryRequest) Reset() {
 	*x = GetHistoryRequest{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[33]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2790,7 +2994,7 @@ func (x *GetHistoryRequest) String() string {
 func (*GetHistoryRequest) ProtoMessage() {}
 
 func (x *GetHistoryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[33]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2803,7 +3007,7 @@ func (x *GetHistoryRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetHistoryRequest.ProtoReflect.Descriptor instead.
 func (*GetHistoryRequest) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{33}
+	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{36}
 }
 
 func (x *GetHistoryRequest) GetSymbol() string {
@@ -2855,7 +3059,7 @@ type GetHistoryOk struct {
 
 func (x *GetHistoryOk) Reset() {
 	*x = GetHistoryOk{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[34]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2867,7 +3071,7 @@ func (x *GetHistoryOk) String() string {
 func (*GetHistoryOk) ProtoMessage() {}
 
 func (x *GetHistoryOk) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[34]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2880,7 +3084,7 @@ func (x *GetHistoryOk) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetHistoryOk.ProtoReflect.Descriptor instead.
 func (*GetHistoryOk) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{34}
+	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{37}
 }
 
 func (x *GetHistoryOk) GetT() []int64 {
@@ -2934,7 +3138,7 @@ type GetHistoryNoData struct {
 
 func (x *GetHistoryNoData) Reset() {
 	*x = GetHistoryNoData{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[35]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2946,7 +3150,7 @@ func (x *GetHistoryNoData) String() string {
 func (*GetHistoryNoData) ProtoMessage() {}
 
 func (x *GetHistoryNoData) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[35]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2959,7 +3163,7 @@ func (x *GetHistoryNoData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetHistoryNoData.ProtoReflect.Descriptor instead.
 func (*GetHistoryNoData) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{35}
+	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{38}
 }
 
 func (x *GetHistoryNoData) GetNextTime() int64 {
@@ -2978,7 +3182,7 @@ type GetHistoryError struct {
 
 func (x *GetHistoryError) Reset() {
 	*x = GetHistoryError{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[36]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2990,7 +3194,7 @@ func (x *GetHistoryError) String() string {
 func (*GetHistoryError) ProtoMessage() {}
 
 func (x *GetHistoryError) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[36]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3003,7 +3207,7 @@ func (x *GetHistoryError) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetHistoryError.ProtoReflect.Descriptor instead.
 func (*GetHistoryError) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{36}
+	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{39}
 }
 
 func (x *GetHistoryError) GetErrmsg() string {
@@ -3027,7 +3231,7 @@ type GetHistoryResponse struct {
 
 func (x *GetHistoryResponse) Reset() {
 	*x = GetHistoryResponse{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[37]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[40]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3039,7 +3243,7 @@ func (x *GetHistoryResponse) String() string {
 func (*GetHistoryResponse) ProtoMessage() {}
 
 func (x *GetHistoryResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[37]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[40]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3052,7 +3256,7 @@ func (x *GetHistoryResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetHistoryResponse.ProtoReflect.Descriptor instead.
 func (*GetHistoryResponse) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{37}
+	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{40}
 }
 
 func (x *GetHistoryResponse) GetResult() isGetHistoryResponse_Result {
@@ -3138,7 +3342,7 @@ type QuoteValues struct {
 
 func (x *QuoteValues) Reset() {
 	*x = QuoteValues{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[38]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[41]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3150,7 +3354,7 @@ func (x *QuoteValues) String() string {
 func (*QuoteValues) ProtoMessage() {}
 
 func (x *QuoteValues) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[38]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[41]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3163,7 +3367,7 @@ func (x *QuoteValues) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QuoteValues.ProtoReflect.Descriptor instead.
 func (*QuoteValues) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{38}
+	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{41}
 }
 
 func (x *QuoteValues) GetCh() float64 {
@@ -3310,7 +3514,7 @@ type QuoteData struct {
 
 func (x *QuoteData) Reset() {
 	*x = QuoteData{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[39]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[42]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3322,7 +3526,7 @@ func (x *QuoteData) String() string {
 func (*QuoteData) ProtoMessage() {}
 
 func (x *QuoteData) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[39]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[42]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3335,7 +3539,7 @@ func (x *QuoteData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QuoteData.ProtoReflect.Descriptor instead.
 func (*QuoteData) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{39}
+	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{42}
 }
 
 func (x *QuoteData) GetS() string {
@@ -3368,7 +3572,7 @@ type GetQuotesRequest struct {
 
 func (x *GetQuotesRequest) Reset() {
 	*x = GetQuotesRequest{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[40]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[43]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3380,7 +3584,7 @@ func (x *GetQuotesRequest) String() string {
 func (*GetQuotesRequest) ProtoMessage() {}
 
 func (x *GetQuotesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[40]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[43]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3393,7 +3597,7 @@ func (x *GetQuotesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetQuotesRequest.ProtoReflect.Descriptor instead.
 func (*GetQuotesRequest) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{40}
+	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{43}
 }
 
 func (x *GetQuotesRequest) GetSymbols() string {
@@ -3412,7 +3616,7 @@ type GetQuotesOk struct {
 
 func (x *GetQuotesOk) Reset() {
 	*x = GetQuotesOk{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[41]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[44]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3424,7 +3628,7 @@ func (x *GetQuotesOk) String() string {
 func (*GetQuotesOk) ProtoMessage() {}
 
 func (x *GetQuotesOk) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[41]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[44]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3437,7 +3641,7 @@ func (x *GetQuotesOk) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetQuotesOk.ProtoReflect.Descriptor instead.
 func (*GetQuotesOk) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{41}
+	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{44}
 }
 
 func (x *GetQuotesOk) GetD() []*QuoteData {
@@ -3456,7 +3660,7 @@ type GetQuotesError struct {
 
 func (x *GetQuotesError) Reset() {
 	*x = GetQuotesError{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[42]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[45]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3468,7 +3672,7 @@ func (x *GetQuotesError) String() string {
 func (*GetQuotesError) ProtoMessage() {}
 
 func (x *GetQuotesError) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[42]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[45]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3481,7 +3685,7 @@ func (x *GetQuotesError) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetQuotesError.ProtoReflect.Descriptor instead.
 func (*GetQuotesError) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{42}
+	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{45}
 }
 
 func (x *GetQuotesError) GetErrmsg() string {
@@ -3504,7 +3708,7 @@ type GetQuotesResponse struct {
 
 func (x *GetQuotesResponse) Reset() {
 	*x = GetQuotesResponse{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[43]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[46]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3516,7 +3720,7 @@ func (x *GetQuotesResponse) String() string {
 func (*GetQuotesResponse) ProtoMessage() {}
 
 func (x *GetQuotesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[43]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[46]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3529,7 +3733,7 @@ func (x *GetQuotesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetQuotesResponse.ProtoReflect.Descriptor instead.
 func (*GetQuotesResponse) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{43}
+	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{46}
 }
 
 func (x *GetQuotesResponse) GetResult() isGetQuotesResponse_Result {
@@ -3586,7 +3790,7 @@ type MarkId struct {
 
 func (x *MarkId) Reset() {
 	*x = MarkId{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[44]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[47]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3598,7 +3802,7 @@ func (x *MarkId) String() string {
 func (*MarkId) ProtoMessage() {}
 
 func (x *MarkId) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[44]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[47]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3611,7 +3815,7 @@ func (x *MarkId) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MarkId.ProtoReflect.Descriptor instead.
 func (*MarkId) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{44}
+	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{47}
 }
 
 func (x *MarkId) GetValue() isMarkId_Value {
@@ -3667,7 +3871,7 @@ type GetMarksRequest struct {
 
 func (x *GetMarksRequest) Reset() {
 	*x = GetMarksRequest{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[45]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[48]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3679,7 +3883,7 @@ func (x *GetMarksRequest) String() string {
 func (*GetMarksRequest) ProtoMessage() {}
 
 func (x *GetMarksRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[45]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[48]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3692,7 +3896,7 @@ func (x *GetMarksRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetMarksRequest.ProtoReflect.Descriptor instead.
 func (*GetMarksRequest) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{45}
+	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{48}
 }
 
 func (x *GetMarksRequest) GetSymbol() string {
@@ -3742,7 +3946,7 @@ type GetMarksResponse struct {
 
 func (x *GetMarksResponse) Reset() {
 	*x = GetMarksResponse{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[46]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[49]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3754,7 +3958,7 @@ func (x *GetMarksResponse) String() string {
 func (*GetMarksResponse) ProtoMessage() {}
 
 func (x *GetMarksResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[46]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[49]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3767,7 +3971,7 @@ func (x *GetMarksResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetMarksResponse.ProtoReflect.Descriptor instead.
 func (*GetMarksResponse) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{46}
+	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{49}
 }
 
 func (x *GetMarksResponse) GetId() []*MarkId {
@@ -3861,7 +4065,7 @@ type TimescaleMark struct {
 
 func (x *TimescaleMark) Reset() {
 	*x = TimescaleMark{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[47]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[50]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3873,7 +4077,7 @@ func (x *TimescaleMark) String() string {
 func (*TimescaleMark) ProtoMessage() {}
 
 func (x *TimescaleMark) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[47]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[50]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3886,7 +4090,7 @@ func (x *TimescaleMark) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TimescaleMark.ProtoReflect.Descriptor instead.
 func (*TimescaleMark) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{47}
+	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{50}
 }
 
 func (x *TimescaleMark) GetId() *MarkId {
@@ -3943,7 +4147,7 @@ type GetTimescaleMarksRequest struct {
 
 func (x *GetTimescaleMarksRequest) Reset() {
 	*x = GetTimescaleMarksRequest{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[48]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[51]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3955,7 +4159,7 @@ func (x *GetTimescaleMarksRequest) String() string {
 func (*GetTimescaleMarksRequest) ProtoMessage() {}
 
 func (x *GetTimescaleMarksRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[48]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[51]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3968,7 +4172,7 @@ func (x *GetTimescaleMarksRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTimescaleMarksRequest.ProtoReflect.Descriptor instead.
 func (*GetTimescaleMarksRequest) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{48}
+	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{51}
 }
 
 func (x *GetTimescaleMarksRequest) GetSymbol() string {
@@ -4008,7 +4212,7 @@ type GetTimescaleMarksResponse struct {
 
 func (x *GetTimescaleMarksResponse) Reset() {
 	*x = GetTimescaleMarksResponse{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[49]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[52]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4020,7 +4224,7 @@ func (x *GetTimescaleMarksResponse) String() string {
 func (*GetTimescaleMarksResponse) ProtoMessage() {}
 
 func (x *GetTimescaleMarksResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[49]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[52]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4033,7 +4237,7 @@ func (x *GetTimescaleMarksResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTimescaleMarksResponse.ProtoReflect.Descriptor instead.
 func (*GetTimescaleMarksResponse) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{49}
+	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{52}
 }
 
 func (x *GetTimescaleMarksResponse) GetMarks() []*TimescaleMark {
@@ -4055,7 +4259,7 @@ type ResolveSymbolRequest struct {
 
 func (x *ResolveSymbolRequest) Reset() {
 	*x = ResolveSymbolRequest{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[50]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[53]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4067,7 +4271,7 @@ func (x *ResolveSymbolRequest) String() string {
 func (*ResolveSymbolRequest) ProtoMessage() {}
 
 func (x *ResolveSymbolRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[50]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[53]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4080,7 +4284,7 @@ func (x *ResolveSymbolRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ResolveSymbolRequest.ProtoReflect.Descriptor instead.
 func (*ResolveSymbolRequest) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{50}
+	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{53}
 }
 
 func (x *ResolveSymbolRequest) GetSymbol() string {
@@ -4120,7 +4324,7 @@ type ResolveSymbolResponse struct {
 
 func (x *ResolveSymbolResponse) Reset() {
 	*x = ResolveSymbolResponse{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[51]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[54]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4132,7 +4336,7 @@ func (x *ResolveSymbolResponse) String() string {
 func (*ResolveSymbolResponse) ProtoMessage() {}
 
 func (x *ResolveSymbolResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[51]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[54]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4145,7 +4349,7 @@ func (x *ResolveSymbolResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ResolveSymbolResponse.ProtoReflect.Descriptor instead.
 func (*ResolveSymbolResponse) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{51}
+	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{54}
 }
 
 func (x *ResolveSymbolResponse) GetSymbol() *LibrarySymbolInfo {
@@ -4164,7 +4368,7 @@ type GetSymbolGroupInfoRequest struct {
 
 func (x *GetSymbolGroupInfoRequest) Reset() {
 	*x = GetSymbolGroupInfoRequest{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[52]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[55]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4176,7 +4380,7 @@ func (x *GetSymbolGroupInfoRequest) String() string {
 func (*GetSymbolGroupInfoRequest) ProtoMessage() {}
 
 func (x *GetSymbolGroupInfoRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[52]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[55]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4189,7 +4393,7 @@ func (x *GetSymbolGroupInfoRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetSymbolGroupInfoRequest.ProtoReflect.Descriptor instead.
 func (*GetSymbolGroupInfoRequest) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{52}
+	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{55}
 }
 
 func (x *GetSymbolGroupInfoRequest) GetGroup() string {
@@ -4230,7 +4434,7 @@ type GetSymbolGroupInfoResponse struct {
 
 func (x *GetSymbolGroupInfoResponse) Reset() {
 	*x = GetSymbolGroupInfoResponse{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[53]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[56]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4242,7 +4446,7 @@ func (x *GetSymbolGroupInfoResponse) String() string {
 func (*GetSymbolGroupInfoResponse) ProtoMessage() {}
 
 func (x *GetSymbolGroupInfoResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[53]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[56]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4255,7 +4459,7 @@ func (x *GetSymbolGroupInfoResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetSymbolGroupInfoResponse.ProtoReflect.Descriptor instead.
 func (*GetSymbolGroupInfoResponse) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{53}
+	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{56}
 }
 
 func (x *GetSymbolGroupInfoResponse) GetSymbol() []string {
@@ -4434,7 +4638,7 @@ type SearchResultItem struct {
 
 func (x *SearchResultItem) Reset() {
 	*x = SearchResultItem{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[54]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[57]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4446,7 +4650,7 @@ func (x *SearchResultItem) String() string {
 func (*SearchResultItem) ProtoMessage() {}
 
 func (x *SearchResultItem) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[54]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[57]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4459,7 +4663,7 @@ func (x *SearchResultItem) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchResultItem.ProtoReflect.Descriptor instead.
 func (*SearchResultItem) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{54}
+	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{57}
 }
 
 func (x *SearchResultItem) GetSymbol() string {
@@ -4523,7 +4727,7 @@ type SearchSymbolsRequest struct {
 
 func (x *SearchSymbolsRequest) Reset() {
 	*x = SearchSymbolsRequest{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[55]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[58]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4535,7 +4739,7 @@ func (x *SearchSymbolsRequest) String() string {
 func (*SearchSymbolsRequest) ProtoMessage() {}
 
 func (x *SearchSymbolsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[55]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[58]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4548,7 +4752,7 @@ func (x *SearchSymbolsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchSymbolsRequest.ProtoReflect.Descriptor instead.
 func (*SearchSymbolsRequest) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{55}
+	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{58}
 }
 
 func (x *SearchSymbolsRequest) GetQuery() string {
@@ -4588,7 +4792,7 @@ type SearchSymbolsResponse struct {
 
 func (x *SearchSymbolsResponse) Reset() {
 	*x = SearchSymbolsResponse{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[56]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[59]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4600,7 +4804,7 @@ func (x *SearchSymbolsResponse) String() string {
 func (*SearchSymbolsResponse) ProtoMessage() {}
 
 func (x *SearchSymbolsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[56]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[59]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4613,7 +4817,7 @@ func (x *SearchSymbolsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SearchSymbolsResponse.ProtoReflect.Descriptor instead.
 func (*SearchSymbolsResponse) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{56}
+	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{59}
 }
 
 func (x *SearchSymbolsResponse) GetItems() []*SearchResultItem {
@@ -4634,7 +4838,7 @@ type StreamBarsRequest struct {
 
 func (x *StreamBarsRequest) Reset() {
 	*x = StreamBarsRequest{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[57]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[60]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4646,7 +4850,7 @@ func (x *StreamBarsRequest) String() string {
 func (*StreamBarsRequest) ProtoMessage() {}
 
 func (x *StreamBarsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[57]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[60]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4659,7 +4863,7 @@ func (x *StreamBarsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StreamBarsRequest.ProtoReflect.Descriptor instead.
 func (*StreamBarsRequest) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{57}
+	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{60}
 }
 
 func (x *StreamBarsRequest) GetSymbolInfo() *LibrarySymbolInfo {
@@ -4697,7 +4901,7 @@ type StreamBarsResponse struct {
 
 func (x *StreamBarsResponse) Reset() {
 	*x = StreamBarsResponse{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[58]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[61]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4709,7 +4913,7 @@ func (x *StreamBarsResponse) String() string {
 func (*StreamBarsResponse) ProtoMessage() {}
 
 func (x *StreamBarsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[58]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[61]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4722,7 +4926,7 @@ func (x *StreamBarsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StreamBarsResponse.ProtoReflect.Descriptor instead.
 func (*StreamBarsResponse) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{58}
+	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{61}
 }
 
 func (x *StreamBarsResponse) GetT() []int64 {
@@ -4767,6 +4971,110 @@ func (x *StreamBarsResponse) GetV() []float64 {
 	return nil
 }
 
+type SubscribeBarsRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	SymbolInfo    *LibrarySymbolInfo     `protobuf:"bytes,1,opt,name=symbol_info,json=symbolInfo,proto3" json:"symbol_info,omitempty"`
+	Resolution    string                 `protobuf:"bytes,2,opt,name=resolution,proto3" json:"resolution,omitempty"`
+	ListenerGuid  string                 `protobuf:"bytes,3,opt,name=listener_guid,json=listenerGuid,proto3" json:"listener_guid,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SubscribeBarsRequest) Reset() {
+	*x = SubscribeBarsRequest{}
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[62]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SubscribeBarsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SubscribeBarsRequest) ProtoMessage() {}
+
+func (x *SubscribeBarsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[62]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SubscribeBarsRequest.ProtoReflect.Descriptor instead.
+func (*SubscribeBarsRequest) Descriptor() ([]byte, []int) {
+	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{62}
+}
+
+func (x *SubscribeBarsRequest) GetSymbolInfo() *LibrarySymbolInfo {
+	if x != nil {
+		return x.SymbolInfo
+	}
+	return nil
+}
+
+func (x *SubscribeBarsRequest) GetResolution() string {
+	if x != nil {
+		return x.Resolution
+	}
+	return ""
+}
+
+func (x *SubscribeBarsRequest) GetListenerGuid() string {
+	if x != nil {
+		return x.ListenerGuid
+	}
+	return ""
+}
+
+type SubscribeBarsResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Bar           *ChartBar              `protobuf:"bytes,1,opt,name=bar,proto3" json:"bar,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SubscribeBarsResponse) Reset() {
+	*x = SubscribeBarsResponse{}
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[63]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SubscribeBarsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SubscribeBarsResponse) ProtoMessage() {}
+
+func (x *SubscribeBarsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[63]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SubscribeBarsResponse.ProtoReflect.Descriptor instead.
+func (*SubscribeBarsResponse) Descriptor() ([]byte, []int) {
+	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{63}
+}
+
+func (x *SubscribeBarsResponse) GetBar() *ChartBar {
+	if x != nil {
+		return x.Bar
+	}
+	return nil
+}
+
 type Tick struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Symbol        string                 `protobuf:"bytes,1,opt,name=symbol,proto3" json:"symbol,omitempty"`
@@ -4780,7 +5088,7 @@ type Tick struct {
 
 func (x *Tick) Reset() {
 	*x = Tick{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[59]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[64]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4792,7 +5100,7 @@ func (x *Tick) String() string {
 func (*Tick) ProtoMessage() {}
 
 func (x *Tick) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[59]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[64]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4805,7 +5113,7 @@ func (x *Tick) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Tick.ProtoReflect.Descriptor instead.
 func (*Tick) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{59}
+	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{64}
 }
 
 func (x *Tick) GetSymbol() string {
@@ -4852,7 +5160,7 @@ type IngestTicksRequest struct {
 
 func (x *IngestTicksRequest) Reset() {
 	*x = IngestTicksRequest{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[60]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[65]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4864,7 +5172,7 @@ func (x *IngestTicksRequest) String() string {
 func (*IngestTicksRequest) ProtoMessage() {}
 
 func (x *IngestTicksRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[60]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[65]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4877,7 +5185,7 @@ func (x *IngestTicksRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IngestTicksRequest.ProtoReflect.Descriptor instead.
 func (*IngestTicksRequest) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{60}
+	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{65}
 }
 
 func (x *IngestTicksRequest) GetTicks() []*Tick {
@@ -4896,7 +5204,7 @@ type IngestTicksResponse struct {
 
 func (x *IngestTicksResponse) Reset() {
 	*x = IngestTicksResponse{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[61]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[66]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4908,7 +5216,7 @@ func (x *IngestTicksResponse) String() string {
 func (*IngestTicksResponse) ProtoMessage() {}
 
 func (x *IngestTicksResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[61]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[66]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4921,7 +5229,7 @@ func (x *IngestTicksResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use IngestTicksResponse.ProtoReflect.Descriptor instead.
 func (*IngestTicksResponse) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{61}
+	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{66}
 }
 
 func (x *IngestTicksResponse) GetInserted() uint32 {
@@ -4943,7 +5251,7 @@ type ReplayTicksRequest struct {
 
 func (x *ReplayTicksRequest) Reset() {
 	*x = ReplayTicksRequest{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[62]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[67]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4955,7 +5263,7 @@ func (x *ReplayTicksRequest) String() string {
 func (*ReplayTicksRequest) ProtoMessage() {}
 
 func (x *ReplayTicksRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[62]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[67]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4968,7 +5276,7 @@ func (x *ReplayTicksRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReplayTicksRequest.ProtoReflect.Descriptor instead.
 func (*ReplayTicksRequest) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{62}
+	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{67}
 }
 
 func (x *ReplayTicksRequest) GetSymbol() string {
@@ -5008,7 +5316,7 @@ type ReplayTicksResponse struct {
 
 func (x *ReplayTicksResponse) Reset() {
 	*x = ReplayTicksResponse{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[63]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[68]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5020,7 +5328,7 @@ func (x *ReplayTicksResponse) String() string {
 func (*ReplayTicksResponse) ProtoMessage() {}
 
 func (x *ReplayTicksResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[63]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[68]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5033,7 +5341,7 @@ func (x *ReplayTicksResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReplayTicksResponse.ProtoReflect.Descriptor instead.
 func (*ReplayTicksResponse) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{63}
+	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{68}
 }
 
 func (x *ReplayTicksResponse) GetTicks() []*Tick {
@@ -5059,7 +5367,7 @@ type Bar struct {
 
 func (x *Bar) Reset() {
 	*x = Bar{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[64]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[69]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5071,7 +5379,7 @@ func (x *Bar) String() string {
 func (*Bar) ProtoMessage() {}
 
 func (x *Bar) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[64]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[69]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5084,7 +5392,7 @@ func (x *Bar) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Bar.ProtoReflect.Descriptor instead.
 func (*Bar) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{64}
+	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{69}
 }
 
 func (x *Bar) GetSymbol() string {
@@ -5156,7 +5464,7 @@ type QueryBarsRequest struct {
 
 func (x *QueryBarsRequest) Reset() {
 	*x = QueryBarsRequest{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[65]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[70]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5168,7 +5476,7 @@ func (x *QueryBarsRequest) String() string {
 func (*QueryBarsRequest) ProtoMessage() {}
 
 func (x *QueryBarsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[65]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[70]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5181,7 +5489,7 @@ func (x *QueryBarsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryBarsRequest.ProtoReflect.Descriptor instead.
 func (*QueryBarsRequest) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{65}
+	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{70}
 }
 
 func (x *QueryBarsRequest) GetSymbol() string {
@@ -5228,7 +5536,7 @@ type QueryBarsResponse struct {
 
 func (x *QueryBarsResponse) Reset() {
 	*x = QueryBarsResponse{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[66]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[71]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5240,7 +5548,7 @@ func (x *QueryBarsResponse) String() string {
 func (*QueryBarsResponse) ProtoMessage() {}
 
 func (x *QueryBarsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[66]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[71]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5253,7 +5561,7 @@ func (x *QueryBarsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use QueryBarsResponse.ProtoReflect.Descriptor instead.
 func (*QueryBarsResponse) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{66}
+	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{71}
 }
 
 func (x *QueryBarsResponse) GetBars() []*Bar {
@@ -5273,7 +5581,7 @@ type ListNewsRequest struct {
 
 func (x *ListNewsRequest) Reset() {
 	*x = ListNewsRequest{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[67]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[72]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5285,7 +5593,7 @@ func (x *ListNewsRequest) String() string {
 func (*ListNewsRequest) ProtoMessage() {}
 
 func (x *ListNewsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[67]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[72]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5298,7 +5606,7 @@ func (x *ListNewsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListNewsRequest.ProtoReflect.Descriptor instead.
 func (*ListNewsRequest) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{67}
+	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{72}
 }
 
 func (x *ListNewsRequest) GetSymbol() string {
@@ -5329,7 +5637,7 @@ type NewsEvent struct {
 
 func (x *NewsEvent) Reset() {
 	*x = NewsEvent{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[68]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[73]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5341,7 +5649,7 @@ func (x *NewsEvent) String() string {
 func (*NewsEvent) ProtoMessage() {}
 
 func (x *NewsEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[68]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[73]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5354,7 +5662,7 @@ func (x *NewsEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use NewsEvent.ProtoReflect.Descriptor instead.
 func (*NewsEvent) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{68}
+	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{73}
 }
 
 func (x *NewsEvent) GetId() string {
@@ -5408,7 +5716,7 @@ type ListNewsResponse struct {
 
 func (x *ListNewsResponse) Reset() {
 	*x = ListNewsResponse{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[69]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[74]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5420,7 +5728,7 @@ func (x *ListNewsResponse) String() string {
 func (*ListNewsResponse) ProtoMessage() {}
 
 func (x *ListNewsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[69]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[74]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5433,7 +5741,7 @@ func (x *ListNewsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListNewsResponse.ProtoReflect.Descriptor instead.
 func (*ListNewsResponse) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{69}
+	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{74}
 }
 
 func (x *ListNewsResponse) GetItems() []*NewsEvent {
@@ -5453,7 +5761,7 @@ type ListSocialRequest struct {
 
 func (x *ListSocialRequest) Reset() {
 	*x = ListSocialRequest{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[70]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[75]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5465,7 +5773,7 @@ func (x *ListSocialRequest) String() string {
 func (*ListSocialRequest) ProtoMessage() {}
 
 func (x *ListSocialRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[70]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[75]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5478,7 +5786,7 @@ func (x *ListSocialRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListSocialRequest.ProtoReflect.Descriptor instead.
 func (*ListSocialRequest) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{70}
+	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{75}
 }
 
 func (x *ListSocialRequest) GetSymbol() string {
@@ -5510,7 +5818,7 @@ type SocialEvent struct {
 
 func (x *SocialEvent) Reset() {
 	*x = SocialEvent{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[71]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[76]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5522,7 +5830,7 @@ func (x *SocialEvent) String() string {
 func (*SocialEvent) ProtoMessage() {}
 
 func (x *SocialEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[71]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[76]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5535,7 +5843,7 @@ func (x *SocialEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SocialEvent.ProtoReflect.Descriptor instead.
 func (*SocialEvent) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{71}
+	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{76}
 }
 
 func (x *SocialEvent) GetId() string {
@@ -5596,7 +5904,7 @@ type ListSocialResponse struct {
 
 func (x *ListSocialResponse) Reset() {
 	*x = ListSocialResponse{}
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[72]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[77]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5608,7 +5916,7 @@ func (x *ListSocialResponse) String() string {
 func (*ListSocialResponse) ProtoMessage() {}
 
 func (x *ListSocialResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_datafeed_proto_msgTypes[72]
+	mi := &file_datafeed_v1_datafeed_proto_msgTypes[77]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5621,7 +5929,7 @@ func (x *ListSocialResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListSocialResponse.ProtoReflect.Descriptor instead.
 func (*ListSocialResponse) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{72}
+	return file_datafeed_v1_datafeed_proto_rawDescGZIP(), []int{77}
 }
 
 func (x *ListSocialResponse) GetItems() []*SocialEvent {
@@ -5850,14 +6158,12 @@ const file_datafeed_v1_datafeed_proto_rawDesc = "" +
 	"\vdescription\x18\x03 \x01(\tR\vdescription\"=\n" +
 	"\bUnitList\x121\n" +
 	"\x05items\x18\x01 \x03(\v2\x1b.quant.datafeed.v1.UnitItemR\x05items\"\x12\n" +
-	"\x10GetConfigRequest\"\xdf\a\n" +
+	"\x10GetConfigRequest\"\xd3\x06\n" +
 	"\x11GetConfigResponse\x123\n" +
-	"\x15supported_resolutions\x18\x01 \x03(\tR\x14supportedResolutions\x129\n" +
-	"\x16supports_group_request\x18\x02 \x01(\bH\x00R\x14supportsGroupRequest\x88\x01\x01\x12*\n" +
-	"\x0esupports_marks\x18\x03 \x01(\bH\x01R\rsupportsMarks\x88\x01\x01\x12,\n" +
-	"\x0fsupports_search\x18\x04 \x01(\bH\x02R\x0esupportsSearch\x88\x01\x01\x12=\n" +
-	"\x18supports_timescale_marks\x18\x05 \x01(\bH\x03R\x16supportsTimescaleMarks\x88\x01\x01\x12(\n" +
-	"\rsupports_time\x18\x06 \x01(\bH\x04R\fsupportsTime\x88\x01\x01\x12C\n" +
+	"\x15supported_resolutions\x18\x01 \x03(\tR\x14supportedResolutions\x12*\n" +
+	"\x0esupports_marks\x18\x03 \x01(\bH\x00R\rsupportsMarks\x88\x01\x01\x12=\n" +
+	"\x18supports_timescale_marks\x18\x05 \x01(\bH\x01R\x16supportsTimescaleMarks\x88\x01\x01\x12(\n" +
+	"\rsupports_time\x18\x06 \x01(\bH\x02R\fsupportsTime\x88\x01\x01\x12C\n" +
 	"\texchanges\x18\a \x03(\v2%.quant.datafeed.v1.ExchangeDescriptorR\texchanges\x12L\n" +
 	"\rsymbols_types\x18\b \x03(\v2'.quant.datafeed.v1.SymbolTypeDescriptorR\fsymbolsTypes\x12K\n" +
 	"\x0ecurrency_codes\x18\t \x03(\v2$.quant.datafeed.v1.CurrencyCodeEntryR\rcurrencyCodes\x12E\n" +
@@ -5870,15 +6176,36 @@ const file_datafeed_v1_datafeed_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\v2\x1b.quant.datafeed.v1.UnitListR\x05value:\x028\x01\x1aB\n" +
 	"\x14SymbolsGroupingEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x19\n" +
-	"\x17_supports_group_requestB\x11\n" +
-	"\x0f_supports_marksB\x12\n" +
-	"\x10_supports_searchB\x1b\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\x11\n" +
+	"\x0f_supports_marksB\x1b\n" +
 	"\x19_supports_timescale_marksB\x10\n" +
-	"\x0e_supports_time\"\x10\n" +
+	"\x0e_supports_timeJ\x04\b\x02\x10\x03J\x04\b\x04\x10\x05\"\x10\n" +
 	"\x0eGetTimeRequest\".\n" +
 	"\x0fGetTimeResponse\x12\x1b\n" +
-	"\tunix_time\x18\x01 \x01(\x03R\bunixTime\"\xa8\x01\n" +
+	"\tunix_time\x18\x01 \x01(\x03R\bunixTime\"\x96\x01\n" +
+	"\bChartBar\x12\x12\n" +
+	"\x04time\x18\x01 \x01(\x03R\x04time\x12\x12\n" +
+	"\x04open\x18\x02 \x01(\x01R\x04open\x12\x12\n" +
+	"\x04high\x18\x03 \x01(\x01R\x04high\x12\x10\n" +
+	"\x03low\x18\x04 \x01(\x01R\x03low\x12\x14\n" +
+	"\x05close\x18\x05 \x01(\x01R\x05close\x12\x1b\n" +
+	"\x06volume\x18\x06 \x01(\x01H\x00R\x06volume\x88\x01\x01B\t\n" +
+	"\a_volume\"\xa6\x01\n" +
+	"\x0eGetBarsRequest\x12\x1f\n" +
+	"\x06symbol\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x06symbol\x12\x12\n" +
+	"\x04from\x18\x02 \x01(\x03R\x04from\x12\x0e\n" +
+	"\x02to\x18\x03 \x01(\x03R\x02to\x12'\n" +
+	"\n" +
+	"resolution\x18\x04 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\n" +
+	"resolution\x12&\n" +
+	"\n" +
+	"count_back\x18\x05 \x01(\rB\a\xbaH\x04*\x02 \x00R\tcountBack\"\x8b\x01\n" +
+	"\x0fGetBarsResponse\x12/\n" +
+	"\x04bars\x18\x01 \x03(\v2\x1b.quant.datafeed.v1.ChartBarR\x04bars\x12\x17\n" +
+	"\ano_data\x18\x02 \x01(\bR\x06noData\x12 \n" +
+	"\tnext_time\x18\x03 \x01(\x03H\x00R\bnextTime\x88\x01\x01B\f\n" +
+	"\n" +
+	"_next_time\"\xa8\x01\n" +
 	"\x11GetHistoryRequest\x12\x1f\n" +
 	"\x06symbol\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x06symbol\x12\x12\n" +
 	"\x04from\x18\x02 \x01(\x03R\x04from\x12\x0e\n" +
@@ -6110,7 +6437,16 @@ const file_datafeed_v1_datafeed_proto_rawDesc = "" +
 	"\x01o\x18\x03 \x03(\x01R\x01o\x12\f\n" +
 	"\x01h\x18\x04 \x03(\x01R\x01h\x12\f\n" +
 	"\x01l\x18\x05 \x03(\x01R\x01l\x12\f\n" +
-	"\x01v\x18\x06 \x03(\x01R\x01v\"u\n" +
+	"\x01v\x18\x06 \x03(\x01R\x01v\"\xb4\x01\n" +
+	"\x14SubscribeBarsRequest\x12E\n" +
+	"\vsymbol_info\x18\x01 \x01(\v2$.quant.datafeed.v1.LibrarySymbolInfoR\n" +
+	"symbolInfo\x12'\n" +
+	"\n" +
+	"resolution\x18\x02 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\n" +
+	"resolution\x12,\n" +
+	"\rlistener_guid\x18\x03 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\flistenerGuid\"F\n" +
+	"\x15SubscribeBarsResponse\x12-\n" +
+	"\x03bar\x18\x01 \x01(\v2\x1b.quant.datafeed.v1.ChartBarR\x03bar\"u\n" +
 	"\x04Tick\x12\x16\n" +
 	"\x06symbol\x18\x01 \x01(\tR\x06symbol\x12\x13\n" +
 	"\x05ts_ms\x18\x02 \x01(\x03R\x04tsMs\x12\x14\n" +
@@ -6195,7 +6531,7 @@ const file_datafeed_v1_datafeed_proto_rawDesc = "" +
 	"\x1bTIMESCALE_MARK_SHAPE_CIRCLE\x10\x01\x12#\n" +
 	"\x1fTIMESCALE_MARK_SHAPE_EARNING_UP\x10\x02\x12%\n" +
 	"!TIMESCALE_MARK_SHAPE_EARNING_DOWN\x10\x03\x12 \n" +
-	"\x1cTIMESCALE_MARK_SHAPE_EARNING\x10\x042\xa6\x16\n" +
+	"\x1cTIMESCALE_MARK_SHAPE_EARNING\x10\x042\xd8\x19\n" +
 	"\x0fDatafeedService\x12\\\n" +
 	"\vIngestTicks\x12%.quant.datafeed.v1.IngestTicksRequest\x1a&.quant.datafeed.v1.IngestTicksResponse\x12\\\n" +
 	"\vReplayTicks\x12%.quant.datafeed.v1.ReplayTicksRequest\x1a&.quant.datafeed.v1.ReplayTicksResponse\x12V\n" +
@@ -6208,7 +6544,10 @@ const file_datafeed_v1_datafeed_proto_rawDesc = "" +
 	"\bDatafeed\x12\x13Get Datafeed Config\x1a;Returns datafeed configuration in chart-library UDF format.*\x19DatafeedService_GetConfig\x12\xbc\x01\n" +
 	"\aGetTime\x12!.quant.datafeed.v1.GetTimeRequest\x1a\".quant.datafeed.v1.GetTimeResponse\"j\xbaGg\n" +
 	"\x03UDF\n" +
-	"\bDatafeed\x12\x0fGet Server Time\x1a,Returns current server time as UNIX seconds.*\x17DatafeedService_GetTime\x12\xd4\x01\n" +
+	"\bDatafeed\x12\x0fGet Server Time\x1a,Returns current server time as UNIX seconds.*\x17DatafeedService_GetTime\x12\xc3\x01\n" +
+	"\aGetBars\x12!.quant.datafeed.v1.GetBarsRequest\x1a\".quant.datafeed.v1.GetBarsResponse\"q\xbaGn\n" +
+	"\bDatafeed\n" +
+	"\x05Chart\x12\bGet Bars\x1a8Returns historical bars in chart datafeed API structure.*\x17DatafeedService_GetBars\x12\xd4\x01\n" +
 	"\n" +
 	"GetHistory\x12$.quant.datafeed.v1.GetHistoryRequest\x1a%.quant.datafeed.v1.GetHistoryResponse\"y\xbaGv\n" +
 	"\x03UDF\n" +
@@ -6235,7 +6574,10 @@ const file_datafeed_v1_datafeed_proto_rawDesc = "" +
 	"\n" +
 	"StreamBars\x12$.quant.datafeed.v1.StreamBarsRequest\x1a%.quant.datafeed.v1.StreamBarsResponse\"r\xbaGo\n" +
 	"\x03UDF\n" +
-	"\bDatafeed\x12\vStream Bars\x1a5Streams incremental bar updates in UDF stream format.*\x1aDatafeedService_StreamBars0\x01\x12\xf3\x01\n" +
+	"\bDatafeed\x12\vStream Bars\x1a5Streams incremental bar updates in UDF stream format.*\x1aDatafeedService_StreamBars0\x01\x12\xe9\x01\n" +
+	"\rSubscribeBars\x12'.quant.datafeed.v1.SubscribeBarsRequest\x1a(.quant.datafeed.v1.SubscribeBarsResponse\"\x82\x01\xbaG\x7f\n" +
+	"\bDatafeed\n" +
+	"\x05Chart\x12\x0eSubscribe Bars\x1a=Streams realtime bar updates in chart datafeed API structure.*\x1dDatafeedService_SubscribeBars0\x01\x12\xf3\x01\n" +
 	"\vListSymbols\x12%.quant.datafeed.v1.ListSymbolsRequest\x1a&.quant.datafeed.v1.ListSymbolsResponse\"\x94\x01\xbaG\x90\x01\n" +
 	"\x03UDF\n" +
 	"\aScanner\n" +
@@ -6254,7 +6596,7 @@ func file_datafeed_v1_datafeed_proto_rawDescGZIP() []byte {
 }
 
 var file_datafeed_v1_datafeed_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
-var file_datafeed_v1_datafeed_proto_msgTypes = make([]protoimpl.MessageInfo, 76)
+var file_datafeed_v1_datafeed_proto_msgTypes = make([]protoimpl.MessageInfo, 81)
 var file_datafeed_v1_datafeed_proto_goTypes = []any{
 	(SeriesFormat)(0),                  // 0: quant.datafeed.v1.SeriesFormat
 	(VisiblePlotsSet)(0),               // 1: quant.datafeed.v1.VisiblePlotsSet
@@ -6294,59 +6636,64 @@ var file_datafeed_v1_datafeed_proto_goTypes = []any{
 	(*GetConfigResponse)(nil),          // 35: quant.datafeed.v1.GetConfigResponse
 	(*GetTimeRequest)(nil),             // 36: quant.datafeed.v1.GetTimeRequest
 	(*GetTimeResponse)(nil),            // 37: quant.datafeed.v1.GetTimeResponse
-	(*GetHistoryRequest)(nil),          // 38: quant.datafeed.v1.GetHistoryRequest
-	(*GetHistoryOk)(nil),               // 39: quant.datafeed.v1.GetHistoryOk
-	(*GetHistoryNoData)(nil),           // 40: quant.datafeed.v1.GetHistoryNoData
-	(*GetHistoryError)(nil),            // 41: quant.datafeed.v1.GetHistoryError
-	(*GetHistoryResponse)(nil),         // 42: quant.datafeed.v1.GetHistoryResponse
-	(*QuoteValues)(nil),                // 43: quant.datafeed.v1.QuoteValues
-	(*QuoteData)(nil),                  // 44: quant.datafeed.v1.QuoteData
-	(*GetQuotesRequest)(nil),           // 45: quant.datafeed.v1.GetQuotesRequest
-	(*GetQuotesOk)(nil),                // 46: quant.datafeed.v1.GetQuotesOk
-	(*GetQuotesError)(nil),             // 47: quant.datafeed.v1.GetQuotesError
-	(*GetQuotesResponse)(nil),          // 48: quant.datafeed.v1.GetQuotesResponse
-	(*MarkId)(nil),                     // 49: quant.datafeed.v1.MarkId
-	(*GetMarksRequest)(nil),            // 50: quant.datafeed.v1.GetMarksRequest
-	(*GetMarksResponse)(nil),           // 51: quant.datafeed.v1.GetMarksResponse
-	(*TimescaleMark)(nil),              // 52: quant.datafeed.v1.TimescaleMark
-	(*GetTimescaleMarksRequest)(nil),   // 53: quant.datafeed.v1.GetTimescaleMarksRequest
-	(*GetTimescaleMarksResponse)(nil),  // 54: quant.datafeed.v1.GetTimescaleMarksResponse
-	(*ResolveSymbolRequest)(nil),       // 55: quant.datafeed.v1.ResolveSymbolRequest
-	(*ResolveSymbolResponse)(nil),      // 56: quant.datafeed.v1.ResolveSymbolResponse
-	(*GetSymbolGroupInfoRequest)(nil),  // 57: quant.datafeed.v1.GetSymbolGroupInfoRequest
-	(*GetSymbolGroupInfoResponse)(nil), // 58: quant.datafeed.v1.GetSymbolGroupInfoResponse
-	(*SearchResultItem)(nil),           // 59: quant.datafeed.v1.SearchResultItem
-	(*SearchSymbolsRequest)(nil),       // 60: quant.datafeed.v1.SearchSymbolsRequest
-	(*SearchSymbolsResponse)(nil),      // 61: quant.datafeed.v1.SearchSymbolsResponse
-	(*StreamBarsRequest)(nil),          // 62: quant.datafeed.v1.StreamBarsRequest
-	(*StreamBarsResponse)(nil),         // 63: quant.datafeed.v1.StreamBarsResponse
-	(*Tick)(nil),                       // 64: quant.datafeed.v1.Tick
-	(*IngestTicksRequest)(nil),         // 65: quant.datafeed.v1.IngestTicksRequest
-	(*IngestTicksResponse)(nil),        // 66: quant.datafeed.v1.IngestTicksResponse
-	(*ReplayTicksRequest)(nil),         // 67: quant.datafeed.v1.ReplayTicksRequest
-	(*ReplayTicksResponse)(nil),        // 68: quant.datafeed.v1.ReplayTicksResponse
-	(*Bar)(nil),                        // 69: quant.datafeed.v1.Bar
-	(*QueryBarsRequest)(nil),           // 70: quant.datafeed.v1.QueryBarsRequest
-	(*QueryBarsResponse)(nil),          // 71: quant.datafeed.v1.QueryBarsResponse
-	(*ListNewsRequest)(nil),            // 72: quant.datafeed.v1.ListNewsRequest
-	(*NewsEvent)(nil),                  // 73: quant.datafeed.v1.NewsEvent
-	(*ListNewsResponse)(nil),           // 74: quant.datafeed.v1.ListNewsResponse
-	(*ListSocialRequest)(nil),          // 75: quant.datafeed.v1.ListSocialRequest
-	(*SocialEvent)(nil),                // 76: quant.datafeed.v1.SocialEvent
-	(*ListSocialResponse)(nil),         // 77: quant.datafeed.v1.ListSocialResponse
-	nil,                                // 78: quant.datafeed.v1.LibrarySymbolInfo.LibraryCustomFieldsEntry
-	nil,                                // 79: quant.datafeed.v1.GetConfigResponse.UnitsEntry
-	nil,                                // 80: quant.datafeed.v1.GetConfigResponse.SymbolsGroupingEntry
-	(*wrapperspb.StringValue)(nil),     // 81: google.protobuf.StringValue
-	(*wrapperspb.DoubleValue)(nil),     // 82: google.protobuf.DoubleValue
-	(*wrapperspb.BoolValue)(nil),       // 83: google.protobuf.BoolValue
-	(*structpb.Value)(nil),             // 84: google.protobuf.Value
+	(*ChartBar)(nil),                   // 38: quant.datafeed.v1.ChartBar
+	(*GetBarsRequest)(nil),             // 39: quant.datafeed.v1.GetBarsRequest
+	(*GetBarsResponse)(nil),            // 40: quant.datafeed.v1.GetBarsResponse
+	(*GetHistoryRequest)(nil),          // 41: quant.datafeed.v1.GetHistoryRequest
+	(*GetHistoryOk)(nil),               // 42: quant.datafeed.v1.GetHistoryOk
+	(*GetHistoryNoData)(nil),           // 43: quant.datafeed.v1.GetHistoryNoData
+	(*GetHistoryError)(nil),            // 44: quant.datafeed.v1.GetHistoryError
+	(*GetHistoryResponse)(nil),         // 45: quant.datafeed.v1.GetHistoryResponse
+	(*QuoteValues)(nil),                // 46: quant.datafeed.v1.QuoteValues
+	(*QuoteData)(nil),                  // 47: quant.datafeed.v1.QuoteData
+	(*GetQuotesRequest)(nil),           // 48: quant.datafeed.v1.GetQuotesRequest
+	(*GetQuotesOk)(nil),                // 49: quant.datafeed.v1.GetQuotesOk
+	(*GetQuotesError)(nil),             // 50: quant.datafeed.v1.GetQuotesError
+	(*GetQuotesResponse)(nil),          // 51: quant.datafeed.v1.GetQuotesResponse
+	(*MarkId)(nil),                     // 52: quant.datafeed.v1.MarkId
+	(*GetMarksRequest)(nil),            // 53: quant.datafeed.v1.GetMarksRequest
+	(*GetMarksResponse)(nil),           // 54: quant.datafeed.v1.GetMarksResponse
+	(*TimescaleMark)(nil),              // 55: quant.datafeed.v1.TimescaleMark
+	(*GetTimescaleMarksRequest)(nil),   // 56: quant.datafeed.v1.GetTimescaleMarksRequest
+	(*GetTimescaleMarksResponse)(nil),  // 57: quant.datafeed.v1.GetTimescaleMarksResponse
+	(*ResolveSymbolRequest)(nil),       // 58: quant.datafeed.v1.ResolveSymbolRequest
+	(*ResolveSymbolResponse)(nil),      // 59: quant.datafeed.v1.ResolveSymbolResponse
+	(*GetSymbolGroupInfoRequest)(nil),  // 60: quant.datafeed.v1.GetSymbolGroupInfoRequest
+	(*GetSymbolGroupInfoResponse)(nil), // 61: quant.datafeed.v1.GetSymbolGroupInfoResponse
+	(*SearchResultItem)(nil),           // 62: quant.datafeed.v1.SearchResultItem
+	(*SearchSymbolsRequest)(nil),       // 63: quant.datafeed.v1.SearchSymbolsRequest
+	(*SearchSymbolsResponse)(nil),      // 64: quant.datafeed.v1.SearchSymbolsResponse
+	(*StreamBarsRequest)(nil),          // 65: quant.datafeed.v1.StreamBarsRequest
+	(*StreamBarsResponse)(nil),         // 66: quant.datafeed.v1.StreamBarsResponse
+	(*SubscribeBarsRequest)(nil),       // 67: quant.datafeed.v1.SubscribeBarsRequest
+	(*SubscribeBarsResponse)(nil),      // 68: quant.datafeed.v1.SubscribeBarsResponse
+	(*Tick)(nil),                       // 69: quant.datafeed.v1.Tick
+	(*IngestTicksRequest)(nil),         // 70: quant.datafeed.v1.IngestTicksRequest
+	(*IngestTicksResponse)(nil),        // 71: quant.datafeed.v1.IngestTicksResponse
+	(*ReplayTicksRequest)(nil),         // 72: quant.datafeed.v1.ReplayTicksRequest
+	(*ReplayTicksResponse)(nil),        // 73: quant.datafeed.v1.ReplayTicksResponse
+	(*Bar)(nil),                        // 74: quant.datafeed.v1.Bar
+	(*QueryBarsRequest)(nil),           // 75: quant.datafeed.v1.QueryBarsRequest
+	(*QueryBarsResponse)(nil),          // 76: quant.datafeed.v1.QueryBarsResponse
+	(*ListNewsRequest)(nil),            // 77: quant.datafeed.v1.ListNewsRequest
+	(*NewsEvent)(nil),                  // 78: quant.datafeed.v1.NewsEvent
+	(*ListNewsResponse)(nil),           // 79: quant.datafeed.v1.ListNewsResponse
+	(*ListSocialRequest)(nil),          // 80: quant.datafeed.v1.ListSocialRequest
+	(*SocialEvent)(nil),                // 81: quant.datafeed.v1.SocialEvent
+	(*ListSocialResponse)(nil),         // 82: quant.datafeed.v1.ListSocialResponse
+	nil,                                // 83: quant.datafeed.v1.LibrarySymbolInfo.LibraryCustomFieldsEntry
+	nil,                                // 84: quant.datafeed.v1.GetConfigResponse.UnitsEntry
+	nil,                                // 85: quant.datafeed.v1.GetConfigResponse.SymbolsGroupingEntry
+	(*wrapperspb.StringValue)(nil),     // 86: google.protobuf.StringValue
+	(*wrapperspb.DoubleValue)(nil),     // 87: google.protobuf.DoubleValue
+	(*wrapperspb.BoolValue)(nil),       // 88: google.protobuf.BoolValue
+	(*structpb.Value)(nil),             // 89: google.protobuf.Value
 }
 var file_datafeed_v1_datafeed_proto_depIdxs = []int32{
 	5,   // 0: quant.datafeed.v1.StringListList.values:type_name -> quant.datafeed.v1.StringList
-	81,  // 1: quant.datafeed.v1.NullableStringList.values:type_name -> google.protobuf.StringValue
-	82,  // 2: quant.datafeed.v1.NullableDoubleList.values:type_name -> google.protobuf.DoubleValue
-	83,  // 3: quant.datafeed.v1.NullableBoolList.values:type_name -> google.protobuf.BoolValue
+	86,  // 1: quant.datafeed.v1.NullableStringList.values:type_name -> google.protobuf.StringValue
+	87,  // 2: quant.datafeed.v1.NullableDoubleList.values:type_name -> google.protobuf.DoubleValue
+	88,  // 3: quant.datafeed.v1.NullableBoolList.values:type_name -> google.protobuf.BoolValue
 	5,   // 4: quant.datafeed.v1.StringOrStringList.many:type_name -> quant.datafeed.v1.StringList
 	5,   // 5: quant.datafeed.v1.StringListOrStringListList.single:type_name -> quant.datafeed.v1.StringList
 	6,   // 6: quant.datafeed.v1.StringListOrStringListList.many:type_name -> quant.datafeed.v1.StringListList
@@ -6364,7 +6711,7 @@ var file_datafeed_v1_datafeed_proto_depIdxs = []int32{
 	1,   // 18: quant.datafeed.v1.LibrarySymbolInfo.visible_plots_set:type_name -> quant.datafeed.v1.VisiblePlotsSet
 	23,  // 19: quant.datafeed.v1.LibrarySymbolInfo.price_sources:type_name -> quant.datafeed.v1.SymbolPriceSource
 	24,  // 20: quant.datafeed.v1.LibrarySymbolInfo.subsessions:type_name -> quant.datafeed.v1.SubsessionInfo
-	78,  // 21: quant.datafeed.v1.LibrarySymbolInfo.library_custom_fields:type_name -> quant.datafeed.v1.LibrarySymbolInfo.LibraryCustomFieldsEntry
+	83,  // 21: quant.datafeed.v1.LibrarySymbolInfo.library_custom_fields:type_name -> quant.datafeed.v1.LibrarySymbolInfo.LibraryCustomFieldsEntry
 	3,   // 22: quant.datafeed.v1.ListSymbolsRequest.sort_order:type_name -> quant.datafeed.v1.SortOrder
 	25,  // 23: quant.datafeed.v1.ListSymbolsResponse.symbols:type_name -> quant.datafeed.v1.LibrarySymbolInfo
 	30,  // 24: quant.datafeed.v1.CurrencyCodeEntry.item:type_name -> quant.datafeed.v1.CurrencyItem
@@ -6372,98 +6719,105 @@ var file_datafeed_v1_datafeed_proto_depIdxs = []int32{
 	28,  // 26: quant.datafeed.v1.GetConfigResponse.exchanges:type_name -> quant.datafeed.v1.ExchangeDescriptor
 	29,  // 27: quant.datafeed.v1.GetConfigResponse.symbols_types:type_name -> quant.datafeed.v1.SymbolTypeDescriptor
 	31,  // 28: quant.datafeed.v1.GetConfigResponse.currency_codes:type_name -> quant.datafeed.v1.CurrencyCodeEntry
-	79,  // 29: quant.datafeed.v1.GetConfigResponse.units:type_name -> quant.datafeed.v1.GetConfigResponse.UnitsEntry
-	80,  // 30: quant.datafeed.v1.GetConfigResponse.symbols_grouping:type_name -> quant.datafeed.v1.GetConfigResponse.SymbolsGroupingEntry
-	39,  // 31: quant.datafeed.v1.GetHistoryResponse.ok:type_name -> quant.datafeed.v1.GetHistoryOk
-	40,  // 32: quant.datafeed.v1.GetHistoryResponse.no_data:type_name -> quant.datafeed.v1.GetHistoryNoData
-	41,  // 33: quant.datafeed.v1.GetHistoryResponse.error:type_name -> quant.datafeed.v1.GetHistoryError
-	43,  // 34: quant.datafeed.v1.QuoteData.v:type_name -> quant.datafeed.v1.QuoteValues
-	44,  // 35: quant.datafeed.v1.GetQuotesOk.d:type_name -> quant.datafeed.v1.QuoteData
-	46,  // 36: quant.datafeed.v1.GetQuotesResponse.ok:type_name -> quant.datafeed.v1.GetQuotesOk
-	47,  // 37: quant.datafeed.v1.GetQuotesResponse.error:type_name -> quant.datafeed.v1.GetQuotesError
-	49,  // 38: quant.datafeed.v1.GetMarksResponse.id:type_name -> quant.datafeed.v1.MarkId
-	16,  // 39: quant.datafeed.v1.GetMarksResponse.time:type_name -> quant.datafeed.v1.Int64OrInt64List
-	13,  // 40: quant.datafeed.v1.GetMarksResponse.color:type_name -> quant.datafeed.v1.StringOrStringList
-	13,  // 41: quant.datafeed.v1.GetMarksResponse.text:type_name -> quant.datafeed.v1.StringOrStringList
-	13,  // 42: quant.datafeed.v1.GetMarksResponse.label:type_name -> quant.datafeed.v1.StringOrStringList
-	13,  // 43: quant.datafeed.v1.GetMarksResponse.label_font_color:type_name -> quant.datafeed.v1.StringOrStringList
-	15,  // 44: quant.datafeed.v1.GetMarksResponse.min_size:type_name -> quant.datafeed.v1.DoubleOrDoubleList
-	19,  // 45: quant.datafeed.v1.GetMarksResponse.border_width:type_name -> quant.datafeed.v1.DoubleOrNullableDoubleList
-	19,  // 46: quant.datafeed.v1.GetMarksResponse.hovered_border_width:type_name -> quant.datafeed.v1.DoubleOrNullableDoubleList
-	18,  // 47: quant.datafeed.v1.GetMarksResponse.image_url:type_name -> quant.datafeed.v1.StringOrNullableStringList
-	20,  // 48: quant.datafeed.v1.GetMarksResponse.show_label_when_image_loaded:type_name -> quant.datafeed.v1.BoolOrNullableBoolList
-	49,  // 49: quant.datafeed.v1.TimescaleMark.id:type_name -> quant.datafeed.v1.MarkId
-	4,   // 50: quant.datafeed.v1.TimescaleMark.shape:type_name -> quant.datafeed.v1.TimescaleMarkShape
-	52,  // 51: quant.datafeed.v1.GetTimescaleMarksResponse.marks:type_name -> quant.datafeed.v1.TimescaleMark
-	25,  // 52: quant.datafeed.v1.ResolveSymbolResponse.symbol:type_name -> quant.datafeed.v1.LibrarySymbolInfo
-	13,  // 53: quant.datafeed.v1.GetSymbolGroupInfoResponse.description:type_name -> quant.datafeed.v1.StringOrStringList
-	15,  // 54: quant.datafeed.v1.GetSymbolGroupInfoResponse.minmov:type_name -> quant.datafeed.v1.DoubleOrDoubleList
-	15,  // 55: quant.datafeed.v1.GetSymbolGroupInfoResponse.pricescale:type_name -> quant.datafeed.v1.DoubleOrDoubleList
-	13,  // 56: quant.datafeed.v1.GetSymbolGroupInfoResponse.type:type_name -> quant.datafeed.v1.StringOrStringList
-	13,  // 57: quant.datafeed.v1.GetSymbolGroupInfoResponse.timezone:type_name -> quant.datafeed.v1.StringOrStringList
-	13,  // 58: quant.datafeed.v1.GetSymbolGroupInfoResponse.exchange_listed:type_name -> quant.datafeed.v1.StringOrStringList
-	13,  // 59: quant.datafeed.v1.GetSymbolGroupInfoResponse.exchange_traded:type_name -> quant.datafeed.v1.StringOrStringList
-	15,  // 60: quant.datafeed.v1.GetSymbolGroupInfoResponse.minmov2:type_name -> quant.datafeed.v1.DoubleOrDoubleList
-	17,  // 61: quant.datafeed.v1.GetSymbolGroupInfoResponse.fractional:type_name -> quant.datafeed.v1.BoolOrBoolList
-	17,  // 62: quant.datafeed.v1.GetSymbolGroupInfoResponse.has_intraday:type_name -> quant.datafeed.v1.BoolOrBoolList
-	17,  // 63: quant.datafeed.v1.GetSymbolGroupInfoResponse.has_daily:type_name -> quant.datafeed.v1.BoolOrBoolList
-	17,  // 64: quant.datafeed.v1.GetSymbolGroupInfoResponse.has_weekly_and_monthly:type_name -> quant.datafeed.v1.BoolOrBoolList
-	17,  // 65: quant.datafeed.v1.GetSymbolGroupInfoResponse.has_empty_bars:type_name -> quant.datafeed.v1.BoolOrBoolList
-	22,  // 66: quant.datafeed.v1.GetSymbolGroupInfoResponse.visible_plots_set:type_name -> quant.datafeed.v1.VisiblePlotsSetOrList
-	13,  // 67: quant.datafeed.v1.GetSymbolGroupInfoResponse.ticker:type_name -> quant.datafeed.v1.StringOrStringList
-	13,  // 68: quant.datafeed.v1.GetSymbolGroupInfoResponse.session_regular:type_name -> quant.datafeed.v1.StringOrStringList
-	13,  // 69: quant.datafeed.v1.GetSymbolGroupInfoResponse.session_holidays:type_name -> quant.datafeed.v1.StringOrStringList
-	13,  // 70: quant.datafeed.v1.GetSymbolGroupInfoResponse.corrections:type_name -> quant.datafeed.v1.StringOrStringList
-	14,  // 71: quant.datafeed.v1.GetSymbolGroupInfoResponse.supported_resolutions:type_name -> quant.datafeed.v1.StringListOrStringListList
-	17,  // 72: quant.datafeed.v1.GetSymbolGroupInfoResponse.force_session_rebuild:type_name -> quant.datafeed.v1.BoolOrBoolList
-	14,  // 73: quant.datafeed.v1.GetSymbolGroupInfoResponse.intraday_multipliers:type_name -> quant.datafeed.v1.StringListOrStringListList
-	15,  // 74: quant.datafeed.v1.GetSymbolGroupInfoResponse.volume_precision:type_name -> quant.datafeed.v1.DoubleOrDoubleList
-	59,  // 75: quant.datafeed.v1.SearchSymbolsResponse.items:type_name -> quant.datafeed.v1.SearchResultItem
-	25,  // 76: quant.datafeed.v1.StreamBarsRequest.symbol_info:type_name -> quant.datafeed.v1.LibrarySymbolInfo
-	64,  // 77: quant.datafeed.v1.IngestTicksRequest.ticks:type_name -> quant.datafeed.v1.Tick
-	64,  // 78: quant.datafeed.v1.ReplayTicksResponse.ticks:type_name -> quant.datafeed.v1.Tick
-	69,  // 79: quant.datafeed.v1.QueryBarsResponse.bars:type_name -> quant.datafeed.v1.Bar
-	73,  // 80: quant.datafeed.v1.ListNewsResponse.items:type_name -> quant.datafeed.v1.NewsEvent
-	76,  // 81: quant.datafeed.v1.ListSocialResponse.items:type_name -> quant.datafeed.v1.SocialEvent
-	84,  // 82: quant.datafeed.v1.LibrarySymbolInfo.LibraryCustomFieldsEntry.value:type_name -> google.protobuf.Value
-	33,  // 83: quant.datafeed.v1.GetConfigResponse.UnitsEntry.value:type_name -> quant.datafeed.v1.UnitList
-	65,  // 84: quant.datafeed.v1.DatafeedService.IngestTicks:input_type -> quant.datafeed.v1.IngestTicksRequest
-	67,  // 85: quant.datafeed.v1.DatafeedService.ReplayTicks:input_type -> quant.datafeed.v1.ReplayTicksRequest
-	70,  // 86: quant.datafeed.v1.DatafeedService.QueryBars:input_type -> quant.datafeed.v1.QueryBarsRequest
-	72,  // 87: quant.datafeed.v1.DatafeedService.ListNews:input_type -> quant.datafeed.v1.ListNewsRequest
-	75,  // 88: quant.datafeed.v1.DatafeedService.ListSocial:input_type -> quant.datafeed.v1.ListSocialRequest
-	34,  // 89: quant.datafeed.v1.DatafeedService.GetConfig:input_type -> quant.datafeed.v1.GetConfigRequest
-	36,  // 90: quant.datafeed.v1.DatafeedService.GetTime:input_type -> quant.datafeed.v1.GetTimeRequest
-	38,  // 91: quant.datafeed.v1.DatafeedService.GetHistory:input_type -> quant.datafeed.v1.GetHistoryRequest
-	45,  // 92: quant.datafeed.v1.DatafeedService.GetQuotes:input_type -> quant.datafeed.v1.GetQuotesRequest
-	50,  // 93: quant.datafeed.v1.DatafeedService.GetMarks:input_type -> quant.datafeed.v1.GetMarksRequest
-	53,  // 94: quant.datafeed.v1.DatafeedService.GetTimescaleMarks:input_type -> quant.datafeed.v1.GetTimescaleMarksRequest
-	55,  // 95: quant.datafeed.v1.DatafeedService.ResolveSymbol:input_type -> quant.datafeed.v1.ResolveSymbolRequest
-	57,  // 96: quant.datafeed.v1.DatafeedService.GetSymbolGroupInfo:input_type -> quant.datafeed.v1.GetSymbolGroupInfoRequest
-	60,  // 97: quant.datafeed.v1.DatafeedService.SearchSymbols:input_type -> quant.datafeed.v1.SearchSymbolsRequest
-	62,  // 98: quant.datafeed.v1.DatafeedService.StreamBars:input_type -> quant.datafeed.v1.StreamBarsRequest
-	26,  // 99: quant.datafeed.v1.DatafeedService.ListSymbols:input_type -> quant.datafeed.v1.ListSymbolsRequest
-	66,  // 100: quant.datafeed.v1.DatafeedService.IngestTicks:output_type -> quant.datafeed.v1.IngestTicksResponse
-	68,  // 101: quant.datafeed.v1.DatafeedService.ReplayTicks:output_type -> quant.datafeed.v1.ReplayTicksResponse
-	71,  // 102: quant.datafeed.v1.DatafeedService.QueryBars:output_type -> quant.datafeed.v1.QueryBarsResponse
-	74,  // 103: quant.datafeed.v1.DatafeedService.ListNews:output_type -> quant.datafeed.v1.ListNewsResponse
-	77,  // 104: quant.datafeed.v1.DatafeedService.ListSocial:output_type -> quant.datafeed.v1.ListSocialResponse
-	35,  // 105: quant.datafeed.v1.DatafeedService.GetConfig:output_type -> quant.datafeed.v1.GetConfigResponse
-	37,  // 106: quant.datafeed.v1.DatafeedService.GetTime:output_type -> quant.datafeed.v1.GetTimeResponse
-	42,  // 107: quant.datafeed.v1.DatafeedService.GetHistory:output_type -> quant.datafeed.v1.GetHistoryResponse
-	48,  // 108: quant.datafeed.v1.DatafeedService.GetQuotes:output_type -> quant.datafeed.v1.GetQuotesResponse
-	51,  // 109: quant.datafeed.v1.DatafeedService.GetMarks:output_type -> quant.datafeed.v1.GetMarksResponse
-	54,  // 110: quant.datafeed.v1.DatafeedService.GetTimescaleMarks:output_type -> quant.datafeed.v1.GetTimescaleMarksResponse
-	56,  // 111: quant.datafeed.v1.DatafeedService.ResolveSymbol:output_type -> quant.datafeed.v1.ResolveSymbolResponse
-	58,  // 112: quant.datafeed.v1.DatafeedService.GetSymbolGroupInfo:output_type -> quant.datafeed.v1.GetSymbolGroupInfoResponse
-	61,  // 113: quant.datafeed.v1.DatafeedService.SearchSymbols:output_type -> quant.datafeed.v1.SearchSymbolsResponse
-	63,  // 114: quant.datafeed.v1.DatafeedService.StreamBars:output_type -> quant.datafeed.v1.StreamBarsResponse
-	27,  // 115: quant.datafeed.v1.DatafeedService.ListSymbols:output_type -> quant.datafeed.v1.ListSymbolsResponse
-	100, // [100:116] is the sub-list for method output_type
-	84,  // [84:100] is the sub-list for method input_type
-	84,  // [84:84] is the sub-list for extension type_name
-	84,  // [84:84] is the sub-list for extension extendee
-	0,   // [0:84] is the sub-list for field type_name
+	84,  // 29: quant.datafeed.v1.GetConfigResponse.units:type_name -> quant.datafeed.v1.GetConfigResponse.UnitsEntry
+	85,  // 30: quant.datafeed.v1.GetConfigResponse.symbols_grouping:type_name -> quant.datafeed.v1.GetConfigResponse.SymbolsGroupingEntry
+	38,  // 31: quant.datafeed.v1.GetBarsResponse.bars:type_name -> quant.datafeed.v1.ChartBar
+	42,  // 32: quant.datafeed.v1.GetHistoryResponse.ok:type_name -> quant.datafeed.v1.GetHistoryOk
+	43,  // 33: quant.datafeed.v1.GetHistoryResponse.no_data:type_name -> quant.datafeed.v1.GetHistoryNoData
+	44,  // 34: quant.datafeed.v1.GetHistoryResponse.error:type_name -> quant.datafeed.v1.GetHistoryError
+	46,  // 35: quant.datafeed.v1.QuoteData.v:type_name -> quant.datafeed.v1.QuoteValues
+	47,  // 36: quant.datafeed.v1.GetQuotesOk.d:type_name -> quant.datafeed.v1.QuoteData
+	49,  // 37: quant.datafeed.v1.GetQuotesResponse.ok:type_name -> quant.datafeed.v1.GetQuotesOk
+	50,  // 38: quant.datafeed.v1.GetQuotesResponse.error:type_name -> quant.datafeed.v1.GetQuotesError
+	52,  // 39: quant.datafeed.v1.GetMarksResponse.id:type_name -> quant.datafeed.v1.MarkId
+	16,  // 40: quant.datafeed.v1.GetMarksResponse.time:type_name -> quant.datafeed.v1.Int64OrInt64List
+	13,  // 41: quant.datafeed.v1.GetMarksResponse.color:type_name -> quant.datafeed.v1.StringOrStringList
+	13,  // 42: quant.datafeed.v1.GetMarksResponse.text:type_name -> quant.datafeed.v1.StringOrStringList
+	13,  // 43: quant.datafeed.v1.GetMarksResponse.label:type_name -> quant.datafeed.v1.StringOrStringList
+	13,  // 44: quant.datafeed.v1.GetMarksResponse.label_font_color:type_name -> quant.datafeed.v1.StringOrStringList
+	15,  // 45: quant.datafeed.v1.GetMarksResponse.min_size:type_name -> quant.datafeed.v1.DoubleOrDoubleList
+	19,  // 46: quant.datafeed.v1.GetMarksResponse.border_width:type_name -> quant.datafeed.v1.DoubleOrNullableDoubleList
+	19,  // 47: quant.datafeed.v1.GetMarksResponse.hovered_border_width:type_name -> quant.datafeed.v1.DoubleOrNullableDoubleList
+	18,  // 48: quant.datafeed.v1.GetMarksResponse.image_url:type_name -> quant.datafeed.v1.StringOrNullableStringList
+	20,  // 49: quant.datafeed.v1.GetMarksResponse.show_label_when_image_loaded:type_name -> quant.datafeed.v1.BoolOrNullableBoolList
+	52,  // 50: quant.datafeed.v1.TimescaleMark.id:type_name -> quant.datafeed.v1.MarkId
+	4,   // 51: quant.datafeed.v1.TimescaleMark.shape:type_name -> quant.datafeed.v1.TimescaleMarkShape
+	55,  // 52: quant.datafeed.v1.GetTimescaleMarksResponse.marks:type_name -> quant.datafeed.v1.TimescaleMark
+	25,  // 53: quant.datafeed.v1.ResolveSymbolResponse.symbol:type_name -> quant.datafeed.v1.LibrarySymbolInfo
+	13,  // 54: quant.datafeed.v1.GetSymbolGroupInfoResponse.description:type_name -> quant.datafeed.v1.StringOrStringList
+	15,  // 55: quant.datafeed.v1.GetSymbolGroupInfoResponse.minmov:type_name -> quant.datafeed.v1.DoubleOrDoubleList
+	15,  // 56: quant.datafeed.v1.GetSymbolGroupInfoResponse.pricescale:type_name -> quant.datafeed.v1.DoubleOrDoubleList
+	13,  // 57: quant.datafeed.v1.GetSymbolGroupInfoResponse.type:type_name -> quant.datafeed.v1.StringOrStringList
+	13,  // 58: quant.datafeed.v1.GetSymbolGroupInfoResponse.timezone:type_name -> quant.datafeed.v1.StringOrStringList
+	13,  // 59: quant.datafeed.v1.GetSymbolGroupInfoResponse.exchange_listed:type_name -> quant.datafeed.v1.StringOrStringList
+	13,  // 60: quant.datafeed.v1.GetSymbolGroupInfoResponse.exchange_traded:type_name -> quant.datafeed.v1.StringOrStringList
+	15,  // 61: quant.datafeed.v1.GetSymbolGroupInfoResponse.minmov2:type_name -> quant.datafeed.v1.DoubleOrDoubleList
+	17,  // 62: quant.datafeed.v1.GetSymbolGroupInfoResponse.fractional:type_name -> quant.datafeed.v1.BoolOrBoolList
+	17,  // 63: quant.datafeed.v1.GetSymbolGroupInfoResponse.has_intraday:type_name -> quant.datafeed.v1.BoolOrBoolList
+	17,  // 64: quant.datafeed.v1.GetSymbolGroupInfoResponse.has_daily:type_name -> quant.datafeed.v1.BoolOrBoolList
+	17,  // 65: quant.datafeed.v1.GetSymbolGroupInfoResponse.has_weekly_and_monthly:type_name -> quant.datafeed.v1.BoolOrBoolList
+	17,  // 66: quant.datafeed.v1.GetSymbolGroupInfoResponse.has_empty_bars:type_name -> quant.datafeed.v1.BoolOrBoolList
+	22,  // 67: quant.datafeed.v1.GetSymbolGroupInfoResponse.visible_plots_set:type_name -> quant.datafeed.v1.VisiblePlotsSetOrList
+	13,  // 68: quant.datafeed.v1.GetSymbolGroupInfoResponse.ticker:type_name -> quant.datafeed.v1.StringOrStringList
+	13,  // 69: quant.datafeed.v1.GetSymbolGroupInfoResponse.session_regular:type_name -> quant.datafeed.v1.StringOrStringList
+	13,  // 70: quant.datafeed.v1.GetSymbolGroupInfoResponse.session_holidays:type_name -> quant.datafeed.v1.StringOrStringList
+	13,  // 71: quant.datafeed.v1.GetSymbolGroupInfoResponse.corrections:type_name -> quant.datafeed.v1.StringOrStringList
+	14,  // 72: quant.datafeed.v1.GetSymbolGroupInfoResponse.supported_resolutions:type_name -> quant.datafeed.v1.StringListOrStringListList
+	17,  // 73: quant.datafeed.v1.GetSymbolGroupInfoResponse.force_session_rebuild:type_name -> quant.datafeed.v1.BoolOrBoolList
+	14,  // 74: quant.datafeed.v1.GetSymbolGroupInfoResponse.intraday_multipliers:type_name -> quant.datafeed.v1.StringListOrStringListList
+	15,  // 75: quant.datafeed.v1.GetSymbolGroupInfoResponse.volume_precision:type_name -> quant.datafeed.v1.DoubleOrDoubleList
+	62,  // 76: quant.datafeed.v1.SearchSymbolsResponse.items:type_name -> quant.datafeed.v1.SearchResultItem
+	25,  // 77: quant.datafeed.v1.StreamBarsRequest.symbol_info:type_name -> quant.datafeed.v1.LibrarySymbolInfo
+	25,  // 78: quant.datafeed.v1.SubscribeBarsRequest.symbol_info:type_name -> quant.datafeed.v1.LibrarySymbolInfo
+	38,  // 79: quant.datafeed.v1.SubscribeBarsResponse.bar:type_name -> quant.datafeed.v1.ChartBar
+	69,  // 80: quant.datafeed.v1.IngestTicksRequest.ticks:type_name -> quant.datafeed.v1.Tick
+	69,  // 81: quant.datafeed.v1.ReplayTicksResponse.ticks:type_name -> quant.datafeed.v1.Tick
+	74,  // 82: quant.datafeed.v1.QueryBarsResponse.bars:type_name -> quant.datafeed.v1.Bar
+	78,  // 83: quant.datafeed.v1.ListNewsResponse.items:type_name -> quant.datafeed.v1.NewsEvent
+	81,  // 84: quant.datafeed.v1.ListSocialResponse.items:type_name -> quant.datafeed.v1.SocialEvent
+	89,  // 85: quant.datafeed.v1.LibrarySymbolInfo.LibraryCustomFieldsEntry.value:type_name -> google.protobuf.Value
+	33,  // 86: quant.datafeed.v1.GetConfigResponse.UnitsEntry.value:type_name -> quant.datafeed.v1.UnitList
+	70,  // 87: quant.datafeed.v1.DatafeedService.IngestTicks:input_type -> quant.datafeed.v1.IngestTicksRequest
+	72,  // 88: quant.datafeed.v1.DatafeedService.ReplayTicks:input_type -> quant.datafeed.v1.ReplayTicksRequest
+	75,  // 89: quant.datafeed.v1.DatafeedService.QueryBars:input_type -> quant.datafeed.v1.QueryBarsRequest
+	77,  // 90: quant.datafeed.v1.DatafeedService.ListNews:input_type -> quant.datafeed.v1.ListNewsRequest
+	80,  // 91: quant.datafeed.v1.DatafeedService.ListSocial:input_type -> quant.datafeed.v1.ListSocialRequest
+	34,  // 92: quant.datafeed.v1.DatafeedService.GetConfig:input_type -> quant.datafeed.v1.GetConfigRequest
+	36,  // 93: quant.datafeed.v1.DatafeedService.GetTime:input_type -> quant.datafeed.v1.GetTimeRequest
+	39,  // 94: quant.datafeed.v1.DatafeedService.GetBars:input_type -> quant.datafeed.v1.GetBarsRequest
+	41,  // 95: quant.datafeed.v1.DatafeedService.GetHistory:input_type -> quant.datafeed.v1.GetHistoryRequest
+	48,  // 96: quant.datafeed.v1.DatafeedService.GetQuotes:input_type -> quant.datafeed.v1.GetQuotesRequest
+	53,  // 97: quant.datafeed.v1.DatafeedService.GetMarks:input_type -> quant.datafeed.v1.GetMarksRequest
+	56,  // 98: quant.datafeed.v1.DatafeedService.GetTimescaleMarks:input_type -> quant.datafeed.v1.GetTimescaleMarksRequest
+	58,  // 99: quant.datafeed.v1.DatafeedService.ResolveSymbol:input_type -> quant.datafeed.v1.ResolveSymbolRequest
+	60,  // 100: quant.datafeed.v1.DatafeedService.GetSymbolGroupInfo:input_type -> quant.datafeed.v1.GetSymbolGroupInfoRequest
+	63,  // 101: quant.datafeed.v1.DatafeedService.SearchSymbols:input_type -> quant.datafeed.v1.SearchSymbolsRequest
+	65,  // 102: quant.datafeed.v1.DatafeedService.StreamBars:input_type -> quant.datafeed.v1.StreamBarsRequest
+	67,  // 103: quant.datafeed.v1.DatafeedService.SubscribeBars:input_type -> quant.datafeed.v1.SubscribeBarsRequest
+	26,  // 104: quant.datafeed.v1.DatafeedService.ListSymbols:input_type -> quant.datafeed.v1.ListSymbolsRequest
+	71,  // 105: quant.datafeed.v1.DatafeedService.IngestTicks:output_type -> quant.datafeed.v1.IngestTicksResponse
+	73,  // 106: quant.datafeed.v1.DatafeedService.ReplayTicks:output_type -> quant.datafeed.v1.ReplayTicksResponse
+	76,  // 107: quant.datafeed.v1.DatafeedService.QueryBars:output_type -> quant.datafeed.v1.QueryBarsResponse
+	79,  // 108: quant.datafeed.v1.DatafeedService.ListNews:output_type -> quant.datafeed.v1.ListNewsResponse
+	82,  // 109: quant.datafeed.v1.DatafeedService.ListSocial:output_type -> quant.datafeed.v1.ListSocialResponse
+	35,  // 110: quant.datafeed.v1.DatafeedService.GetConfig:output_type -> quant.datafeed.v1.GetConfigResponse
+	37,  // 111: quant.datafeed.v1.DatafeedService.GetTime:output_type -> quant.datafeed.v1.GetTimeResponse
+	40,  // 112: quant.datafeed.v1.DatafeedService.GetBars:output_type -> quant.datafeed.v1.GetBarsResponse
+	45,  // 113: quant.datafeed.v1.DatafeedService.GetHistory:output_type -> quant.datafeed.v1.GetHistoryResponse
+	51,  // 114: quant.datafeed.v1.DatafeedService.GetQuotes:output_type -> quant.datafeed.v1.GetQuotesResponse
+	54,  // 115: quant.datafeed.v1.DatafeedService.GetMarks:output_type -> quant.datafeed.v1.GetMarksResponse
+	57,  // 116: quant.datafeed.v1.DatafeedService.GetTimescaleMarks:output_type -> quant.datafeed.v1.GetTimescaleMarksResponse
+	59,  // 117: quant.datafeed.v1.DatafeedService.ResolveSymbol:output_type -> quant.datafeed.v1.ResolveSymbolResponse
+	61,  // 118: quant.datafeed.v1.DatafeedService.GetSymbolGroupInfo:output_type -> quant.datafeed.v1.GetSymbolGroupInfoResponse
+	64,  // 119: quant.datafeed.v1.DatafeedService.SearchSymbols:output_type -> quant.datafeed.v1.SearchSymbolsResponse
+	66,  // 120: quant.datafeed.v1.DatafeedService.StreamBars:output_type -> quant.datafeed.v1.StreamBarsResponse
+	68,  // 121: quant.datafeed.v1.DatafeedService.SubscribeBars:output_type -> quant.datafeed.v1.SubscribeBarsResponse
+	27,  // 122: quant.datafeed.v1.DatafeedService.ListSymbols:output_type -> quant.datafeed.v1.ListSymbolsResponse
+	105, // [105:123] is the sub-list for method output_type
+	87,  // [87:105] is the sub-list for method input_type
+	87,  // [87:87] is the sub-list for extension type_name
+	87,  // [87:87] is the sub-list for extension extendee
+	0,   // [0:87] is the sub-list for field type_name
 }
 
 func init() { file_datafeed_v1_datafeed_proto_init() }
@@ -6516,35 +6870,37 @@ func file_datafeed_v1_datafeed_proto_init() {
 		(*CurrencyCodeEntry_Item)(nil),
 	}
 	file_datafeed_v1_datafeed_proto_msgTypes[30].OneofWrappers = []any{}
+	file_datafeed_v1_datafeed_proto_msgTypes[33].OneofWrappers = []any{}
 	file_datafeed_v1_datafeed_proto_msgTypes[35].OneofWrappers = []any{}
-	file_datafeed_v1_datafeed_proto_msgTypes[37].OneofWrappers = []any{
+	file_datafeed_v1_datafeed_proto_msgTypes[38].OneofWrappers = []any{}
+	file_datafeed_v1_datafeed_proto_msgTypes[40].OneofWrappers = []any{
 		(*GetHistoryResponse_Ok)(nil),
 		(*GetHistoryResponse_NoData)(nil),
 		(*GetHistoryResponse_Error)(nil),
 	}
-	file_datafeed_v1_datafeed_proto_msgTypes[38].OneofWrappers = []any{}
-	file_datafeed_v1_datafeed_proto_msgTypes[39].OneofWrappers = []any{}
-	file_datafeed_v1_datafeed_proto_msgTypes[43].OneofWrappers = []any{
+	file_datafeed_v1_datafeed_proto_msgTypes[41].OneofWrappers = []any{}
+	file_datafeed_v1_datafeed_proto_msgTypes[42].OneofWrappers = []any{}
+	file_datafeed_v1_datafeed_proto_msgTypes[46].OneofWrappers = []any{
 		(*GetQuotesResponse_Ok)(nil),
 		(*GetQuotesResponse_Error)(nil),
 	}
-	file_datafeed_v1_datafeed_proto_msgTypes[44].OneofWrappers = []any{
+	file_datafeed_v1_datafeed_proto_msgTypes[47].OneofWrappers = []any{
 		(*MarkId_StringId)(nil),
 		(*MarkId_NumericId)(nil),
 	}
-	file_datafeed_v1_datafeed_proto_msgTypes[46].OneofWrappers = []any{}
-	file_datafeed_v1_datafeed_proto_msgTypes[47].OneofWrappers = []any{}
+	file_datafeed_v1_datafeed_proto_msgTypes[49].OneofWrappers = []any{}
 	file_datafeed_v1_datafeed_proto_msgTypes[50].OneofWrappers = []any{}
 	file_datafeed_v1_datafeed_proto_msgTypes[53].OneofWrappers = []any{}
-	file_datafeed_v1_datafeed_proto_msgTypes[54].OneofWrappers = []any{}
-	file_datafeed_v1_datafeed_proto_msgTypes[55].OneofWrappers = []any{}
+	file_datafeed_v1_datafeed_proto_msgTypes[56].OneofWrappers = []any{}
+	file_datafeed_v1_datafeed_proto_msgTypes[57].OneofWrappers = []any{}
+	file_datafeed_v1_datafeed_proto_msgTypes[58].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_datafeed_v1_datafeed_proto_rawDesc), len(file_datafeed_v1_datafeed_proto_rawDesc)),
 			NumEnums:      5,
-			NumMessages:   76,
+			NumMessages:   81,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

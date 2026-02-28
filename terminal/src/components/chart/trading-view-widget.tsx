@@ -10,8 +10,8 @@ import type {
   ResolutionString,
   LanguageCode,
   ChartingLibraryWidgetConstructor,
-  IBasicDataFeed,
 } from "charting_library";
+import { useDataFeed } from "@/components/chart/use-datafeed";
 
 /**
  * At runtime the TradingView library is loaded from public/ via <script> tags.
@@ -19,12 +19,6 @@ import type {
  */
 interface TradingViewGlobal {
   TradingView?: { widget: ChartingLibraryWidgetConstructor };
-  Datafeeds?: {
-    UDFCompatibleDatafeed: new (
-      datafeedUrl: string,
-      updateFrequency?: number
-    ) => IBasicDataFeed;
-  };
 }
 
 /* ── Props ── */
@@ -38,7 +32,7 @@ export interface TradingViewWidgetProps {
 /* ── Component ── */
 
 export function TradingViewWidget({
-  symbol = "AAPL",
+  symbol = "BTC-USDT",
   interval = "D" as ResolutionString,
   className,
 }: TradingViewWidgetProps) {
@@ -46,6 +40,7 @@ export function TradingViewWidget({
   const widgetRef = useRef<IChartingLibraryWidget | null>(null);
   const { resolvedTheme } = useTheme();
   const locale = useLocale();
+  const datafeed = useDataFeed();
 
   const tvTheme: ThemeName = resolvedTheme === "dark" ? "dark" : "light";
   const tvThemeRef = useRef(tvTheme);
@@ -60,7 +55,7 @@ export function TradingViewWidget({
     if (!containerRef.current) return;
 
     const g = window as unknown as TradingViewGlobal;
-    if (!g.TradingView || !g.Datafeeds) return;
+    if (!g.TradingView) return;
 
     // Tear down any previous instance
     if (widgetRef.current) {
@@ -71,10 +66,7 @@ export function TradingViewWidget({
     const options: ChartingLibraryWidgetOptions = {
       container: containerRef.current,
       library_path: "/charting_library/charting_library/",
-      datafeed: new g.Datafeeds.UDFCompatibleDatafeed(
-        "https://demo_feed.tradingview.com",
-        10_000
-      ),
+      datafeed,
       symbol,
       interval,
       locale: tvLocaleRef.current,
@@ -102,13 +94,13 @@ export function TradingViewWidget({
       widgetRef.current = widget;
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [symbol, interval, tvLocale]);
+  }, [symbol, interval, tvLocale, datafeed]);
 
   /* Load the runtime scripts once, then instantiate the widget. */
   useEffect(() => {
     const g = window as unknown as TradingViewGlobal;
 
-    if (g.TradingView && g.Datafeeds) {
+    if (g.TradingView) {
       createWidget();
       return () => {
         widgetRef.current?.remove();
@@ -116,27 +108,14 @@ export function TradingViewWidget({
       };
     }
 
-    // Load the two scripts in order: library first, then datafeed bundle.
+    // Load the charting library runtime script.
     const libScript = document.createElement("script");
     libScript.src =
       "/charting_library/charting_library/charting_library.standalone.js";
     libScript.async = true;
-
-    const dfScript = document.createElement("script");
-    dfScript.src = "/charting_library/datafeeds/udf/dist/bundle.js";
-    dfScript.async = true;
-
-    let loaded = 0;
-    const onLoad = () => {
-      loaded++;
-      if (loaded === 2) createWidget();
-    };
-
-    libScript.addEventListener("load", onLoad);
-    dfScript.addEventListener("load", onLoad);
+    libScript.addEventListener("load", createWidget);
 
     document.head.appendChild(libScript);
-    document.head.appendChild(dfScript);
 
     return () => {
       widgetRef.current?.remove();

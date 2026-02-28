@@ -1,4 +1,5 @@
 import { getTranslations } from "next-intl/server";
+import packageJson from "../../../../package.json";
 import { PageHeader } from "@/components/page-header";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -10,6 +11,11 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 export default async function SettingsPage() {
   const t = await getTranslations("pages.settings");
   const tc = await getTranslations("common");
+  const appVersion = process.env.NEXT_PUBLIC_APP_VERSION ?? packageJson.version ?? "dev";
+  const buildRef =
+    process.env.VERCEL_GIT_COMMIT_SHA?.slice(0, 7) ??
+    process.env.GIT_COMMIT_SHA?.slice(0, 7) ??
+    "local";
 
   return (
     <div className="space-y-6">
@@ -127,6 +133,15 @@ export default async function SettingsPage() {
           </Card>
         </TabsContent>
       </Tabs>
+
+      <footer className="flex flex-wrap items-center justify-between gap-2 rounded-md border bg-muted/20 px-3 py-2">
+        <p className="font-mono text-xs text-muted-foreground">
+          {t("versionLabel")}: <span className="text-foreground">v{appVersion}</span>
+        </p>
+        <p className="font-mono text-xs text-muted-foreground">
+          {t("buildLabel")}: <span className="text-foreground">{buildRef}</span>
+        </p>
+      </footer>
     </div>
   );
 }

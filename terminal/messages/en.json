@@ -12,6 +12,7 @@
       "Research": "Research",
       "Market Data": "Market Data",
       "Execution": "Execution",
+      "Retrospective": "Retrospective",
       "System": "System"
     },
     "items": {
@@ -24,7 +25,7 @@
       "Risk Rules": "Risk Rules", "Exposure": "Exposure",
       "Cost Analysis": "Cost Analysis", "Health": "Health",
       "Settings": "Settings", "Analytics": "Analytics", "Reports": "Reports",
-      "Feedback": "Feedback", "Similarity": "Similarity"
+      "Feedback": "Feedback"
     }
   },
   "common": {
@@ -80,7 +81,7 @@
       "description": "Interactive price charts and technical analysis"
     },
     "screening": {
-      "title": "Symbol Screening",
+      "title": "Screening",
       "description": "Screen and analyse symbols using time series, orderbook, and factor data",
       "searchPlaceholder": "Search symbols\u2026",
       "filter": "Filter",
@@ -279,7 +280,9 @@
       "maxPosition": "Max Position Size ($)",
       "stopLoss": "Stop Loss (%)",
       "notificationsPlaceholder": "Notification preferences and channel configuration",
-      "apiPlaceholder": "API key management for external services"
+      "apiPlaceholder": "API key management for external services",
+      "versionLabel": "Version",
+      "buildLabel": "Build"
     },
     "analytics": {
       "title": "Analytics",
@@ -313,10 +316,6 @@
       "feedbackHistory": "Feedback History",
       "feedbackHistoryDesc": "Signal and trade outcome evaluations",
       "newFeedback": "New Feedback"
-    },
-    "similarity": {
-      "title": "Similarity Analysis",
-      "description": "ML-driven stock similarity and clustering workbench"
     }
   }
 }

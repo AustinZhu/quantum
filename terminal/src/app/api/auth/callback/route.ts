@@ -1,4 +1,4 @@
-import { casdoor } from "@/lib/casdoor";
+import { casdoor, parseCasdoorAccessToken } from "@/lib/casdoor";
 import { type NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
@@ -11,7 +11,20 @@ export async function GET(request: NextRequest) {
 
   try {
     const { access_token } = await casdoor.getAuthToken(code);
-    const user = casdoor.parseJwtToken(access_token);
+    const tokenUser = parseCasdoorAccessToken(access_token);
+    const userName =
+      tokenUser.name ??
+      tokenUser.preferred_username ??
+      tokenUser.sub?.split("/").pop() ??
+      "user";
+
+    const user = {
+      name: userName,
+      displayName: tokenUser.displayName,
+      email: tokenUser.email,
+      avatar: tokenUser.avatar,
+      owner: tokenUser.owner,
+    };
 
     const response = NextResponse.redirect(new URL("/dashboard", request.url));
 

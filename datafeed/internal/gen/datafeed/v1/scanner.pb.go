@@ -7,6 +7,7 @@
 package datafeedv1
 
 import (
+	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
 	_ "github.com/google/gnostic/openapiv3"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -151,6 +152,143 @@ func (ScannerFilterOperation) EnumDescriptor() ([]byte, []int) {
 	return file_datafeed_v1_scanner_proto_rawDescGZIP(), []int{1}
 }
 
+type ScannerSortOrder int32
+
+const (
+	ScannerSortOrder_SCANNER_SORT_ORDER_UNSPECIFIED ScannerSortOrder = 0
+	ScannerSortOrder_SCANNER_SORT_ORDER_ASC         ScannerSortOrder = 1
+	ScannerSortOrder_SCANNER_SORT_ORDER_DESC        ScannerSortOrder = 2
+)
+
+// Enum value maps for ScannerSortOrder.
+var (
+	ScannerSortOrder_name = map[int32]string{
+		0: "SCANNER_SORT_ORDER_UNSPECIFIED",
+		1: "SCANNER_SORT_ORDER_ASC",
+		2: "SCANNER_SORT_ORDER_DESC",
+	}
+	ScannerSortOrder_value = map[string]int32{
+		"SCANNER_SORT_ORDER_UNSPECIFIED": 0,
+		"SCANNER_SORT_ORDER_ASC":         1,
+		"SCANNER_SORT_ORDER_DESC":        2,
+	}
+)
+
+func (x ScannerSortOrder) Enum() *ScannerSortOrder {
+	p := new(ScannerSortOrder)
+	*p = x
+	return p
+}
+
+func (x ScannerSortOrder) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (ScannerSortOrder) Descriptor() protoreflect.EnumDescriptor {
+	return file_datafeed_v1_scanner_proto_enumTypes[2].Descriptor()
+}
+
+func (ScannerSortOrder) Type() protoreflect.EnumType {
+	return &file_datafeed_v1_scanner_proto_enumTypes[2]
+}
+
+func (x ScannerSortOrder) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use ScannerSortOrder.Descriptor instead.
+func (ScannerSortOrder) EnumDescriptor() ([]byte, []int) {
+	return file_datafeed_v1_scanner_proto_rawDescGZIP(), []int{2}
+}
+
+type ScannerStringList struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Values        []string               `protobuf:"bytes,1,rep,name=values,proto3" json:"values,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ScannerStringList) Reset() {
+	*x = ScannerStringList{}
+	mi := &file_datafeed_v1_scanner_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ScannerStringList) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ScannerStringList) ProtoMessage() {}
+
+func (x *ScannerStringList) ProtoReflect() protoreflect.Message {
+	mi := &file_datafeed_v1_scanner_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ScannerStringList.ProtoReflect.Descriptor instead.
+func (*ScannerStringList) Descriptor() ([]byte, []int) {
+	return file_datafeed_v1_scanner_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *ScannerStringList) GetValues() []string {
+	if x != nil {
+		return x.Values
+	}
+	return nil
+}
+
+type ScannerDoubleList struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Values        []float64              `protobuf:"fixed64,1,rep,packed,name=values,proto3" json:"values,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ScannerDoubleList) Reset() {
+	*x = ScannerDoubleList{}
+	mi := &file_datafeed_v1_scanner_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ScannerDoubleList) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ScannerDoubleList) ProtoMessage() {}
+
+func (x *ScannerDoubleList) ProtoReflect() protoreflect.Message {
+	mi := &file_datafeed_v1_scanner_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ScannerDoubleList.ProtoReflect.Descriptor instead.
+func (*ScannerDoubleList) Descriptor() ([]byte, []int) {
+	return file_datafeed_v1_scanner_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *ScannerDoubleList) GetValues() []float64 {
+	if x != nil {
+		return x.Values
+	}
+	return nil
+}
+
 type ScannerFilterValue struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Types that are valid to be assigned to Value:
@@ -167,7 +305,7 @@ type ScannerFilterValue struct {
 
 func (x *ScannerFilterValue) Reset() {
 	*x = ScannerFilterValue{}
-	mi := &file_datafeed_v1_scanner_proto_msgTypes[0]
+	mi := &file_datafeed_v1_scanner_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -179,7 +317,7 @@ func (x *ScannerFilterValue) String() string {
 func (*ScannerFilterValue) ProtoMessage() {}
 
 func (x *ScannerFilterValue) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_scanner_proto_msgTypes[0]
+	mi := &file_datafeed_v1_scanner_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -192,7 +330,7 @@ func (x *ScannerFilterValue) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ScannerFilterValue.ProtoReflect.Descriptor instead.
 func (*ScannerFilterValue) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_scanner_proto_rawDescGZIP(), []int{0}
+	return file_datafeed_v1_scanner_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *ScannerFilterValue) GetValue() isScannerFilterValue_Value {
@@ -229,7 +367,7 @@ func (x *ScannerFilterValue) GetBoolValue() bool {
 	return false
 }
 
-func (x *ScannerFilterValue) GetStringList() *StringList {
+func (x *ScannerFilterValue) GetStringList() *ScannerStringList {
 	if x != nil {
 		if x, ok := x.Value.(*ScannerFilterValue_StringList); ok {
 			return x.StringList
@@ -238,7 +376,7 @@ func (x *ScannerFilterValue) GetStringList() *StringList {
 	return nil
 }
 
-func (x *ScannerFilterValue) GetNumberList() *DoubleList {
+func (x *ScannerFilterValue) GetNumberList() *ScannerDoubleList {
 	if x != nil {
 		if x, ok := x.Value.(*ScannerFilterValue_NumberList); ok {
 			return x.NumberList
@@ -264,11 +402,11 @@ type ScannerFilterValue_BoolValue struct {
 }
 
 type ScannerFilterValue_StringList struct {
-	StringList *StringList `protobuf:"bytes,4,opt,name=string_list,json=stringList,proto3,oneof"`
+	StringList *ScannerStringList `protobuf:"bytes,4,opt,name=string_list,json=stringList,proto3,oneof"`
 }
 
 type ScannerFilterValue_NumberList struct {
-	NumberList *DoubleList `protobuf:"bytes,5,opt,name=number_list,json=numberList,proto3,oneof"`
+	NumberList *ScannerDoubleList `protobuf:"bytes,5,opt,name=number_list,json=numberList,proto3,oneof"`
 }
 
 func (*ScannerFilterValue_StringValue) isScannerFilterValue_Value() {}
@@ -292,7 +430,7 @@ type ScannerFilterExpression struct {
 
 func (x *ScannerFilterExpression) Reset() {
 	*x = ScannerFilterExpression{}
-	mi := &file_datafeed_v1_scanner_proto_msgTypes[1]
+	mi := &file_datafeed_v1_scanner_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -304,7 +442,7 @@ func (x *ScannerFilterExpression) String() string {
 func (*ScannerFilterExpression) ProtoMessage() {}
 
 func (x *ScannerFilterExpression) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_scanner_proto_msgTypes[1]
+	mi := &file_datafeed_v1_scanner_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -317,7 +455,7 @@ func (x *ScannerFilterExpression) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ScannerFilterExpression.ProtoReflect.Descriptor instead.
 func (*ScannerFilterExpression) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_scanner_proto_rawDescGZIP(), []int{1}
+	return file_datafeed_v1_scanner_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *ScannerFilterExpression) GetLeft() string {
@@ -351,7 +489,7 @@ type ScannerFilterNode struct {
 
 func (x *ScannerFilterNode) Reset() {
 	*x = ScannerFilterNode{}
-	mi := &file_datafeed_v1_scanner_proto_msgTypes[2]
+	mi := &file_datafeed_v1_scanner_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -363,7 +501,7 @@ func (x *ScannerFilterNode) String() string {
 func (*ScannerFilterNode) ProtoMessage() {}
 
 func (x *ScannerFilterNode) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_scanner_proto_msgTypes[2]
+	mi := &file_datafeed_v1_scanner_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -376,7 +514,7 @@ func (x *ScannerFilterNode) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ScannerFilterNode.ProtoReflect.Descriptor instead.
 func (*ScannerFilterNode) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_scanner_proto_rawDescGZIP(), []int{2}
+	return file_datafeed_v1_scanner_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *ScannerFilterNode) GetExpression() *ScannerFilterExpression {
@@ -403,7 +541,7 @@ type ScannerFilterGroup struct {
 
 func (x *ScannerFilterGroup) Reset() {
 	*x = ScannerFilterGroup{}
-	mi := &file_datafeed_v1_scanner_proto_msgTypes[3]
+	mi := &file_datafeed_v1_scanner_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -415,7 +553,7 @@ func (x *ScannerFilterGroup) String() string {
 func (*ScannerFilterGroup) ProtoMessage() {}
 
 func (x *ScannerFilterGroup) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_scanner_proto_msgTypes[3]
+	mi := &file_datafeed_v1_scanner_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -428,7 +566,7 @@ func (x *ScannerFilterGroup) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ScannerFilterGroup.ProtoReflect.Descriptor instead.
 func (*ScannerFilterGroup) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_scanner_proto_rawDescGZIP(), []int{3}
+	return file_datafeed_v1_scanner_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *ScannerFilterGroup) GetOperator() ScannerLogicalOperator {
@@ -455,7 +593,7 @@ type ScannerFilter struct {
 
 func (x *ScannerFilter) Reset() {
 	*x = ScannerFilter{}
-	mi := &file_datafeed_v1_scanner_proto_msgTypes[4]
+	mi := &file_datafeed_v1_scanner_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -467,7 +605,7 @@ func (x *ScannerFilter) String() string {
 func (*ScannerFilter) ProtoMessage() {}
 
 func (x *ScannerFilter) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_scanner_proto_msgTypes[4]
+	mi := &file_datafeed_v1_scanner_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -480,7 +618,7 @@ func (x *ScannerFilter) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ScannerFilter.ProtoReflect.Descriptor instead.
 func (*ScannerFilter) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_scanner_proto_rawDescGZIP(), []int{4}
+	return file_datafeed_v1_scanner_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *ScannerFilter) GetOperator() ScannerLogicalOperator {
@@ -500,14 +638,14 @@ func (x *ScannerFilter) GetOperands() []*ScannerFilterNode {
 type ScannerSort struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	SortBy        string                 `protobuf:"bytes,1,opt,name=sort_by,json=sortBy,proto3" json:"sort_by,omitempty"`
-	SortOrder     SortOrder              `protobuf:"varint,2,opt,name=sort_order,json=sortOrder,proto3,enum=quant.datafeed.v1.SortOrder" json:"sort_order,omitempty"`
+	SortOrder     ScannerSortOrder       `protobuf:"varint,2,opt,name=sort_order,json=sortOrder,proto3,enum=quant.datafeed.v1.ScannerSortOrder" json:"sort_order,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ScannerSort) Reset() {
 	*x = ScannerSort{}
-	mi := &file_datafeed_v1_scanner_proto_msgTypes[5]
+	mi := &file_datafeed_v1_scanner_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -519,7 +657,7 @@ func (x *ScannerSort) String() string {
 func (*ScannerSort) ProtoMessage() {}
 
 func (x *ScannerSort) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_scanner_proto_msgTypes[5]
+	mi := &file_datafeed_v1_scanner_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -532,7 +670,7 @@ func (x *ScannerSort) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ScannerSort.ProtoReflect.Descriptor instead.
 func (*ScannerSort) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_scanner_proto_rawDescGZIP(), []int{5}
+	return file_datafeed_v1_scanner_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *ScannerSort) GetSortBy() string {
@@ -542,11 +680,11 @@ func (x *ScannerSort) GetSortBy() string {
 	return ""
 }
 
-func (x *ScannerSort) GetSortOrder() SortOrder {
+func (x *ScannerSort) GetSortOrder() ScannerSortOrder {
 	if x != nil {
 		return x.SortOrder
 	}
-	return SortOrder_SORT_ORDER_UNSPECIFIED
+	return ScannerSortOrder_SCANNER_SORT_ORDER_UNSPECIFIED
 }
 
 type ScannerRange struct {
@@ -559,7 +697,7 @@ type ScannerRange struct {
 
 func (x *ScannerRange) Reset() {
 	*x = ScannerRange{}
-	mi := &file_datafeed_v1_scanner_proto_msgTypes[6]
+	mi := &file_datafeed_v1_scanner_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -571,7 +709,7 @@ func (x *ScannerRange) String() string {
 func (*ScannerRange) ProtoMessage() {}
 
 func (x *ScannerRange) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_scanner_proto_msgTypes[6]
+	mi := &file_datafeed_v1_scanner_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -584,7 +722,7 @@ func (x *ScannerRange) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ScannerRange.ProtoReflect.Descriptor instead.
 func (*ScannerRange) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_scanner_proto_rawDescGZIP(), []int{6}
+	return file_datafeed_v1_scanner_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *ScannerRange) GetStart() uint32 {
@@ -610,7 +748,7 @@ type ScannerOptions struct {
 
 func (x *ScannerOptions) Reset() {
 	*x = ScannerOptions{}
-	mi := &file_datafeed_v1_scanner_proto_msgTypes[7]
+	mi := &file_datafeed_v1_scanner_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -622,7 +760,7 @@ func (x *ScannerOptions) String() string {
 func (*ScannerOptions) ProtoMessage() {}
 
 func (x *ScannerOptions) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_scanner_proto_msgTypes[7]
+	mi := &file_datafeed_v1_scanner_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -635,7 +773,7 @@ func (x *ScannerOptions) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ScannerOptions.ProtoReflect.Descriptor instead.
 func (*ScannerOptions) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_scanner_proto_rawDescGZIP(), []int{7}
+	return file_datafeed_v1_scanner_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *ScannerOptions) GetLang() string {
@@ -661,7 +799,7 @@ type ScanSymbolsRequest struct {
 
 func (x *ScanSymbolsRequest) Reset() {
 	*x = ScanSymbolsRequest{}
-	mi := &file_datafeed_v1_scanner_proto_msgTypes[8]
+	mi := &file_datafeed_v1_scanner_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -673,7 +811,7 @@ func (x *ScanSymbolsRequest) String() string {
 func (*ScanSymbolsRequest) ProtoMessage() {}
 
 func (x *ScanSymbolsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_scanner_proto_msgTypes[8]
+	mi := &file_datafeed_v1_scanner_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -686,7 +824,7 @@ func (x *ScanSymbolsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ScanSymbolsRequest.ProtoReflect.Descriptor instead.
 func (*ScanSymbolsRequest) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_scanner_proto_rawDescGZIP(), []int{8}
+	return file_datafeed_v1_scanner_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *ScanSymbolsRequest) GetColumns() []string {
@@ -755,7 +893,7 @@ type ScanSymbolRow struct {
 
 func (x *ScanSymbolRow) Reset() {
 	*x = ScanSymbolRow{}
-	mi := &file_datafeed_v1_scanner_proto_msgTypes[9]
+	mi := &file_datafeed_v1_scanner_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -767,7 +905,7 @@ func (x *ScanSymbolRow) String() string {
 func (*ScanSymbolRow) ProtoMessage() {}
 
 func (x *ScanSymbolRow) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_scanner_proto_msgTypes[9]
+	mi := &file_datafeed_v1_scanner_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -780,7 +918,7 @@ func (x *ScanSymbolRow) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ScanSymbolRow.ProtoReflect.Descriptor instead.
 func (*ScanSymbolRow) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_scanner_proto_rawDescGZIP(), []int{9}
+	return file_datafeed_v1_scanner_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *ScanSymbolRow) GetS() string {
@@ -807,7 +945,7 @@ type ScanSymbolsResponse struct {
 
 func (x *ScanSymbolsResponse) Reset() {
 	*x = ScanSymbolsResponse{}
-	mi := &file_datafeed_v1_scanner_proto_msgTypes[10]
+	mi := &file_datafeed_v1_scanner_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -819,7 +957,7 @@ func (x *ScanSymbolsResponse) String() string {
 func (*ScanSymbolsResponse) ProtoMessage() {}
 
 func (x *ScanSymbolsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_datafeed_v1_scanner_proto_msgTypes[10]
+	mi := &file_datafeed_v1_scanner_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -832,7 +970,7 @@ func (x *ScanSymbolsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ScanSymbolsResponse.ProtoReflect.Descriptor instead.
 func (*ScanSymbolsResponse) Descriptor() ([]byte, []int) {
-	return file_datafeed_v1_scanner_proto_rawDescGZIP(), []int{10}
+	return file_datafeed_v1_scanner_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *ScanSymbolsResponse) GetTotalCount() uint32 {
@@ -853,19 +991,23 @@ var File_datafeed_v1_scanner_proto protoreflect.FileDescriptor
 
 const file_datafeed_v1_scanner_proto_rawDesc = "" +
 	"\n" +
-	"\x19datafeed/v1/scanner.proto\x12\x11quant.datafeed.v1\x1a\x1adatafeed/v1/datafeed.proto\x1a$gnostic/openapi/v3/annotations.proto\x1a\x1cgoogle/protobuf/struct.proto\"\x8c\x02\n" +
-	"\x12ScannerFilterValue\x12#\n" +
-	"\fstring_value\x18\x01 \x01(\tH\x00R\vstringValue\x12#\n" +
+	"\x19datafeed/v1/scanner.proto\x12\x11quant.datafeed.v1\x1a\x1bbuf/validate/validate.proto\x1a$gnostic/openapi/v3/annotations.proto\x1a\x1cgoogle/protobuf/struct.proto\"+\n" +
+	"\x11ScannerStringList\x12\x16\n" +
+	"\x06values\x18\x01 \x03(\tR\x06values\"+\n" +
+	"\x11ScannerDoubleList\x12\x16\n" +
+	"\x06values\x18\x01 \x03(\x01R\x06values\"\xa3\x02\n" +
+	"\x12ScannerFilterValue\x12,\n" +
+	"\fstring_value\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01H\x00R\vstringValue\x12#\n" +
 	"\fnumber_value\x18\x02 \x01(\x01H\x00R\vnumberValue\x12\x1f\n" +
 	"\n" +
-	"bool_value\x18\x03 \x01(\bH\x00R\tboolValue\x12@\n" +
-	"\vstring_list\x18\x04 \x01(\v2\x1d.quant.datafeed.v1.StringListH\x00R\n" +
-	"stringList\x12@\n" +
-	"\vnumber_list\x18\x05 \x01(\v2\x1d.quant.datafeed.v1.DoubleListH\x00R\n" +
+	"bool_value\x18\x03 \x01(\bH\x00R\tboolValue\x12G\n" +
+	"\vstring_list\x18\x04 \x01(\v2$.quant.datafeed.v1.ScannerStringListH\x00R\n" +
+	"stringList\x12G\n" +
+	"\vnumber_list\x18\x05 \x01(\v2$.quant.datafeed.v1.ScannerDoubleListH\x00R\n" +
 	"numberListB\a\n" +
-	"\x05value\"\xb3\x01\n" +
-	"\x17ScannerFilterExpression\x12\x12\n" +
-	"\x04left\x18\x01 \x01(\tR\x04left\x12G\n" +
+	"\x05value\"\xbc\x01\n" +
+	"\x17ScannerFilterExpression\x12\x1b\n" +
+	"\x04left\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x04left\x12G\n" +
 	"\toperation\x18\x02 \x01(\x0e2).quant.datafeed.v1.ScannerFilterOperationR\toperation\x12;\n" +
 	"\x05right\x18\x03 \x01(\v2%.quant.datafeed.v1.ScannerFilterValueR\x05right\"\xcb\x01\n" +
 	"\x11ScannerFilterNode\x12O\n" +
@@ -881,19 +1023,19 @@ const file_datafeed_v1_scanner_proto_rawDesc = "" +
 	"\boperands\x18\x02 \x03(\v2$.quant.datafeed.v1.ScannerFilterNodeR\boperands\"\x98\x01\n" +
 	"\rScannerFilter\x12E\n" +
 	"\boperator\x18\x01 \x01(\x0e2).quant.datafeed.v1.ScannerLogicalOperatorR\boperator\x12@\n" +
-	"\boperands\x18\x02 \x03(\v2$.quant.datafeed.v1.ScannerFilterNodeR\boperands\"c\n" +
-	"\vScannerSort\x12\x17\n" +
-	"\asort_by\x18\x01 \x01(\tR\x06sortBy\x12;\n" +
+	"\boperands\x18\x02 \x03(\v2$.quant.datafeed.v1.ScannerFilterNodeR\boperands\"s\n" +
+	"\vScannerSort\x12 \n" +
+	"\asort_by\x18\x01 \x01(\tB\a\xbaH\x04r\x02\x10\x01R\x06sortBy\x12B\n" +
 	"\n" +
-	"sort_order\x18\x02 \x01(\x0e2\x1c.quant.datafeed.v1.SortOrderR\tsortOrder\"6\n" +
+	"sort_order\x18\x02 \x01(\x0e2#.quant.datafeed.v1.ScannerSortOrderR\tsortOrder\"6\n" +
 	"\fScannerRange\x12\x14\n" +
 	"\x05start\x18\x01 \x01(\rR\x05start\x12\x10\n" +
 	"\x03end\x18\x02 \x01(\rR\x03end\"2\n" +
 	"\x0eScannerOptions\x12\x17\n" +
 	"\x04lang\x18\x01 \x01(\tH\x00R\x04lang\x88\x01\x01B\a\n" +
-	"\x05_lang\"\xdd\x04\n" +
-	"\x12ScanSymbolsRequest\x12\x18\n" +
-	"\acolumns\x18\x01 \x03(\tR\acolumns\x12=\n" +
+	"\x05_lang\"\xeb\x04\n" +
+	"\x12ScanSymbolsRequest\x12&\n" +
+	"\acolumns\x18\x01 \x03(\tB\f\xbaH\t\x92\x01\x06\"\x04r\x02\x10\x01R\acolumns\x12=\n" +
 	"\x06filter\x18\x02 \x01(\v2 .quant.datafeed.v1.ScannerFilterH\x00R\x06filter\x88\x01\x01\x127\n" +
 	"\x04sort\x18\x03 \x01(\v2\x1e.quant.datafeed.v1.ScannerSortH\x01R\x04sort\x88\x01\x01\x12:\n" +
 	"\x05range\x18\x04 \x01(\v2\x1f.quant.datafeed.v1.ScannerRangeH\x02R\x05range\x88\x01\x01\x12@\n" +
@@ -935,7 +1077,11 @@ const file_datafeed_v1_scanner_proto_rawDesc = "" +
 	"$SCANNER_FILTER_OPERATION_HAS_NONE_OF\x10\n" +
 	"\x12\"\n" +
 	"\x1eSCANNER_FILTER_OPERATION_MATCH\x10\v\x12&\n" +
-	"\"SCANNER_FILTER_OPERATION_NOT_MATCH\x10\f2\xe2\x01\n" +
+	"\"SCANNER_FILTER_OPERATION_NOT_MATCH\x10\f*o\n" +
+	"\x10ScannerSortOrder\x12\"\n" +
+	"\x1eSCANNER_SORT_ORDER_UNSPECIFIED\x10\x00\x12\x1a\n" +
+	"\x16SCANNER_SORT_ORDER_ASC\x10\x01\x12\x1b\n" +
+	"\x17SCANNER_SORT_ORDER_DESC\x10\x022\xe2\x01\n" +
 	"\x0eScannerService\x12\xcf\x01\n" +
 	"\vScanSymbols\x12%.quant.datafeed.v1.ScanSymbolsRequest\x1a&.quant.datafeed.v1.ScanSymbolsResponse\"q\xbaGn\n" +
 	"\aScanner\n" +
@@ -953,50 +1099,50 @@ func file_datafeed_v1_scanner_proto_rawDescGZIP() []byte {
 	return file_datafeed_v1_scanner_proto_rawDescData
 }
 
-var file_datafeed_v1_scanner_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_datafeed_v1_scanner_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
+var file_datafeed_v1_scanner_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
+var file_datafeed_v1_scanner_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
 var file_datafeed_v1_scanner_proto_goTypes = []any{
 	(ScannerLogicalOperator)(0),     // 0: quant.datafeed.v1.ScannerLogicalOperator
 	(ScannerFilterOperation)(0),     // 1: quant.datafeed.v1.ScannerFilterOperation
-	(*ScannerFilterValue)(nil),      // 2: quant.datafeed.v1.ScannerFilterValue
-	(*ScannerFilterExpression)(nil), // 3: quant.datafeed.v1.ScannerFilterExpression
-	(*ScannerFilterNode)(nil),       // 4: quant.datafeed.v1.ScannerFilterNode
-	(*ScannerFilterGroup)(nil),      // 5: quant.datafeed.v1.ScannerFilterGroup
-	(*ScannerFilter)(nil),           // 6: quant.datafeed.v1.ScannerFilter
-	(*ScannerSort)(nil),             // 7: quant.datafeed.v1.ScannerSort
-	(*ScannerRange)(nil),            // 8: quant.datafeed.v1.ScannerRange
-	(*ScannerOptions)(nil),          // 9: quant.datafeed.v1.ScannerOptions
-	(*ScanSymbolsRequest)(nil),      // 10: quant.datafeed.v1.ScanSymbolsRequest
-	(*ScanSymbolRow)(nil),           // 11: quant.datafeed.v1.ScanSymbolRow
-	(*ScanSymbolsResponse)(nil),     // 12: quant.datafeed.v1.ScanSymbolsResponse
-	nil,                             // 13: quant.datafeed.v1.ScanSymbolsRequest.SymbolsEntry
-	(*StringList)(nil),              // 14: quant.datafeed.v1.StringList
-	(*DoubleList)(nil),              // 15: quant.datafeed.v1.DoubleList
-	(SortOrder)(0),                  // 16: quant.datafeed.v1.SortOrder
+	(ScannerSortOrder)(0),           // 2: quant.datafeed.v1.ScannerSortOrder
+	(*ScannerStringList)(nil),       // 3: quant.datafeed.v1.ScannerStringList
+	(*ScannerDoubleList)(nil),       // 4: quant.datafeed.v1.ScannerDoubleList
+	(*ScannerFilterValue)(nil),      // 5: quant.datafeed.v1.ScannerFilterValue
+	(*ScannerFilterExpression)(nil), // 6: quant.datafeed.v1.ScannerFilterExpression
+	(*ScannerFilterNode)(nil),       // 7: quant.datafeed.v1.ScannerFilterNode
+	(*ScannerFilterGroup)(nil),      // 8: quant.datafeed.v1.ScannerFilterGroup
+	(*ScannerFilter)(nil),           // 9: quant.datafeed.v1.ScannerFilter
+	(*ScannerSort)(nil),             // 10: quant.datafeed.v1.ScannerSort
+	(*ScannerRange)(nil),            // 11: quant.datafeed.v1.ScannerRange
+	(*ScannerOptions)(nil),          // 12: quant.datafeed.v1.ScannerOptions
+	(*ScanSymbolsRequest)(nil),      // 13: quant.datafeed.v1.ScanSymbolsRequest
+	(*ScanSymbolRow)(nil),           // 14: quant.datafeed.v1.ScanSymbolRow
+	(*ScanSymbolsResponse)(nil),     // 15: quant.datafeed.v1.ScanSymbolsResponse
+	nil,                             // 16: quant.datafeed.v1.ScanSymbolsRequest.SymbolsEntry
 	(*structpb.Value)(nil),          // 17: google.protobuf.Value
 }
 var file_datafeed_v1_scanner_proto_depIdxs = []int32{
-	14, // 0: quant.datafeed.v1.ScannerFilterValue.string_list:type_name -> quant.datafeed.v1.StringList
-	15, // 1: quant.datafeed.v1.ScannerFilterValue.number_list:type_name -> quant.datafeed.v1.DoubleList
+	3,  // 0: quant.datafeed.v1.ScannerFilterValue.string_list:type_name -> quant.datafeed.v1.ScannerStringList
+	4,  // 1: quant.datafeed.v1.ScannerFilterValue.number_list:type_name -> quant.datafeed.v1.ScannerDoubleList
 	1,  // 2: quant.datafeed.v1.ScannerFilterExpression.operation:type_name -> quant.datafeed.v1.ScannerFilterOperation
-	2,  // 3: quant.datafeed.v1.ScannerFilterExpression.right:type_name -> quant.datafeed.v1.ScannerFilterValue
-	3,  // 4: quant.datafeed.v1.ScannerFilterNode.expression:type_name -> quant.datafeed.v1.ScannerFilterExpression
-	5,  // 5: quant.datafeed.v1.ScannerFilterNode.operation:type_name -> quant.datafeed.v1.ScannerFilterGroup
+	5,  // 3: quant.datafeed.v1.ScannerFilterExpression.right:type_name -> quant.datafeed.v1.ScannerFilterValue
+	6,  // 4: quant.datafeed.v1.ScannerFilterNode.expression:type_name -> quant.datafeed.v1.ScannerFilterExpression
+	8,  // 5: quant.datafeed.v1.ScannerFilterNode.operation:type_name -> quant.datafeed.v1.ScannerFilterGroup
 	0,  // 6: quant.datafeed.v1.ScannerFilterGroup.operator:type_name -> quant.datafeed.v1.ScannerLogicalOperator
-	4,  // 7: quant.datafeed.v1.ScannerFilterGroup.operands:type_name -> quant.datafeed.v1.ScannerFilterNode
+	7,  // 7: quant.datafeed.v1.ScannerFilterGroup.operands:type_name -> quant.datafeed.v1.ScannerFilterNode
 	0,  // 8: quant.datafeed.v1.ScannerFilter.operator:type_name -> quant.datafeed.v1.ScannerLogicalOperator
-	4,  // 9: quant.datafeed.v1.ScannerFilter.operands:type_name -> quant.datafeed.v1.ScannerFilterNode
-	16, // 10: quant.datafeed.v1.ScannerSort.sort_order:type_name -> quant.datafeed.v1.SortOrder
-	6,  // 11: quant.datafeed.v1.ScanSymbolsRequest.filter:type_name -> quant.datafeed.v1.ScannerFilter
-	7,  // 12: quant.datafeed.v1.ScanSymbolsRequest.sort:type_name -> quant.datafeed.v1.ScannerSort
-	8,  // 13: quant.datafeed.v1.ScanSymbolsRequest.range:type_name -> quant.datafeed.v1.ScannerRange
-	9,  // 14: quant.datafeed.v1.ScanSymbolsRequest.options:type_name -> quant.datafeed.v1.ScannerOptions
-	13, // 15: quant.datafeed.v1.ScanSymbolsRequest.symbols:type_name -> quant.datafeed.v1.ScanSymbolsRequest.SymbolsEntry
+	7,  // 9: quant.datafeed.v1.ScannerFilter.operands:type_name -> quant.datafeed.v1.ScannerFilterNode
+	2,  // 10: quant.datafeed.v1.ScannerSort.sort_order:type_name -> quant.datafeed.v1.ScannerSortOrder
+	9,  // 11: quant.datafeed.v1.ScanSymbolsRequest.filter:type_name -> quant.datafeed.v1.ScannerFilter
+	10, // 12: quant.datafeed.v1.ScanSymbolsRequest.sort:type_name -> quant.datafeed.v1.ScannerSort
+	11, // 13: quant.datafeed.v1.ScanSymbolsRequest.range:type_name -> quant.datafeed.v1.ScannerRange
+	12, // 14: quant.datafeed.v1.ScanSymbolsRequest.options:type_name -> quant.datafeed.v1.ScannerOptions
+	16, // 15: quant.datafeed.v1.ScanSymbolsRequest.symbols:type_name -> quant.datafeed.v1.ScanSymbolsRequest.SymbolsEntry
 	17, // 16: quant.datafeed.v1.ScanSymbolRow.d:type_name -> google.protobuf.Value
-	11, // 17: quant.datafeed.v1.ScanSymbolsResponse.data:type_name -> quant.datafeed.v1.ScanSymbolRow
+	14, // 17: quant.datafeed.v1.ScanSymbolsResponse.data:type_name -> quant.datafeed.v1.ScanSymbolRow
 	17, // 18: quant.datafeed.v1.ScanSymbolsRequest.SymbolsEntry.value:type_name -> google.protobuf.Value
-	10, // 19: quant.datafeed.v1.ScannerService.ScanSymbols:input_type -> quant.datafeed.v1.ScanSymbolsRequest
-	12, // 20: quant.datafeed.v1.ScannerService.ScanSymbols:output_type -> quant.datafeed.v1.ScanSymbolsResponse
+	13, // 19: quant.datafeed.v1.ScannerService.ScanSymbols:input_type -> quant.datafeed.v1.ScanSymbolsRequest
+	15, // 20: quant.datafeed.v1.ScannerService.ScanSymbols:output_type -> quant.datafeed.v1.ScanSymbolsResponse
 	20, // [20:21] is the sub-list for method output_type
 	19, // [19:20] is the sub-list for method input_type
 	19, // [19:19] is the sub-list for extension type_name
@@ -1009,24 +1155,23 @@ func file_datafeed_v1_scanner_proto_init() {
 	if File_datafeed_v1_scanner_proto != nil {
 		return
 	}
-	file_datafeed_v1_datafeed_proto_init()
-	file_datafeed_v1_scanner_proto_msgTypes[0].OneofWrappers = []any{
+	file_datafeed_v1_scanner_proto_msgTypes[2].OneofWrappers = []any{
 		(*ScannerFilterValue_StringValue)(nil),
 		(*ScannerFilterValue_NumberValue)(nil),
 		(*ScannerFilterValue_BoolValue)(nil),
 		(*ScannerFilterValue_StringList)(nil),
 		(*ScannerFilterValue_NumberList)(nil),
 	}
-	file_datafeed_v1_scanner_proto_msgTypes[2].OneofWrappers = []any{}
-	file_datafeed_v1_scanner_proto_msgTypes[7].OneofWrappers = []any{}
-	file_datafeed_v1_scanner_proto_msgTypes[8].OneofWrappers = []any{}
+	file_datafeed_v1_scanner_proto_msgTypes[4].OneofWrappers = []any{}
+	file_datafeed_v1_scanner_proto_msgTypes[9].OneofWrappers = []any{}
+	file_datafeed_v1_scanner_proto_msgTypes[10].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_datafeed_v1_scanner_proto_rawDesc), len(file_datafeed_v1_scanner_proto_rawDesc)),
-			NumEnums:      2,
-			NumMessages:   12,
+			NumEnums:      3,
+			NumMessages:   14,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
