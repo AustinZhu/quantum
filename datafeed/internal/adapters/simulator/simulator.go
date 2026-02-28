@@ -4,7 +4,7 @@ import (
 	"math"
 	"time"
 
-	"github.com/austin/quantum/datafeed/internal/storage"
+	"github.com/AustinZhu/quantum/datafeed/internal/storage"
 )
 
 type TickSource interface {

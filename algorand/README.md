@@ -24,6 +24,10 @@ Python 3.14 backend for quant research and trading workflows:
 
 ```text
 algorand/
+├── proto/                           # algorand-owned protobuf source
+├── buf.yaml
+├── buf.gen.yaml
+├── gen/openapi/                     # generated OpenAPI artifacts
 ├── src/algorand/app/                # app bootstrap, server, worker
 ├── src/algorand/core/               # config, logging, shared primitives
 ├── src/algorand/modules/            # domain modules
@@ -94,7 +98,21 @@ uv run pytest
 
 ```bash
 cd algorand
-./scripts/generate_proto.sh
+buf dep update
+buf lint
+buf generate
 ```
 
-This delegates to `../api/scripts/generate.sh`.
+Generated outputs from this module include:
+
+- Python protobuf/typing files in `src/algorand/interfaces/connectrpc/generated`
+- Go/connect stubs for shared consumers in `../datafeed/internal/gen/algorand/v1`
+- Kotlin protobuf stubs in `../doordash/build/generated/source/proto/main/kotlin`
+- TypeScript protobuf/connect stubs in `../terminal/src/lib/gen`
+- OpenAPI docs in `gen/openapi`
+
+You can also use:
+
+```bash
+./scripts/generate_proto.sh
+```

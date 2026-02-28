@@ -17,7 +17,7 @@ cp .env.example .env
 ## 2) Generate protobuf/connect clients
 
 ```bash
-./api/scripts/generate.sh
+make generate
 ```
 
 ## 3) Start and bootstrap the full platform (Terraform)
@@ -52,7 +52,10 @@ make tf-apply
 - Casdoor: http://localhost:8000
 - PgAdmin: http://localhost:5050
 - RedisInsight: http://localhost:5540
-- Generated OpenAPI: `api/gen/openapi/quantum.openapi.yml` and `api/gen/openapi/quantum.openapi.json`
+- Generated OpenAPI:
+  - `algorand/gen/openapi/quantum.openapi.{yml,json}`
+  - `datafeed/gen/openapi/quantum.openapi.{yml,json}`
+  - `doordash/gen/openapi/quantum.openapi.{yml,json}`
 
 ## Common commands
 

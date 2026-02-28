@@ -8,7 +8,7 @@ import (
 	connect "connectrpc.com/connect"
 	context "context"
 	errors "errors"
-	v1 "github.com/austin/quantum/datafeed/internal/gen/doordash/v1"
+	v1 "github.com/AustinZhu/quantum/datafeed/internal/gen/doordash/v1"
 	http "net/http"
 	strings "strings"
 )

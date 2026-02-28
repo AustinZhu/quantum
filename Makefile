@@ -25,8 +25,10 @@ bootstrap: ## Install local dependencies for all projects
 	cd datafeed && go mod tidy
 	cd doordash && (./gradlew --no-daemon help || gradle --no-daemon help)
 
-generate: ## Run protobuf/connect code generation from api/
-	./api/scripts/generate.sh
+generate: ## Run protobuf/connect code generation per service module
+	cd algorand && buf dep update && buf lint && buf generate
+	cd datafeed && buf dep update && buf lint && buf generate --path proto/datafeed/v1
+	cd doordash && buf dep update && buf lint && buf generate
 
 up: check-env ## Build and start the full local stack
 	docker compose up --build --wait

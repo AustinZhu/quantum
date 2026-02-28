@@ -582,7 +582,7 @@ services:
     volumes:
       - algorand_data:/app/data
       - ./infra/feast:/app/feast:ro
-      - ./api/gen/openapi:/app/openapi:ro
+      - ./algorand/gen/openapi:/app/openapi:ro
     healthcheck:
       test: ["CMD-SHELL", "if command -v curl >/dev/null 2>&1; then curl -fsS http://127.0.0.1:8080/healthz >/dev/null; elif command -v wget >/dev/null 2>&1; then wget -q -O- http://127.0.0.1:8080/healthz >/dev/null; else exit 1; fi"]
       interval: 10s
@@ -648,7 +648,7 @@ services:
     ports:
       - "8081:8081"
     volumes:
-      - ./api/gen/openapi:/app/openapi:ro
+      - ./datafeed/gen/openapi:/app/openapi:ro
     healthcheck:
       test: ["CMD-SHELL", "if command -v curl >/dev/null 2>&1; then curl -fsS http://127.0.0.1:8081/healthz >/dev/null; elif command -v wget >/dev/null 2>&1; then wget -q -O- http://127.0.0.1:8081/healthz >/dev/null; else exit 1; fi"]
       interval: 10s
@@ -656,20 +656,32 @@ services:
       retries: 15
       start_period: 20s
 
-  datafeed-worker:
+  datafeed-events:
     build:
       context: ./datafeed
       dockerfile: Dockerfile
-    container_name: datafeed-worker
+    container_name: datafeed-events
     env_file:
       - .env
-    environment:
-      DATAFEED_TEMPORAL_NAMESPACE: datafeed
-    command: ["/app/datafeed-worker"]
+    command: ["/app/datafeed-events"]
     depends_on:
       datafeed-api:
         condition: service_healthy
       redpanda:
+        condition: service_healthy
+      temporal-admin-tools:
+        condition: service_healthy
+
+  datafeed-jobs:
+    build:
+      context: ./datafeed
+      dockerfile: Dockerfile
+    container_name: datafeed-jobs
+    env_file:
+      - .env
+    command: ["/app/datafeed-jobs"]
+    depends_on:
+      datafeed-api:
         condition: service_healthy
       temporal-admin-tools:
         condition: service_healthy
@@ -698,7 +710,7 @@ services:
     ports:
       - "8082:8082"
     volumes:
-      - ./api/gen/openapi:/app/openapi:ro
+      - ./doordash/gen/openapi:/app/openapi:ro
 
   doordash-worker:
     build:

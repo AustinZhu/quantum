@@ -349,7 +349,7 @@ const file_algorand_v1_alerts_proto_rawDesc = "" +
 	"\x04page\x18\x02 \x01(\v2\x1b.quant.algorand.v1.PageInfoR\x04page2\xd0\x01\n" +
 	"\fAlertService\x12V\n" +
 	"\tTestAlert\x12#.quant.algorand.v1.TestAlertRequest\x1a$.quant.algorand.v1.TestAlertResponse\x12h\n" +
-	"\x0fListAlertEvents\x12).quant.algorand.v1.ListAlertEventsRequest\x1a*.quant.algorand.v1.ListAlertEventsResponseBHZFgithub.com/austin/quantum/datafeed/internal/gen/algorand/v1;algorandv1b\x06proto3"
+	"\x0fListAlertEvents\x12).quant.algorand.v1.ListAlertEventsRequest\x1a*.quant.algorand.v1.ListAlertEventsResponseBKZIgithub.com/AustinZhu/quantum/datafeed/internal/gen/algorand/v1;algorandv1b\x06proto3"
 
 var (
 	file_algorand_v1_alerts_proto_rawDescOnce sync.Once

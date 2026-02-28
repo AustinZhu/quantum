@@ -857,7 +857,7 @@ const file_doordash_v1_doordash_proto_rawDesc = "" +
 	"\fEvaluateRisk\x12&.quant.doordash.v1.EvaluateRiskRequest\x1a'.quant.doordash.v1.EvaluateRiskResponse\x12Y\n" +
 	"\n" +
 	"UpsertRule\x12$.quant.doordash.v1.UpsertRuleRequest\x1a%.quant.doordash.v1.UpsertRuleResponse\x12V\n" +
-	"\tListRules\x12#.quant.doordash.v1.ListRulesRequest\x1a$.quant.doordash.v1.ListRulesResponseBHZFgithub.com/austin/quantum/datafeed/internal/gen/doordash/v1;doordashv1b\x06proto3"
+	"\tListRules\x12#.quant.doordash.v1.ListRulesRequest\x1a$.quant.doordash.v1.ListRulesResponseBKZIgithub.com/AustinZhu/quantum/datafeed/internal/gen/doordash/v1;doordashv1b\x06proto3"
 
 var (
 	file_doordash_v1_doordash_proto_rawDescOnce sync.Once

@@ -243,6 +243,10 @@ function mapSearchResult(
   return item;
 }
 
+function barCacheKey(symbolInfo: Pick<LibrarySymbolInfo, "name" | "ticker">, resolution: ResolutionString): string {
+  return `${symbolInfo.ticker ?? symbolInfo.name}::${resolution}`;
+}
+
 function mapConfig(config: GetConfigResponse): DatafeedConfiguration {
   const units = Object.entries(config.units).reduce<Record<string, { id: string; name: string; description: string }[]>>(
     (result, [group, unitList]) => {
@@ -298,6 +302,7 @@ function mapConfig(config: GetConfigResponse): DatafeedConfiguration {
 export function useDataFeed(): IBasicDataFeed {
   const client = useMemo(() => getDatafeedClient(), []);
   const subscriptionsRef = useRef<Map<string, SubscriptionState>>(new Map());
+  const lastBarsRef = useRef<Map<string, Bar>>(new Map());
 
   useEffect(() => {
     return () => {
@@ -305,6 +310,7 @@ export function useDataFeed(): IBasicDataFeed {
         subscription.abortController.abort();
       }
       subscriptionsRef.current.clear();
+      lastBarsRef.current.clear();
     };
   }, []);
 
@@ -396,12 +402,15 @@ export function useDataFeed(): IBasicDataFeed {
       getBars(symbolInfo, resolution, periodParams, onResult: HistoryCallback, onError: DatafeedErrorCallback) {
         void (async () => {
           try {
+            const requestedCountBack = Number.isFinite(periodParams.countBack)
+              ? Math.floor(periodParams.countBack)
+              : 300;
             const response = await client.getBars({
               symbol: symbolInfo.ticker ?? symbolInfo.name,
               resolution,
               from: BigInt(Math.floor(periodParams.from)),
               to: BigInt(Math.floor(periodParams.to)),
-              countBack: Math.max(2, Math.floor(periodParams.countBack)),
+              countBack: Math.max(2, requestedCountBack),
             });
 
             const bars: Bar[] = response.bars.map((item) => {
@@ -417,6 +426,10 @@ export function useDataFeed(): IBasicDataFeed {
               }
               return bar;
             });
+            bars.sort((left, right) => left.time - right.time);
+            if (bars.length > 0) {
+              lastBarsRef.current.set(barCacheKey(symbolInfo, resolution), bars[bars.length - 1]);
+            }
 
             onResult(bars, {
               noData: response.noData || bars.length === 0,
@@ -468,6 +481,13 @@ export function useDataFeed(): IBasicDataFeed {
               if (update.bar.volume !== undefined) {
                 bar.volume = update.bar.volume;
               }
+              const key = barCacheKey(symbolInfo, resolution);
+              const previous = lastBarsRef.current.get(key);
+              if (previous && bar.time < previous.time) {
+                // Drop stale rows from provider snapshots. TradingView expects monotonic realtime updates.
+                continue;
+              }
+              lastBarsRef.current.set(key, bar);
               onTick(bar);
             }
           } catch {

@@ -510,6 +510,7 @@ func (c *Client) readBars(
 			continue
 		}
 
+		var latest *Candle
 		for _, raw := range envelope.Data {
 			var row []string
 			if err := json.Unmarshal(raw, &row); err != nil {
@@ -521,11 +522,18 @@ func (c *Client) readBars(
 				c.logger.Debug("drop websocket bar message: parse candle failed", "error", err)
 				continue
 			}
-			select {
-			case out <- candle:
-			case <-ctx.Done():
-				return
+			if latest == nil || candle.TsMS > latest.TsMS || (candle.TsMS == latest.TsMS && candle.Confirmed && !latest.Confirmed) {
+				selected := candle
+				latest = &selected
 			}
+		}
+		if latest == nil {
+			continue
+		}
+		select {
+		case out <- *latest:
+		case <-ctx.Done():
+			return
 		}
 	}
 }

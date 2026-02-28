@@ -2,6 +2,8 @@
 set -euo pipefail
 
 MONOREPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-cd "$MONOREPO_ROOT"
+cd "$MONOREPO_ROOT/algorand"
 
-./api/scripts/generate.sh
+buf dep update
+buf lint
+buf generate

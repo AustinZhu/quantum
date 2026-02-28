@@ -502,7 +502,7 @@ const file_algorand_v1_catalog_proto_rawDesc = "" +
 	"\x0eCatalogService\x12e\n" +
 	"\x0eListStrategies\x12(.quant.algorand.v1.ListStrategiesRequest\x1a).quant.algorand.v1.ListStrategiesResponse\x12e\n" +
 	"\x0eListIndicators\x12(.quant.algorand.v1.ListIndicatorsRequest\x1a).quant.algorand.v1.ListIndicatorsResponse\x12\\\n" +
-	"\vListSignals\x12%.quant.algorand.v1.ListSignalsRequest\x1a&.quant.algorand.v1.ListSignalsResponseBHZFgithub.com/austin/quantum/datafeed/internal/gen/algorand/v1;algorandv1b\x06proto3"
+	"\vListSignals\x12%.quant.algorand.v1.ListSignalsRequest\x1a&.quant.algorand.v1.ListSignalsResponseBKZIgithub.com/AustinZhu/quantum/datafeed/internal/gen/algorand/v1;algorandv1b\x06proto3"
 
 var (
 	file_algorand_v1_catalog_proto_rawDescOnce sync.Once

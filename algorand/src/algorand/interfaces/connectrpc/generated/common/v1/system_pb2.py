@@ -24,14 +24,14 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x16\x63ommon/v1/system.proto\x12\x0fquant.system.v1\"\x0f\n\rHealthRequest\"W\n\x0eHealthResponse\x12\x18\n\x07service\x18\x01 \x01(\tR\x07service\x12\x16\n\x06status\x18\x02 \x01(\tR\x06status\x12\x13\n\x05ts_ms\x18\x03 \x01(\x03R\x04tsMs\"\x12\n\x10ReadinessRequest\"V\n\x10\x44\x65pendencyStatus\x12\x12\n\x04name\x18\x01 \x01(\tR\x04name\x12\x16\n\x06status\x18\x02 \x01(\tR\x06status\x12\x16\n\x06\x64\x65tail\x18\x03 \x01(\tR\x06\x64\x65tail\"\x8c\x01\n\x11ReadinessResponse\x12\x18\n\x07service\x18\x01 \x01(\tR\x07service\x12\x16\n\x06status\x18\x02 \x01(\tR\x06status\x12\x45\n\x0c\x64\x65pendencies\x18\x03 \x03(\x0b\x32!.quant.system.v1.DependencyStatusR\x0c\x64\x65pendencies2\xb4\x01\n\rSystemService\x12L\n\tGetHealth\x12\x1e.quant.system.v1.HealthRequest\x1a\x1f.quant.system.v1.HealthResponse\x12U\n\x0cGetReadiness\x12!.quant.system.v1.ReadinessRequest\x1a\".quant.system.v1.ReadinessResponseBDZBgithub.com/austin/quantum/datafeed/internal/gen/system/v1;systemv1b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x16\x63ommon/v1/system.proto\x12\x0fquant.system.v1\"\x0f\n\rHealthRequest\"W\n\x0eHealthResponse\x12\x18\n\x07service\x18\x01 \x01(\tR\x07service\x12\x16\n\x06status\x18\x02 \x01(\tR\x06status\x12\x13\n\x05ts_ms\x18\x03 \x01(\x03R\x04tsMs\"\x12\n\x10ReadinessRequest\"V\n\x10\x44\x65pendencyStatus\x12\x12\n\x04name\x18\x01 \x01(\tR\x04name\x12\x16\n\x06status\x18\x02 \x01(\tR\x06status\x12\x16\n\x06\x64\x65tail\x18\x03 \x01(\tR\x06\x64\x65tail\"\x8c\x01\n\x11ReadinessResponse\x12\x18\n\x07service\x18\x01 \x01(\tR\x07service\x12\x16\n\x06status\x18\x02 \x01(\tR\x06status\x12\x45\n\x0c\x64\x65pendencies\x18\x03 \x03(\x0b\x32!.quant.system.v1.DependencyStatusR\x0c\x64\x65pendencies2\xb4\x01\n\rSystemService\x12L\n\tGetHealth\x12\x1e.quant.system.v1.HealthRequest\x1a\x1f.quant.system.v1.HealthResponse\x12U\n\x0cGetReadiness\x12!.quant.system.v1.ReadinessRequest\x1a\".quant.system.v1.ReadinessResponseBGZEgithub.com/AustinZhu/quantum/datafeed/internal/gen/system/v1;systemv1b\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'common.v1.system_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
   _globals['DESCRIPTOR']._loaded_options = None
-  _globals['DESCRIPTOR']._serialized_options = b'ZBgithub.com/austin/quantum/datafeed/internal/gen/system/v1;systemv1'
+  _globals['DESCRIPTOR']._serialized_options = b'ZEgithub.com/AustinZhu/quantum/datafeed/internal/gen/system/v1;systemv1'
   _globals['_HEALTHREQUEST']._serialized_start=43
   _globals['_HEALTHREQUEST']._serialized_end=58
   _globals['_HEALTHRESPONSE']._serialized_start=60

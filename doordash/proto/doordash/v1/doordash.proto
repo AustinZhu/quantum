@@ -1,0 +1,91 @@
+syntax = "proto3";
+
+package quant.doordash.v1;
+option go_package = "github.com/AustinZhu/quantum/datafeed/internal/gen/doordash/v1;doordashv1";
+
+service OrderService {
+  rpc PlaceOrder(PlaceOrderRequest) returns (PlaceOrderResponse);
+  rpc GetOrder(GetOrderRequest) returns (GetOrderResponse);
+  rpc ListOrders(ListOrdersRequest) returns (ListOrdersResponse);
+}
+
+service RiskService {
+  rpc EvaluateRisk(EvaluateRiskRequest) returns (EvaluateRiskResponse);
+  rpc UpsertRule(UpsertRuleRequest) returns (UpsertRuleResponse);
+  rpc ListRules(ListRulesRequest) returns (ListRulesResponse);
+}
+
+message PlaceOrderRequest {
+  string symbol = 1;
+  string side = 2;
+  double quantity = 3;
+  string order_type = 4;
+  double limit_price = 5;
+  string account_id = 6;
+}
+
+message PlaceOrderResponse {
+  string order_id = 1;
+  string status = 2;
+}
+
+message GetOrderRequest {
+  string order_id = 1;
+}
+
+message GetOrderResponse {
+  string order_id = 1;
+  string status = 2;
+  string symbol = 3;
+  string side = 4;
+  double quantity = 5;
+  string account_id = 6;
+}
+
+message ListOrdersRequest {
+  string account_id = 1;
+  uint32 limit = 2;
+}
+
+message ListOrdersResponse {
+  repeated GetOrderResponse orders = 1;
+}
+
+message EvaluateRiskRequest {
+  string order_id = 1;
+  string account_id = 2;
+  string symbol = 3;
+  string side = 4;
+  double quantity = 5;
+}
+
+message EvaluateRiskResponse {
+  string decision_id = 1;
+  string verdict = 2;
+  repeated string reasons = 3;
+}
+
+message UpsertRuleRequest {
+  string rule_id = 1;
+  string version = 2;
+  string drl = 3;
+  bool enabled = 4;
+}
+
+message UpsertRuleResponse {
+  string rule_id = 1;
+  string version = 2;
+}
+
+message RuleVersion {
+  string rule_id = 1;
+  string version = 2;
+  bool enabled = 3;
+  int64 updated_ts_ms = 4;
+}
+
+message ListRulesRequest {}
+
+message ListRulesResponse {
+  repeated RuleVersion rules = 1;
+}

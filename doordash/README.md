@@ -25,6 +25,10 @@ Kotlin order execution and risk-gating service.
 
 ```text
 doordash/
+├── proto/                             # doordash-owned protobuf source
+├── buf.yaml
+├── buf.gen.yaml
+├── gen/openapi/                       # generated OpenAPI artifacts
 ├── src/main/kotlin/com/quantum/doordash/
 │   ├── app/                         # runtime assembly
 │   ├── connect/                     # HTTP/RPC routes
@@ -103,3 +107,20 @@ Auth:
 cd doordash
 gradle test
 ```
+
+## Protobuf and OpenAPI Codegen
+
+```bash
+cd doordash
+buf dep update
+buf lint
+buf generate
+```
+
+Generated outputs from this module include:
+
+- Kotlin protobuf stubs in `build/generated/source/proto/main/kotlin`
+- Go/connect stubs for shared consumers in `../datafeed/internal/gen/doordash/v1` and `../datafeed/internal/gen/system/v1`
+- Python protobuf/typing files in `../algorand/src/algorand/interfaces/connectrpc/generated`
+- TypeScript protobuf/connect stubs in `../terminal/src/lib/gen`
+- OpenAPI docs in `gen/openapi`

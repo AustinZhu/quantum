@@ -294,7 +294,7 @@ const file_common_v1_system_proto_rawDesc = "" +
 	"\fdependencies\x18\x03 \x03(\v2!.quant.system.v1.DependencyStatusR\fdependencies2\xb4\x01\n" +
 	"\rSystemService\x12L\n" +
 	"\tGetHealth\x12\x1e.quant.system.v1.HealthRequest\x1a\x1f.quant.system.v1.HealthResponse\x12U\n" +
-	"\fGetReadiness\x12!.quant.system.v1.ReadinessRequest\x1a\".quant.system.v1.ReadinessResponseBDZBgithub.com/austin/quantum/datafeed/internal/gen/system/v1;systemv1b\x06proto3"
+	"\fGetReadiness\x12!.quant.system.v1.ReadinessRequest\x1a\".quant.system.v1.ReadinessResponseBGZEgithub.com/AustinZhu/quantum/datafeed/internal/gen/system/v1;systemv1b\x06proto3"
 
 var (
 	file_common_v1_system_proto_rawDescOnce sync.Once

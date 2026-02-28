@@ -1141,7 +1141,7 @@ const file_algorand_v1_ml_proto_rawDesc = "" +
 	"\x0eRunTrainingJob\x12(.quant.algorand.v1.RunTrainingJobRequest\x1a).quant.algorand.v1.RunTrainingJobResponse\x12k\n" +
 	"\x10GetModelVersions\x12*.quant.algorand.v1.GetModelVersionsRequest\x1a+.quant.algorand.v1.GetModelVersionsResponse\x12b\n" +
 	"\rClusterStocks\x12'.quant.algorand.v1.ClusterStocksRequest\x1a(.quant.algorand.v1.ClusterStocksResponse\x12n\n" +
-	"\x11FindSimilarStocks\x12+.quant.algorand.v1.FindSimilarStocksRequest\x1a,.quant.algorand.v1.FindSimilarStocksResponseBHZFgithub.com/austin/quantum/datafeed/internal/gen/algorand/v1;algorandv1b\x06proto3"
+	"\x11FindSimilarStocks\x12+.quant.algorand.v1.FindSimilarStocksRequest\x1a,.quant.algorand.v1.FindSimilarStocksResponseBKZIgithub.com/AustinZhu/quantum/datafeed/internal/gen/algorand/v1;algorandv1b\x06proto3"
 
 var (
 	file_algorand_v1_ml_proto_rawDescOnce sync.Once

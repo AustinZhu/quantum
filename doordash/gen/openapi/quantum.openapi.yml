@@ -1,0 +1,602 @@
+openapi: 3.1.0
+info: {}
+paths:
+  /quant.doordash.v1.OrderService/GetOrder:
+    post:
+      tags:
+        - OrderService
+      summary: GetOrder
+      operationId: OrderService_GetOrder
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/quant.doordash.v1.GetOrderRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/quant.doordash.v1.GetOrderResponse'
+  /quant.doordash.v1.OrderService/ListOrders:
+    post:
+      tags:
+        - OrderService
+      summary: ListOrders
+      operationId: OrderService_ListOrders
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/quant.doordash.v1.ListOrdersRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/quant.doordash.v1.ListOrdersResponse'
+  /quant.doordash.v1.OrderService/PlaceOrder:
+    post:
+      tags:
+        - OrderService
+      summary: PlaceOrder
+      operationId: OrderService_PlaceOrder
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/quant.doordash.v1.PlaceOrderRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/quant.doordash.v1.PlaceOrderResponse'
+  /quant.doordash.v1.RiskService/EvaluateRisk:
+    post:
+      tags:
+        - RiskService
+      summary: EvaluateRisk
+      operationId: RiskService_EvaluateRisk
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/quant.doordash.v1.EvaluateRiskRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/quant.doordash.v1.EvaluateRiskResponse'
+  /quant.doordash.v1.RiskService/ListRules:
+    post:
+      tags:
+        - RiskService
+      summary: ListRules
+      operationId: RiskService_ListRules
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/quant.doordash.v1.ListRulesRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/quant.doordash.v1.ListRulesResponse'
+  /quant.doordash.v1.RiskService/UpsertRule:
+    post:
+      tags:
+        - RiskService
+      summary: UpsertRule
+      operationId: RiskService_UpsertRule
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/quant.doordash.v1.UpsertRuleRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/quant.doordash.v1.UpsertRuleResponse'
+  /quant.system.v1.SystemService/GetHealth:
+    post:
+      tags:
+        - SystemService
+      summary: GetHealth
+      operationId: SystemService_GetHealth
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/quant.system.v1.HealthRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/quant.system.v1.HealthResponse'
+  /quant.system.v1.SystemService/GetReadiness:
+    post:
+      tags:
+        - SystemService
+      summary: GetReadiness
+      operationId: SystemService_GetReadiness
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/quant.system.v1.ReadinessRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/quant.system.v1.ReadinessResponse'
+components:
+  schemas:
+    connect-protocol-version:
+      type: number
+      title: Connect-Protocol-Version
+      enum:
+        - 1
+      description: Define the version of the Connect protocol
+      const: 1
+    connect-timeout-header:
+      type: number
+      title: Connect-Timeout-Ms
+      description: Define the timeout, in ms
+    connect.error:
+      type: object
+      properties:
+        code:
+          type: string
+          examples:
+            - not_found
+          enum:
+            - canceled
+            - unknown
+            - invalid_argument
+            - deadline_exceeded
+            - not_found
+            - already_exists
+            - permission_denied
+            - resource_exhausted
+            - failed_precondition
+            - aborted
+            - out_of_range
+            - unimplemented
+            - internal
+            - unavailable
+            - data_loss
+            - unauthenticated
+          description: The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
+        message:
+          type: string
+          description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/connect.error_details.Any'
+          description: A list of messages that carry the error details. There is no limit on the number of messages.
+      title: Connect Error
+      additionalProperties: true
+      description: 'Error type returned by Connect: https://connectrpc.com/docs/go/errors/#http-representation'
+    connect.error_details.Any:
+      type: object
+      properties:
+        type:
+          type: string
+          description: 'A URL that acts as a globally unique identifier for the type of the serialized message. For example: `type.googleapis.com/google.rpc.ErrorInfo`. This is used to determine the schema of the data in the `value` field and is the discriminator for the `debug` field.'
+        value:
+          type: string
+          format: binary
+          description: The Protobuf message, serialized as bytes and base64-encoded. The specific message type is identified by the `type` field.
+        debug:
+          oneOf:
+            - type: object
+              title: Any
+              additionalProperties: true
+              description: Detailed error information.
+          discriminator:
+            propertyName: type
+          title: Debug
+          description: Deserialized error detail payload. The 'type' field indicates the schema. This field is for easier debugging and should not be relied upon for application logic.
+      additionalProperties: true
+      description: Contains an arbitrary serialized message along with a @type that describes the type of the serialized message, with an additional debug field for ConnectRPC error details.
+    quant.doordash.v1.EvaluateRiskRequest:
+      type: object
+      properties:
+        orderId:
+          type: string
+          title: order_id
+        accountId:
+          type: string
+          title: account_id
+        symbol:
+          type: string
+          title: symbol
+        side:
+          type: string
+          title: side
+        quantity:
+          type: number
+          title: quantity
+          format: double
+      title: EvaluateRiskRequest
+      additionalProperties: false
+    quant.doordash.v1.EvaluateRiskResponse:
+      type: object
+      properties:
+        decisionId:
+          type: string
+          title: decision_id
+        verdict:
+          type: string
+          title: verdict
+        reasons:
+          type: array
+          items:
+            type: string
+          title: reasons
+      title: EvaluateRiskResponse
+      additionalProperties: false
+    quant.doordash.v1.GetOrderRequest:
+      type: object
+      properties:
+        orderId:
+          type: string
+          title: order_id
+      title: GetOrderRequest
+      additionalProperties: false
+    quant.doordash.v1.GetOrderResponse:
+      type: object
+      properties:
+        orderId:
+          type: string
+          title: order_id
+        status:
+          type: string
+          title: status
+        symbol:
+          type: string
+          title: symbol
+        side:
+          type: string
+          title: side
+        quantity:
+          type: number
+          title: quantity
+          format: double
+        accountId:
+          type: string
+          title: account_id
+      title: GetOrderResponse
+      additionalProperties: false
+    quant.doordash.v1.ListOrdersRequest:
+      type: object
+      properties:
+        accountId:
+          type: string
+          title: account_id
+        limit:
+          type: integer
+          title: limit
+      title: ListOrdersRequest
+      additionalProperties: false
+    quant.doordash.v1.ListOrdersResponse:
+      type: object
+      properties:
+        orders:
+          type: array
+          items:
+            $ref: '#/components/schemas/quant.doordash.v1.GetOrderResponse'
+          title: orders
+      title: ListOrdersResponse
+      additionalProperties: false
+    quant.doordash.v1.ListRulesRequest:
+      type: object
+      title: ListRulesRequest
+      additionalProperties: false
+    quant.doordash.v1.ListRulesResponse:
+      type: object
+      properties:
+        rules:
+          type: array
+          items:
+            $ref: '#/components/schemas/quant.doordash.v1.RuleVersion'
+          title: rules
+      title: ListRulesResponse
+      additionalProperties: false
+    quant.doordash.v1.PlaceOrderRequest:
+      type: object
+      properties:
+        symbol:
+          type: string
+          title: symbol
+        side:
+          type: string
+          title: side
+        quantity:
+          type: number
+          title: quantity
+          format: double
+        orderType:
+          type: string
+          title: order_type
+        limitPrice:
+          type: number
+          title: limit_price
+          format: double
+        accountId:
+          type: string
+          title: account_id
+      title: PlaceOrderRequest
+      additionalProperties: false
+    quant.doordash.v1.PlaceOrderResponse:
+      type: object
+      properties:
+        orderId:
+          type: string
+          title: order_id
+        status:
+          type: string
+          title: status
+      title: PlaceOrderResponse
+      additionalProperties: false
+    quant.doordash.v1.RuleVersion:
+      type: object
+      properties:
+        ruleId:
+          type: string
+          title: rule_id
+        version:
+          type: string
+          title: version
+        enabled:
+          type: boolean
+          title: enabled
+        updatedTsMs:
+          type:
+            - integer
+            - string
+          title: updated_ts_ms
+          format: int64
+      title: RuleVersion
+      additionalProperties: false
+    quant.doordash.v1.UpsertRuleRequest:
+      type: object
+      properties:
+        ruleId:
+          type: string
+          title: rule_id
+        version:
+          type: string
+          title: version
+        drl:
+          type: string
+          title: drl
+        enabled:
+          type: boolean
+          title: enabled
+      title: UpsertRuleRequest
+      additionalProperties: false
+    quant.doordash.v1.UpsertRuleResponse:
+      type: object
+      properties:
+        ruleId:
+          type: string
+          title: rule_id
+        version:
+          type: string
+          title: version
+      title: UpsertRuleResponse
+      additionalProperties: false
+    quant.system.v1.DependencyStatus:
+      type: object
+      properties:
+        name:
+          type: string
+          title: name
+        status:
+          type: string
+          title: status
+        detail:
+          type: string
+          title: detail
+      title: DependencyStatus
+      additionalProperties: false
+    quant.system.v1.HealthRequest:
+      type: object
+      title: HealthRequest
+      additionalProperties: false
+    quant.system.v1.HealthResponse:
+      type: object
+      properties:
+        service:
+          type: string
+          title: service
+        status:
+          type: string
+          title: status
+        tsMs:
+          type:
+            - integer
+            - string
+          title: ts_ms
+          format: int64
+      title: HealthResponse
+      additionalProperties: false
+    quant.system.v1.ReadinessRequest:
+      type: object
+      title: ReadinessRequest
+      additionalProperties: false
+    quant.system.v1.ReadinessResponse:
+      type: object
+      properties:
+        service:
+          type: string
+          title: service
+        status:
+          type: string
+          title: status
+        dependencies:
+          type: array
+          items:
+            $ref: '#/components/schemas/quant.system.v1.DependencyStatus'
+          title: dependencies
+      title: ReadinessResponse
+      additionalProperties: false
+security: []
+tags:
+  - name: SystemService
+  - name: OrderService
+  - name: RiskService

@@ -6,7 +6,6 @@ For a shorter setup flow, see [QUICKSTART.md](./QUICKSTART.md).
 
 ## What This Repo Contains
 
-- `api`: canonical protobuf and code generation workspace (Buf)
 - `algorand`: Python 3.14 service for backtesting, analytics, ML, features, technical analysis, signals, and alerts
 - `datafeed`: Go 1.26 service for market/news/social ingestion and replay (sqlc + pgx + golang-migrate)
 - `doordash`: Kotlin service for order management and Drools-based risk gating (Ktor + jOOQ + Flyway)
@@ -53,16 +52,21 @@ flowchart LR
 ```text
 quantum/
 ├── algorand/                # Python service
-├── datafeed/                # Go service
-├── doordash/                # Kotlin service
-├── terminal/                # Next.js dashboard + BFF
-├── api/                     # Canonical protobuf + codegen
-│   ├── proto/
-│   │   ├── algorand/v1/
-│   │   ├── datafeed/v1/
-│   │   ├── doordash/v1/
-│   │   └── common/v1/
+│   ├── proto/               # algorand-owned protobuf modules
+│   ├── buf.yaml
+│   ├── buf.gen.yaml
 │   └── gen/openapi/
+├── datafeed/                # Go service
+│   ├── proto/               # datafeed-owned protobuf modules
+│   ├── buf.yaml
+│   ├── buf.gen.yaml
+│   └── gen/openapi/
+├── doordash/                # Kotlin service
+│   ├── proto/               # doordash-owned protobuf modules
+│   ├── buf.yaml
+│   ├── buf.gen.yaml
+│   └── gen/openapi/
+├── terminal/                # Next.js dashboard + BFF
 ├── infra/                   # ops/infra configs (consul, grafana, loki, tempo, etc.)
 ├── docker-compose.yml       # Single local stack entrypoint
 ├── .env.example
@@ -71,11 +75,24 @@ quantum/
 
 ## Service Contracts and API Docs
 
-- Protobuf source of truth: `api/proto`
-- Codegen command: `./api/scripts/generate.sh`
+- Contract ownership model:
+  - `algorand` owns `algorand/proto`
+  - `datafeed` owns `datafeed/proto`
+  - `doordash` owns `doordash/proto`
+  - there is no shared top-level `api` proto workspace
+- Protobuf source of truth:
+  - `algorand/proto`
+  - `datafeed/proto`
+  - `doordash/proto`
+- Codegen command: `make generate`
+- Per-service codegen commands:
+  - `cd algorand && buf dep update && buf lint && buf generate`
+  - `cd datafeed && buf dep update && buf lint && buf generate --path proto/datafeed/v1`
+  - `cd doordash && buf dep update && buf lint && buf generate`
 - Generated OpenAPI artifacts:
-  - `api/gen/openapi/quantum.openapi.yml`
-  - `api/gen/openapi/quantum.openapi.json`
+  - `algorand/gen/openapi/quantum.openapi.{yml,json}`
+  - `datafeed/gen/openapi/quantum.openapi.{yml,json}`
+  - `doordash/gen/openapi/quantum.openapi.{yml,json}`
 - Scalar API docs:
   - Algorand: [http://localhost:8080/scalar](http://localhost:8080/scalar)
   - Datafeed: [http://localhost:8081/scalar](http://localhost:8081/scalar)
@@ -241,6 +258,14 @@ make down-v
 
 ```bash
 make generate
+```
+
+Or run module-local generation:
+
+```bash
+cd algorand && buf generate
+cd datafeed && buf generate --path proto/datafeed/v1
+cd doordash && buf generate
 ```
 
 ### Run tests

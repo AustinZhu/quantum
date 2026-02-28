@@ -413,7 +413,7 @@ const file_algorand_v1_backtest_proto_rawDesc = "" +
 	"\x0fBacktestService\x12\\\n" +
 	"\vRunBacktest\x12%.quant.algorand.v1.RunBacktestRequest\x1a&.quant.algorand.v1.RunBacktestResponse\x12M\n" +
 	"\x06GetRun\x12 .quant.algorand.v1.GetRunRequest\x1a!.quant.algorand.v1.GetRunResponse\x12S\n" +
-	"\bListRuns\x12\".quant.algorand.v1.ListRunsRequest\x1a#.quant.algorand.v1.ListRunsResponseBHZFgithub.com/austin/quantum/datafeed/internal/gen/algorand/v1;algorandv1b\x06proto3"
+	"\bListRuns\x12\".quant.algorand.v1.ListRunsRequest\x1a#.quant.algorand.v1.ListRunsResponseBKZIgithub.com/AustinZhu/quantum/datafeed/internal/gen/algorand/v1;algorandv1b\x06proto3"
 
 var (
 	file_algorand_v1_backtest_proto_rawDescOnce sync.Once

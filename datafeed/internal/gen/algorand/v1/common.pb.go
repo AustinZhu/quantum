@@ -643,7 +643,7 @@ const file_common_v1_common_proto_rawDesc = "" +
 	"\n" +
 	"page_token\x18\x02 \x01(\tR\tpageToken\"2\n" +
 	"\bPageInfo\x12&\n" +
-	"\x0fnext_page_token\x18\x01 \x01(\tR\rnextPageTokenBHZFgithub.com/austin/quantum/datafeed/internal/gen/algorand/v1;algorandv1b\x06proto3"
+	"\x0fnext_page_token\x18\x01 \x01(\tR\rnextPageTokenBKZIgithub.com/AustinZhu/quantum/datafeed/internal/gen/algorand/v1;algorandv1b\x06proto3"
 
 var (
 	file_common_v1_common_proto_rawDescOnce sync.Once

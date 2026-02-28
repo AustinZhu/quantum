@@ -1,0 +1,1433 @@
+openapi: 3.1.0
+info: {}
+paths:
+  /quant.algorand.v1.AlertService/ListAlertEvents:
+    post:
+      tags:
+        - AlertService
+      summary: ListAlertEvents
+      operationId: AlertService_ListAlertEvents
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/quant.algorand.v1.ListAlertEventsRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/quant.algorand.v1.ListAlertEventsResponse'
+  /quant.algorand.v1.AlertService/TestAlert:
+    post:
+      tags:
+        - AlertService
+      summary: TestAlert
+      operationId: AlertService_TestAlert
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/quant.algorand.v1.TestAlertRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/quant.algorand.v1.TestAlertResponse'
+  /quant.algorand.v1.AnalyticsService/GetPerformanceSummary:
+    post:
+      tags:
+        - AnalyticsService
+      summary: GetPerformanceSummary
+      operationId: AnalyticsService_GetPerformanceSummary
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/quant.algorand.v1.GetPerformanceSummaryRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/quant.algorand.v1.GetPerformanceSummaryResponse'
+  /quant.algorand.v1.AnalyticsService/GetPlotlyArtifact:
+    post:
+      tags:
+        - AnalyticsService
+      summary: GetPlotlyArtifact
+      operationId: AnalyticsService_GetPlotlyArtifact
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/quant.algorand.v1.GetPlotlyArtifactRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/quant.algorand.v1.GetPlotlyArtifactResponse'
+  /quant.algorand.v1.AnalyticsService/GetTradingViewSeries:
+    post:
+      tags:
+        - AnalyticsService
+      summary: GetTradingViewSeries
+      operationId: AnalyticsService_GetTradingViewSeries
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/quant.algorand.v1.GetTradingViewSeriesRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/quant.algorand.v1.GetTradingViewSeriesResponse'
+  /quant.algorand.v1.BacktestService/GetRun:
+    post:
+      tags:
+        - BacktestService
+      summary: GetRun
+      operationId: BacktestService_GetRun
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/quant.algorand.v1.GetRunRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/quant.algorand.v1.GetRunResponse'
+  /quant.algorand.v1.BacktestService/ListRuns:
+    post:
+      tags:
+        - BacktestService
+      summary: ListRuns
+      operationId: BacktestService_ListRuns
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/quant.algorand.v1.ListRunsRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/quant.algorand.v1.ListRunsResponse'
+  /quant.algorand.v1.BacktestService/RunBacktest:
+    post:
+      tags:
+        - BacktestService
+      summary: RunBacktest
+      operationId: BacktestService_RunBacktest
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/quant.algorand.v1.RunBacktestRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/quant.algorand.v1.RunBacktestResponse'
+  /quant.algorand.v1.CatalogService/ListIndicators:
+    post:
+      tags:
+        - CatalogService
+      summary: ListIndicators
+      operationId: CatalogService_ListIndicators
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/quant.algorand.v1.ListIndicatorsRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/quant.algorand.v1.ListIndicatorsResponse'
+  /quant.algorand.v1.CatalogService/ListSignals:
+    post:
+      tags:
+        - CatalogService
+      summary: ListSignals
+      operationId: CatalogService_ListSignals
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/quant.algorand.v1.ListSignalsRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/quant.algorand.v1.ListSignalsResponse'
+  /quant.algorand.v1.CatalogService/ListStrategies:
+    post:
+      tags:
+        - CatalogService
+      summary: ListStrategies
+      operationId: CatalogService_ListStrategies
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/quant.algorand.v1.ListStrategiesRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/quant.algorand.v1.ListStrategiesResponse'
+  /quant.algorand.v1.MLService/ClusterStocks:
+    post:
+      tags:
+        - MLService
+      summary: ClusterStocks
+      operationId: MLService_ClusterStocks
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/quant.algorand.v1.ClusterStocksRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/quant.algorand.v1.ClusterStocksResponse'
+  /quant.algorand.v1.MLService/FindSimilarStocks:
+    post:
+      tags:
+        - MLService
+      summary: FindSimilarStocks
+      operationId: MLService_FindSimilarStocks
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/quant.algorand.v1.FindSimilarStocksRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/quant.algorand.v1.FindSimilarStocksResponse'
+  /quant.algorand.v1.MLService/GetModelVersions:
+    post:
+      tags:
+        - MLService
+      summary: GetModelVersions
+      operationId: MLService_GetModelVersions
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/quant.algorand.v1.GetModelVersionsRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/quant.algorand.v1.GetModelVersionsResponse'
+  /quant.algorand.v1.MLService/RunTrainingJob:
+    post:
+      tags:
+        - MLService
+      summary: RunTrainingJob
+      operationId: MLService_RunTrainingJob
+      parameters:
+        - name: Connect-Protocol-Version
+          in: header
+          required: true
+          schema:
+            $ref: '#/components/schemas/connect-protocol-version'
+        - name: Connect-Timeout-Ms
+          in: header
+          schema:
+            $ref: '#/components/schemas/connect-timeout-header'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/quant.algorand.v1.RunTrainingJobRequest'
+        required: true
+      responses:
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connect.error'
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/quant.algorand.v1.RunTrainingJobResponse'
+components:
+  schemas:
+    connect-protocol-version:
+      type: number
+      title: Connect-Protocol-Version
+      enum:
+        - 1
+      description: Define the version of the Connect protocol
+      const: 1
+    connect-timeout-header:
+      type: number
+      title: Connect-Timeout-Ms
+      description: Define the timeout, in ms
+    connect.error:
+      type: object
+      properties:
+        code:
+          type: string
+          examples:
+            - not_found
+          enum:
+            - canceled
+            - unknown
+            - invalid_argument
+            - deadline_exceeded
+            - not_found
+            - already_exists
+            - permission_denied
+            - resource_exhausted
+            - failed_precondition
+            - aborted
+            - out_of_range
+            - unimplemented
+            - internal
+            - unavailable
+            - data_loss
+            - unauthenticated
+          description: The status code, which should be an enum value of [google.rpc.Code][google.rpc.Code].
+        message:
+          type: string
+          description: A developer-facing error message, which should be in English. Any user-facing error message should be localized and sent in the [google.rpc.Status.details][google.rpc.Status.details] field, or localized by the client.
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/connect.error_details.Any'
+          description: A list of messages that carry the error details. There is no limit on the number of messages.
+      title: Connect Error
+      additionalProperties: true
+      description: 'Error type returned by Connect: https://connectrpc.com/docs/go/errors/#http-representation'
+    connect.error_details.Any:
+      type: object
+      properties:
+        type:
+          type: string
+          description: 'A URL that acts as a globally unique identifier for the type of the serialized message. For example: `type.googleapis.com/google.rpc.ErrorInfo`. This is used to determine the schema of the data in the `value` field and is the discriminator for the `debug` field.'
+        value:
+          type: string
+          format: binary
+          description: The Protobuf message, serialized as bytes and base64-encoded. The specific message type is identified by the `type` field.
+        debug:
+          oneOf:
+            - type: object
+              title: Any
+              additionalProperties: true
+              description: Detailed error information.
+          discriminator:
+            propertyName: type
+          title: Debug
+          description: Deserialized error detail payload. The 'type' field indicates the schema. This field is for easier debugging and should not be relied upon for application logic.
+      additionalProperties: true
+      description: Contains an arbitrary serialized message along with a @type that describes the type of the serialized message, with an additional debug field for ConnectRPC error details.
+    quant.algorand.v1.AlertEvent:
+      type: object
+      properties:
+        eventId:
+          type: string
+          title: event_id
+        runId:
+          title: run_id
+          $ref: '#/components/schemas/quant.algorand.v1.RunId'
+        channel:
+          type: string
+          title: channel
+        target:
+          type: string
+          title: target
+        status:
+          type: string
+          title: status
+        createdTsMs:
+          type:
+            - integer
+            - string
+          title: created_ts_ms
+          format: int64
+      title: AlertEvent
+      additionalProperties: false
+    quant.algorand.v1.ClusterMember:
+      type: object
+      properties:
+        symbol:
+          type: string
+          title: symbol
+        sector:
+          type: string
+          title: sector
+        clusterId:
+          type: integer
+          title: cluster_id
+          format: int32
+        periodReturn:
+          type: number
+          title: period_return
+          format: double
+        volatility:
+          type: number
+          title: volatility
+          format: double
+      title: ClusterMember
+      additionalProperties: false
+    quant.algorand.v1.ClusterStocksRequest:
+      type: object
+      properties:
+        symbols:
+          type: array
+          items:
+            type: string
+          title: symbols
+        interval:
+          type: string
+          title: interval
+        timeWindow:
+          title: time_window
+          $ref: '#/components/schemas/quant.algorand.v1.TimeWindow'
+        minClusters:
+          type: integer
+          title: min_clusters
+          format: int32
+        maxClusters:
+          type: integer
+          title: max_clusters
+          format: int32
+        weights:
+          title: weights
+          $ref: '#/components/schemas/quant.algorand.v1.SimilarityWeights'
+      title: ClusterStocksRequest
+      additionalProperties: false
+    quant.algorand.v1.ClusterStocksResponse:
+      type: object
+      properties:
+        members:
+          type: array
+          items:
+            $ref: '#/components/schemas/quant.algorand.v1.ClusterMember'
+          title: members
+        clusterCount:
+          type: integer
+          title: cluster_count
+          format: int32
+        figures:
+          type: array
+          items:
+            $ref: '#/components/schemas/quant.algorand.v1.PlotlyFigureSpec'
+          title: figures
+        droppedSymbols:
+          type: array
+          items:
+            type: string
+          title: dropped_symbols
+      title: ClusterStocksResponse
+      additionalProperties: false
+    quant.algorand.v1.DateRange:
+      type: object
+      properties:
+        startDate:
+          type: string
+          title: start_date
+        endDate:
+          type: string
+          title: end_date
+      title: DateRange
+      additionalProperties: false
+    quant.algorand.v1.FindSimilarStocksRequest:
+      type: object
+      properties:
+        targetSymbol:
+          type: string
+          title: target_symbol
+        symbols:
+          type: array
+          items:
+            type: string
+          title: symbols
+        interval:
+          type: string
+          title: interval
+        timeWindow:
+          title: time_window
+          $ref: '#/components/schemas/quant.algorand.v1.TimeWindow'
+        topK:
+          type: integer
+          title: top_k
+          format: int32
+        minClusters:
+          type: integer
+          title: min_clusters
+          format: int32
+        maxClusters:
+          type: integer
+          title: max_clusters
+          format: int32
+        weights:
+          title: weights
+          $ref: '#/components/schemas/quant.algorand.v1.SimilarityWeights'
+      title: FindSimilarStocksRequest
+      additionalProperties: false
+    quant.algorand.v1.FindSimilarStocksResponse:
+      type: object
+      properties:
+        targetSymbol:
+          type: string
+          title: target_symbol
+        targetClusterId:
+          type: integer
+          title: target_cluster_id
+          format: int32
+        members:
+          type: array
+          items:
+            $ref: '#/components/schemas/quant.algorand.v1.ClusterMember'
+          title: members
+        similar:
+          type: array
+          items:
+            $ref: '#/components/schemas/quant.algorand.v1.SimilarStock'
+          title: similar
+        clusterCount:
+          type: integer
+          title: cluster_count
+          format: int32
+        figures:
+          type: array
+          items:
+            $ref: '#/components/schemas/quant.algorand.v1.PlotlyFigureSpec'
+          title: figures
+        droppedSymbols:
+          type: array
+          items:
+            type: string
+          title: dropped_symbols
+      title: FindSimilarStocksResponse
+      additionalProperties: false
+    quant.algorand.v1.GetModelVersionsRequest:
+      type: object
+      properties:
+        modelName:
+          type: string
+          title: model_name
+      title: GetModelVersionsRequest
+      additionalProperties: false
+    quant.algorand.v1.GetModelVersionsResponse:
+      type: object
+      properties:
+        versions:
+          type: array
+          items:
+            $ref: '#/components/schemas/quant.algorand.v1.ModelVersion'
+          title: versions
+      title: GetModelVersionsResponse
+      additionalProperties: false
+    quant.algorand.v1.GetPerformanceSummaryRequest:
+      type: object
+      properties:
+        runId:
+          title: run_id
+          $ref: '#/components/schemas/quant.algorand.v1.RunId'
+      title: GetPerformanceSummaryRequest
+      additionalProperties: false
+    quant.algorand.v1.GetPerformanceSummaryResponse:
+      type: object
+      properties:
+        runId:
+          title: run_id
+          $ref: '#/components/schemas/quant.algorand.v1.RunId'
+        metrics:
+          type: array
+          items:
+            $ref: '#/components/schemas/quant.algorand.v1.Metric'
+          title: metrics
+      title: GetPerformanceSummaryResponse
+      additionalProperties: false
+    quant.algorand.v1.GetPlotlyArtifactRequest:
+      type: object
+      properties:
+        artifactId:
+          type: string
+          title: artifact_id
+      title: GetPlotlyArtifactRequest
+      additionalProperties: false
+    quant.algorand.v1.GetPlotlyArtifactResponse:
+      type: object
+      properties:
+        spec:
+          title: spec
+          $ref: '#/components/schemas/quant.algorand.v1.PlotlyFigureSpec'
+      title: GetPlotlyArtifactResponse
+      additionalProperties: false
+    quant.algorand.v1.GetRunRequest:
+      type: object
+      properties:
+        runId:
+          title: run_id
+          $ref: '#/components/schemas/quant.algorand.v1.RunId'
+      title: GetRunRequest
+      additionalProperties: false
+    quant.algorand.v1.GetRunResponse:
+      type: object
+      properties:
+        runId:
+          title: run_id
+          $ref: '#/components/schemas/quant.algorand.v1.RunId'
+        status:
+          type: string
+          title: status
+        symbol:
+          type: string
+          title: symbol
+        interval:
+          type: string
+          title: interval
+        strategyId:
+          title: strategy_id
+          $ref: '#/components/schemas/quant.algorand.v1.StrategyId'
+        metadata:
+          type: object
+          title: metadata
+          additionalProperties:
+            type: string
+            title: value
+      title: GetRunResponse
+      additionalProperties: false
+    quant.algorand.v1.GetRunResponse.MetadataEntry:
+      type: object
+      properties:
+        key:
+          type: string
+          title: key
+        value:
+          type: string
+          title: value
+      title: MetadataEntry
+      additionalProperties: false
+    quant.algorand.v1.GetTradingViewSeriesRequest:
+      type: object
+      properties:
+        runId:
+          title: run_id
+          $ref: '#/components/schemas/quant.algorand.v1.RunId'
+        symbol:
+          type: string
+          title: symbol
+        interval:
+          type: string
+          title: interval
+      title: GetTradingViewSeriesRequest
+      additionalProperties: false
+    quant.algorand.v1.GetTradingViewSeriesResponse:
+      type: object
+      properties:
+        series:
+          type: array
+          items:
+            $ref: '#/components/schemas/quant.algorand.v1.TradingViewSeries'
+          title: series
+        meta:
+          title: meta
+          $ref: '#/components/schemas/quant.algorand.v1.TradingViewResponseMeta'
+      title: GetTradingViewSeriesResponse
+      additionalProperties: false
+    quant.algorand.v1.IndicatorDefinition:
+      type: object
+      properties:
+        indicatorId:
+          type: string
+          title: indicator_id
+        version:
+          type: string
+          title: version
+        displayName:
+          type: string
+          title: display_name
+        description:
+          type: string
+          title: description
+      title: IndicatorDefinition
+      additionalProperties: false
+    quant.algorand.v1.IndicatorId:
+      type: object
+      properties:
+        value:
+          type: string
+          title: value
+      title: IndicatorId
+      additionalProperties: false
+    quant.algorand.v1.ListAlertEventsRequest:
+      type: object
+      properties:
+        runId:
+          title: run_id
+          $ref: '#/components/schemas/quant.algorand.v1.RunId'
+        paging:
+          title: paging
+          $ref: '#/components/schemas/quant.algorand.v1.Paging'
+      title: ListAlertEventsRequest
+      additionalProperties: false
+    quant.algorand.v1.ListAlertEventsResponse:
+      type: object
+      properties:
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/quant.algorand.v1.AlertEvent'
+          title: events
+        page:
+          title: page
+          $ref: '#/components/schemas/quant.algorand.v1.PageInfo'
+      title: ListAlertEventsResponse
+      additionalProperties: false
+    quant.algorand.v1.ListIndicatorsRequest:
+      type: object
+      title: ListIndicatorsRequest
+      additionalProperties: false
+    quant.algorand.v1.ListIndicatorsResponse:
+      type: object
+      properties:
+        indicators:
+          type: array
+          items:
+            $ref: '#/components/schemas/quant.algorand.v1.IndicatorDefinition'
+          title: indicators
+      title: ListIndicatorsResponse
+      additionalProperties: false
+    quant.algorand.v1.ListRunsRequest:
+      type: object
+      properties:
+        paging:
+          title: paging
+          $ref: '#/components/schemas/quant.algorand.v1.Paging'
+      title: ListRunsRequest
+      additionalProperties: false
+    quant.algorand.v1.ListRunsResponse:
+      type: object
+      properties:
+        runs:
+          type: array
+          items:
+            $ref: '#/components/schemas/quant.algorand.v1.GetRunResponse'
+          title: runs
+        page:
+          title: page
+          $ref: '#/components/schemas/quant.algorand.v1.PageInfo'
+      title: ListRunsResponse
+      additionalProperties: false
+    quant.algorand.v1.ListSignalsRequest:
+      type: object
+      title: ListSignalsRequest
+      additionalProperties: false
+    quant.algorand.v1.ListSignalsResponse:
+      type: object
+      properties:
+        signals:
+          type: array
+          items:
+            $ref: '#/components/schemas/quant.algorand.v1.SignalDefinition'
+          title: signals
+      title: ListSignalsResponse
+      additionalProperties: false
+    quant.algorand.v1.ListStrategiesRequest:
+      type: object
+      title: ListStrategiesRequest
+      additionalProperties: false
+    quant.algorand.v1.ListStrategiesResponse:
+      type: object
+      properties:
+        strategies:
+          type: array
+          items:
+            $ref: '#/components/schemas/quant.algorand.v1.StrategyDefinition'
+          title: strategies
+      title: ListStrategiesResponse
+      additionalProperties: false
+    quant.algorand.v1.Metric:
+      type: object
+      properties:
+        name:
+          type: string
+          title: name
+        value:
+          type: number
+          title: value
+          format: double
+        unit:
+          type: string
+          title: unit
+      title: Metric
+      additionalProperties: false
+    quant.algorand.v1.ModelVersion:
+      type: object
+      properties:
+        modelVersionId:
+          title: model_version_id
+          $ref: '#/components/schemas/quant.algorand.v1.ModelVersionId'
+        modelName:
+          type: string
+          title: model_name
+        status:
+          type: string
+          title: status
+        trainedTsMs:
+          type:
+            - integer
+            - string
+          title: trained_ts_ms
+          format: int64
+        metrics:
+          type: object
+          title: metrics
+          additionalProperties:
+            type: string
+            title: value
+      title: ModelVersion
+      additionalProperties: false
+    quant.algorand.v1.ModelVersion.MetricsEntry:
+      type: object
+      properties:
+        key:
+          type: string
+          title: key
+        value:
+          type: string
+          title: value
+      title: MetricsEntry
+      additionalProperties: false
+    quant.algorand.v1.ModelVersionId:
+      type: object
+      properties:
+        value:
+          type: string
+          title: value
+      title: ModelVersionId
+      additionalProperties: false
+    quant.algorand.v1.PageInfo:
+      type: object
+      properties:
+        nextPageToken:
+          type: string
+          title: next_page_token
+      title: PageInfo
+      additionalProperties: false
+    quant.algorand.v1.Paging:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          title: page_size
+        pageToken:
+          type: string
+          title: page_token
+      title: Paging
+      additionalProperties: false
+    quant.algorand.v1.PlotlyFigureSpec:
+      type: object
+      properties:
+        artifactId:
+          type: string
+          title: artifact_id
+        figureJson:
+          type: string
+          title: figure_json
+        kind:
+          type: string
+          title: kind
+      title: PlotlyFigureSpec
+      additionalProperties: false
+    quant.algorand.v1.RunBacktestRequest:
+      type: object
+      properties:
+        symbol:
+          type: string
+          title: symbol
+        interval:
+          type: string
+          title: interval
+        timeRange:
+          title: time_range
+          $ref: '#/components/schemas/quant.algorand.v1.TimeRange'
+        strategyId:
+          title: strategy_id
+          $ref: '#/components/schemas/quant.algorand.v1.StrategyId'
+        strategyParams:
+          type: object
+          title: strategy_params
+          additionalProperties:
+            type: string
+            title: value
+      title: RunBacktestRequest
+      additionalProperties: false
+    quant.algorand.v1.RunBacktestRequest.StrategyParamsEntry:
+      type: object
+      properties:
+        key:
+          type: string
+          title: key
+        value:
+          type: string
+          title: value
+      title: StrategyParamsEntry
+      additionalProperties: false
+    quant.algorand.v1.RunBacktestResponse:
+      type: object
+      properties:
+        runId:
+          title: run_id
+          $ref: '#/components/schemas/quant.algorand.v1.RunId'
+        status:
+          type: string
+          title: status
+      title: RunBacktestResponse
+      additionalProperties: false
+    quant.algorand.v1.RunId:
+      type: object
+      properties:
+        value:
+          type: string
+          title: value
+      title: RunId
+      additionalProperties: false
+    quant.algorand.v1.RunTrainingJobRequest:
+      type: object
+      properties:
+        modelName:
+          type: string
+          title: model_name
+        trainingRange:
+          title: training_range
+          $ref: '#/components/schemas/quant.algorand.v1.TimeRange'
+        hyperparameters:
+          type: object
+          title: hyperparameters
+          additionalProperties:
+            type: string
+            title: value
+      title: RunTrainingJobRequest
+      additionalProperties: false
+    quant.algorand.v1.RunTrainingJobRequest.HyperparametersEntry:
+      type: object
+      properties:
+        key:
+          type: string
+          title: key
+        value:
+          type: string
+          title: value
+      title: HyperparametersEntry
+      additionalProperties: false
+    quant.algorand.v1.RunTrainingJobResponse:
+      type: object
+      properties:
+        jobId:
+          type: string
+          title: job_id
+        status:
+          type: string
+          title: status
+      title: RunTrainingJobResponse
+      additionalProperties: false
+    quant.algorand.v1.SignalDefinition:
+      type: object
+      properties:
+        signalId:
+          type: string
+          title: signal_id
+        version:
+          type: string
+          title: version
+        displayName:
+          type: string
+          title: display_name
+        description:
+          type: string
+          title: description
+      title: SignalDefinition
+      additionalProperties: false
+    quant.algorand.v1.SimilarStock:
+      type: object
+      properties:
+        symbol:
+          type: string
+          title: symbol
+        sector:
+          type: string
+          title: sector
+        clusterId:
+          type: integer
+          title: cluster_id
+          format: int32
+        score:
+          type: number
+          title: score
+          format: double
+        priceActionSimilarity:
+          type: number
+          title: price_action_similarity
+          format: double
+        volatilitySimilarity:
+          type: number
+          title: volatility_similarity
+          format: double
+        performanceSimilarity:
+          type: number
+          title: performance_similarity
+          format: double
+        sectorSimilarity:
+          type: number
+          title: sector_similarity
+          format: double
+        periodReturn:
+          type: number
+          title: period_return
+          format: double
+        volatility:
+          type: number
+          title: volatility
+          format: double
+      title: SimilarStock
+      additionalProperties: false
+    quant.algorand.v1.SimilarityWeights:
+      type: object
+      properties:
+        priceActionWeight:
+          type: number
+          title: price_action_weight
+          format: double
+        volatilityWeight:
+          type: number
+          title: volatility_weight
+          format: double
+        performanceWeight:
+          type: number
+          title: performance_weight
+          format: double
+        sectorWeight:
+          type: number
+          title: sector_weight
+          format: double
+      title: SimilarityWeights
+      additionalProperties: false
+    quant.algorand.v1.StrategyDefinition:
+      type: object
+      properties:
+        strategyId:
+          type: string
+          title: strategy_id
+        version:
+          type: string
+          title: version
+        displayName:
+          type: string
+          title: display_name
+        description:
+          type: string
+          title: description
+      title: StrategyDefinition
+      additionalProperties: false
+    quant.algorand.v1.StrategyId:
+      type: object
+      properties:
+        value:
+          type: string
+          title: value
+      title: StrategyId
+      additionalProperties: false
+    quant.algorand.v1.TestAlertRequest:
+      type: object
+      properties:
+        channel:
+          type: string
+          title: channel
+        target:
+          type: string
+          title: target
+        message:
+          type: string
+          title: message
+      title: TestAlertRequest
+      additionalProperties: false
+    quant.algorand.v1.TestAlertResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          title: status
+        eventId:
+          type: string
+          title: event_id
+      title: TestAlertResponse
+      additionalProperties: false
+    quant.algorand.v1.TimeRange:
+      type: object
+      properties:
+        startTsMs:
+          type:
+            - integer
+            - string
+          title: start_ts_ms
+          format: int64
+        endTsMs:
+          type:
+            - integer
+            - string
+          title: end_ts_ms
+          format: int64
+      title: TimeRange
+      additionalProperties: false
+    quant.algorand.v1.TimeWindow:
+      type: object
+      oneOf:
+        - properties:
+            dateRange:
+              title: date_range
+              $ref: '#/components/schemas/quant.algorand.v1.DateRange'
+          title: date_range
+          required:
+            - dateRange
+        - properties:
+            windowBars:
+              type: integer
+              title: window_bars
+              format: int32
+          title: window_bars
+          required:
+            - windowBars
+      title: TimeWindow
+      additionalProperties: false
+    quant.algorand.v1.TradingViewPoint:
+      type: object
+      properties:
+        tsMs:
+          type:
+            - integer
+            - string
+          title: ts_ms
+          format: int64
+        value:
+          type: number
+          title: value
+          format: double
+      title: TradingViewPoint
+      additionalProperties: false
+    quant.algorand.v1.TradingViewResponseMeta:
+      type: object
+      properties:
+        timezone:
+          type: string
+          title: timezone
+        symbol:
+          type: string
+          title: symbol
+        interval:
+          type: string
+          title: interval
+        sourceVersion:
+          type: string
+          title: source_version
+      title: TradingViewResponseMeta
+      additionalProperties: false
+    quant.algorand.v1.TradingViewSeries:
+      type: object
+      properties:
+        seriesId:
+          type: string
+          title: series_id
+        name:
+          type: string
+          title: name
+        pane:
+          type: string
+          title: pane
+        color:
+          type: string
+          title: color
+        points:
+          type: array
+          items:
+            $ref: '#/components/schemas/quant.algorand.v1.TradingViewPoint'
+          title: points
+      title: TradingViewSeries
+      additionalProperties: false
+security: []
+tags:
+  - name: AlertService
+  - name: AnalyticsService
+  - name: BacktestService
+  - name: CatalogService
+  - name: MLService

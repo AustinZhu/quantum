@@ -406,7 +406,7 @@ const file_algorand_v1_analytics_proto_rawDesc = "" +
 	"\x10AnalyticsService\x12z\n" +
 	"\x15GetPerformanceSummary\x12/.quant.algorand.v1.GetPerformanceSummaryRequest\x1a0.quant.algorand.v1.GetPerformanceSummaryResponse\x12n\n" +
 	"\x11GetPlotlyArtifact\x12+.quant.algorand.v1.GetPlotlyArtifactRequest\x1a,.quant.algorand.v1.GetPlotlyArtifactResponse\x12w\n" +
-	"\x14GetTradingViewSeries\x12..quant.algorand.v1.GetTradingViewSeriesRequest\x1a/.quant.algorand.v1.GetTradingViewSeriesResponseBHZFgithub.com/austin/quantum/datafeed/internal/gen/algorand/v1;algorandv1b\x06proto3"
+	"\x14GetTradingViewSeries\x12..quant.algorand.v1.GetTradingViewSeriesRequest\x1a/.quant.algorand.v1.GetTradingViewSeriesResponseBKZIgithub.com/AustinZhu/quantum/datafeed/internal/gen/algorand/v1;algorandv1b\x06proto3"
 
 var (
 	file_algorand_v1_analytics_proto_rawDescOnce sync.Once
