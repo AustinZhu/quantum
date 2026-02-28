@@ -8,7 +8,6 @@ import (
 	"github.com/AustinZhu/quantum/datafeed/internal/infrastructure/outbox"
 	ingestionbiz "github.com/AustinZhu/quantum/datafeed/internal/modules/ingestion/biz"
 	ingestionsvc "github.com/AustinZhu/quantum/datafeed/internal/modules/ingestion/service"
-	"github.com/google/wire"
 	"golang.org/x/sync/errgroup"
 )
 
@@ -17,8 +16,6 @@ type App struct {
 	ingestion  *ingestionbiz.Service
 	dispatcher *outbox.Dispatcher
 }
-
-var ProviderSet = wire.NewSet(New)
 
 func New(consumer *broker.CommandConsumer, ingestion *ingestionbiz.Service, dispatcher *outbox.Dispatcher) *App {
 	return &App{consumer: consumer, ingestion: ingestion, dispatcher: dispatcher}

@@ -20,16 +20,16 @@ import (
 
 func InitializeEventsApp(ctx context.Context, configPath string) (*App, func(), error) {
 	wire.Build(
-		conf.ProviderSet,
-		clock.ProviderSet,
+		conf.New,
+		clock.New,
 		postgres.ProviderSet,
-		redis.ProviderSet,
+		redis.New,
 		broker.ProviderSet,
 		outbox.ProviderSet,
 		ingestion.ProviderSet,
 		marketdata.ProviderSet,
 		scanner.ProviderSet,
-		ProviderSet,
+		New,
 	)
 	return nil, nil, nil
 }

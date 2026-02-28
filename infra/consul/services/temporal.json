@@ -8,8 +8,16 @@
     "checks": [
       {
         "id": "temporal-tcp",
-        "name": "temporal tcp",
+        "name": "Temporal TCP",
         "tcp": "temporal:7233",
+        "interval": "10s",
+        "timeout": "3s"
+      },
+      {
+        "id": "temporal-h2ping",
+        "name": "Temporal H2 Ping",
+        "h2ping": "temporal:7233",
+        "h2ping_use_tls": false,
         "interval": "10s",
         "timeout": "3s"
       }

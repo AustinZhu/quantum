@@ -8,8 +8,15 @@
     "checks": [
       {
         "id": "feast-tcp",
-        "name": "feast tcp",
+        "name": "Feast TCP",
         "tcp": "feast:6566",
+        "interval": "15s",
+        "timeout": "5s"
+      },
+      {
+        "id": "feast-http",
+        "name": "Feast HTTP",
+        "http": "http://feast:6566/health",
         "interval": "15s",
         "timeout": "5s"
       }

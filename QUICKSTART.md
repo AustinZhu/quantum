@@ -47,11 +47,13 @@ make tf-apply
 - Airflow: http://localhost:8087
 - MLflow UI: http://localhost:5001
 - DuckDB UI: http://localhost:4213
+- Algorand JupyterLab: http://localhost:8890/lab
 - Consul UI: http://localhost:8500
 - Vault: http://localhost:8200
 - Casdoor: http://localhost:8000
 - PgAdmin: http://localhost:5050
 - RedisInsight: http://localhost:5540
+  - Preconfigured connection: `quantum-redis` -> `redis:6379` (DB `0`)
 - Generated OpenAPI:
   - `algorand/gen/openapi/quantum.openapi.{yml,json}`
   - `datafeed/gen/openapi/quantum.openapi.{yml,json}`

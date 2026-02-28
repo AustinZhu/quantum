@@ -11,7 +11,10 @@ import (
 	"github.com/AustinZhu/quantum/datafeed/internal/infrastructure/auth"
 	"github.com/AustinZhu/quantum/datafeed/internal/infrastructure/clock"
 	"github.com/AustinZhu/quantum/datafeed/internal/infrastructure/conf"
+	"github.com/AustinZhu/quantum/datafeed/internal/infrastructure/observability"
 	"github.com/AustinZhu/quantum/datafeed/internal/infrastructure/postgres"
+	"github.com/AustinZhu/quantum/datafeed/internal/infrastructure/server"
+	"github.com/AustinZhu/quantum/datafeed/internal/infrastructure/validation"
 	biz3 "github.com/AustinZhu/quantum/datafeed/internal/modules/content/biz"
 	data3 "github.com/AustinZhu/quantum/datafeed/internal/modules/content/data"
 	"github.com/AustinZhu/quantum/datafeed/internal/modules/ingestion/biz"
@@ -22,13 +25,12 @@ import (
 	biz4 "github.com/AustinZhu/quantum/datafeed/internal/modules/scanner/biz"
 	data4 "github.com/AustinZhu/quantum/datafeed/internal/modules/scanner/data"
 	service2 "github.com/AustinZhu/quantum/datafeed/internal/modules/scanner/service"
-	"github.com/AustinZhu/quantum/datafeed/internal/server"
 )
 
 // Injectors from wire.go:
 
 func InitializeAPIApp(ctx context.Context, configPath string) (*App, func(), error) {
-	config, err := conf.Provide(ctx, configPath)
+	config, err := conf.New(ctx, configPath)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -38,8 +40,8 @@ func InitializeAPIApp(ctx context.Context, configPath string) (*App, func(), err
 	}
 	outboxStore := postgres.NewOutboxStore(client)
 	repository := data.NewRepository(client, outboxStore)
-	clockClock := clock.New()
-	bizService := biz.NewService(repository, clockClock)
+	v := clock.New()
+	bizService := biz.NewService(repository, v)
 	queryRepository := data2.NewQueryRepository(client)
 	marketProvider := data2.NewMarketProvider(config)
 	service3 := biz2.NewService(queryRepository, marketProvider)
@@ -49,8 +51,22 @@ func InitializeAPIApp(ctx context.Context, configPath string) (*App, func(), err
 	repository2 := data4.NewRepository(client)
 	service5 := biz4.NewService(repository2, service3)
 	handler := service2.NewHandler(service5)
-	middleware := auth.New(config)
-	serveMux := server.NewMux(datafeedHandler, handler, middleware, config)
+	connectHandlerOptions, err := auth.New(config)
+	if err != nil {
+		cleanup()
+		return nil, nil, err
+	}
+	observabilityConnectHandlerOptions, err := observability.New()
+	if err != nil {
+		cleanup()
+		return nil, nil, err
+	}
+	validationConnectHandlerOptions, err := validation.New()
+	if err != nil {
+		cleanup()
+		return nil, nil, err
+	}
+	serveMux := server.NewMux(datafeedHandler, handler, connectHandlerOptions, observabilityConnectHandlerOptions, validationConnectHandlerOptions, config)
 	httpServer := server.NewHTTPServer(config, serveMux)
 	app := New(httpServer, client)
 	return app, func() {

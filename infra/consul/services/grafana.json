@@ -8,7 +8,7 @@
     "checks": [
       {
         "id": "grafana-http",
-        "name": "grafana http",
+        "name": "Grafana HTTP",
         "http": "http://grafana:3000/api/health",
         "interval": "15s",
         "timeout": "5s"

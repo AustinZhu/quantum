@@ -8,7 +8,7 @@
     "checks": [
       {
         "id": "redisinsight-http",
-        "name": "redisinsight http",
+        "name": "RedisInsight HTTP",
         "http": "http://redisinsight:5540/api/health/",
         "interval": "15s",
         "timeout": "5s"

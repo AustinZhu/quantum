@@ -1,4 +1,4 @@
-package okx
+package providers
 
 import "testing"
 

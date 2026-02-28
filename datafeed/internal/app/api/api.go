@@ -4,16 +4,13 @@ import (
 	"context"
 
 	"github.com/AustinZhu/quantum/datafeed/internal/infrastructure/postgres"
-	"github.com/AustinZhu/quantum/datafeed/internal/server"
-	"github.com/google/wire"
+	"github.com/AustinZhu/quantum/datafeed/internal/infrastructure/server"
 )
 
 type App struct {
 	server   *server.HTTPServer
 	postgres *postgres.Client
 }
-
-var ProviderSet = wire.NewSet(New)
 
 func New(server *server.HTTPServer, pg *postgres.Client) *App {
 	return &App{server: server, postgres: pg}

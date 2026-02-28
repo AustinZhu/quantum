@@ -7,19 +7,19 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/AustinZhu/quantum/datafeed/internal/storage"
+	ingestionbiz "github.com/AustinZhu/quantum/datafeed/internal/modules/ingestion/biz"
 )
 
 type CSVReplayAdapter struct{}
 
-func (a CSVReplayAdapter) Load(path string) ([]storage.Tick, error) {
+func (a CSVReplayAdapter) Load(path string) ([]ingestionbiz.Tick, error) {
 	file, err := os.Open(path)
 	if err != nil {
 		return nil, err
 	}
 	defer file.Close()
 
-	out := make([]storage.Tick, 0)
+	out := make([]ingestionbiz.Tick, 0)
 	s := bufio.NewScanner(file)
 	for s.Scan() {
 		line := strings.TrimSpace(s.Text())
@@ -42,7 +42,7 @@ func (a CSVReplayAdapter) Load(path string) ([]storage.Tick, error) {
 		if err != nil {
 			return nil, err
 		}
-		out = append(out, storage.Tick{Symbol: parts[0], TsMS: ts, Price: price, Size: size, Source: parts[4]})
+		out = append(out, ingestionbiz.Tick{Symbol: parts[0], TsMS: ts, Price: price, Size: size, Source: parts[4]})
 	}
 	if err := s.Err(); err != nil {
 		return nil, err

@@ -239,6 +239,7 @@ make down-v
 - Casdoor: `http://localhost:8000`
 - PgAdmin: `http://localhost:5050`
 - RedisInsight: `http://localhost:5540`
+  - Preconfigured DB connection: `quantum-redis` (`redis:6379`, DB `0`)
 - Feast UI: `http://localhost:6567`
 - Airflow UI: `http://localhost:8087`
 - MLflow UI: `http://localhost:5001`

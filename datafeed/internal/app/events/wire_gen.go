@@ -26,7 +26,7 @@ import (
 // Injectors from wire.go:
 
 func InitializeEventsApp(ctx context.Context, configPath string) (*App, func(), error) {
-	config, err := conf.Provide(ctx, configPath)
+	config, err := conf.New(ctx, configPath)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -41,8 +41,8 @@ func InitializeEventsApp(ctx context.Context, configPath string) (*App, func(), 
 	}
 	outboxStore := postgres.NewOutboxStore(client)
 	repository := data.NewRepository(client, outboxStore)
-	clockClock := clock.New()
-	bizService := biz.NewService(repository, clockClock)
+	v := clock.New()
+	bizService := biz.NewService(repository, v)
 	redisClient, cleanup3, err := redis.New(config)
 	if err != nil {
 		cleanup2()
@@ -62,7 +62,7 @@ func InitializeEventsApp(ctx context.Context, configPath string) (*App, func(), 
 	service2 := biz2.NewService(queryRepository, marketProvider)
 	service3 := biz3.NewService(dataRepository, service2)
 	projectionUpdater := service.NewProjectionUpdater(service3)
-	dispatcher := outbox.NewDispatcher(config, outboxStore, publisher, projectionUpdater, clockClock)
+	dispatcher := outbox.NewDispatcher(config, outboxStore, publisher, projectionUpdater, v)
 	app := New(commandConsumer, bizService, dispatcher)
 	return app, func() {
 		cleanup4()

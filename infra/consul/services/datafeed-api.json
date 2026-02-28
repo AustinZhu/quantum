@@ -8,7 +8,7 @@
     "checks": [
       {
         "id": "datafeed-api-http",
-        "name": "datafeed-api http",
+        "name": "Datafeed API HTTP",
         "http": "http://datafeed-api:8081/healthz",
         "interval": "10s",
         "timeout": "5s"

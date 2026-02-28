@@ -16,9 +16,20 @@ type Config struct {
 }
 
 type ServerConfig struct {
-	HTTPAddr        string `koanf:"http_addr"`
-	APIKey          string `koanf:"api_key"`
-	OpenAPISpecPath string `koanf:"openapi_spec_path"`
+	HTTPAddr        string     `koanf:"http_addr"`
+	Mode            string     `koanf:"mode"`
+	PprofEnabled    bool       `koanf:"pprof_enabled"`
+	APIKey          string     `koanf:"api_key"`
+	OpenAPISpecPath string     `koanf:"openapi_spec_path"`
+	Auth            AuthConfig `koanf:"auth"`
+}
+
+type AuthConfig struct {
+	Enabled          bool   `koanf:"enabled"`
+	CasdoorIssuerURL string `koanf:"casdoor_issuer_url"`
+	CasdoorAudience  string `koanf:"casdoor_audience"`
+	CasbinModelPath  string `koanf:"casbin_model_path"`
+	CasbinPolicyPath string `koanf:"casbin_policy_path"`
 }
 
 type StorageConfig struct {
@@ -94,6 +105,9 @@ func (c Config) Validate() error {
 	if strings.TrimSpace(c.Server.HTTPAddr) == "" {
 		return fmt.Errorf("server.http_addr is required")
 	}
+	if strings.TrimSpace(c.Server.Mode) == "" {
+		return fmt.Errorf("server.mode is required")
+	}
 	if strings.TrimSpace(c.Storage.PostgresURL) == "" {
 		return fmt.Errorf("storage.postgres_url is required")
 	}
@@ -111,6 +125,15 @@ func (c Config) Validate() error {
 	}
 	if c.Jobs.SyncSymbolsIntervalSec <= 0 || c.Jobs.OutboxRecoveryIntervalSec <= 0 || c.Jobs.ProjectionRebuildIntervalSec <= 0 || c.Jobs.MarketBackfillIntervalSec <= 0 {
 		return fmt.Errorf("jobs intervals must be > 0")
+	}
+	if c.Server.Auth.Enabled && strings.TrimSpace(c.Server.Auth.CasdoorIssuerURL) == "" {
+		return fmt.Errorf("server.auth.casdoor_issuer_url is required when auth is enabled")
+	}
+	if c.Server.Auth.CasbinModelPath != "" && c.Server.Auth.CasbinPolicyPath == "" {
+		return fmt.Errorf("server.auth.casbin_policy_path is required when casbin_model_path is set")
+	}
+	if c.Server.Auth.CasbinModelPath == "" && c.Server.Auth.CasbinPolicyPath != "" {
+		return fmt.Errorf("server.auth.casbin_model_path is required when casbin_policy_path is set")
 	}
 	if c.Config.Consul.Enabled {
 		if strings.TrimSpace(c.Config.Consul.HTTPAddr) == "" {
@@ -138,4 +161,9 @@ func (c Config) Validate() error {
 		}
 	}
 	return nil
+}
+
+func (s ServerConfig) IsDevelopmentMode() bool {
+	mode := strings.ToLower(strings.TrimSpace(s.Mode))
+	return mode == "development" || mode == "dev" || mode == "local"
 }

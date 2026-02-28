@@ -8,8 +8,15 @@
     "checks": [
       {
         "id": "timescaledb-tcp",
-        "name": "timescaledb tcp",
+        "name": "Timescaledb TCP",
         "tcp": "timescaledb:5432",
+        "interval": "10s",
+        "timeout": "3s"
+      },
+      {
+        "id": "timescaledb-protocol-sslrequest",
+        "name": "Timescaledb Protocol SSLRequest",
+        "args": ["sh", "-ec", "first=\"$(printf '\\000\\000\\000\\010\\004\\322\\026\\057' | nc -w 2 timescaledb 5432 | head -c 1)\"; [ \"$first\" = 'S' ] || [ \"$first\" = 'N' ]"],
         "interval": "10s",
         "timeout": "3s"
       }

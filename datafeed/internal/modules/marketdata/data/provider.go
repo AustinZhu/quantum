@@ -5,17 +5,17 @@ import (
 	"strings"
 	"time"
 
-	"github.com/AustinZhu/quantum/datafeed/internal/adapters/okx"
 	"github.com/AustinZhu/quantum/datafeed/internal/infrastructure/conf"
+	"github.com/AustinZhu/quantum/datafeed/internal/infrastructure/providers"
 	"github.com/AustinZhu/quantum/datafeed/internal/modules/marketdata/biz"
 )
 
 type MarketProvider struct {
-	inner *okx.Client
+	inner *providers.Client
 }
 
 func NewMarketProvider(cfg conf.Config) *MarketProvider {
-	client := okx.NewClient(okx.Config{
+	client := providers.NewClient(providers.Config{
 		RESTBaseURL:     cfg.Integration.OKX.RESTBaseURL,
 		WSPublicURL:     cfg.Integration.OKX.WSPublicURL,
 		WSBusinessURL:   cfg.Integration.OKX.WSBusinessURL,

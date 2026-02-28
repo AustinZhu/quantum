@@ -46,7 +46,9 @@ datafeed/
 │   │   ├── conf/
 │   │   ├── outbox/
 │   │   ├── postgres/
+│   │   ├── providers/
 │   │   ├── redis/
+│   │   ├── server/
 │   │   └── temporal/
 │   ├── modules/
 │   │   ├── content/
@@ -54,7 +56,6 @@ datafeed/
 │   │   ├── jobs/
 │   │   ├── marketdata/
 │   │   └── scanner/
-│   ├── server/
 │   └── gen/
 └── sqlc.yaml
 ```
@@ -122,22 +123,45 @@ This generates query bindings into `db/sqlc` from `db/migrations` and `db/querie
 - Connect handlers:
   - `/quant.datafeed.v1.DatafeedService/*`
   - `/quant.datafeed.v1.ScannerService/*`
+  - `/grpc.health.v1.Health/*`
+  - `/grpc.reflection.v1.ServerReflection/*`
+  - `/grpc.reflection.v1alpha.ServerReflection/*`
 - Ops:
   - `GET /healthz`
   - `GET /readyz`
   - `GET /metrics`
   - `GET /openapi/connect.json`
   - `GET /scalar`
+  - `GET /debug/pprof/` (when pprof is enabled)
+  - `GET /debug/pprof/allocs` (when pprof is enabled)
+  - `GET /debug/pprof/block` (when pprof is enabled)
+  - `GET /debug/pprof/cmdline` (when pprof is enabled)
+  - `GET /debug/pprof/goroutine` (when pprof is enabled)
+  - `GET /debug/pprof/heap` (when pprof is enabled)
+  - `GET /debug/pprof/mutex` (when pprof is enabled)
+  - `GET /debug/pprof/profile` (when pprof is enabled)
+  - `GET /debug/pprof/symbol` (when pprof is enabled)
+  - `GET /debug/pprof/threadcreate` (when pprof is enabled)
+  - `GET /debug/pprof/trace` (when pprof is enabled)
+
+Connect handlers are instrumented with `otelconnect` interceptors.
 
 Auth:
 
-- when `DATAFEED_SERVER_API_KEY` is set, requests must include `x-api-key` or `x-service-key`.
+- when `DATAFEED_SERVER_AUTH_ENABLED=true`, requests must include `Authorization: Bearer <access-token>`.
+- bearer tokens are verified against Casdoor issuer metadata and authorized via Casbin policy.
 
 ## Environment Variables
 
 - `DATAFEED_SERVER_HTTP_ADDR`
-- `DATAFEED_SERVER_API_KEY`
+- `DATAFEED_SERVER_MODE`
+- `DATAFEED_SERVER_PPROF_ENABLED`
 - `DATAFEED_SERVER_OPENAPI_SPEC_PATH`
+- `DATAFEED_SERVER_AUTH_ENABLED`
+- `DATAFEED_SERVER_AUTH_CASDOOR_ISSUER_URL`
+- `DATAFEED_SERVER_AUTH_CASDOOR_AUDIENCE`
+- `DATAFEED_SERVER_AUTH_CASBIN_MODEL_PATH`
+- `DATAFEED_SERVER_AUTH_CASBIN_POLICY_PATH`
 - `DATAFEED_STORAGE_POSTGRES_URL`
 - `DATAFEED_STORAGE_POSTGRES_SCHEMA`
 - `DATAFEED_STORAGE_MIGRATIONS_PATH`
@@ -169,6 +193,11 @@ Auth:
 - `DATAFEED_CONFIG_VAULT_KV_MOUNT`
 - `DATAFEED_CONFIG_VAULT_SECRET_PATH`
 - `DATAFEED_CONFIG_VAULT_API_KEY_FIELD`
+
+`DATAFEED_SERVER_PPROF_ENABLED` behavior:
+
+- if explicitly set (`true`/`false`), that value is used.
+- if not set, pprof is enabled only when `DATAFEED_SERVER_MODE` is development-like (`development`, `dev`, or `local`), and disabled otherwise.
 
 ## Dev Gates
 

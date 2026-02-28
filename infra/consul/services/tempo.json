@@ -8,7 +8,7 @@
     "checks": [
       {
         "id": "tempo-http",
-        "name": "tempo http",
+        "name": "Tempo HTTP",
         "http": "http://tempo:3200/ready",
         "interval": "15s",
         "timeout": "5s"

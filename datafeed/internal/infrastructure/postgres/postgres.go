@@ -6,7 +6,6 @@ import (
 
 	"github.com/AustinZhu/quantum/datafeed/internal/infrastructure/conf"
 	"github.com/AustinZhu/quantum/datafeed/internal/infrastructure/outbox"
-	"github.com/AustinZhu/quantum/datafeed/internal/storage"
 	"github.com/google/wire"
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgxpool"
@@ -70,5 +69,5 @@ func (c *Client) WithTx(ctx context.Context, fn func(tx pgx.Tx) error) error {
 }
 
 func (c *Client) RunMigrations() error {
-	return storage.RunMigrations(c.pool.Config().ConnString(), c.migrationsPath)
+	return runMigrations(c.pool.Config().ConnString(), c.migrationsPath)
 }

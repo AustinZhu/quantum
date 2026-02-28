@@ -4,14 +4,11 @@ import (
 	"context"
 
 	"github.com/AustinZhu/quantum/datafeed/internal/infrastructure/temporal"
-	"github.com/google/wire"
 )
 
 type App struct {
 	runner *temporal.Runner
 }
-
-var ProviderSet = wire.NewSet(New)
 
 func New(runner *temporal.Runner) *App {
 	return &App{runner: runner}

@@ -4,15 +4,12 @@ import (
 	"fmt"
 
 	"github.com/AustinZhu/quantum/datafeed/internal/infrastructure/conf"
-	"github.com/google/wire"
 	"github.com/redis/rueidis"
 )
 
 type Client struct {
 	inner rueidis.Client
 }
-
-var ProviderSet = wire.NewSet(New)
 
 func New(cfg conf.Config) (*Client, func(), error) {
 	opts, err := rueidis.ParseURL(cfg.Infra.RedisURL)

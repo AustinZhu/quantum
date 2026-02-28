@@ -6,7 +6,6 @@ import (
 	"time"
 
 	"github.com/AustinZhu/quantum/datafeed/internal/infrastructure/conf"
-	"github.com/google/wire"
 )
 
 type Task interface {
@@ -19,8 +18,6 @@ type Runner struct {
 	cfg   conf.Config
 	tasks []Task
 }
-
-var ProviderSet = wire.NewSet(NewRunner)
 
 func NewRunner(cfg conf.Config, tasks []Task) *Runner {
 	return &Runner{cfg: cfg, tasks: tasks}

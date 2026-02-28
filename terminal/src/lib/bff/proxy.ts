@@ -146,6 +146,12 @@ export async function forwardRpc(serviceKind: ServiceKind, segments: string[], r
   headers.delete("host");
   headers.delete("connection");
   headers.delete("content-length");
+  if (!headers.get("authorization")) {
+    const accessToken = req.cookies.get("casdoor_access_token")?.value;
+    if (accessToken) {
+      headers.set("authorization", `Bearer ${accessToken}`);
+    }
+  }
   if (apiKey) {
     headers.set("x-api-key", apiKey);
     headers.set("x-service-key", apiKey);

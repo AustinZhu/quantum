@@ -1,0 +1,18 @@
+{
+  "service": {
+    "id": "algorand-jupyter",
+    "name": "algorand-jupyter",
+    "address": "algorand-jupyter",
+    "port": 8888,
+    "tags": ["app", "python", "jupyterlab", "research", "ui"],
+    "checks": [
+      {
+        "id": "algorand-jupyter-http",
+        "name": "Algorand Jupyter HTTP",
+        "http": "http://algorand-jupyter:8888/api/status",
+        "interval": "15s",
+        "timeout": "5s"
+      }
+    ]
+  }
+}

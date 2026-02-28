@@ -1,23 +1,11 @@
 package clock
 
 import (
-	"time"
-
-	"github.com/google/wire"
+	kclock "k8s.io/utils/clock"
 )
 
-type Clock interface {
-	Now() time.Time
-}
-
-type RealClock struct{}
-
-func (RealClock) Now() time.Time {
-	return time.Now().UTC()
-}
-
-var ProviderSet = wire.NewSet(New)
+type Clock = kclock.Clock
 
 func New() Clock {
-	return RealClock{}
+	return kclock.RealClock{}
 }

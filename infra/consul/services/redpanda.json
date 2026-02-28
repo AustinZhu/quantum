@@ -8,8 +8,15 @@
     "checks": [
       {
         "id": "redpanda-tcp",
-        "name": "redpanda tcp",
+        "name": "Redpanda TCP",
         "tcp": "redpanda:9092",
+        "interval": "10s",
+        "timeout": "3s"
+      },
+      {
+        "id": "redpanda-http-ready",
+        "name": "Redpanda HTTP Ready",
+        "http": "http://redpanda:9644/v1/status/ready",
         "interval": "10s",
         "timeout": "3s"
       }

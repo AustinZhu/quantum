@@ -1,15 +1,44 @@
 package postgres
 
 import (
+	"database/sql"
+	"errors"
 	"fmt"
 
 	"github.com/AustinZhu/quantum/datafeed/internal/infrastructure/conf"
-	"github.com/AustinZhu/quantum/datafeed/internal/storage"
+	"github.com/golang-migrate/migrate/v4"
+	"github.com/golang-migrate/migrate/v4/database/postgres"
+	_ "github.com/golang-migrate/migrate/v4/source/file"
+	_ "github.com/lib/pq"
 )
 
 func RunMigrations(cfg conf.Config) error {
-	if err := storage.RunMigrations(cfg.Storage.PostgresURL, cfg.Storage.MigrationsPath); err != nil {
+	if err := runMigrations(cfg.Storage.PostgresURL, cfg.Storage.MigrationsPath); err != nil {
 		return fmt.Errorf("run migrations: %w", err)
+	}
+	return nil
+}
+
+func runMigrations(databaseURL string, migrationsPath string) error {
+	db, err := sql.Open("postgres", databaseURL)
+	if err != nil {
+		return fmt.Errorf("open database for migrations: %w", err)
+	}
+	defer db.Close()
+
+	driver, err := postgres.WithInstance(db, &postgres.Config{})
+	if err != nil {
+		return fmt.Errorf("create migrate postgres driver: %w", err)
+	}
+
+	m, err := migrate.NewWithDatabaseInstance("file://"+migrationsPath, "postgres", driver)
+	if err != nil {
+		return fmt.Errorf("create migrate instance: %w", err)
+	}
+	defer m.Close()
+
+	if err := m.Up(); err != nil && !errors.Is(err, migrate.ErrNoChange) {
+		return fmt.Errorf("apply migrations: %w", err)
 	}
 	return nil
 }

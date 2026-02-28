@@ -122,7 +122,7 @@ services:
   consul:
     image: hashicorp/consul:1.22
     container_name: consul
-    command: ["agent", "-dev", "-client=0.0.0.0", "-ui", "-config-dir=/consul/config"]
+    command: ["agent", "-dev", "-client=0.0.0.0", "-ui", "-config-dir=/consul/config", "-enable-local-script-checks=true"]
     ports:
       - "8500:8500"
       - "8600:8600/udp"
@@ -197,6 +197,11 @@ services:
   redisinsight:
     image: redis/redisinsight:latest
     container_name: redisinsight
+    environment:
+      RI_REDIS_HOST: ${REDISINSIGHT_REDIS_HOST:-redis}
+      RI_REDIS_PORT: ${REDISINSIGHT_REDIS_PORT:-6379}
+      RI_REDIS_ALIAS: ${REDISINSIGHT_REDIS_ALIAS:-quantum-redis}
+      RI_REDIS_DB: ${REDISINSIGHT_REDIS_DB:-0}
     ports:
       - "5540:5540"
     volumes:
@@ -610,6 +615,56 @@ services:
     volumes:
       - algorand_data:/app/data
       - ./infra/feast:/app/feast:ro
+
+  algorand-jupyter:
+    build:
+      context: ./algorand
+      dockerfile: Dockerfile
+      args:
+        ALG_PIP_EXTRAS: ${ALG_JUPYTER_PIP_EXTRAS:-dev,research}
+    container_name: algorand-jupyter
+    working_dir: /app
+    env_file:
+      - .env
+    environment:
+      PYTHONPATH: /app/src
+      JUPYTER_PORT: 8888
+      JUPYTER_TOKEN: ${ALG_JUPYTER_TOKEN:-}
+      JUPYTER_ROOT_DIR: /app/notebooks
+    command:
+      - /bin/bash
+      - -lc
+      - >
+        exec jupyter lab
+        --ip=0.0.0.0
+        --port=8888
+        --no-browser
+        --allow-root
+        --ServerApp.root_dir=/app/notebooks
+        --ServerApp.allow_remote_access=true
+        --ServerApp.token="$${JUPYTER_TOKEN}"
+        --ServerApp.password=''
+    depends_on:
+      timescaledb:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      redpanda:
+        condition: service_healthy
+      temporal:
+        condition: service_healthy
+    ports:
+      - "${ALG_JUPYTER_HOST_PORT:-8890}:8888"
+    volumes:
+      - ./algorand:/app
+      - algorand_data:/app/data
+      - ./infra/feast:/app/feast:ro
+    healthcheck:
+      test: ["CMD-SHELL", "if command -v curl >/dev/null 2>&1; then curl -fsS \"http://127.0.0.1:8888/api/status?token=$${JUPYTER_TOKEN}\" >/dev/null; elif command -v wget >/dev/null 2>&1; then wget -q -O- \"http://127.0.0.1:8888/api/status?token=$${JUPYTER_TOKEN}\" >/dev/null; else exit 1; fi"]
+      interval: 15s
+      timeout: 5s
+      retries: 20
+      start_period: 40s
 
   duckdb-ui:
     image: duckdb/duckdb:1.4.4

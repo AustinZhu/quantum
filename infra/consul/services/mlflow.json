@@ -8,7 +8,7 @@
     "checks": [
       {
         "id": "mlflow-http",
-        "name": "mlflow http",
+        "name": "MLflow HTTP",
         "http": "http://mlflow:5000/",
         "interval": "15s",
         "timeout": "5s"

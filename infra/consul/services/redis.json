@@ -8,8 +8,15 @@
     "checks": [
       {
         "id": "redis-tcp",
-        "name": "redis tcp",
+        "name": "Redis TCP",
         "tcp": "redis:6379",
+        "interval": "10s",
+        "timeout": "3s"
+      },
+      {
+        "id": "redis-protocol-ping",
+        "name": "Redis Protocol Ping",
+        "args": ["sh", "-ec", "printf '*1\\r\\n$4\\r\\nPING\\r\\n' | nc -w 2 redis 6379 | grep -q '^+PONG'"],
         "interval": "10s",
         "timeout": "3s"
       }

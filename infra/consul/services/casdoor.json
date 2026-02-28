@@ -8,7 +8,7 @@
     "checks": [
       {
         "id": "casdoor-http",
-        "name": "casdoor http",
+        "name": "Casdoor HTTP",
         "http": "http://casdoor:8000/",
         "interval": "15s",
         "timeout": "5s"

@@ -8,8 +8,15 @@
     "checks": [
       {
         "id": "redpanda-connect-tcp",
-        "name": "redpanda-connect tcp",
+        "name": "Redpanda Connect TCP",
         "tcp": "redpanda-connect:4195",
+        "interval": "10s",
+        "timeout": "3s"
+      },
+      {
+        "id": "redpanda-connect-http-ready",
+        "name": "Redpanda Connect HTTP Ready",
+        "http": "http://redpanda-connect:4195/ready",
         "interval": "10s",
         "timeout": "3s"
       }

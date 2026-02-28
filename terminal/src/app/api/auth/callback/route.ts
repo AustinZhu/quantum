@@ -35,6 +35,13 @@ export async function GET(request: NextRequest) {
       maxAge: 60 * 60 * 24, // 1 day
       path: "/",
     });
+    response.cookies.set("casdoor_access_token", access_token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      maxAge: 60 * 60 * 24, // 1 day
+      path: "/",
+    });
 
     return response;
   } catch (error) {

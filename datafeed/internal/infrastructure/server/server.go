@@ -20,11 +20,16 @@ type HTTPServer struct {
 var ProviderSet = wire.NewSet(NewMux, NewHTTPServer)
 
 func NewHTTPServer(cfg conf.Config, mux *http.ServeMux) *HTTPServer {
+	protocols := new(http.Protocols)
+	protocols.SetHTTP1(true)
+	protocols.SetUnencryptedHTTP2(true)
+
 	return &HTTPServer{
 		cfg: cfg,
 		server: &http.Server{
-			Addr:    cfg.Server.HTTPAddr,
-			Handler: mux,
+			Addr:      cfg.Server.HTTPAddr,
+			Handler:   mux,
+			Protocols: protocols,
 		},
 	}
 }

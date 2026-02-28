@@ -4,8 +4,17 @@ func defaultMap() map[string]any {
 	return map[string]any{
 		"server": map[string]any{
 			"http_addr":         ":8081",
+			"mode":              "development",
+			"pprof_enabled":     true,
 			"api_key":           "",
 			"openapi_spec_path": "/app/openapi/quantum.openapi.json",
+			"auth": map[string]any{
+				"enabled":            false,
+				"casdoor_issuer_url": "",
+				"casdoor_audience":   "",
+				"casbin_model_path":  "",
+				"casbin_policy_path": "",
+			},
 		},
 		"storage": map[string]any{
 			"postgres_url":    "postgres://quantum:quantum@localhost:5432/quantum?sslmode=disable",

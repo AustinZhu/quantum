@@ -8,7 +8,7 @@
     "checks": [
       {
         "id": "algorand-api-http",
-        "name": "algorand-api http",
+        "name": "Algorand API HTTP",
         "http": "http://algorand-api:8080/healthz",
         "interval": "10s",
         "timeout": "5s"

@@ -65,6 +65,8 @@ func Load(ctx context.Context, opts LoadOptions) (Config, error) {
 		}
 	}
 
+	applyModeDefaults(&cfg)
+
 	if err := cfg.Validate(); err != nil {
 		return Config{}, err
 	}
@@ -115,8 +117,15 @@ func applyEnv(k *koanf.Koanf) {
 	}
 
 	setString("DATAFEED_SERVER_HTTP_ADDR", "server.http_addr")
+	setString("DATAFEED_SERVER_MODE", "server.mode")
+	setBool("DATAFEED_SERVER_PPROF_ENABLED", "server.pprof_enabled")
 	setString("DATAFEED_SERVER_API_KEY", "server.api_key")
 	setString("DATAFEED_SERVER_OPENAPI_SPEC_PATH", "server.openapi_spec_path")
+	setBool("DATAFEED_SERVER_AUTH_ENABLED", "server.auth.enabled")
+	setString("DATAFEED_SERVER_AUTH_CASDOOR_ISSUER_URL", "server.auth.casdoor_issuer_url")
+	setString("DATAFEED_SERVER_AUTH_CASDOOR_AUDIENCE", "server.auth.casdoor_audience")
+	setString("DATAFEED_SERVER_AUTH_CASBIN_MODEL_PATH", "server.auth.casbin_model_path")
+	setString("DATAFEED_SERVER_AUTH_CASBIN_POLICY_PATH", "server.auth.casbin_policy_path")
 
 	setString("DATAFEED_STORAGE_POSTGRES_URL", "storage.postgres_url")
 	setString("DATAFEED_STORAGE_POSTGRES_SCHEMA", "storage.postgres_schema")
@@ -229,6 +238,12 @@ func mergeConsulMap(cfg *Config, payload map[string]any) {
 	if value := pickString(payload, "server.http_addr", "http_addr"); value != "" {
 		cfg.Server.HTTPAddr = value
 	}
+	if value := pickString(payload, "server.mode", "mode"); value != "" {
+		cfg.Server.Mode = value
+	}
+	if value, ok := pickBool(payload, "server.pprof_enabled", "pprof_enabled"); ok {
+		cfg.Server.PprofEnabled = value
+	}
 	if value := pickString(payload, "server.api_key", "api_key"); value != "" {
 		cfg.Server.APIKey = value
 	}
@@ -296,6 +311,34 @@ func pickString(payload map[string]any, paths ...string) string {
 		}
 	}
 	return ""
+}
+
+func pickBool(payload map[string]any, paths ...string) (bool, bool) {
+	for _, path := range paths {
+		if strings.TrimSpace(path) == "" {
+			continue
+		}
+		value := lookupPath(payload, path)
+		switch typed := value.(type) {
+		case bool:
+			return typed, true
+		case string:
+			parsed, err := strconv.ParseBool(strings.TrimSpace(typed))
+			if err == nil {
+				return parsed, true
+			}
+		}
+	}
+	return false, false
+}
+
+func applyModeDefaults(cfg *Config) {
+	if _, ok := os.LookupEnv("DATAFEED_SERVER_PPROF_ENABLED"); ok {
+		return
+	}
+	if !cfg.Server.IsDevelopmentMode() {
+		cfg.Server.PprofEnabled = false
+	}
 }
 
 func lookupPath(payload map[string]any, path string) any {

@@ -21,17 +21,17 @@ import (
 
 func InitializeJobsApp(ctx context.Context, configPath string) (*App, func(), error) {
 	wire.Build(
-		conf.ProviderSet,
-		clock.ProviderSet,
+		conf.New,
+		clock.New,
 		postgres.ProviderSet,
-		redis.ProviderSet,
+		redis.New,
 		broker.ProviderSet,
 		outbox.ProviderSet,
 		marketdata.ProviderSet,
 		scanner.ProviderSet,
 		jobs.ProviderSet,
-		temporal.ProviderSet,
-		ProviderSet,
+		temporal.NewRunner,
+		New,
 	)
 	return nil, nil, nil
 }

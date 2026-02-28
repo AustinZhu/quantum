@@ -8,7 +8,7 @@
     "checks": [
       {
         "id": "vault-http",
-        "name": "vault http",
+        "name": "Vault HTTP",
         "http": "http://vault:8200/v1/sys/health?standbyok=true&sealedcode=503&uninitcode=503",
         "interval": "15s",
         "timeout": "5s"

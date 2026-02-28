@@ -27,7 +27,7 @@ import (
 // Injectors from wire.go:
 
 func InitializeJobsApp(ctx context.Context, configPath string) (*App, func(), error) {
-	config, err := conf.Provide(ctx, configPath)
+	config, err := conf.New(ctx, configPath)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -53,15 +53,15 @@ func InitializeJobsApp(ctx context.Context, configPath string) (*App, func(), er
 		return nil, nil, err
 	}
 	projectionUpdater := service.NewProjectionUpdater(service3)
-	clockClock := clock.New()
-	dispatcher := outbox.NewDispatcher(config, outboxStore, publisher, projectionUpdater, clockClock)
+	v := clock.New()
+	dispatcher := outbox.NewDispatcher(config, outboxStore, publisher, projectionUpdater, v)
 	service4 := biz3.NewService(service3, dispatcher)
 	syncMarketSymbolsTask := service2.NewSyncMarketSymbolsTask(config, service4)
 	outboxRecoveryTask := service2.NewOutboxRecoveryTask(config, service4)
 	rebuildScannerProjectionTask := service2.NewRebuildScannerProjectionTask(config, service4)
 	marketBackfillTask := service2.NewMarketBackfillTask(config, service4)
-	v := service2.ProvideTasks(syncMarketSymbolsTask, outboxRecoveryTask, rebuildScannerProjectionTask, marketBackfillTask)
-	runner := temporal.NewRunner(config, v)
+	v2 := service2.ProvideTasks(syncMarketSymbolsTask, outboxRecoveryTask, rebuildScannerProjectionTask, marketBackfillTask)
+	runner := temporal.NewRunner(config, v2)
 	app := New(runner)
 	return app, func() {
 		cleanup3()

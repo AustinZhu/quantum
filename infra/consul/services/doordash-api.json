@@ -8,7 +8,7 @@
     "checks": [
       {
         "id": "doordash-api-http",
-        "name": "doordash-api http",
+        "name": "Doordash API HTTP",
         "http": "http://doordash-api:8082/healthz",
         "interval": "10s",
         "timeout": "5s"

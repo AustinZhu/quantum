@@ -8,7 +8,7 @@
     "checks": [
       {
         "id": "prometheus-http",
-        "name": "prometheus http",
+        "name": "Prometheus HTTP",
         "http": "http://prometheus:9090/-/healthy",
         "interval": "15s",
         "timeout": "5s"

@@ -9,10 +9,6 @@
       "path": "algorand"
     },
     {
-      "name": "api",
-      "path": "api"
-    },
-    {
       "name": "datafeed",
       "path": "datafeed"
     },
